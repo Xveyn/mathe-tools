@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mathe-Werkzeuge</title>
+<link rel="stylesheet" href="shared/theme.css">
+<link rel="stylesheet" href="shared/ui.css">
+<style>
+  .katalog{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:14px;margin-top:24px;
+  }
+  .karte{
+    display:block;text-decoration:none;color:inherit;
+    background:linear-gradient(180deg,var(--panel-a),var(--panel-b));
+    border:1px solid var(--edge);border-radius:3px;padding:16px 17px 14px;
+  }
+  .karte:hover,.karte:focus-visible{border-color:var(--gold);outline:none}
+  .karte h2{
+    font-family:Georgia,"Iowan Old Style",serif;font-weight:400;
+    font-size:1.05rem;margin:0 0 6px;color:var(--ink);
+  }
+  .karte p{margin:0 0 12px;color:var(--dim);font-size:.88rem}
+  .karte em{
+    font-family:Georgia,serif;font-style:italic;font-size:.95rem;color:var(--gold);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Mathe-Werkzeuge</h1>
+  <p class="lede">Kleine Seiten, die Begriffe aus der Analysis sichtbar machen. Jede läuft im Browser, ohne Installation, und lässt sich mit Reglern durchfahren, bis der Zusammenhang klar wird.</p>
+
+  <div class="katalog">
+    <a class="karte" href="tools/flaechenrechner/index.html">
+      <h2>Flächenrechner</h2>
+      <p>Eine Funktion zweier Veränderlicher als Fläche im Raum, dazu die Höhenlinien von oben und die Schnitte mit den beiden senkrechten Ebenen — alle vier Ansichten gleichzeitig und farblich verknüpft.</p>
+      <em>z = f(x, y)</em>
+    </a>
+  </div>
+
+</div>
+</body>
+</html>
