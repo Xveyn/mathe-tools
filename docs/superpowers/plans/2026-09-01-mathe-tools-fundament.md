@@ -126,9 +126,9 @@ Ausgabe nur `Vergleich fertig` heißt: bestanden. Jede gemeldete Zeile muss ange
 | `index.html` | Startseite mit Werkzeug-Katalog | Aufgabe 7 |
 | `README.md` | Worum es geht, wie man ein Werkzeug ergänzt | Aufgabe 7 |
 
-## Abweichungen von der Spec
+## Abweichungen vom ursprünglichen Entwurf
 
-Beim Lesen des Originalcodes und bei der Umsetzung haben sich sechs Signaturen der Spec als unpraktisch erwiesen. Der Plan setzt stattdessen um:
+Beim Lesen des Originalcodes und bei der Umsetzung haben sich sechs Signaturen des ursprünglichen Entwurfs als unpraktisch erwiesen. Der Plan setzte stattdessen um, was unten steht — und die Spec (`docs/superpowers/specs/2026-09-01-mathe-tools-design.md`) ist inzwischen auf denselben Stand nachgezogen. Dieser Abschnitt widerspricht der Spec also nicht: Er erzählt, wie es zu den Signaturen kam, die dort inzwischen als Ist-Stand stehen.
 
 1. **`MT.canvas.mapper(bereich, breite, hoehe)` → `MT.canvas.linear(vonMin, vonMax, nachMin, nachMax)`.** Die beiden 2D-Ansichten bilden unterschiedlich ab (die Karte quadratisch und zentriert, der Schnitt mit vier verschiedenen Rändern). Eine einzelne lineare Abbildung deckt beide Achsen beider Ansichten ab; ein Bereichsobjekt hätte für keine der beiden gepasst. `toWorld` braucht kein Aufrufer und entfällt (YAGNI).
 2. **`MT.canvas.grid(...)` / `MT.canvas.axes(...)` entfallen.** Karte und Schnitt zeichnen inhaltlich verschiedene Gitter — die Karte ein x-y-Gitter mit ganzzahligen Linien, der Schnitt ein x-z-Gitter mit berechneter z-Schrittweite. Gemeinsam ist nur die Schrittweitenrechnung; die zieht als `MT.canvas.tickStep(spanne)` nach `shared/canvas.js`, das Zeichnen bleibt beim Werkzeug. Eine Funktion mit einem Dutzend Parametern wäre schlechter als zwei ehrliche Schleifen.
@@ -1414,7 +1414,7 @@ Der Nutzer bestätigt von Hand: Die Seite zeigt alle vier Ansichten, die Chips w
 
 - [ ] **Schritt 7: Plan und Spec nachziehen**
 
-Falls sich unterwegs etwas an den Modulschnitten geändert hat, den Abschnitt „Abweichungen von der Spec" in diesem Plan ergänzen, damit der nächste Leser den Ist-Zustand vorfindet.
+Falls sich unterwegs etwas an den Modulschnitten geändert hat, den Abschnitt „Abweichungen vom ursprünglichen Entwurf" in diesem Plan ergänzen und die entsprechenden Signaturen in der Spec nachziehen, damit der nächste Leser in der Spec den Ist-Zustand und im Plan die Entstehungsgeschichte vorfindet.
 
 ```bash
 cd "<REPO>" && git add docs && git commit -m "Plan und Spec auf den umgesetzten Stand ziehen" -m "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>

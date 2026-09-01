@@ -157,7 +157,12 @@ doppelte Pflege der Farben in CSS und JS.
 
 ### `shared/scene3d.js` → `MT.scene3d`
 
-- `MT.scene3d.camera(breite, hoehe, azimut, elevation)` — Kameraobjekt.
+- `MT.scene3d.camera(opt)` → Kameraobjekt `{cx, cy, s, az, el}`. `opt` ist
+  `{w, h, az, el, range, zMin, zMax}` — ein Objekt statt vier
+  Einzelparametern, weil die Kamera außer den beiden Blickwinkeln auch
+  `range`, `zMin` und `zMax` braucht, um den Quader
+  `[-range,range]² × [zMin,zMax]` mit Rand in die Zeichenfläche
+  einzupassen; sieben Stellungsparameter wären nicht mehr lesbar.
 - `MT.scene3d.project(x, y, z, kamera)` — Punkt auf Bildkoordinaten.
 - `MT.scene3d.enableDrag(canvas, zustand, beiAenderung)` — Rotation per
   Zeiger, kapselt die `pointerdown`/`pointermove`/`pointerup`-Logik
