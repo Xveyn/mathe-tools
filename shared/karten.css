@@ -1,0 +1,112 @@
+/* Bausteine der Karteikarten, samt Abfragemodus und Druck-Stylesheet.
+   Farben kommen aus shared/theme.css; im Druck werden die Tokens
+   umdefiniert, damit auch Inline-SVG hell wird. */
+
+/* ---- Teil 1: die Kartenbausteine ---- */
+
+.abfrage-leiste{display:flex;justify-content:flex-end;margin:0 0 16px;max-width:46rem}
+.abfrage-leiste button{
+  background:transparent;border:1px solid var(--edge);border-radius:2px;
+  color:var(--dim);font-family:Georgia,serif;font-size:.9rem;
+  padding:5px 13px;cursor:pointer;
+}
+.abfrage-leiste button:hover{border-color:var(--gold);color:var(--ink);outline:none}
+.abfrage-leiste button:focus-visible{border-color:var(--gold);color:var(--ink);outline:2px solid currentColor;outline-offset:4px}
+.abfrage-leiste button[aria-pressed=true]{border-color:var(--gold);color:var(--gold)}
+
+.karte{
+  background:linear-gradient(180deg,var(--panel-a),var(--panel-b));
+  border:1px solid var(--edge);border-radius:3px;
+  padding:18px 20px 16px;margin:0 0 20px;max-width:46rem;
+}
+.karte:target{border-color:var(--gold)}
+.karte h3{
+  font-family:Georgia,"Iowan Old Style",serif;font-weight:400;
+  font-size:1.15rem;line-height:1.25;margin:0 0 8px;color:var(--ink);
+}
+.karte p{margin:0 0 .6rem;max-width:64ch}
+.karte math{font-family:Georgia,"Iowan Old Style",serif}
+/* Farbmarken für Größen, die im Bild wiederkehren. */
+.karte .mint{color:var(--mint)}
+.karte .rose{color:var(--rose)}
+.karte code{font-size:.92em;color:var(--gold);background:var(--panel-b);border:1px solid var(--edge);border-radius:2px;padding:1px 5px}
+
+.voraussetzung{color:var(--dim);font-size:.85rem;margin:0 0 14px;max-width:64ch}
+
+/* Formel und Beispiel sitzen in einer eigenen Fläche. Das ist auch der
+   Grund, warum im Abfragemodus sichtbar bleibt, wo etwas verdeckt ist. */
+.formel,.beispiel{
+  background:var(--panel-b);border:1px solid var(--edge);border-radius:3px;
+  padding:14px 16px;margin:0 0 16px;
+}
+.formel{text-align:center}
+.formel math{font-size:1.05rem}
+.formel p{margin:12px auto 0;text-align:left;color:var(--dim);font-size:.86rem}
+.beispiel math{font-size:1.02rem}
+.beispiel small{color:var(--dim);font-size:.82rem;margin-left:.7em}
+.beispiel p:last-of-type{margin-bottom:0}
+
+.bild{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:10px 16px;margin:16px 0 0;
+}
+.bild svg{width:100%;height:auto;display:block}
+.bild figcaption{
+  grid-column:1 / -1;color:var(--dim);font-size:.8rem;max-width:70ch;
+  border-top:1px solid var(--edge);padding-top:8px;
+}
+
+.merksatz,.fehler{
+  margin:0 0 12px;padding:6px 0 6px 14px;font-size:.92rem;max-width:64ch;
+  border-left:3px solid var(--gold);
+}
+.fehler{border-left-color:var(--rose)}
+
+.querlink{
+  display:block;margin:14px 0 0;padding-top:12px;
+  border-top:1px solid var(--edge);
+  color:var(--gold);text-decoration:none;font-size:.9rem;
+}
+.querlink:hover{text-decoration:underline}
+.querlink:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+
+/* ---- Teil 2: der Abfragemodus ----
+   visibility:hidden statt display:none ist Absicht: Der Platz bleibt
+   stehen, die Seite springt beim Aufdecken nicht. */
+
+body.abfrage [data-verdeckbar]{ position:relative; }
+body.abfrage [data-verdeckbar] > *:not(.aufdecken){ visibility:hidden; }
+body.abfrage [data-verdeckbar].aufgedeckt > *{ visibility:visible; }
+body.abfrage [data-verdeckbar].aufgedeckt .aufdecken{ display:none; }
+.aufdecken{ display:none; }
+body.abfrage [data-verdeckbar] .aufdecken{ display:inline-block; }
+
+.aufdecken{
+  position:absolute;left:16px;top:14px;
+  background:transparent;border:1px solid var(--edge);border-radius:2px;
+  color:var(--dim);font-family:Georgia,serif;font-size:.85rem;
+  padding:3px 11px;cursor:pointer;
+}
+.aufdecken:hover{border-color:var(--gold);color:var(--ink);outline:none}
+.aufdecken:focus-visible{border-color:var(--gold);color:var(--ink);outline:2px solid currentColor;outline-offset:4px}
+
+/* ---- Teil 3: der Druck ----
+   Die vierte Regel ist die wichtige: Im Druck wird nie verdeckt, auch
+   wenn der Abfragemodus gerade an ist. */
+
+@media print{
+  /* Tokens umdefinieren, damit auch die SVG-Farben hell werden. */
+  :root{
+    --ink:#111; --dim:#555; --edge:#bbb;
+    --panel-a:transparent; --panel-b:transparent;
+    --grid:#ddd; --axis:#666;
+    --gold:#8a6300; --mint:#0a7d6c; --rose:#a4457a;
+  }
+  body{ background:#fff; color:#111; }
+  .karte{ break-inside:avoid; border-color:#bbb; background:none; }
+  .abfrage-leiste, .aufdecken{ display:none !important; }
+  body.abfrage [data-verdeckbar] > *{ visibility:visible !important; }
+  .querlink::after{ content:" (" attr(href) ")"; font-size:.85em; color:#555; }
+  .formel, .beispiel{ background:none; }
+  .bild{ break-inside:avoid; }
+}
