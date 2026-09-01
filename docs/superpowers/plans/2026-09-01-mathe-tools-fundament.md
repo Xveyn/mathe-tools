@@ -1248,7 +1248,7 @@ Ziel: Das Repo hat ein Gesicht. Wer die Adresse öffnet, sieht, was es gibt, und
   <p class="lede">Kleine Seiten, die Begriffe aus der Analysis sichtbar machen. Jede läuft im Browser, ohne Installation, und lässt sich mit Reglern durchfahren, bis der Zusammenhang klar wird.</p>
 
   <div class="katalog">
-    <a class="karte" href="tools/flaechenrechner/">
+    <a class="karte" href="tools/flaechenrechner/index.html">
       <h2>Flächenrechner</h2>
       <p>Eine Funktion zweier Veränderlicher als Fläche im Raum, dazu die Höhenlinien von oben und die Schnitte mit den beiden senkrechten Ebenen — alle vier Ansichten gleichzeitig und farblich verknüpft.</p>
       <em>z = f(x, y)</em>
@@ -1259,6 +1259,8 @@ Ziel: Das Repo hat ein Gesicht. Wer die Adresse öffnet, sieht, was es gibt, und
 </body>
 </html>
 ```
+
+Der Karten-Link zeigt auf `index.html` und **nicht** auf das Verzeichnis. Über HTTP wäre beides gleichwertig, weil der Server ein Verzeichnis selbst zur Indexdatei auflöst — über `file://` tut der Browser das nicht, sondern zeigt seine eigene Verzeichnisliste. Da die Doppelklick-Tauglichkeit eine bindende Randbedingung ist, entscheidet der schwächere der beiden Fälle. Im README darf der Link weiterhin auf das Verzeichnis zeigen: den rendert GitHub, und dort ist die Verzeichnisansicht das Gewollte.
 
 - [ ] **Schritt 2: `README.md` anlegen**
 
