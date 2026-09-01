@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gradient und Richtungsableitung</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/karten.css">
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Gradient und Richtungsableitung</h1>
+  <p class="lede">Der Gradient bündelt beide partiellen Ableitungen zu einem Vektor, der in Richtung des steilsten Anstiegs zeigt. Die Richtungsableitung fragt danach, wie steil es in einer beliebigen anderen Richtung bergauf geht.</p>
+
+  <div class="abfrage-leiste">
+    <button type="button" id="abfrage-schalter" aria-pressed="false">Abfragen</button>
+  </div>
+
+  <article class="karte" id="gradient">
+    <h3>Gradient</h3>
+
+    <div class="voraussetzung"><math><mi>f</mi></math> ist partiell differenzierbar.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <mo>&#x2207;</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo>
+          <mo>=</mo>
+          <mo>(</mo>
+          <msub><mi>f</mi><mi>x</mi></msub><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo>
+          <mo>,</mo>
+          <msub><mi>f</mi><mi>y</mi></msub><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo>
+          <mo>)</mo>
+        </mrow>
+      </math>
+      <p>Der Gradient ist ein Vektor, kein Skalar &#x2014; er hat eine Richtung und einen Betrag.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p><math><mi>f</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></math></p>
+
+      <p><math><msub><mi>f</mi><mi>x</mi></msub><mo>=</mo><mn>2</mn><mi>x</mi><mo>,</mo><msub><mi>f</mi><mi>y</mi></msub><mo>=</mo><mn>2</mn><mi>y</mi></math></p>
+
+      <p><math>
+        <mo>&#x2207;</mo><mi>f</mi><mo>(</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>)</mo>
+        <mo>=</mo>
+        <mo>(</mo><mn>2</mn><mo>&#x22C5;</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>&#x22C5;</mo><mn>2</mn><mo>)</mo>
+        <mo>=</mo>
+        <mo>(</mo><mn>2</mn><mo>,</mo><mn>4</mn><mo>)</mo>
+      </math></p>
+
+      <p>Betrag: <math>
+        <mo lspace="0" rspace="0">|</mo><mo>&#x2207;</mo><mi>f</mi><mo lspace="0" rspace="0">|</mo>
+        <mo>=</mo>
+        <msqrt><mrow><mn>4</mn><mo>+</mo><mn>16</mn></mrow></msqrt>
+        <mo>=</mo>
+        <msqrt><mn>20</mn></msqrt>
+        <mo>=</mo>
+        <mn>2</mn><msqrt><mn>5</mn></msqrt>
+        <mo>&#x2248;</mo>
+        <mn>4</mn><mo>,</mo><mn>47</mn>
+      </math></p>
+
+      <p>Das ist die größte Steigung, die es an dieser Stelle gibt &#x2014; und sie zeigt in Richtung <math><mo>(</mo><mn>2</mn><mo>,</mo><mn>4</mn><mo>)</mo></math>.</p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 260" role="img" aria-label="Höhenlinien von f gleich x Quadrat plus y Quadrat als konzentrische Kreise um den Ursprung, mit dem Gradientenpfeil im Punkt (1, 2), der senkrecht auf der Kreislinie durch diesen Punkt steht.">
+          <!-- Achsen -->
+          <line x1="15" y1="130" x2="245" y2="130" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="130" y1="245" x2="130" y2="15" stroke="var(--axis)" stroke-width="1"/>
+          <text x="250" y="134" text-anchor="end" font-size="10" fill="var(--dim)">x</text>
+          <text x="130" y="11" text-anchor="middle" font-size="10" fill="var(--dim)">y</text>
+
+          <!-- Höhenlinien: Kreise x^2+y^2=c, Radius Wurzel c, Skala 30 px/Einheit -->
+          <circle cx="130" cy="130" r="30" fill="none" stroke="var(--dim)" stroke-width="1.2"/>
+          <circle cx="130" cy="130" r="90" fill="none" stroke="var(--dim)" stroke-width="1.2"/>
+          <circle cx="130" cy="130" r="67.08" fill="none" stroke="var(--gold)" stroke-width="1.6"/>
+          <text x="96" y="126" text-anchor="middle" font-size="9" fill="var(--dim)">c=1</text>
+          <text x="58.92" y="126" text-anchor="middle" font-size="9" fill="var(--gold)">c=5</text>
+          <text x="36" y="126" text-anchor="middle" font-size="9" fill="var(--dim)">c=9</text>
+
+          <!-- Tangente an die aktive Höhenlinie im Punkt (1,2) -->
+          <line x1="137.64" y1="58.82" x2="182.36" y2="81.18" stroke="var(--gold)" stroke-width="1.4"/>
+
+          <!-- Winkelhaken: rechter Winkel zwischen Tangente und Gradient -->
+          <polyline fill="none" stroke="var(--dim)" stroke-width="1"
+            points="163.58,62.84 170.74,66.42 167.16,73.58"/>
+
+          <!-- Gradientenpfeil von (1,2) in Richtung (2,4), normiert, mit Spitze -->
+          <line x1="160" y1="70" x2="178.78" y2="32.44" stroke="var(--rose)" stroke-width="1.8"/>
+          <polygon points="182.36,25.28 181.46,33.78 176.10,31.10" fill="var(--rose)"/>
+          <text x="186" y="22" font-size="10" fill="var(--rose)">&#x2207;f</text>
+
+          <!-- Punkt (1,2) -->
+          <circle cx="160" cy="70" r="3" fill="var(--gold)"/>
+          <text x="148" y="82" text-anchor="end" font-size="10" fill="var(--ink)">(1, 2)</text>
+        </svg>
+        <figcaption>Die Höhenlinien von f sind Kreise um den Ursprung. Der Gradient in (1, 2) steht senkrecht auf der Kreislinie durch diesen Punkt (Winkelhaken) und zeigt nach außen, in Richtung wachsender Funktionswerte.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Der Gradient zeigt bergauf und steht senkrecht auf der Höhenlinie.</p>
+
+    <p class="fehler">Den Gradienten für einen Skalar halten. Er ist ein Vektor &#x2014; die Zahl daran ist sein Betrag.</p>
+
+    <p>Gib dort <code>x^2 + y^2</code> ein; die Höhenlinien-Ansicht von oben zeigt genau diese Kreise.</p>
+
+    <a class="querlink" href="../tools/flaechenrechner/index.html">Selbst durchfahren &#x2192; Flächenrechner</a>
+  </article>
+
+  <article class="karte" id="richtungsableitung">
+    <h3>Richtungsableitung</h3>
+
+    <div class="voraussetzung"><math><mi>f</mi></math> partiell differenzierbar, <math><mi>v</mi></math> ein Einheitsvektor (<math><mo lspace="0" rspace="0">|</mo><mi>v</mi><mo lspace="0" rspace="0">|</mo><mo>=</mo><mn>1</mn></math>).</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <msub><mi>D</mi><mi>v</mi></msub><mi>f</mi>
+          <mo>=</mo>
+          <mo>&#x2207;</mo><mi>f</mi><mo>&#x22C5;</mo><mi>v</mi>
+        </mrow>
+      </math>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p><math><mi>f</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></math>,
+        <math><mo>&#x2207;</mo><mi>f</mi><mo>(</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>)</mo><mo>=</mo><mo>(</mo><mn>2</mn><mo>,</mo><mn>4</mn><mo>)</mo></math></p>
+
+      <p>Richtung <math><mi>v</mi><mo>=</mo><mo>(</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo>,</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mo>)</mo></math>.
+        Probe: <math>
+          <msup><mrow><mo>(</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo>)</mo></mrow><mn>2</mn></msup>
+          <mo>+</mo>
+          <msup><mrow><mo>(</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mo>)</mo></mrow><mn>2</mn></msup>
+          <mo>=</mo>
+          <mfrac><mn>9</mn><mn>25</mn></mfrac><mo>+</mo><mfrac><mn>16</mn><mn>25</mn></mfrac><mo>=</mo><mn>1</mn>
+        </math> &#x2713;</p>
+
+      <p><math>
+        <msub><mi>D</mi><mi>v</mi></msub><mi>f</mi>
+        <mo>=</mo>
+        <mn>2</mn><mo>&#x22C5;</mo><mfrac><mn>3</mn><mn>5</mn></mfrac>
+        <mo>+</mo>
+        <mn>4</mn><mo>&#x22C5;</mo><mfrac><mn>4</mn><mn>5</mn></mfrac>
+        <mo>=</mo>
+        <mfrac><mn>6</mn><mn>5</mn></mfrac><mo>+</mo><mfrac><mn>16</mn><mn>5</mn></mfrac>
+        <mo>=</mo>
+        <mfrac><mn>22</mn><mn>5</mn></mfrac>
+        <mo>=</mo>
+        <mn>4</mn><mo>,</mo><mn>4</mn>
+      </math></p>
+
+      <p>Zum Vergleich: die größte mögliche Steigung ist <math><mo lspace="0" rspace="0">|</mo><mo>&#x2207;</mo><mi>f</mi><mo lspace="0" rspace="0">|</mo><mo>&#x2248;</mo><mn>4</mn><mo>,</mo><mn>47</mn></math>. <math><mn>4</mn><mo>,</mo><mn>4</mn></math> liegt knapp darunter &#x2014; <math><mi>v</mi></math> zeigt fast, aber nicht ganz bergauf.</p>
+
+      <p>Ein eigenes Bild dazu braucht diese Karte nicht: oben, bei der Karte „Gradient“, zeigt derselbe Punkt (1, 2) bereits den Pfeil <math><mo>&#x2207;</mo><mi>f</mi></math>. Die Richtung <math><mi>v</mi></math> läge dort nur wenig neben diesem Pfeil &#x2014; nah genug, dass <math><mn>4</mn><mo>,</mo><mn>4</mn></math> knapp unter dem Maximalwert <math><mo lspace="0" rspace="0">|</mo><mo>&#x2207;</mo><mi>f</mi><mo lspace="0" rspace="0">|</mo></math> bleibt.</p>
+    </div>
+
+    <p class="merksatz">Die Richtungsableitung ist die Projektion des Gradienten auf die Richtung &#x2014; am größten, wenn beide gleich zeigen.</p>
+
+    <p class="fehler"><math><mi>v</mi></math> nicht normieren. Mit <math><mi>v</mi><mo>=</mo><mo>(</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>)</mo></math> statt <math><mo>(</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo>,</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mo>)</mo></math> käme <math><mn>22</mn></math> heraus statt <math><mn>4</mn><mo>,</mo><mn>4</mn></math> &#x2014; das Fünffache, weil <math><mo lspace="0" rspace="0">|</mo><mo>(</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>)</mo><mo lspace="0" rspace="0">|</mo><mo>=</mo><mn>5</mn></math>.</p>
+
+    <p>Gib dort <code>x^2 + y^2</code> ein; die Höhenlinien-Ansicht von oben zeigt genau diese Kreise.</p>
+
+    <a class="querlink" href="../tools/flaechenrechner/index.html">Selbst durchfahren &#x2192; Flächenrechner</a>
+  </article>
+
+</div>
+
+<script src="../shared/abfrage.js"></script>
+<script>MT.abfrage.start();</script>
+</body>
+</html>
