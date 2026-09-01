@@ -480,7 +480,9 @@ return { compile:compile, FUNCS:FUNCS, CONSTS:CONSTS };
 })();
 ```
 
-Zur Probeauswertung: Das Original prüft mit `f(0.31,0.47)` und `f(1.1,0.7)`. Die Formeln `0.31+i*0.16` und `1.1-i*0.4` ergeben für `vars=['x','y']` genau diese beiden Punkte, so dass sich am Verhalten nichts ändert.
+Zur Probeauswertung: Das Original prüft mit `f(0.31,0.47)` und `f(1.1,0.7)`. Die Formeln `0.31+i*0.16` und `1.1-i*0.4` treffen für `vars=['x','y']` drei dieser vier Werte exakt; `1.1-0.4` ergibt in Gleitkomma `0.7000000000000001` statt `0.7`. Das ist folgenlos, weil an den Proben nur `isFinite` geprüft wird — aber es ist nicht dieselbe Zahl, und diese Zeile sagt das lieber, als Exaktheit zu behaupten, die nicht besteht.
+
+`vars` ist kein beliebiges Array: Variablennamen sind einzelne Buchstaben und dürfen nicht mit einer Funktion oder Konstante kollidieren. `compile` prüft das und wirft sonst. Ohne diese Prüfung verschluckt der Tokenizer eine Variable namens `e` stillschweigend und rechnet mit der Eulerschen Zahl weiter.
 
 - [ ] **Schritt 2: Restliches JavaScript in eine eigene Datei ziehen**
 
