@@ -205,7 +205,7 @@ var C3=document.getElementById('c3d'), G3=C3.getContext('2d');
 var CM=document.getElementById('cmap'), GM=CM.getContext('2d');
 var CX=document.getElementById('csx'), GX=CX.getContext('2d');
 var CY=document.getElementById('csy'), GY=CY.getContext('2d');
-var COL={gold:'#F0B429',mint:'#5FD1BE',rose:'#E58BB5',dim:'#7FA6B6',grid:'rgba(94,158,182,.14)',axis:'rgba(150,200,216,.55)'};
+var COL=MT.canvas.colors();
 
 function sampleGrid(){
   var n=GRID, vals=new Float64Array((n+1)*(n+1)), fin=[];
@@ -276,9 +276,7 @@ function makeCam(w,h){
 function clampZ(v){ return Math.max(zMin,Math.min(zMax,v)); }
 
 function draw3D(){
-  var w=C3.clientWidth,h=C3.clientHeight,dpr=window.devicePixelRatio||1;
-  if(C3.width!==Math.round(w*dpr)){C3.width=Math.round(w*dpr);C3.height=Math.round(h*dpr);}
-  G3.setTransform(dpr,0,0,dpr,0,0); G3.clearRect(0,0,w,h);
+  var masse=MT.canvas.fit(C3,G3), w=masse.w, h=masse.h;
   if(!f) return;
   var cam=makeCam(w,h), P=function(x,y,z){return proj(x,y,z,cam);};
   var polys=[], n=samples.n, step=2;
@@ -349,13 +347,12 @@ function draw3D(){
 
 /* ---------- Höhenlinien von oben ---------- */
 function draw2Dmap(){
-  var w=CM.clientWidth,h=CM.clientHeight,dpr=window.devicePixelRatio||1;
-  if(CM.width!==Math.round(w*dpr)){CM.width=Math.round(w*dpr);CM.height=Math.round(h*dpr);}
-  GM.setTransform(dpr,0,0,dpr,0,0); GM.clearRect(0,0,w,h);
+  var masse=MT.canvas.fit(CM,GM), w=masse.w, h=masse.h;
   if(!f) return;
   var pad=26, s=Math.min((w-2*pad),(h-2*pad))/(2*RANGE);
   var cx=w/2, cy=h/2;
-  var X=function(v){return cx+v*s;}, Y=function(v){return cy-v*s;};
+  var X=MT.canvas.linear(-RANGE,RANGE,cx-RANGE*s,cx+RANGE*s);
+  var Y=MT.canvas.linear(-RANGE,RANGE,cy+RANGE*s,cy-RANGE*s);
 
   GM.strokeStyle=COL.grid; GM.lineWidth=1;
   for(var g=-Math.floor(RANGE);g<=Math.floor(RANGE);g++){
@@ -395,17 +392,15 @@ function draw2Dmap(){
 
 /* ---------- Schnittkurven ---------- */
 function drawSection(cv,ctx,fixY,val,color,varName){
-  var w=cv.clientWidth,h=cv.clientHeight,dpr=window.devicePixelRatio||1;
-  if(cv.width!==Math.round(w*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);}
-  ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,h);
+  var masse=MT.canvas.fit(cv,ctx), w=masse.w, h=masse.h;
   if(!f) return;
   var padL=30,padR=14,padT=14,padB=24;
-  var sx=(w-padL-padR)/(2*RANGE), sy=(h-padT-padB)/(zMax-zMin);
-  var X=function(v){return padL+(v+RANGE)*sx;}, Y=function(v){return h-padB-(v-zMin)*sy;};
+  var X=MT.canvas.linear(-RANGE,RANGE,padL,w-padR);
+  var Y=MT.canvas.linear(zMin,zMax,h-padB,padT);
 
   ctx.strokeStyle=COL.grid; ctx.lineWidth=1;
   for(var g=-Math.floor(RANGE);g<=Math.floor(RANGE);g++){ ctx.beginPath(); ctx.moveTo(X(g),padT); ctx.lineTo(X(g),h-padB); ctx.stroke(); }
-  var zstep=Math.pow(10,Math.round(Math.log10((zMax-zMin)/5)));
+  var zstep=MT.canvas.tickStep(zMax-zMin);
   for(var z=Math.ceil(zMin/zstep)*zstep; z<=zMax; z+=zstep){ ctx.beginPath(); ctx.moveTo(padL,Y(z)); ctx.lineTo(w-padR,Y(z)); ctx.stroke(); }
 
   ctx.strokeStyle=COL.axis; ctx.lineWidth=1.1;
