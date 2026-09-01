@@ -223,37 +223,12 @@ function sampleGrid(){
   if(hi-lo<1e-6){ lo-=1; hi+=1; }
   var pad=(hi-lo)*0.12;
   zMin=lo-pad; zMax=hi+pad;
-  samples={n:n,vals:vals};
+  samples={n:n,vals:vals,min:-RANGE,max:RANGE};
 }
 
 function fval(i,j){ return samples.vals[i*(samples.n+1)+j]; }
 function gx(i){ return -RANGE+2*RANGE*i/samples.n; }
-
-/* ---------- Marching Squares ---------- */
-function contour(level){
-  var segs=[], n=samples.n;
-  for(var i=0;i<n;i++){
-    for(var j=0;j<n;j++){
-      var v=[fval(i,j),fval(i+1,j),fval(i+1,j+1),fval(i,j+1)];
-      if(v.some(isNaN)) continue;
-      var p=[[gx(i),gx(j)],[gx(i+1),gx(j)],[gx(i+1),gx(j+1)],[gx(i),gx(j+1)]];
-      var idx=0;
-      for(var k=0;k<4;k++) if(v[k]>level) idx|=(1<<k);
-      if(idx===0||idx===15) continue;
-      function ip(a,b){
-        var t=(level-v[a])/(v[b]-v[a]);
-        return [p[a][0]+t*(p[b][0]-p[a][0]), p[a][1]+t*(p[b][1]-p[a][1])];
-      }
-      var e=[];
-      if(((idx>>0)&1)!==((idx>>1)&1)) e.push(ip(0,1));
-      if(((idx>>1)&1)!==((idx>>2)&1)) e.push(ip(1,2));
-      if(((idx>>2)&1)!==((idx>>3)&1)) e.push(ip(2,3));
-      if(((idx>>3)&1)!==((idx>>0)&1)) e.push(ip(3,0));
-      for(var m=0;m+1<e.length;m+=2) segs.push([e[m],e[m+1]]);
-    }
-  }
-  return segs;
-}
+function hoehenlinie(niveau){ return MT.plot2d.contour(samples,niveau); }
 
 /* ---------- 3D ---------- */
 function proj(x,y,z,cam){
@@ -320,26 +295,27 @@ function draw3D(){
   });
 
   // Höhenlinie im Raum
-  var segs=contour(cH);
-  G3.strokeStyle=COL.gold; G3.lineWidth=2.4; G3.beginPath();
+  var segs=hoehenlinie(cH);
+  var punkte=[];
   segs.forEach(function(s){
-    var p1=P(s[0][0],s[0][1],cH), p2=P(s[1][0],s[1][1],cH);
-    G3.moveTo(p1.x,p1.y); G3.lineTo(p2.x,p2.y);
+    punkte.push(P(s[0][0],s[0][1],cH));
+    punkte.push(P(s[1][0],s[1][1],cH));
+    punkte.push(null);
   });
-  G3.stroke();
+  G3.strokeStyle=COL.gold; G3.lineWidth=2.4;
+  MT.plot2d.polyline(G3,punkte);
 
   // Schnittkurven auf der Fläche
   function ridge(fixY, val, color){
-    G3.strokeStyle=color; G3.lineWidth=2.2; G3.beginPath();
-    var started=false;
+    var punkte=[];
     for(var t=0;t<=120;t++){
       var u=-RANGE+2*RANGE*t/120;
       var z=fixY? f(u,val) : f(val,u);
-      if(!isFinite(z)||z<zMin||z>zMax){ started=false; continue; }
-      var p=fixY? P(u,val,z) : P(val,u,z);
-      if(started) G3.lineTo(p.x,p.y); else { G3.moveTo(p.x,p.y); started=true; }
+      if(!isFinite(z)||z<zMin||z>zMax){ punkte.push(null); continue; }
+      punkte.push(fixY? P(u,val,z) : P(val,u,z));
     }
-    G3.stroke();
+    G3.strokeStyle=color; G3.lineWidth=2.2;
+    MT.plot2d.polyline(G3,punkte);
   }
   ridge(true,cY,COL.mint);
   ridge(false,cX,COL.rose);
@@ -369,10 +345,9 @@ function draw2Dmap(){
   for(var k=1;k<=9;k++){
     var lv=zMin+(zMax-zMin)*k/10;
     if(Math.abs(lv-cH)<(zMax-zMin)*0.012) continue;
-    var sg=contour(lv);
-    GM.strokeStyle='rgba(94,158,182,.36)'; GM.lineWidth=1; GM.beginPath();
-    sg.forEach(function(sm){ GM.moveTo(X(sm[0][0]),Y(sm[0][1])); GM.lineTo(X(sm[1][0]),Y(sm[1][1])); });
-    GM.stroke();
+    var sg=hoehenlinie(lv);
+    GM.strokeStyle='rgba(94,158,182,.36)'; GM.lineWidth=1;
+    MT.plot2d.segments(GM,sg,X,Y);
   }
   // Schnittebenen als Spuren
   GM.setLineDash([5,4]); GM.lineWidth=1.4;
@@ -380,10 +355,9 @@ function draw2Dmap(){
   GM.strokeStyle=COL.rose; GM.beginPath(); GM.moveTo(X(cX),Y(-RANGE)); GM.lineTo(X(cX),Y(RANGE)); GM.stroke();
   GM.setLineDash([]);
   // aktive Höhenlinie
-  var act=contour(cH);
-  GM.strokeStyle=COL.gold; GM.lineWidth=2.6; GM.beginPath();
-  act.forEach(function(sm){ GM.moveTo(X(sm[0][0]),Y(sm[0][1])); GM.lineTo(X(sm[1][0]),Y(sm[1][1])); });
-  GM.stroke();
+  var act=hoehenlinie(cH);
+  GM.strokeStyle=COL.gold; GM.lineWidth=2.6;
+  MT.plot2d.segments(GM,act,X,Y);
   if(act.length===0){
     GM.fillStyle='rgba(240,180,41,.75)'; GM.font='italic 15px Georgia, serif';
     GM.fillText('leere Menge', pad+4, pad+8);
@@ -414,16 +388,15 @@ function drawSection(cv,ctx,fixY,val,color,varName){
   ctx.strokeStyle='rgba(240,180,41,.6)'; ctx.setLineDash([5,4]); ctx.lineWidth=1.3;
   ctx.beginPath(); ctx.moveTo(padL,Y(cH)); ctx.lineTo(w-padR,Y(cH)); ctx.stroke(); ctx.setLineDash([]);
 
-  ctx.strokeStyle=color; ctx.lineWidth=2.4; ctx.beginPath();
-  var started=false;
+  var punkte=[];
   for(var t=0;t<=260;t++){
     var u=-RANGE+2*RANGE*t/260;
     var v=fixY? f(u,val) : f(val,u);
-    if(!isFinite(v)||v<zMin-0.5||v>zMax+0.5){ started=false; continue; }
-    var px=X(u), py=Y(Math.max(zMin,Math.min(zMax,v)));
-    if(started) ctx.lineTo(px,py); else { ctx.moveTo(px,py); started=true; }
+    if(!isFinite(v)||v<zMin-0.5||v>zMax+0.5){ punkte.push(null); continue; }
+    punkte.push({x:X(u), y:Y(Math.max(zMin,Math.min(zMax,v)))});
   }
-  ctx.stroke();
+  ctx.strokeStyle=color; ctx.lineWidth=2.4;
+  MT.plot2d.polyline(ctx,punkte);
 }
 
 /* ---------- Ausgabe ---------- */
