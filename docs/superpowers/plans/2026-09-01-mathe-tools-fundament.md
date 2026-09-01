@@ -51,7 +51,7 @@ Die Zustände sind deterministisch: der Zufallsgenerator in `fitQuadratic` läuf
 Ablauf mit den `mcp__playwright-edge__*`-Werkzeugen:
 
 1. `browser_resize` auf Breite `1400`, Höhe `1000`.
-2. `browser_navigate` auf die zu prüfende URL.
+2. Seite laden. **`browser_navigate` weist `file://`-URLs ab**; nimm dafür `browser_run_code_unsafe` mit `await page.goto(URL)`. Bei `https://`-URLs (Aufgabe 8) arbeitet `browser_navigate` normal.
 3. `browser_wait_for` mit `time: 1` (Layout und erstes Zeichnen abwarten).
 4. `browser_console_messages` — **es darf keine Meldung vom Typ `error` geben.** Eine einzige Fehlermeldung lässt die Prüfung durchfallen.
 5. `browser_take_screenshot` mit `fullPage: true`, Dateiname `<name>-01-start.png` in SHOTS.
@@ -95,6 +95,10 @@ Ablauf mit den `mcp__playwright-edge__*`-Werkzeugen:
     ```
     Erwartet: `rot` ist `true` und `text` ist nicht leer. Dann `browser_take_screenshot` als `<name>-10-fehler.png`.
 11. `browser_console_messages` erneut — weiterhin keine `error`-Meldung. Ein abgefangener Parserfehler darf **nicht** in der Konsole landen.
+
+Das ergibt **21 Bilder je Durchlauf** (1 Start + 6 Chips + 12 Reglerstellungen + 1 gedreht + 1 Fehler).
+
+`browser_take_screenshot` legt seine Dateien nicht in SHOTS ab, sondern im Arbeitsverzeichnis des MCP-Servers (`…\Tools`). Verschiebe sie danach mit den vorgesehenen Namen nach SHOTS; entscheidend ist nur, dass dort am Ende genau die 21 benannten Dateien des Durchlaufs liegen.
 
 **Vergleich:** Nach dem ersten Durchlauf (Aufgabe 1) sind die Bilder unter dem Namen `referenz` die Wahrheit. Jeder spätere Durchlauf erzeugt Bilder unter einem eigenen Namen und wird bildweise dagegen gehalten. Der Vergleich läuft über die Dateigröße als Vorfilter und, wo diese abweicht, über das Betrachten beider Bilder:
 
@@ -211,7 +215,7 @@ mkdir -p "<SHOTS>"
 
 Dann **Prüfroutine P** auf URL_ORIGINAL laufen lassen, Bildname-Präfix `referenz`. Es gibt in diesem Durchlauf nichts zu vergleichen — er *erzeugt* die Vergleichsbasis. Die Konsolen-Prüfung (Schritte 4 und 11 der Routine) gilt trotzdem: Wenn das Original schon Fehler wirft, muss das jetzt auffallen und dokumentiert werden, sonst erklärt man sie später fälschlich dem Umbau zu.
 
-Erwartet: 14 Dateien `referenz-*.png` in SHOTS, keine `error`-Meldung.
+Erwartet: 21 Dateien `referenz-*.png` in SHOTS, keine `error`-Meldung.
 
 - [ ] **Schritt 6: Die Kopie prüfen**
 
