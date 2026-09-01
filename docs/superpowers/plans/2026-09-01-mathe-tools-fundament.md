@@ -1170,7 +1170,13 @@ MT.scene3d.enableDrag(C3, blick, draw3D);
 cd "<REPO>" && grep -n "\baz\b\|\bel\b\|makeCam\|\bproj\b\|\bdrag\b" tools/flaechenrechner/flaechenrechner.js
 ```
 
-Erwartet: keine Ausgabe. Jeder Treffer ist ein übersehener Rest.
+Erwartet: **genau zwei** Treffer — die Definition `var blick={az:-0.62, el:0.58};` und ihre Verwendung in `draw3D`. Der Punkt in `blick.az` ist für `grep` eine Wortgrenze, deshalb greift `\baz\b` auch dort; das sind die vorgesehenen Feldnamen, keine Reste. Jeder weitere Treffer ist ein übersehener Rest. Schärfer prüfen, ob wirklich nichts liegenblieb, tut:
+
+```bash
+cd "<REPO>" && grep -n "makeCam\|\bdrag\b\|function proj" tools/flaechenrechner/flaechenrechner.js
+```
+
+Hier ist keine Ausgabe erwartet.
 
 - [ ] **Schritt 8: Prüfen**
 
