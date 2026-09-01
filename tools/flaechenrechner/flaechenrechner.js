@@ -197,7 +197,7 @@ function analyse(f){
 
 var f=null, RANGE=4, cH=-2, cY=0, cX=0;
 var zMin=-6, zMax=1;
-var az=-0.62, el=0.58;
+var blick={az:-0.62, el:0.58};
 var GRID=46;
 var samples=null;
 
@@ -230,30 +230,14 @@ function fval(i,j){ return samples.vals[i*(samples.n+1)+j]; }
 function gx(i){ return -RANGE+2*RANGE*i/samples.n; }
 function hoehenlinie(niveau){ return MT.plot2d.contour(samples,niveau); }
 
-/* ---------- 3D ---------- */
-function proj(x,y,z,cam){
-  var ca=Math.cos(az),sa=Math.sin(az),ce=Math.cos(el),se=Math.sin(el);
-  var x1=x*ca-y*sa, y1=x*sa+y*ca;
-  return { x:cam.cx+x1*cam.s, y:cam.cy-(y1*se+z*ce)*cam.s, d:y1*ce-z*se };
-}
-function makeCam(w,h){
-  var cam={cx:0,cy:0,s:1}, R=RANGE, pts=[];
-  var Z=[zMin,zMax];
-  for(var i=0;i<2;i++)for(var j=0;j<2;j++)for(var k=0;k<2;k++)
-    pts.push(proj(i?R:-R, j?R:-R, Z[k], cam));
-  var a=1e9,b=-1e9,c=1e9,d=-1e9;
-  pts.forEach(function(p){ a=Math.min(a,p.x); b=Math.max(b,p.x); c=Math.min(c,p.y); d=Math.max(d,p.y); });
-  var pad=18;
-  cam.s=Math.min((w-2*pad)/(b-a),(h-2*pad)/(d-c));
-  cam.cx=w/2-((a+b)/2)*cam.s; cam.cy=h/2+((c+d)/2)*cam.s;
-  return cam;
-}
 function clampZ(v){ return Math.max(zMin,Math.min(zMax,v)); }
 
 function draw3D(){
   var masse=MT.canvas.fit(C3,G3), w=masse.w, h=masse.h;
   if(!f) return;
-  var cam=makeCam(w,h), P=function(x,y,z){return proj(x,y,z,cam);};
+  var cam=MT.scene3d.camera({w:w, h:h, az:blick.az, el:blick.el,
+                             range:RANGE, zMin:zMin, zMax:zMax});
+  var P=function(x,y,z){ return MT.scene3d.project(x,y,z,cam); };
   var polys=[], n=samples.n, step=2;
 
   for(var i=0;i<n;i+=step){
@@ -490,15 +474,7 @@ document.getElementById('sR').addEventListener('input',function(){
   sampleGrid(); refreshSliders(); drawAll();
 });
 
-var drag=null;
-C3.addEventListener('pointerdown',function(e){ drag={x:e.clientX,y:e.clientY,az:az,el:el}; C3.setPointerCapture(e.pointerId); });
-C3.addEventListener('pointermove',function(e){
-  if(!drag) return;
-  az=drag.az+(e.clientX-drag.x)*0.008;
-  el=Math.max(0.12,Math.min(1.45,drag.el+(e.clientY-drag.y)*0.006));
-  draw3D();
-});
-['pointerup','pointercancel'].forEach(function(ev){ C3.addEventListener(ev,function(){drag=null;}); });
+MT.scene3d.enableDrag(C3, blick, draw3D);
 
 function sizeAll(){
   var w=C3.clientWidth;
