@@ -11,21 +11,23 @@
   font-family:Georgia,serif;font-style:italic;font-size:1.15rem;
   display:flex;align-items:center;color:var(--dim);flex:0 0 auto;
 }
-#fx{
+.term{
   flex:1 1 320px;min-width:0;
   background:rgba(6,24,33,.7);border:1px solid var(--edge);border-radius:3px;
   color:var(--ink);font-family:Georgia,serif;font-size:1.1rem;
   padding:10px 12px;
 }
-#fx:focus{outline:none;border-color:var(--gold)}
-#fx.bad{border-color:#E06C5A}
+.term:focus{outline:none;border-color:var(--gold)}
+.term:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.term.bad{border-color:#E06C5A}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
 .chip{
   background:transparent;border:1px solid var(--edge);border-radius:2px;
   color:var(--dim);font-family:Georgia,serif;font-size:.9rem;
   padding:4px 9px;cursor:pointer;
 }
-.chip:hover,.chip:focus-visible{border-color:var(--gold);color:var(--ink);outline:none}
+.chip:hover{border-color:var(--gold);color:var(--ink);outline:none}
+.chip:focus-visible{border-color:var(--gold);color:var(--ink);outline:2px solid currentColor;outline-offset:4px}
 .err{color:#E89383;font-size:.85rem;min-height:1.2em;margin:0 0 14px}
 
 /* ---- Panels ---- */
@@ -37,8 +39,8 @@ figure{
   display:flex;flex-direction:column;
 }
 canvas{width:100%;display:block;touch-action:none}
-#c3d{cursor:grab}
-#c3d:active{cursor:grabbing}
+.drehbar{cursor:grab}
+.drehbar:active{cursor:grabbing}
 figcaption{
   color:var(--dim);font-size:.78rem;padding:7px 3px 9px;
   border-top:1px solid rgba(94,158,182,.18);margin-top:7px;

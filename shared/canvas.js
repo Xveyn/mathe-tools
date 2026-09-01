@@ -8,7 +8,7 @@ MT.canvas = (function(){
 
 function fit(cv, ctx){
   var w=cv.clientWidth, h=cv.clientHeight, dpr=window.devicePixelRatio||1;
-  if(cv.width!==Math.round(w*dpr)){ cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr); }
+  if(cv.width!==Math.round(w*dpr) || cv.height!==Math.round(h*dpr)){ cv.width=Math.round(w*dpr); cv.height=Math.round(h*dpr); }
   ctx.setTransform(dpr,0,0,dpr,0,0);
   ctx.clearRect(0,0,w,h);
   return {w:w,h:h};
@@ -20,6 +20,7 @@ function linear(vonMin, vonMax, nachMin, nachMax){
 }
 
 function tickStep(spanne){
+  if(!(spanne>0)) return 1;
   return Math.pow(10, Math.round(Math.log10(spanne/5)));
 }
 
