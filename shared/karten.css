@@ -86,6 +86,20 @@ body.abfrage [data-verdeckbar].aufgedeckt .aufdecken{ display:none; }
 .aufdecken{ display:none; }
 body.abfrage [data-verdeckbar] .aufdecken{ display:inline-block; }
 
+/* Das verdeckte Feld verliert mit seiner Sichtbarkeit auch den eigenen
+   Rahmen. Dieses Pseudoelement setzt ihn an genau dieselbe Stelle zurueck
+   und holt sich die Sichtbarkeit wie der Knopf. Werte aus .formel,.beispiel
+   uebernommen; inset:-1px, weil ein absolut positioniertes Kind sich auf
+   die Polsterungsbox bezieht, der echte Rahmen aber einen Pixel weiter
+   aussen sitzt. */
+body.abfrage [data-verdeckbar]::before{
+  content:""; position:absolute; inset:-1px;
+  border:1px solid var(--edge); border-radius:3px;
+  background:var(--panel-b);
+  visibility:visible;
+}
+body.abfrage [data-verdeckbar].aufgedeckt::before{ content:none; }
+
 .aufdecken{
   position:absolute;left:16px;top:14px;
   background:transparent;border:1px solid var(--edge);border-radius:2px;
@@ -111,6 +125,7 @@ body.abfrage [data-verdeckbar] .aufdecken{ display:inline-block; }
   .karte{ break-inside:avoid; border-color:#bbb; background:none; }
   .abfrage-leiste, .aufdecken{ display:none !important; }
   body.abfrage [data-verdeckbar]{ visibility:visible !important; }
+  body.abfrage [data-verdeckbar]::before{ content:none; }
   .querlink::after{ content:" (" attr(href) ")"; font-size:.85em; color:#555; }
   .formel, .beispiel{ background:none; }
   .bild{ break-inside:avoid; }
