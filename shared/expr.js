@@ -2,7 +2,8 @@
    Variablenliste. Tokenizer mit impliziter Multiplikation, danach
    rekursiver Abstieg. Die Knotenfunktionen nehmen ein Werte-Array
    entgegen; compile() verpackt sie zu einer Funktion mit
-   Stellungsargumenten. */
+   Stellungsargumenten. Variablennamen müssen einzelne Buchstaben
+   sein und dürfen nicht mit einer Funktion oder Konstante kollidieren. */
 
 var MT = MT || {};
 
@@ -118,6 +119,16 @@ function parse(tokens){
 
 function compile(src, vars){
   vars = vars || ['x','y'];
+  if(!vars.length) throw new Error('Es muss mindestens eine Variable angegeben werden');
+  for(var vi=0;vi<vars.length;vi++){
+    var name=vars[vi];
+    if(typeof name!=='string' || !/^[a-zA-Z]$/.test(name))
+      throw new Error('Variablenname "'+name+'" ist nicht erlaubt — Variablen sind einzelne Buchstaben');
+    if(FUNCS[name] || CONSTS[name])
+      throw new Error('Variablenname "'+name+'" ist schon als Funktion oder Konstante vergeben');
+    if(vars.indexOf(name)!==vi)
+      throw new Error('Variablenname "'+name+'" kommt doppelt vor');
+  }
   var root = parse(tokenize(src, vars));
   // arguments ist array-artig; die Knoten greifen nur per Index zu.
   var fn = function(){ return root(arguments); };
