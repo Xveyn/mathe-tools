@@ -42,7 +42,10 @@ und die Seiten sollen ohne Server laufen.
 
 1. `tools/<name>/index.html` anlegen, `shared/theme.css` und
    `shared/ui.css` einbinden, dazu die gebrauchten `shared/*.js`.
-2. Werkzeug-eigenes JavaScript nach `tools/<name>/<name>.js`.
+2. Werkzeug-eigenes JavaScript nach `tools/<name>/<name>.js`. Die
+   `<script>`-Tags gehören ans Ende des `<body>`, nicht in den `<head>`:
+   der Werkzeugcode greift ohne DOM-Ready-Schutz sofort auf Elemente
+   der Seite zu, im `<head>` eingebunden gäbe es die noch nicht.
 3. Eine Karte in `index.html` ergänzen.
 
 Alle Pfade relativ halten — ein führender `/` bricht sowohl den

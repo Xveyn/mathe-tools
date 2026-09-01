@@ -38,7 +38,10 @@ mathe-tools/
 ├─ README.md
 ├─ LICENSE                         MIT
 ├─ .nojekyll                       Pages soll nichts wegfiltern
-├─ docs/superpowers/specs/         Design- und Planungsdokumente
+├─ .gitignore                      Was nicht ins Repo gehört
+├─ .gitattributes                  Zeilenenden im Repo auf LF festnageln
+├─ docs/superpowers/specs/         Designdokumente
+├─ docs/superpowers/plans/         Planungsdokumente
 ├─ shared/
 │  ├─ theme.css                    Farbtokens, Typografie
 │  ├─ ui.css                       Panels, figure, Regler, Chips, Analyse-Raster
@@ -91,9 +94,20 @@ impliziter Multiplikation, rekursiver Abstieg (`expr` → `term` →
 
 Öffentlich:
 
-- `MT.expr.compile(term, vars)` → Funktion mit so vielen Argumenten wie
-  `vars` Einträge hat, in genau dieser Reihenfolge. `vars` ist optional
-  und steht per Vorgabe auf `['x', 'y']`.
+- `MT.expr.compile(term, vars)` → Funktion, die sich verhält, als nähme
+  sie so viele Argumente wie `vars` Einträge hat, in genau dieser
+  Reihenfolge. Technisch ist `fn.length` dabei `0`: Die zurückgegebene
+  Funktion reicht `arguments` unverändert an die kompilierten Knoten
+  durch, statt eine feste Parameterliste zu deklarieren. Am Aufruf
+  `f(x, y)` ändert das nichts, nur an der Introspektion über
+  `fn.length`.
+- `vars` ist optional und steht per Vorgabe auf `['x', 'y']`. Es ist
+  kein beliebiges Array: Jeder Eintrag muss ein einzelner Buchstabe
+  sein, der weder mit einem Funktionsnamen (`MT.expr.FUNCS`) noch einer
+  Konstante (`MT.expr.CONSTS`) kollidiert, und kein Eintrag darf
+  doppelt vorkommen. `compile` prüft das und wirft sonst — sonst würde
+  der Tokenizer etwa eine Variable namens `e` stillschweigend
+  verschlucken und mit der Eulerschen Zahl weiterrechnen.
 - `MT.expr.FUNCS`, `MT.expr.CONSTS` — für Werkzeuge, die dem Nutzer
   anzeigen wollen, was erlaubt ist.
 
@@ -112,15 +126,18 @@ Fehler werden weiterhin als `Error` mit deutschem Text geworfen
 
 Alles, was jede Zeichenfläche braucht:
 
-- `MT.canvas.fit(canvas, ctx, hoehe)` — Größe an die CSS-Breite und das
-  `devicePixelRatio` anpassen.
-- `MT.canvas.mapper(bereich, breite, hoehe)` — Welt→Pixel-Abbildung für
-  einen rechteckigen Bereich, liefert `toPx(x, y)` und `toWorld(px, py)`.
-- `MT.canvas.grid(...)` und `MT.canvas.axes(...)` — Gitter und Achsen im
-  gemeinsamen Stil.
+- `MT.canvas.fit(cv, ctx)` → `{w, h}` — passt die Pixelgröße an die
+  CSS-Breite und das `devicePixelRatio` an, setzt die Transformation,
+  leert die Fläche und liefert die Maße in CSS-Pixeln. Ohne
+  Höhenparameter: Die Höhe der Zeichenflächen setzt das Werkzeug selbst
+  (`sizeAll()`), weil sie von der jeweiligen Zeichenfläche abhängt.
+- `MT.canvas.linear(vonMin, vonMax, nachMin, nachMax)` → `function(v)` —
+  lineare Achsenabbildung.
+- `MT.canvas.tickStep(spanne)` → Zahl — Schrittweite für etwa fünf
+  Gitterlinien über die Spanne.
 - `MT.canvas.colors()` — liest die Farbwerte per `getComputedStyle` aus
-  den CSS-Variablen und liefert sie als Objekt (`gold`, `mint`, `rose`,
-  `dim`, `grid`, `axis`).
+  den CSS-Variablen und liefert sie als Objekt mit sieben Schlüsseln:
+  `gold`, `mint`, `rose`, `dim`, `grid`, `axis`, `ink`.
 
 `MT.canvas.colors()` ersetzt das heutige `COL`-Objekt und beseitigt die
 doppelte Pflege der Farben in CSS und JS.
@@ -129,8 +146,14 @@ doppelte Pflege der Farben in CSS und JS.
 
 - `MT.plot2d.contour(gitter, niveau)` — Höhenlinien nach Marching
   Squares, liefert Liniensegmente.
-- `MT.plot2d.curve(ctx, punkte, farbe)` — Kurvenzug mit Unterbrechung an
-  undefinierten Stellen (`NaN`, `Infinity`).
+- `MT.plot2d.segments(ctx, segs, X, Y)` — zeichnet fertige Liniensegmente
+  (etwa aus `contour`) als einen Pfad; `X` und `Y` bilden Welt- auf
+  Pixelkoordinaten ab.
+- `MT.plot2d.polyline(ctx, punkte)` — Kurvenzug mit Unterbrechung an
+  undefinierten Stellen (`NaN`, `Infinity`), als `null`-Einträge im
+  Punktarray. Beide setzen weder Farbe noch Strichstärke — das macht
+  der Aufrufer vorher auf dem Kontext, ein eigener Farbparameter wäre
+  eine doppelte Stelle dafür gewesen.
 
 ### `shared/scene3d.js` → `MT.scene3d`
 

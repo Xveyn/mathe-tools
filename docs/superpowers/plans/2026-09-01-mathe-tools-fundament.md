@@ -35,12 +35,12 @@ Diese Punkte gelten für **jede** Aufgabe:
 
 | Kürzel | Pfad |
 |---|---|
-| REPO | `F:\Einige_Dateien\TH_Koeln\Mathematik 2\Tools\mathe-tools` |
-| ORIGINAL | `F:\Einige_Dateien\TH_Koeln\Mathematik 2\Tools\import files\flaechenrechner.html` |
-| SHOTS | `C:\Users\<NUTZER>\AppData\Local\Temp\claude\F--Einige-Dateien-TH-Koeln-Mathematik-2-Tools\83a2610e-7078-4633-a91f-4c692215577c\scratchpad\shots` |
-| URL_ORIGINAL | `file:///F:/Einige_Dateien/TH_Koeln/Mathematik%202/Tools/import%20files/flaechenrechner.html` |
-| URL_TOOL | `file:///F:/Einige_Dateien/TH_Koeln/Mathematik%202/Tools/mathe-tools/tools/flaechenrechner/index.html` |
-| URL_START | `file:///F:/Einige_Dateien/TH_Koeln/Mathematik%202/Tools/mathe-tools/index.html` |
+| REPO | das Repo-Verzeichnis |
+| ORIGINAL | die Original-HTML-Datei außerhalb des Repos |
+| SHOTS | ein temporäres Verzeichnis für die Vergleichsbilder |
+| URL_ORIGINAL | die Originaldatei über `file://` |
+| URL_TOOL | das Werkzeug über `file://` |
+| URL_START | die Startseite über `file://` |
 
 ## Prüfroutine P
 
@@ -128,13 +128,16 @@ Ausgabe nur `Vergleich fertig` heißt: bestanden. Jede gemeldete Zeile muss ange
 
 ## Abweichungen von der Spec
 
-Beim Lesen des Originalcodes haben sich drei Signaturen der Spec als unpraktisch erwiesen. Der Plan setzt stattdessen um:
+Beim Lesen des Originalcodes und bei der Umsetzung haben sich sechs Signaturen der Spec als unpraktisch erwiesen. Der Plan setzt stattdessen um:
 
 1. **`MT.canvas.mapper(bereich, breite, hoehe)` → `MT.canvas.linear(vonMin, vonMax, nachMin, nachMax)`.** Die beiden 2D-Ansichten bilden unterschiedlich ab (die Karte quadratisch und zentriert, der Schnitt mit vier verschiedenen Rändern). Eine einzelne lineare Abbildung deckt beide Achsen beider Ansichten ab; ein Bereichsobjekt hätte für keine der beiden gepasst. `toWorld` braucht kein Aufrufer und entfällt (YAGNI).
 2. **`MT.canvas.grid(...)` / `MT.canvas.axes(...)` entfallen.** Karte und Schnitt zeichnen inhaltlich verschiedene Gitter — die Karte ein x-y-Gitter mit ganzzahligen Linien, der Schnitt ein x-z-Gitter mit berechneter z-Schrittweite. Gemeinsam ist nur die Schrittweitenrechnung; die zieht als `MT.canvas.tickStep(spanne)` nach `shared/canvas.js`, das Zeichnen bleibt beim Werkzeug. Eine Funktion mit einem Dutzend Parametern wäre schlechter als zwei ehrliche Schleifen.
 3. **`MT.scene3d.camera(breite, hoehe, azimut, elevation)` → `MT.scene3d.camera(opt)`** mit einem Objekt, weil die Kamera zusätzlich `range`, `zMin` und `zMax` braucht, um die Fläche einzupassen. Sieben Stellungsparameter wären nicht lesbar.
+4. **`MT.canvas.fit(canvas, ctx, hoehe)` → `fit(cv, ctx)` ohne Höhenparameter.** Die Höhe der Zeichenflächen setzt nicht `fit`, sondern `sizeAll()` im Werkzeug — dort hängt sie von der Breite und vom jeweiligen Canvas ab (`c3d`/`cmap` variabel, `csx`/`csy` fest auf `220px`). Ein dritter Parameter hätte diese Entscheidung nur nach außen verlagert, ohne sie zu vereinfachen.
+5. **`MT.plot2d.curve(ctx, punkte, farbe)` → `polyline(ctx, punkte)` ohne Farbe, plus zusätzlich `segments(ctx, segs, X, Y)`.** Die Farbe setzt der Aufrufer ohnehin vorher auf den Kontext (`ctx.strokeStyle=...`), ein weiterer Parameter hätte das nur verdoppelt. `segments` kam dazu, weil ein Teil der Aufrufstellen fertige Liniensegmente in Weltkoordinaten hat (aus `contour`) statt eines zusammenhängenden Punktzugs — beides über `polyline` zu erzwingen hätte an der Aufrufstelle mehr Code gekostet als die zweite, ehrliche Funktion.
+6. **`colors()` liefert sieben Schlüssel statt sechs.** Zusätzlich zu `gold`, `mint`, `rose`, `dim`, `grid`, `axis` liefert sie `ink` — die Textfarbe wird beim Zeichnen der Achsbeschriftung gebraucht und war sonst nur über eine zweite Quelle zu haben.
 
-Diese drei Punkte sind Verfeinerungen desselben Schnitts, keine neue Architektur.
+Diese sechs Punkte sind Verfeinerungen desselben Schnitts, keine neue Architektur.
 
 ---
 
@@ -1357,7 +1360,7 @@ Claude-Session: https://claude.ai/code/session_016ra8LtfH4uUnzFZLtRKBJp"
 
 Ziel: Das Repo liegt öffentlich unter `Xveyn/mathe-tools`, GitHub Pages liefert es aus, und die veröffentlichte Fassung ist dieselbe wie die geprüfte.
 
-Diese Aufgabe geht nach außen. **Vor dem ersten Push die Zustimmung des Nutzers einholen** — ein öffentliches Repo lässt sich nicht ungeschehen machen, und der Nutzer hat zwei GitHub-Konten im Zugriff (`Xveyn` ist aktiv, `Xveyn-MH` nicht).
+Diese Aufgabe geht nach außen. **Vor dem ersten Push die Zustimmung des Nutzers einholen** — ein öffentliches Repo lässt sich nicht ungeschehen machen, und vorher ist zu prüfen, dass `gh` beim Zielkonto `Xveyn` angemeldet ist.
 
 **Dateien:** keine neuen
 
