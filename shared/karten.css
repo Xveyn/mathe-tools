@@ -72,11 +72,16 @@
 
 /* ---- Teil 2: der Abfragemodus ----
    visibility:hidden statt display:none ist Absicht: Der Platz bleibt
-   stehen, die Seite springt beim Aufdecken nicht. */
+   stehen, die Seite springt beim Aufdecken nicht.
 
-body.abfrage [data-verdeckbar]{ position:relative; }
-body.abfrage [data-verdeckbar] > *:not(.aufdecken){ visibility:hidden; }
-body.abfrage [data-verdeckbar].aufgedeckt > *{ visibility:visible; }
+   Verdeckt wird das Feld selbst, nicht seine Kinder. visibility vererbt
+   sich, laesst sich am Kind aber zuruecknehmen — genau das tut der
+   Aufdeck-Knopf. So ist auch ein nackter Textknoten mitverdeckt, den
+   eine Regel auf die Elementkinder stehen liesse. */
+
+body.abfrage [data-verdeckbar]{ position:relative; visibility:hidden; }
+body.abfrage [data-verdeckbar] .aufdecken{ visibility:visible; }
+body.abfrage [data-verdeckbar].aufgedeckt{ visibility:visible; }
 body.abfrage [data-verdeckbar].aufgedeckt .aufdecken{ display:none; }
 .aufdecken{ display:none; }
 body.abfrage [data-verdeckbar] .aufdecken{ display:inline-block; }
@@ -105,7 +110,7 @@ body.abfrage [data-verdeckbar] .aufdecken{ display:inline-block; }
   body{ background:#fff; color:#111; }
   .karte{ break-inside:avoid; border-color:#bbb; background:none; }
   .abfrage-leiste, .aufdecken{ display:none !important; }
-  body.abfrage [data-verdeckbar] > *{ visibility:visible !important; }
+  body.abfrage [data-verdeckbar]{ visibility:visible !important; }
   .querlink::after{ content:" (" attr(href) ")"; font-size:.85em; color:#555; }
   .formel, .beispiel{ background:none; }
   .bild{ break-inside:avoid; }
