@@ -133,9 +133,16 @@ Nachkommastellen; die Rechenprobe akzeptiert das entsprechend.
 
 **Einsammeln.** Verworfen wird ein Treffer, der außerhalb `[−r, r]²` liegt
 oder nicht konvergiert ist. Zwei Treffer gelten als dieselbe Stelle, wenn ihr
-Abstand kleiner als `1e-6 · (1 + r)` ist. Die Liste wird nach `x` sortiert,
-bei Gleichstand nach `y` — damit dieselbe Eingabe dieselbe Reihenfolge
-liefert.
+Abstand kleiner ist als das Größere aus dem festen Wert `1e-6 · (1 + r)` und
+der Unschärfe `tau / max(|f_xx|, |f_xy|, |f_yy|)` (mit
+`tau = 1e-10 · (1 + |f|)`) beider Treffer — eine feste Zahl allein muss sich
+zwischen einer entarteten Stelle, an der weit verstreute Läufe
+zusammengehören, und zwei echten, nah beieinanderliegenden Stellen
+entscheiden und liegt dann bei einer von beiden falsch, während die Lage
+einer stationären Stelle ohnehin nur so genau bestimmt ist, wie die
+Krümmung dort es zulässt. Behalten wird bei einer Kollision der Treffer mit
+dem kleineren Gradientenbetrag. Die Liste wird nach `x` sortiert, bei
+Gleichstand nach `y` — damit dieselbe Eingabe dieselbe Reihenfolge liefert.
 
 **Einordnung.** Mit `det = f_xx · f_yy − f_xy²`:
 

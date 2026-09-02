@@ -78,6 +78,19 @@ var MT = MT || {};
     return nahGenug(d) ? { x: x, y: y, d: d } : null;
   }
 
+  /* Wie unscharf die Lage einer gefundenen Stelle ist: die Konvergenz
+     bricht ab, sobald der Gradient unter die Schranke tau fällt, und aus
+     |g| < tau folgt über die Hesse-Matrix nur |Abstand zur wahren
+     Stelle| ≲ tau / |Krümmung|. Ist die Krümmung groß (gewöhnliche
+     Stelle), ist das eine winzige Unschärfe. Ist sie fast null (entartete
+     Stelle wie bei x^4 + y^4), wird die Unschärfe groß — die Lage ist
+     dann wirklich nur so genau bestimmt, wie die Krümmung es zulässt. */
+  function unschaerfe(d){
+    var tau = 1e-10 * (1 + Math.abs(d.f));
+    var kruemmung = Math.max(Math.abs(d.fxx), Math.abs(d.fxy), Math.abs(d.fyy));
+    return kruemmung > 0 ? tau / kruemmung : Infinity;
+  }
+
   /* Das Schulkriterium. Die Schwelle wird zuerst geprüft: eine
      Determinante nahe null entscheidet nichts, auch wenn ihr Vorzeichen
      zufällig positiv ist. */
@@ -104,25 +117,29 @@ var MT = MT || {};
 
     /* Zusammenfassen nach echtem Abstand, nicht nach Kästchen um jeden
        Punkt — über die Diagonale wäre ein Kästchenvergleich um den
-       Faktor Wurzel 2 zu großzügig. Von zwei Treffern, die näher als
-       eps beieinanderliegen, gewinnt der mit dem kleineren
-       Gradientenbetrag, nicht der zuerst gefundene: an einer entarteten
-       Stelle (z. B. x^4 + y^4) greift die Konvergenzschwelle
-       |g| < 1e-10*(1+|f|) schon in einem Umkreis der Größenordnung 3e-4
-       um die wahre Stelle, und je nach Startpunkt bleiben Läufe an
-       verstreuten Positionen in diesem Umkreis stehen. Wer den
-       zuerst gefundenen Treffer behält, kann so einen schlechter
-       konvergierten Lauf über einen exakten stellen — trifft das
-       Rasters selbst die stationäre Stelle, wie bei x^4 + y^4 den
-       Startpunkt (0|0), geht das exakte Ergebnis sonst verloren. */
-    var eps = 1e-6 * (1 + r), gewaehlt = [], k, m, treffer, dx, dy, abstand;
+       Faktor Wurzel 2 zu großzügig. Eine feste Toleranz kann nicht beide
+       Fälle bedienen: bei einer entarteten Stelle (z. B. x^4 + y^4)
+       bleiben Läufe weit verstreut stehen und müssen zusammengefasst
+       werden; bei zwei echten, nahe beieinanderliegenden Stellen (Sattel
+       zwischen zwei Minima) treffen die Läufe genau, und Zusammenfassen
+       würde die eine oder andere verschlucken. Die Toleranz für ein
+       Paar ist deshalb das Größere aus dem festen Spec-Wert eps und der
+       Unschärfe beider Treffer — ist einer der beiden entartet, ist die
+       Stelle unscharf, egal wie genau der andere sitzt. Von zwei
+       Treffern, die so als dieselbe Stelle gelten, gewinnt der mit dem
+       kleineren Gradientenbetrag, nicht der zuerst gefundene — sonst
+       kann ein schlechter konvergierter Lauf einen exakten verdrängen,
+       etwa wenn das Raster selbst die stationäre Stelle trifft, wie bei
+       x^4 + y^4 den Startpunkt (0|0). */
+    var eps = 1e-6 * (1 + r), gewaehlt = [], k, m, treffer, dx, dy, abstand, toleranz;
     for (k = 0; k < roh.length; k++) {
       treffer = -1;
       for (m = 0; m < gewaehlt.length; m++) {
         dx = gewaehlt[m].x - roh[k].x;
         dy = gewaehlt[m].y - roh[k].y;
         abstand = Math.sqrt(dx * dx + dy * dy);
-        if (abstand < eps) { treffer = m; break; }
+        toleranz = Math.max(eps, unschaerfe(gewaehlt[m].d), unschaerfe(roh[k].d));
+        if (abstand < toleranz) { treffer = m; break; }
       }
       if (treffer < 0) {
         gewaehlt.push(roh[k]);
