@@ -95,6 +95,37 @@ input[type=range]:focus-visible{outline:2px solid currentColor;outline-offset:4p
   font-family:Georgia,serif;font-style:italic;font-size:.95rem;color:var(--gold);
 }
 
+/* ---- Verweiszeilen ----
+   Zwei Platzierungen, eine Optik: ein goldener Link, nicht unterstrichen
+   bis zum Hover, mit demselben Fokusring wie Chips und Regler.
+
+   .querlink   sitzt am Fuß einer Karte und am Fuß der Werkzeugseite und
+               zeigt quer auf die jeweils andere Gattung.
+   .seitenfuss sitzt am Fuß einer ganzen Seite und führt eine Ebene
+               zurück: Kartenseite → Übersicht → Startseite.
+
+   Beides steht hier und nicht in karten.css, weil es beide Gattungen
+   betrifft: den Flächenrechner ebenso wie die Karten, und `.seitenfuss`
+   zusätzlich die Startseite und die Kartenübersicht — die beiden laden
+   karten.css gar nicht. Vorher war dieselbe Idee dreimal von Hand
+   geschrieben (.querlink, .mehr, .zurueck) und dreimal auseinandergelaufen.
+
+   Zwei Selektorgruppen, weil die Zeile mal selbst der Anker ist (eine
+   Karte, ein Ziel) und mal mehrere Anker als Kinder trägt. Sonst
+   unterstriche ein Hover irgendwo auf der Zeile gleich die ganze Zeile.
+
+   Ausgeblendet wird `.seitenfuss` im Druck — die Regel dazu steht bei
+   den übrigen Druckentscheidungen in shared/karten.css. */
+.querlink,.seitenfuss{
+  display:block;font-size:.9rem;border-top:1px solid var(--edge);
+}
+.querlink{margin:14px 0 0;padding-top:12px;max-width:46rem;color:var(--gold)}
+.seitenfuss{margin:32px 0 0;padding-top:16px;color:var(--dim)}
+a.querlink,a.seitenfuss,.querlink a,.seitenfuss a{color:var(--gold);text-decoration:none}
+a.querlink:hover,a.seitenfuss:hover,.querlink a:hover,.seitenfuss a:hover{text-decoration:underline}
+a.querlink:focus-visible,a.seitenfuss:focus-visible,
+.querlink a:focus-visible,.seitenfuss a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+
 /* ---- Analyse ---- */
 .analysis{
   margin-top:22px;padding-top:16px;border-top:1px solid rgba(94,158,182,.25);
