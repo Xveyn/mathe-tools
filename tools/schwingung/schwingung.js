@@ -48,12 +48,34 @@ function xhoch(k){
   return 'x' + hoch(k) + '·';
 }
 
+/* Der Exponentialfaktor e^(vx): weggelassen, wenn v praktisch 0 ist (der
+   Faktor ist dann 1 und trüge nur Rauschen bei -- etwa bei Chip (d), wo
+   a = 0 und damit der Realteil der Wurzel 0 ist), ohne die führende 1
+   vor dem x, wenn |v| = 1 ist ("e^(x)", "e^(−x)" statt "e^(1x)",
+   "e^(−1x)"). Eine Anzeige, die Zeile für Zeile mit der Handrechnung
+   verglichen wird, darf diese beiden Fälle nicht als Sonderfall des
+   Lesers behandeln. */
+function expFaktor(v){
+  var betrag, kern;
+  if (Math.abs(v) < 1e-10) return '';
+  betrag = Math.abs(v);
+  kern = (Math.abs(betrag - 1) < 1e-12) ? 'x' : (num(betrag) + 'x');
+  return 'e^(' + (v < 0 ? '−' : '') + kern + ')';
+}
+
 /* ==================== Koeffizientenliste parsen ====================
    parseFloat statt Number: Number('') ist 0, nicht NaN. Ein leeres
    Element in "1, , 3" würde mit Number/map(Number) zu [1, 0, 3] --
    einer still falschen Liste, statt eines Fehlers, den der Baustein
    melden könnte. Deshalb wird ein leeres Element hier selbst geprüft,
-   nicht erst dem Baustein überlassen. */
+   nicht erst dem Baustein überlassen.
+
+   parseFloat allein reicht aber nicht: es liest bis zum ersten
+   unpassenden Zeichen und liefert klaglos, was es hat -- aus "2x" wird
+   2, aus "2 3" ebenfalls 2. Ein Element muss deshalb VOR der Umwandlung
+   ganz auf eine Zahl passen, sonst löst dieselbe Lücke, die "1, , 3"
+   schließen sollte, sich einen Buchstaben weiter wieder auf. */
+var ZAHL_MUSTER = /^[+-]?(\d+\.?\d*|\.\d+)([eE][+-]?\d+)?$/;
 function parseKoeffliste(text, bezeichnung){
   var roh = text, teile, ergebnis = [], i, t, w;
   if (roh.trim() === '') throw new Error(bezeichnung + ': Koeffizienten fehlen.');
@@ -61,6 +83,7 @@ function parseKoeffliste(text, bezeichnung){
   for (i = 0; i < teile.length; i++){
     t = teile[i].trim();
     if (t === '') throw new Error(bezeichnung + ': leeres Element in der Liste "' + roh + '".');
+    if (!ZAHL_MUSTER.test(t)) throw new Error(bezeichnung + ': "' + t + '" ist keine Zahl.');
     w = parseFloat(t);
     if (!isFinite(w)) throw new Error(bezeichnung + ': "' + t + '" ist keine Zahl.');
     ergebnis.push(w);
@@ -77,7 +100,7 @@ function polynomZeile(a, b){
   return 'λ²' + vorzeichenTerm(a, 'λ') + vorzeichenTerm(b, '');
 }
 function diskriminanteZeile(a, b, D){
-  return 'D = a² − 4b = ' + klammer(a) + '² − 4·' + klammer(b) + ' = ' + num(D);
+  return 'Diskriminante D = a² − 4b = ' + klammer(a) + '² − 4·' + klammer(b) + ' = ' + num(D);
 }
 
 function fallSatz(fall){
@@ -90,16 +113,19 @@ function fallSatz(fall){
    herunter (Schwelle 1e-10), es wird hier also nirgends auf das
    Vorzeichen von re getestet. */
 function wurzelnUndYh(res){
-  var w = res.wurzeln;
+  var w = res.wurzeln, f1, f2, fre;
   if (res.fall === 'zwei-reelle'){
-    return 'λ₁ = ' + num(w[0]) + ', λ₂ = ' + num(w[1]) +
-           '. y_h = C₁·e^(' + num(w[0]) + 'x) + C₂·e^(' + num(w[1]) + 'x).';
+    f1 = expFaktor(w[0]); f2 = expFaktor(w[1]);
+    return 'λ₁ = ' + num(w[0]) + ', λ₂ = ' + num(w[1]) + '. y_h = C₁' +
+           (f1 ? '·' + f1 : '') + ' + C₂' + (f2 ? '·' + f2 : '') + '.';
   }
   if (res.fall === 'doppelt'){
-    return 'λ = ' + num(w[0]) + ' (doppelt). y_h = (C₁ + C₂x)·e^(' + num(w[0]) + 'x).';
+    f1 = expFaktor(w[0]);
+    return 'λ = ' + num(w[0]) + ' (doppelt). y_h = (C₁ + C₂x)' + (f1 ? '·' + f1 : '') + '.';
   }
-  return 'λ = ' + num(w.re) + ' ± ' + num(w.im) + 'i. y_h = e^(' + num(w.re) +
-         'x)·(C₁cos(' + num(w.im) + 'x) + C₂sin(' + num(w.im) + 'x)).';
+  fre = expFaktor(w.re);
+  return 'λ = ' + num(w.re) + ' ± ' + num(w.im) + 'i. y_h = ' + (fre ? fre + '·' : '') +
+         '(C₁cos(' + num(w.im) + 'x) + C₂sin(' + num(w.im) + 'x)).';
 }
 
 function resonanzSatz(teil){
@@ -117,13 +143,15 @@ function resonanzSatz(teil){
 function polynomSymbolisch(n){
   if (n === 0) return 'A₀';
   if (n === 1) return 'A₀ + A₁x';
+  if (n === 2) return 'A₀ + A₁x + A₂x²';
   return 'A₀ + A₁x + … + A' + tief(n) + 'x' + hoch(n);
 }
 function ansatzSymbolisch(teil){
+  var n, ef;
   if (teil.art === 'polyexp'){
-    var n = teil.ansatzGrad - teil.k;
-    var emu = (teil.mu === 0) ? '' : '·e^(' + num(teil.mu) + 'x)';
-    return 'y_p = ' + xhoch(teil.k) + '(' + polynomSymbolisch(n) + ')' + emu;
+    n = teil.ansatzGrad - teil.k;
+    ef = expFaktor(teil.mu);
+    return 'y_p = ' + xhoch(teil.k) + '(' + polynomSymbolisch(n) + ')' + (ef ? '·' + ef : '');
   }
   return 'y_p = ' + xhoch(teil.k) + '(A·cos(' + num(teil.omega) + 'x) + B·sin(' + num(teil.omega) + 'x))';
 }
@@ -162,22 +190,41 @@ function polynomNumerisch(koeff){
   return { text: out, mehrfach: glieder.length > 1 };
 }
 
+/* Zwei benannte Summanden A·cos(ωx) + B·sin(ωx) mit echten Zahlen: ein
+   Summand mit A bzw. B praktisch 0 fällt weg (statt als "+ 0·sin(3x)"
+   mitgeschleppt zu werden), wie polynomNumerisch es für ein Polynom
+   schon tut. */
+function harmonischNumerisch(A, B, omega){
+  var glieder = [], i, g, betrag, kern, out;
+  if (Math.abs(A) >= 1e-12) glieder.push({ c: A, name: 'cos(' + num(omega) + 'x)' });
+  if (Math.abs(B) >= 1e-12) glieder.push({ c: B, name: 'sin(' + num(omega) + 'x)' });
+  if (glieder.length === 0) return '0';
+  out = '';
+  for (i = 0; i < glieder.length; i++){
+    g = glieder[i];
+    betrag = Math.abs(g.c);
+    kern = (Math.abs(betrag - 1) < 1e-12) ? '' : num(betrag) + '·';
+    kern += g.name;
+    out += (i === 0) ? ((g.c < 0 ? '−' : '') + kern) : ((g.c < 0 ? ' − ' : ' + ') + kern);
+  }
+  return out;
+}
+
 /* Die tatsächlich berechnete Teillösung, mit Zahlen statt A0..An. Bei
    polyexp steckt der Faktor x^k schon in den führenden Nullen von v --
-   das ergibt "x³·e^(−1x)" statt des unhandlicheren "x²·x·e^(−1x)". */
+   das ergibt "x³·e^(−x)" statt des unhandlicheren "x²·x·e^(−x)". */
 function termNumerisch(teil){
-  var v, poly, kern, emu, i;
+  var v, poly, kern, ef, i;
   if (teil.art === 'polyexp'){
     v = [];
     for (i = 0; i < teil.k; i++) v.push(0);
     for (i = 0; i < teil.koeff.length; i++) v.push(teil.koeff[i]);
     poly = polynomNumerisch(v);
     kern = poly.mehrfach ? '(' + poly.text + ')' : poly.text;
-    emu = (teil.mu !== 0) ? '·e^(' + num(teil.mu) + 'x)' : '';
-    return kern + emu;
+    ef = expFaktor(teil.mu);
+    return kern + (ef ? '·' + ef : '');
   }
-  return xhoch(teil.k) + '(' + num(teil.koeff[0]) + '·cos(' + num(teil.omega) +
-         'x) + ' + num(teil.koeff[1]) + '·sin(' + num(teil.omega) + 'x))';
+  return xhoch(teil.k) + '(' + harmonischNumerisch(teil.koeff[0], teil.koeff[1], teil.omega) + ')';
 }
 function ypZeile(teile){
   var i, teileTexte = [];

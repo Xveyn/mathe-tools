@@ -151,26 +151,27 @@ a.querlink:focus-visible,a.seitenfuss:focus-visible,
 /* ---- Gleichung, Glieder, Anfangswerte (Werkzeuge mit mehreren
    Zahlenfeldern statt eines einzigen Terms) ---- */
 .gleichung{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 14px}
-.gleichung input,.glied-felder input,.anfang input[type=number],select{
-  background:rgba(6,24,33,.7);border:1px solid var(--edge);border-radius:3px;
+.gleichung input,.glied-felder input,.anfang input[type=number],.glied-kopf select{
+  background:var(--panel-b);border:1px solid var(--edge);border-radius:3px;
   color:var(--ink);font-family:Georgia,serif;font-size:.95rem;padding:6px 9px;
 }
 .gleichung input{width:100px}
-.gleichung input:focus,.glied-felder input:focus,.anfang input:focus,select:focus{outline:none;border-color:var(--gold)}
+.gleichung input:focus,.glied-felder input:focus,.anfang input:focus,.glied-kopf select:focus{outline:none;border-color:var(--gold)}
 .gleichung input:focus-visible,.glied-felder input:focus-visible,
-.anfang input:focus-visible,select:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.anfang input:focus-visible,.glied-kopf select:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 
 .glieder{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:0 0 14px}
 .glied{background:var(--panel-b);border:1px solid var(--edge);border-radius:3px;padding:12px 14px}
 .glied-kopf{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 10px}
 .glied-kopf label{font-family:Georgia,serif;font-style:italic;color:var(--dim);font-size:.92rem}
 .glied-felder{display:flex;flex-wrap:wrap;gap:10px 16px}
+.glied-felder[hidden]{display:none}
 .glied-felder label{display:flex;align-items:center;gap:6px;font-size:.88rem;color:var(--dim)}
 .glied-felder input[type=number]{width:80px}
 .glied-felder input[type=text]{width:170px}
 
 .anfang{
   display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin:0 0 14px;
-  padding-top:12px;border-top:1px solid rgba(94,158,182,.25);
+  padding-top:12px;border-top:1px solid var(--edge);
 }
 .anfang label{display:flex;align-items:center;gap:6px;font-size:.9rem;color:var(--dim)}

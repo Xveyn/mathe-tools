@@ -129,7 +129,7 @@ MT.dgl = (function(){
   function teilPolyexp(a, b, glied, nummer){
     var mu = glied.mu, P = glied.koeff, idx;
     if (!P || !P.length) throw new Error('Das ' + nummer + '. Glied hat keine Koeffizienten.');
-    pruefeGliedZahl(mu, 'mu', nummer);
+    pruefeGliedZahl(mu, 'μ', nummer);
     for (idx = 0; idx < P.length; idx++){
       if (!isFinite(P[idx])) throw new Error('Das ' + nummer + '. Glied hat im ' + (idx + 1) + '. Koeffizienten keine endliche Zahl.');
     }
@@ -156,7 +156,7 @@ MT.dgl = (function(){
       if (j - 2 >= 0 && j - 2 < anzahl) M[j - 2][i] += j * (j - 1);
     }
     var A = loeseSystem(M, r, anzahl);
-    if (!A) throw new Error('Das ' + nummer + '. Glied fuehrt auf ein unloesbares System.');
+    if (!A) throw new Error('Das ' + nummer + '. Glied führt auf ein unlösbares System.');
 
     var v = [];
     for (g = 0; g < k; g++) v.push(0);
@@ -181,7 +181,7 @@ MT.dgl = (function(){
      +-i*omega Wurzeln. */
   function teilHarmonisch(a, b, glied, nummer){
     var om = glied.omega, c = glied.c, d = glied.d;
-    if (!(isFinite(om) && om > 0)) throw new Error('Das ' + nummer + '. Glied braucht ein endliches omega groesser null.');
+    if (!(isFinite(om) && om > 0)) throw new Error('Das ' + nummer + '. Glied braucht ein endliches ω größer null.');
     pruefeGliedZahl(c, 'c', nummer);
     pruefeGliedZahl(d, 'd', nummer);
 
@@ -210,7 +210,7 @@ MT.dgl = (function(){
 
     k = 0;
     var e = b - om * om, f = a * om, det = e * e + f * f;
-    if (det < 1e-300) throw new Error('Das ' + nummer + '. Glied fuehrt auf ein unloesbares System.');
+    if (det < 1e-300) throw new Error('Das ' + nummer + '. Glied führt auf ein unlösbares System.');
     A = (c * e - d * f) / det;
     B = (c * f + d * e) / det;
     return {
@@ -245,8 +245,8 @@ MT.dgl = (function(){
 
     var konstanten = null;
     if (anfang){
-      pruefeZahl(anfang.y0, 'anfang.y0');
-      pruefeZahl(anfang.y0strich, 'anfang.y0strich');
+      pruefeZahl(anfang.y0, "Der Anfangswert y(0)");
+      pruefeZahl(anfang.y0strich, "Der Anfangswert y'(0)");
       konstanten = loeseSystem(
         [[h.beiNull[0][0], h.beiNull[0][1]], [h.beiNull[1][0], h.beiNull[1][1]]],
         [anfang.y0 - yp(0), anfang.y0strich - ypEins(0)], 2);
