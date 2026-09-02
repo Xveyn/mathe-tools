@@ -84,6 +84,14 @@ function num(v){
   return s.replace(/\.?0+$/,'').replace('.',',').replace('-','−');
 }
 
+// wie num(), aber mit fest vier Nachkommastellen — für die Koordinaten
+// der stationären Stellen, wo die Genauigkeit Teil der Anforderung ist.
+function num4(v){
+  var s=v.toFixed(4);
+  if(parseFloat(s)===0) s=(0).toFixed(4);
+  return s.replace('.',',').replace('-','−');
+}
+
 function analyse(f){
   var q=fitQuadratic(f);
   var out={ levels:[], secY:[], secX:[], note:'' };
@@ -196,6 +204,7 @@ function analyse(f){
 /* ==================== Zustand ==================== */
 
 var f=null, RANGE=4, cH=-2, cY=0, cX=0;
+var stellen=null;
 var zMin=-6, zMax=1;
 var blick={az:-0.62, el:0.58};
 var GRID=46;
@@ -384,18 +393,54 @@ function drawSection(cv,ctx,fixY,val,color,varName){
 }
 
 /* ---------- Ausgabe ---------- */
+function block(list){
+  return list.map(function(row){
+    return '<div class="case"><span>'+row[0]+'</span><span>'+row[1]+'</span></div>';
+  }).join('');
+}
+
 function renderAnalysis(a){
-  function block(list){
-    return list.map(function(row){
-      return '<div class="case"><span>'+row[0]+'</span><span>'+row[1]+'</span></div>';
-    }).join('');
-  }
   document.getElementById('anaH').innerHTML =
     block(a.levels) + (a.note? '<p style="margin-top:10px;color:var(--dim)">'+a.note+'</p>' : '');
   document.getElementById('anaY').innerHTML =
     a.secY.map(function(r){return '<div class="case mint"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>';}).join('');
   document.getElementById('anaX').innerHTML =
     a.secX.map(function(r){return '<div class="case rose"><span>'+r[0]+'</span><span>'+r[1]+'</span></div>';}).join('');
+}
+
+/* Stationäre Stellen: erscheint immer, auch ohne quadratischen Fit. */
+function urteilstext(art){
+  if(art==='minimum') return 'Minimum';
+  if(art==='maximum') return 'Maximum';
+  if(art==='sattel') return 'Sattelpunkt';
+  return 'Die Determinante ist null — das Kriterium entscheidet hier nicht. Die Art der Stelle ist von Hand zu klären.';
+}
+
+function renderStellen(res){
+  var rTxt=RANGE.toFixed(1).replace('.',',');
+  var teile=[];
+
+  if(res.kurvenfall){
+    teile.push('<p>Die Bedingung ist hier nicht in einzelnen Punkten erfüllt, sondern entlang einer ganzen Kurve. Unten stehen die ersten Treffer, nicht alle.</p>');
+  }
+
+  if(res.stellen.length===0){
+    teile.push('<p>Im Bereich −'+rTxt+' bis '+rTxt+' liegt keine Stelle mit waagerechter Tangentialebene.</p>');
+  } else {
+    teile.push(block(res.stellen.map(function(s){
+      var text='f = '+num(s.z)+' · Hesse: fxx = '+num(s.fxx)+', fxy = '+num(s.fxy)+', fyy = '+num(s.fyy)+
+               ' · det = '+num(s.det)+' · '+urteilstext(s.art);
+      return ['('+num4(s.x)+' | '+num4(s.y)+')', text];
+    })));
+  }
+
+  if(res.amRand){
+    teile.push('<p>Eine Stelle liegt dicht am Rand des durchsuchten Bereichs. Zieh den Bereich weiter auf, sonst entgeht dir womöglich eine Stelle knapp außerhalb.</p>');
+  }
+
+  teile.push('<p>Gesucht wurde in −'+rTxt+' bis '+rTxt+'. Außerhalb dieses Bereichs kann es weitere Stellen geben.</p>');
+
+  document.getElementById('anaS').innerHTML=teile.join('');
 }
 
 function drawAll(){
@@ -431,6 +476,8 @@ function rebuild(){
   sampleGrid();
   refreshSliders();
   renderAnalysis(analyse(f));
+  stellen=MT.extrema.finde(f,RANGE);
+  renderStellen(stellen);
   drawAll();
 }
 
@@ -471,7 +518,7 @@ document.getElementById('sX').addEventListener('input',function(){
 document.getElementById('sR').addEventListener('input',function(){
   RANGE=parseFloat(this.value);
   cY=Math.max(-RANGE,Math.min(RANGE,cY)); cX=Math.max(-RANGE,Math.min(RANGE,cX));
-  sampleGrid(); refreshSliders(); drawAll();
+  rebuild();
 });
 
 MT.scene3d.enableDrag(C3, blick, draw3D);
