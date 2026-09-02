@@ -184,7 +184,7 @@ Ohne JavaScript ist schlicht alles sichtbar.
 **Werkzeug → Karte:** Der Flächenrechner bekommt am **Fuß der Seite**,
 hinter dem Analysebereich, eine Zeile, die auf die passenden Karten
 zeigt. Unmittelbar unter den Ansichten stünde sie zwischen Bild und
-Erklärung und trännte beides; am Seitenfuß steht sie da, wo man mit dem
+Erklärung und trennte beides; am Seitenfuß steht sie da, wo man mit dem
 Werkzeug fertig ist.
 
 **Kein vorbelegter Term.** Ein Link wie `?f=x^2-y^2` würde URL-Zustand

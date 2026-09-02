@@ -58,7 +58,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | Datei | Was drin ist |
 |---|---|
 | `shared/theme.css` | Farbtokens, Grundtypografie |
-| `shared/ui.css` | Panels, Regler, Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`) und die Verweiszeilen (`.querlink`, `.seitenfuss`). Beides brauchen auch Startseite und Kartenübersicht, also Seiten, die keine Werkzeuge sind |
+| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`) und die Verweiszeilen (`.querlink`, `.seitenfuss`). Beides brauchen auch Startseite und Kartenübersicht, also Seiten, die keine Werkzeuge sind |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
 | `shared/expr.js` | `MT.expr.compile(term, vars)` — Terme in Funktionen |
 | `shared/canvas.js` | `MT.canvas` — Zeichenflächen, Achsen, Farben |
@@ -124,6 +124,13 @@ schlechter als kein Merksatz. Lieber weglassen.
 
 **Das Beispiel ist durchgerechnet**, nicht angedeutet. Jeder Schritt
 sichtbar, bis zum Ergebnis. Dazu ein Bild.
+
+**Nennt der Text eine Einstellung im verlinkten Werkzeug**, etwa „stelle
+den Regler `<span class="regler">Höhe c</span>` auf 5", bekommt der Name
+diese Klasse. Bewusst kein `<code>`: das steht auf den Karten für etwas,
+das man eintippt, ein Regler wird gezogen. `.regler` ist in
+`shared/karten.css` definiert, nicht in `shared/ui.css` — dort stehen nur
+die Schieberegler-Bedienelemente der Werkzeuge selbst.
 
 **`data-verdeckbar`** ist der Haken für den Abfragemodus. Er gehört an
 Formel und Beispiel, an sonst nichts. Eine Karte ohne ihn funktioniert,

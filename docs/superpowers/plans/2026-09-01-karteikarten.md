@@ -667,7 +667,7 @@ Nur wenn keine Datei erscheint, den Ordner entfernen. Erscheint irgendetwas, **h
 - [ ] **Schritt 3: Vollständigkeit prüfen**
 
 ```bash
-cd "<REPO>" && git status --short && echo "---" && git ls-files && echo "---" && git ls-files -z | xargs -0 grep -niE "<VORNAME>|<NACHNAME>|appdat[a]|einige_dateie[n]|th_koel[n]|scratchpa[d]" ; echo "Suche beendet"
+cd "<REPO>" && git status --short && echo "---" && git ls-files && echo "---" && git ls-files -z | xargs -0 grep -niE "<VORNAME>|<NACHNAME>|appdat[a]|einige_dateie[n]|(th[ _-]?)?k[oö]e?l[n]|scratchpa[d]|<MAILKONTO>|<MAILANBIETER>" ; echo "Suche beendet"
 ```
 
 Erwartet: sauberes Arbeitsverzeichnis, die erwartete Dateiliste, und nur `Suche beendet` — keine privaten Daten. Das war in der vorigen Runde der kritische Fund.
