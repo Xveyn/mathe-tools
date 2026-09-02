@@ -416,6 +416,23 @@ function urteilstext(art){
   return 'Die Determinante ist null — das Kriterium entscheidet hier nicht. Die Art der Stelle ist von Hand zu klären.';
 }
 
+/* Rauschschwelle für die Anzeige der Hesse-Einträge und der Determinante:
+   die zentralen Differenzen in shared/extrema.js liefern bei einer wahr
+   verschwindenden zweiten Ableitung nicht exakt 0, sondern einen Rest in
+   der Größenordnung 1e-6 bis 1e-9 (siehe die Rechenprobe R, Zeilen R1,
+   R3, R5, R7: fxx/fyy/det bis zu 5e-7 statt 0). Wer das als Zahl sieht,
+   sucht einen Rechenfehler, den es nicht gibt. Die Schwelle ist deshalb
+   relativ zur größten zweiten Ableitung an genau dieser Stelle
+   ("skala"), nicht zu einem Funktionswert oder zu einer festen Zahl:
+   1e-6·skala liegt in jeder der sieben Zeilen mindestens eine
+   Größenordnung über dem beobachteten Rauschen und zugleich mindestens
+   fünf Größenordnungen unter dem kleinsten dort vorkommenden echten
+   Eintrag (0,27 bei R4). Gerundet wird nur die Anzeige — art und der
+   rohe Determinantenwert aus MT.extrema.finde bleiben unverändert. */
+function fuerAnzeige(v, skala){
+  return Math.abs(v) < 1e-6*skala ? 0 : v;
+}
+
 function renderStellen(res){
   var rTxt=RANGE.toFixed(1).replace('.',',');
   var teile=[];
@@ -428,8 +445,11 @@ function renderStellen(res){
     teile.push('<p>Im Bereich −'+rTxt+' bis '+rTxt+' liegt keine Stelle mit waagerechter Tangentialebene.</p>');
   } else {
     teile.push(block(res.stellen.map(function(s){
-      var text='f = '+num(s.z)+' · Hesse: fxx = '+num(s.fxx)+', fxy = '+num(s.fxy)+', fyy = '+num(s.fyy)+
-               ' · det = '+num(s.det)+' · '+urteilstext(s.art);
+      var skala=Math.max(Math.abs(s.fxx),Math.abs(s.fxy),Math.abs(s.fyy),1);
+      var fxxA=fuerAnzeige(s.fxx,skala), fxyA=fuerAnzeige(s.fxy,skala),
+          fyyA=fuerAnzeige(s.fyy,skala), detA=fuerAnzeige(s.det,skala);
+      var text='f = '+num(s.z)+' · Hesse: fxx = '+num(fxxA)+', fxy = '+num(fxyA)+', fyy = '+num(fyyA)+
+               ' · det = '+num(detA)+' · '+urteilstext(s.art);
       return ['('+num4(s.x)+' | '+num4(s.y)+')', text];
     })));
   }
@@ -463,6 +483,18 @@ function refreshSliders(){
   document.getElementById('oR').textContent=RANGE.toFixed(1).replace('.',',');
 }
 
+/* Der Teil nach dem Kompilieren: läuft aus rebuild() nach einem gültigen
+   Term, und direkt aus dem Bereichsregler-Handler, wenn f schon steht —
+   dort ist der Term unverändert, ein erneutes Kompilieren unnötig. */
+function neuRechnen(){
+  sampleGrid();
+  refreshSliders();
+  renderAnalysis(analyse(f));
+  stellen=MT.extrema.finde(f,RANGE);
+  renderStellen(stellen);
+  drawAll();
+}
+
 function rebuild(){
   var src=document.getElementById('fx').value;
   var errEl=document.getElementById('err'), inp=document.getElementById('fx');
@@ -473,12 +505,7 @@ function rebuild(){
     errEl.textContent=e.message; inp.classList.add('bad');
     return;
   }
-  sampleGrid();
-  refreshSliders();
-  renderAnalysis(analyse(f));
-  stellen=MT.extrema.finde(f,RANGE);
-  renderStellen(stellen);
-  drawAll();
+  neuRechnen();
 }
 
 /* ---------- Bedienung ---------- */
@@ -518,7 +545,7 @@ document.getElementById('sX').addEventListener('input',function(){
 document.getElementById('sR').addEventListener('input',function(){
   RANGE=parseFloat(this.value);
   cY=Math.max(-RANGE,Math.min(RANGE,cY)); cX=Math.max(-RANGE,Math.min(RANGE,cX));
-  rebuild();
+  if(f) neuRechnen();
 });
 
 MT.scene3d.enableDrag(C3, blick, draw3D);
