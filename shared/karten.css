@@ -63,12 +63,19 @@
 .fehler{border-left-color:var(--rose)}
 
 .querlink{
-  display:block;margin:14px 0 0;padding-top:12px;
+  display:block;margin:14px 0 0;padding-top:12px;max-width:46rem;
   border-top:1px solid var(--edge);
   color:var(--gold);text-decoration:none;font-size:.9rem;
 }
-.querlink:hover{text-decoration:underline}
-.querlink:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+/* .querlink ist meist selbst der Anker (eine Karte, ein Ziel). Verweist
+   eine Zeile auf mehrere Ziele, sitzen die Anker als Kinder darin — die
+   zweite Regelgruppe gibt ihnen dieselbe Optik, ohne dass ein Hover
+   irgendwo auf der Zeile schon die ganze Zeile unterstreicht. */
+a.querlink:hover{text-decoration:underline}
+a.querlink:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.querlink a{color:inherit;text-decoration:inherit}
+.querlink a:hover{text-decoration:underline}
+.querlink a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 
 /* ---- Teil 2: der Abfragemodus ----
    visibility:hidden statt display:none ist Absicht: Der Platz bleibt
@@ -126,7 +133,7 @@ body.abfrage [data-verdeckbar].aufgedeckt::before{ content:none; }
   .abfrage-leiste, .aufdecken{ display:none !important; }
   body.abfrage [data-verdeckbar]{ visibility:visible !important; }
   body.abfrage [data-verdeckbar]::before{ content:none; }
-  .querlink::after{ content:" (" attr(href) ")"; font-size:.85em; color:#555; }
+  a.querlink::after,.querlink a::after{ content:" (" attr(href) ")"; font-size:.85em; color:#555; }
   .formel, .beispiel{ background:none; }
   .bild{ break-inside:avoid; }
 }

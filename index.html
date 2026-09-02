@@ -7,29 +7,14 @@
 <link rel="stylesheet" href="shared/theme.css">
 <link rel="stylesheet" href="shared/ui.css">
 <style>
-  .katalog{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-    gap:14px;margin-top:24px;
-  }
-  .kachel{
-    display:block;text-decoration:none;color:inherit;
-    background:linear-gradient(180deg,var(--panel-a),var(--panel-b));
-    border:1px solid var(--edge);border-radius:3px;padding:16px 17px 14px;
-  }
-  .kachel:hover{border-color:var(--gold);outline:none}
-  .kachel:focus-visible{border-color:var(--gold);outline:2px solid currentColor;outline-offset:4px}
-  .kachel h2{
-    font-family:Georgia,"Iowan Old Style",serif;font-weight:400;
-    font-size:1.05rem;margin:0 0 6px;color:var(--ink);
-  }
-  .kachel p{margin:0 0 12px;color:var(--dim);font-size:.88rem}
-  .kachel em{
-    font-family:Georgia,serif;font-style:italic;font-size:.95rem;color:var(--gold);
-  }
   h2.abschnitt{
     font-family:Georgia,"Iowan Old Style",serif;font-weight:400;
     font-size:1.05rem;margin:28px 0 0;color:var(--dim);
   }
+  .mehr{margin:14px 0 0;font-size:.9rem;color:var(--dim)}
+  .mehr a{color:var(--gold);text-decoration:none}
+  .mehr a:hover{text-decoration:underline}
+  .mehr a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 </style>
 </head>
 <body>
@@ -41,7 +26,7 @@
   <h2 class="abschnitt">Werkzeuge</h2>
   <div class="katalog">
     <a class="kachel" href="tools/flaechenrechner/index.html">
-      <h2>Flächenrechner</h2>
+      <h3>Flächenrechner</h3>
       <p>Eine Funktion zweier Veränderlicher als Fläche im Raum, dazu die Höhenlinien von oben und die Schnitte mit den beiden senkrechten Ebenen — alle vier Ansichten gleichzeitig und farblich verknüpft.</p>
       <em>z = f(x, y)</em>
     </a>
@@ -50,21 +35,22 @@
   <h2 class="abschnitt">Karten</h2>
   <div class="katalog">
     <a class="kachel" href="karten/partielle-ableitungen.html">
-      <h2>Partielle Ableitungen</h2>
+      <h3>Partielle Ableitungen</h3>
       <p>Eine Funktion zweier Veränderlicher wird nach einer Variablen abgeleitet, während die andere festgehalten wird.</p>
       <em>Partielle Ableitung</em>
     </a>
     <a class="kachel" href="karten/gradient.html">
-      <h2>Gradient und Richtungsableitung</h2>
+      <h3>Gradient und Richtungsableitung</h3>
       <p>Der Gradient bündelt beide partiellen Ableitungen zu einem Vektor; die Richtungsableitung fragt nach der Steigung in einer beliebigen anderen Richtung.</p>
       <em>Gradient &#x00B7; Richtungsableitung</em>
     </a>
     <a class="kachel" href="karten/extrema-mit-nebenbedingung.html">
-      <h2>Extrema mit Nebenbedingung</h2>
+      <h3>Extrema mit Nebenbedingung</h3>
       <p>Extrema, die nur auf einer Nebenbedingung gesucht sind &#x2014; der Multiplikator von Lagrange liefert die Kandidaten.</p>
       <em>Extrema mit Nebenbedingung &#x2014; Multiplikator von Lagrange</em>
     </a>
   </div>
+  <p class="mehr"><a href="karten/index.html">Alle Themen im Überblick</a></p>
 
 </div>
 </body>
