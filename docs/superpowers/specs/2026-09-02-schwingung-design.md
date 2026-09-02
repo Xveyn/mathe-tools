@@ -1,7 +1,7 @@
 # Schwingungsrechner — Design
 
 Datum: 2026-09-02
-Status: Entwurf
+Status: freigegeben
 
 ## Zweck
 
