@@ -56,7 +56,7 @@
       <p>Dazu <math><mi>y</mi><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></math>: die Stellen sind <strong>(0 | 0)</strong> und <strong>(1 | 1)</strong>.</p>
 
       <figure class="bild">
-        <svg viewBox="0 0 245 260" role="img" aria-label="Achsenkreuz mit den Parabeln y gleich x Quadrat und x gleich y Quadrat. Sie schneiden sich im Ursprung (0, 0) und im Punkt (1, 1).">
+        <svg viewBox="0 0 245 260" role="img" aria-label="Achsenkreuz mit den Parabeln y gleich x Quadrat und x gleich y Quadrat. Sie schneiden sich im Ursprung und im Punkt x gleich 1, y gleich 1; beide Schnittpunkte sind mit einem offenen Quadrat markiert.">
           <!-- Achsen -->
           <line x1="24" y1="175" x2="225" y2="175" stroke="var(--axis)" stroke-width="1"/>
           <line x1="95" y1="246" x2="95" y2="44" stroke="var(--axis)" stroke-width="1"/>
@@ -79,18 +79,24 @@
             points="150.08,236.2 144.13,232.8 138.52,229.4 133.25,226 128.32,222.6 123.73,219.2 119.48,215.8 115.57,212.4 112,209 108.77,205.6 105.88,202.2 103.33,198.8 101.12,195.4 99.25,192 97.72,188.6 96.53,185.2 95.68,181.8 95.17,178.4 95,175 95.17,171.6 95.68,168.2 96.53,164.8 97.72,161.4 99.25,158 101.12,154.6 103.33,151.2 105.88,147.8 108.77,144.4 112,141 115.57,137.6 119.48,134.2 123.73,130.8 128.32,127.4 133.25,124 138.52,120.6 144.13,117.2 150.08,113.8 156.37,110.4 163,107 169.97,103.6 177.28,100.2 184.93,96.8 192.92,93.4 201.25,90 209.92,86.6"/>
           <text x="213" y="84" font-size="9" fill="var(--mint)">x = y&#xB2;</text>
 
-          <!-- Schnittpunkte -->
-          <circle cx="95" cy="175" r="3" fill="var(--gold)"/>
-          <text x="78" y="192" text-anchor="middle" font-size="10" fill="var(--ink)">(0, 0)</text>
+          <!-- Schnittpunkte. Offenes Quadrat in --dim, wie im Werkzeug die
+               noch unentschiedene Stelle: an dieser Stelle der Rechnung sind
+               es Kandidaten und sonst nichts. Ein gefüllter Kreis hieße zwei
+               Karten weiter Minimum, Gold hieße Sattel — beides wäre hier
+               eine Behauptung, die noch keine Grundlage hat. -->
+          <rect x="91.5" y="171.5" width="7" height="7" fill="none" stroke="var(--dim)" stroke-width="1.6"/>
+          <text x="78" y="192" text-anchor="middle" font-size="10" fill="var(--ink)">(0 | 0)</text>
 
-          <circle cx="163" cy="107" r="3" fill="var(--gold)"/>
-          <text x="137" y="100" text-anchor="start" font-size="10" fill="var(--ink)">(1, 1)</text>
+          <rect x="159.5" y="103.5" width="7" height="7" fill="none" stroke="var(--dim)" stroke-width="1.6"/>
+          <text x="134" y="98" text-anchor="start" font-size="10" fill="var(--ink)">(1 | 1)</text>
         </svg>
-        <figcaption>Beide Parabeln schneiden sich zweimal: im Ursprung und bei (1, 1). Das sind genau die beiden Lösungen des Gleichungssystems.</figcaption>
+        <figcaption>Beide Parabeln schneiden sich zweimal: im Ursprung und bei (1 | 1). Das sind genau die beiden Lösungen des Gleichungssystems. Die offenen Quadrate sind die Marke, die auch das Werkzeug für eine noch unentschiedene Stelle setzt — was die beiden sind, entscheidet erst die nächste Karte.</figcaption>
       </figure>
     </div>
 
     <p class="fehler"><math><msup><mi>x</mi><mn>4</mn></msup><mo>=</mo><mi>x</mi></math> durch <math><mi>x</mi></math> geteilt &#x2014; damit geht die Lösung <math><mi>x</mi><mo>=</mo><mn>0</mn></math> verloren, und die Hälfte der Aufgabe fehlt.</p>
+
+    <p>Gib dort <code>x^3 + y^3 - 3*x*y</code> ein; den Regler <span class="regler">Bereich</span> lässt du auf seinem Anfangswert <math><mn>4,0</mn></math>, dann liegen beide Stellen im durchsuchten Quadrat. Der Block <em>Stationäre Stellen</em> unter den Bildern nennt daraufhin (0,0000 | 0,0000) und (1,0000 | 1,0000) &#x2014; dieselben zwei Stellen, die oben von Hand herauskamen, und keine dritte. Im Höhenlinienbild sitzt auf jeder von beiden eine Marke.</p>
 
     <a class="querlink" href="../tools/flaechenrechner/index.html">Selbst durchfahren &#x2192; Flächenrechner</a>
   </article>
@@ -151,7 +157,7 @@
       <p>Bei <math><mo>(</mo><mn>1</mn><mo>|</mo><mn>1</mn><mo>)</mo></math>: <math><mo>det</mo><mi>H</mi><mo>=</mo><mn>27</mn><mo>&gt;</mo><mn>0</mn></math> und <math><msub><mi>f</mi><mrow><mi>x</mi><mi>x</mi></mrow></msub><mo>=</mo><mn>6</mn><mo>&gt;</mo><mn>0</mn></math> &#x27F9; <strong>Minimum</strong>, mit <math><mi>f</mi><mo>(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>)</mo><mo>=</mo><mo>&#x2212;</mo><mn>1</mn></math></p>
 
       <figure class="bild">
-        <svg viewBox="0 0 205 220" role="img" aria-label="Höhenlinie f(x, y) gleich 0 als geschlossene Schleife durch den Ursprung, mit einem Kreuz für den Sattelpunkt bei (0, 0) und einem gefüllten Kreis für das Minimum bei (1, 1) innerhalb der Schleife.">
+        <svg viewBox="0 0 205 220" role="img" aria-label="Höhenlinie f(x, y) gleich 0 als geschlossene Schleife durch den Ursprung, mit einem Kreuz für den Sattelpunkt im Ursprung und einem gefüllten Kreis für das Minimum bei x gleich 1, y gleich 1 innerhalb der Schleife.">
           <!-- Achsen -->
           <line x1="36" y1="175" x2="182" y2="175" stroke="var(--axis)" stroke-width="1"/>
           <line x1="55" y1="194" x2="55" y2="48" stroke="var(--axis)" stroke-width="1"/>
@@ -174,24 +180,24 @@
           <polygon fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linejoin="round"
             points="55,175 64.3,174.54 73.58,173.14 82.81,170.83 91.9,167.62 100.78,163.55 109.33,158.7 117.42,153.15 124.92,147.03 131.71,140.48 137.67,133.67 142.71,126.76 146.78,119.93 149.85,113.35 151.95,107.14 153.11,101.42 153.41,96.27 152.95,91.74 151.82,87.86 150.13,84.62 148,82 145.38,79.87 142.14,78.18 138.26,77.05 133.73,76.59 128.58,76.89 122.86,78.05 116.65,80.15 110.07,83.22 103.24,87.29 96.33,92.33 89.52,98.29 82.97,105.08 76.85,112.58 71.3,120.67 66.45,129.22 62.38,138.1 59.17,147.19 56.86,156.42 55.46,165.7"/>
 
-          <!-- Sattelpunkt (0, 0): Kreuz -->
+          <!-- Sattelpunkt (0 | 0): Kreuz -->
           <line x1="51.5" y1="171.5" x2="58.5" y2="178.5" stroke="var(--gold)" stroke-width="1.6"/>
           <line x1="51.5" y1="178.5" x2="58.5" y2="171.5" stroke="var(--gold)" stroke-width="1.6"/>
-          <text x="47" y="188" text-anchor="end" font-size="10" fill="var(--ink)">(0, 0)</text>
+          <text x="47" y="188" text-anchor="end" font-size="10" fill="var(--ink)">(0 | 0)</text>
 
-          <!-- Minimum (1, 1): gefüllter Kreis -->
+          <!-- Minimum (1 | 1): gefüllter Kreis -->
           <circle cx="117" cy="113" r="3.2" fill="var(--mint)"/>
-          <text x="106" y="129" text-anchor="start" font-size="10" fill="var(--ink)">(1, 1)</text>
+          <text x="106" y="129" text-anchor="start" font-size="10" fill="var(--ink)">(1 | 1)</text>
         </svg>
-        <figcaption>Kreuz: Sattelpunkt bei (0, 0), auf der Höhenlinie f = 0 selbst &#x2014; dort trifft die Schleife wieder auf sich selbst. Kreis: Minimum bei (1, 1), innerhalb der Schleife, wo f negativ ist.</figcaption>
+        <figcaption>Kreuz: Sattelpunkt bei (0 | 0), auf der Höhenlinie f = 0 selbst &#x2014; dort trifft die Schleife wieder auf sich selbst. Kreis: Minimum bei (1 | 1), innerhalb der Schleife, wo f negativ ist.</figcaption>
       </figure>
     </div>
 
     <p class="merksatz"><math><mo>det</mo><mi>H</mi><mo>&gt;</mo><mn>0</mn></math> heißt Extremum, und erst dann entscheidet das Vorzeichen von <math><msub><mi>f</mi><mrow><mi>x</mi><mi>x</mi></mrow></msub></math> zwischen Minimum und Maximum.</p>
 
-    <p class="fehler">Eine stationäre Stelle für ein Extremum halten. Waagerechte Tangentialebene heißt nur, dass die Fläche dort nicht steigt &#x2014; bei (0 | 0) fällt sie in der einen Richtung und steigt in der anderen.</p>
+    <p class="fehler">Eine stationäre Stelle für ein Extremum halten. Waagerechte Tangentialebene heißt nur, dass die Fläche dort in erster Näherung weder steigt noch fällt &#x2014; bei (0 | 0) fällt sie in der einen Richtung und steigt in der anderen.</p>
 
-    <p>Gib dort <code>x^3 + y^3 - 3*x*y</code> ein und stelle den Regler <span class="regler">Höhe c</span> auf <math><mn>0</mn></math>: die Höhenlinien-Ansicht zeigt dann genau die Schleife aus dem Bild oben, mit dem Sattelpunkt im Ursprung markiert (Kreuz) und dem Minimum darin (Kreis), dazu einen unbeschränkten Ast durch den zweiten und vierten Quadranten, den das Bild oben weglässt. Anfangs steht der Regler auf <math><mo>&#x2212;</mo><mn>2</mn></math>, dort zeigt die Ansicht eine andere Höhenlinie ohne die Schleife.</p>
+    <p>Gib dort <code>x^3 + y^3 - 3*x*y</code> ein und stelle den Regler <span class="regler">Höhe c</span> auf <math><mn>0</mn></math>: die Höhenlinien-Ansicht zeigt dann genau die Schleife aus dem Bild oben, mit dem Sattelpunkt im Ursprung markiert (Kreuz) und dem Minimum darin (Kreis), dazu einen unbeschränkten Ast durch den zweiten und vierten Quadranten, den das Bild oben weglässt. Anfangs steht der Regler auf <math><mo>&#x2212;</mo><mn>2</mn></math>, dort zeigt die Ansicht eine andere Höhenlinie ohne die Schleife. Der Block <em>Stationäre Stellen</em> darunter rechnet das Kriterium dieser Karte vor: zu jeder Stelle die drei Einträge der Hesse-Matrix, ihre Determinante und das Urteil &#x2014; bei (0 | 0) <math><mo>det</mo><mi>H</mi><mo>=</mo><mo>&#x2212;</mo><mn>9</mn></math> und Sattelpunkt, bei (1 | 1) <math><mo>det</mo><mi>H</mi><mo>=</mo><mn>27</mn></math> und Minimum.</p>
 
     <a class="querlink" href="../tools/flaechenrechner/index.html">Selbst durchfahren &#x2192; Flächenrechner</a>
   </article>
