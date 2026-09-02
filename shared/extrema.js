@@ -5,23 +5,59 @@
    bei f(x,y) = x² + y² - 2xy + 1 ist die Hesse-Matrix überall exakt
    singulär, obwohl der Gradient auf der ganzen Geraden y = x
    verschwindet. Newton bräche dort an jedem Startpunkt ab und meldete
-   fälschlich, es gebe keine stationäre Stelle. */
+   fälschlich, es gebe keine stationäre Stelle.
+
+   Zwei Zahlen tragen dieses Modul, und beide hängen an der
+   Differenzenschrittweite h: der Gradient wird nach Richardson
+   extrapoliert (siehe ableitungen), und zwei Treffer gelten als dieselbe
+   Stelle, wenn sie näher als 2h beieinanderliegen (siehe finde). Feiner
+   als h kann dieses Verfahren nicht auflösen — was es feiner behauptet,
+   ist erfunden. */
 var MT = MT || {};
 (function(){
   "use strict";
 
   /* Zentrale Differenzen. Liefert null, sobald ein Wert nicht endlich
-     ist — das ist der Polstellenfall. */
+     ist — das ist der Polstellenfall.
+
+     Der GRADIENT wird zusätzlich nach Richardson extrapoliert, und das
+     ist keine Verfeinerung, sondern notwendig. Die zentrale Differenz
+     liefert nicht f_x, sondern f_x + h²·f_xxx/6 + … Dieser Rest ist kein
+     Rauschen um null herum, sondern ein fester Sockel, und die Suche
+     unten treibt genau diese Größe gegen null. Zwei Folgen, beide
+     gemessen:
+
+     - f = x³ + y³: die genäherte Ableitung ist 3x² + h² und hat gar
+       keine Nullstelle. Jeder Startpunkt läuft ins Leere, das Werkzeug
+       meldete „keine Stelle“ — obwohl (0|0) stationär ist. Beim
+       Kontrollieren ist das die schädlichste aller Antworten.
+     - f = x³ − 3xy², der Affensattel aus MV 14c: die genäherte
+       Ableitung verschwindet bei y = ±h/√3 — an zwei Stellen, die es
+       nicht gibt. Das Werkzeug erfand dort zwei Sattelpunkte.
+
+     Aus D(h) und D(h/2) fällt das h²-Glied heraus:
+     (4·D(h/2) − D(h)) / 3 = f_x + O(h⁴). Bei f = x³ ist das Ergebnis
+     wieder exakt 3x². Kosten: vier weitere Funktionsauswertungen je
+     Stelle, 13 statt 9 — gemessen ein Aufschlag von rund einem Drittel
+     auf die Laufzeit der Suche, im langsamsten geprüften Fall von 42 auf
+     58 ms.
+
+     Die ZWEITEN Ableitungen bleiben schlichte zentrale Differenzen. Sie
+     werden nirgends gegen null getrieben; ihr h²-Glied verfälscht keine
+     Entscheidung, sondern nur die letzte angezeigte Stelle. */
   function ableitungen(f, x, y, h){
     var f0  = f(x, y);
     var fpx = f(x + h, y),     fmx = f(x - h, y);
     var fpy = f(x, y + h),     fmy = f(x, y - h);
     var fpp = f(x + h, y + h), fpm = f(x + h, y - h);
     var fmp = f(x - h, y + h), fmm = f(x - h, y - h);
+    var hh  = h / 2;
+    var hpx = f(x + hh, y),    hmx = f(x - hh, y);
+    var hpy = f(x, y + hh),    hmy = f(x, y - hh);
     var d = {
       f:   f0,
-      gx:  (fpx - fmx) / (2 * h),
-      gy:  (fpy - fmy) / (2 * h),
+      gx:  (4 * (hpx - hmx) / h - (fpx - fmx) / (2 * h)) / 3,
+      gy:  (4 * (hpy - hmy) / h - (fpy - fmy) / (2 * h)) / 3,
       fxx: (fpx - 2 * f0 + fmx) / (h * h),
       fyy: (fpy - 2 * f0 + fmy) / (h * h),
       fxy: (fpp - fpm - fmp + fmm) / (4 * h * h)
@@ -36,7 +72,9 @@ var MT = MT || {};
   function nahGenug(d){ return betrag(d) < 1e-10 * (1 + Math.abs(d.f)); }
 
   /* Ein Lauf von einem Startpunkt aus. Liefert null, wenn er nicht
-     konvergiert, aus dem Bereich läuft oder auf eine Polstelle trifft. */
+     konvergiert oder auf eine Polstelle trifft. Ob der Treffer noch im
+     Suchbereich liegt, prüft dieser Lauf NICHT — das tut finde() beim
+     Einsammeln. */
   function laufe(f, x, y, r, h){
     var lambda = 1e-3, schritt = 0;
     var d = ableitungen(f, x, y, h);
@@ -78,38 +116,6 @@ var MT = MT || {};
     return nahGenug(d) ? { x: x, y: y, d: d } : null;
   }
 
-  /* Wie unscharf die Lage einer gefundenen Stelle ist: die Konvergenz
-     bricht ab, sobald der Gradient unter die Schranke tau fällt, und aus
-     |g| < tau folgt über die Hesse-Matrix nur |Abstand zur wahren
-     Stelle| ≲ tau / |Krümmung|. Maßgeblich ist dabei die WEICHSTE
-     Richtung, also der betragskleinere der beiden Eigenwerte von H. Nicht
-     der größte Matrixeintrag: der greift die am besten bestimmte Richtung
-     ab, während die Unschärfe von der weichsten herrührt — bei einer
-     Stelle mit fxx klein und fyy = 1 maskiert fyy das eigentlich weiche
-     fxx. Auch nicht min(|fxx|,|fxy|,|fyy|): bei H = [[1,0],[0,1]] wäre das
-     0, obwohl beide Eigenwerte 1 sind und nichts weich ist — es müssen die
-     Eigenwerte sein, kein einzelner Matrixeintrag. Ist die weichste
-     Richtung fast flach (entartete Stelle wie bei x^4 + y^4), wird die
-     Unschärfe entsprechend groß. Gedeckelt wird bei 2h: jenseits der
-     doppelten Differenzenschrittweite tastet der zweite
-     Differenzenquotient gar nichts mehr über diese Stelle aus, seine Werte
-     sind dort bedeutungslos — weiter darf keine Toleranz reichen, egal wie
-     flach die Stelle ist. Ohne diese Deckelung würde bei einer exakt
-     singulären Hesse-Matrix (der Geradenfall x² + y² − 2xy + 1, Eigenwerte
-     4 und exakt 0) die Unschärfe unendlich, und die ganze Gerade schrumpfte
-     fälschlich auf einen einzigen Punkt zusammen. */
-  function unschaerfe(d, h){
-    var a = d.fxx, b = d.fxy, c = d.fyy;
-    var spur = a + c;
-    var wurzel = Math.sqrt((a - c) * (a - c) + 4 * b * b);
-    var ew1 = (spur + wurzel) / 2;
-    var ew2 = (spur - wurzel) / 2;
-    var weich = Math.min(Math.abs(ew1), Math.abs(ew2));
-    var sehrKlein = 1e-300;
-    var tau = 1e-10 * (1 + Math.abs(d.f));
-    return Math.min(tau / Math.max(weich, sehrKlein), 2 * h);
-  }
-
   /* Das Schulkriterium. Die Schwelle wird zuerst geprüft: eine
      Determinante nahe null entscheidet nichts, auch wenn ihr Vorzeichen
      zufällig positiv ist. */
@@ -136,29 +142,41 @@ var MT = MT || {};
 
     /* Zusammenfassen nach echtem Abstand, nicht nach Kästchen um jeden
        Punkt — über die Diagonale wäre ein Kästchenvergleich um den
-       Faktor Wurzel 2 zu großzügig. Eine feste Toleranz kann nicht beide
-       Fälle bedienen: bei einer entarteten Stelle (z. B. x^4 + y^4)
-       bleiben Läufe weit verstreut stehen und müssen zusammengefasst
-       werden; bei zwei echten, nahe beieinanderliegenden Stellen (Sattel
-       zwischen zwei Minima) treffen die Läufe genau, und Zusammenfassen
-       würde die eine oder andere verschlucken. Die Toleranz für ein
-       Paar ist deshalb das Größere aus dem festen Spec-Wert eps und der
-       Unschärfe beider Treffer — ist einer der beiden entartet, ist die
-       Stelle unscharf, egal wie genau der andere sitzt. Von zwei
-       Treffern, die so als dieselbe Stelle gelten, gewinnt der mit dem
-       kleineren Gradientenbetrag, nicht der zuerst gefundene — sonst
-       kann ein schlechter konvergierter Lauf einen exakten verdrängen,
-       etwa wenn das Raster selbst die stationäre Stelle trifft, wie bei
-       x^4 + y^4 den Startpunkt (0|0). */
-    var eps = 1e-6 * (1 + r), gewaehlt = [], k, m, treffer, dx, dy, abstand, toleranz;
+       Faktor Wurzel 2 zu großzügig.
+
+       Die Toleranz ist 2h, die doppelte Differenzenschrittweite, und
+       sonst nichts. Weiter reicht die Aussagekraft dieser Rechnung nicht:
+       unterhalb von h sind alle Ableitungen über diese Länge gemittelt,
+       zwei Stellen darunter kann das Verfahren nicht trennen. Die Spec
+       hält genau das unter „Grenzen“ fest.
+
+       Eine feinere Toleranz behauptet eine Genauigkeit, die es nicht
+       gibt, und sie kostet etwas: an einer entarteten Stelle — x⁴ + y⁴,
+       x³ + y³, x³ − 3xy² — ist die Hesse-Matrix im Nullpunkt selbst
+       null, der Gradient fällt nur kubisch, und die Läufe bleiben über
+       einen ganzen Ball vom Radius einiger h verstreut stehen. Mit der
+       früheren festen Toleranz 1e-6·(1+r), hundertmal feiner als h,
+       zerfiel eine solche Stelle in bis zu acht angebliche Stellen.
+
+       Früher stand hier zusätzlich eine aus den Eigenwerten von H
+       geschätzte Unschärfe, gedeckelt bei 2h. Sie ist entfallen: die
+       Schätzung konnte die Toleranz nur UNTER 2h drücken, gebraucht wird
+       aber genau die andere Richtung — bei x⁴ + y⁴ schätzte sie 9e-5,
+       während die Treffer 7e-4 auseinanderlagen. Neben 2h wäre sie ohne
+       jede Wirkung geblieben.
+
+       Von zwei Treffern, die als dieselbe Stelle gelten, gewinnt der mit
+       dem kleineren Gradientenbetrag, nicht der zuerst gefundene: trifft
+       das Raster die Stelle selbst, wie bei x⁴ + y⁴ den Startpunkt
+       (0|0), überlebt dieser exakte Treffer. */
+    var eps = 2 * h, gewaehlt = [], k, m, treffer, dx, dy, abstand;
     for (k = 0; k < roh.length; k++) {
       treffer = -1;
       for (m = 0; m < gewaehlt.length; m++) {
         dx = gewaehlt[m].x - roh[k].x;
         dy = gewaehlt[m].y - roh[k].y;
         abstand = Math.sqrt(dx * dx + dy * dy);
-        toleranz = Math.max(eps, unschaerfe(gewaehlt[m].d, h), unschaerfe(roh[k].d, h));
-        if (abstand < toleranz) { treffer = m; break; }
+        if (abstand < eps) { treffer = m; break; }
       }
       if (treffer < 0) {
         gewaehlt.push(roh[k]);

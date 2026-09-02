@@ -87,7 +87,22 @@ und ist von den anderen `shared/*.js` unabhängig.
 ### Verfahren
 
 **Ableitungen.** Zentrale Differenzen mit einer Schrittweite
-`h = 1e-4 · (1 + r)`. Daraus der Gradient `(f_x, f_y)` und die Hesse-Matrix
+`h = 1e-4 · (1 + r)`. Der **Gradient** wird zusätzlich nach Richardson
+extrapoliert: aus `D(h)` und `D(h/2)` wird `(4·D(h/2) − D(h)) / 3`. Das ist
+keine Verfeinerung, sondern notwendig. Die bloße zentrale Differenz liefert
+`f_x + h²·f_xxx/6 + …`, und die Suche unten treibt genau diese Größe gegen
+null — sie sucht also die Nullstellen der falschen Funktion. Bei `f = x³`
+ist die genäherte Ableitung `3x² + h²` und hat gar keine Nullstelle; bei
+`f = x³ − 3xy²` verschwindet sie bei `y = ±h/√3`, also an zwei Stellen, die
+es nicht gibt. Nach der Extrapolation bleibt ein Rest der Ordnung `h⁴`, und
+bei einem Polynom bis zum vierten Grad verschwindet er ganz. Kosten: 13
+statt 9 Funktionsauswertungen je Stelle.
+
+Die **zweiten** Ableitungen bleiben schlichte zentrale Differenzen: sie
+werden nirgends gegen null getrieben, ihr `h²`-Glied verschiebt keine
+Entscheidung, sondern nur die letzte angezeigte Stelle.
+
+Daraus der Gradient `(f_x, f_y)` und die Hesse-Matrix
 `[[f_xx, f_xy], [f_xy, f_yy]]`. Der gemischte Term wird einmal berechnet, nicht
 zweimal — `f_xy` und `f_yx` sind für die hier auftretenden Funktionen gleich,
 und wo sie es nicht sind (Satz von Schwarz, MV 25), ist die Funktion an der
@@ -126,9 +141,11 @@ Drei Sicherungen, ohne die das Verfahren an Polstellen davonläuft:
   aufgegeben — dort ist keine Lösung.
 
 **Entartete Stellen.** Wo `H` an der Lösung selbst singulär ist, fällt `|g|`
-nur linear statt quadratisch, und Läufe von verschiedenen Startpunkten
-bleiben unterschiedlich weit von der wahren Stelle entfernt stehen. Beim
-Zusammenfassen gewinnt aber der Treffer mit dem kleineren Gradientenbetrag:
+nur langsam, und Läufe von verschiedenen Startpunkten bleiben über einen
+ganzen Ball vom Radius einiger `h` verstreut stehen — gemessen bei
+`x⁴ + y⁴` rund `7·10⁻⁴` Streuung bei `h = 5·10⁻⁴`. Das Zusammenfassen mit
+der Toleranz `2h` (siehe „Einsammeln“) führt sie wieder zu einer Stelle
+zusammen. Dabei gewinnt der Treffer mit dem kleineren Gradientenbetrag:
 trifft das Startraster die Stelle selbst, wie bei `x⁴ + y⁴` den
 Rasterpunkt (0 | 0), überlebt dieser exakte Treffer und wird nicht zugunsten
 eines schlechter konvergierten verworfen. Die Grenze, die bleibt, ist eine
@@ -138,29 +155,25 @@ selbst meldet").
 
 **Einsammeln.** Verworfen wird ein Treffer, der außerhalb `[−r, r]²` liegt
 oder nicht konvergiert ist. Zwei Treffer gelten als dieselbe Stelle, wenn ihr
-Abstand kleiner ist als das Größere aus dem festen Wert `eps = 1e-6 · (1 + r)`
-und der Unschärfe beider Treffer. Die Unschärfe eines Treffers ist
-`min(tau / max(weich, sehr_klein), 2h)`, mit `tau = 1e-10 · (1 + |f|)` und
-`weich` dem betragskleineren Eigenwert der Hesse-Matrix an dieser Stelle.
-Nicht der größte Matrixeintrag: der greift die am besten bestimmte Richtung
-ab, während die Unschärfe von der weichsten herrührt — bei der
-Gegenfunktion `x⁴/4 − w²/2·x² + y²/2` maskiert `f_yy = 1` das kleine
-`f_xx ≈ 1,5·10⁻⁶` an den Minima. Auch nicht `min(|f_xx|, |f_xy|, |f_yy|)`:
-bei `H = [[1,0],[0,1]]` wäre das `0`, obwohl beide Eigenwerte `1` sind und
-nichts weich ist. Maßgeblich ist die weichste Richtung, in der die Lage am
-schlechtesten bestimmt ist. Gedeckelt wird bei `2h` (`h` die
-Differenzenschrittweite), weil der zweite Differenzenquotient jenseits davon
-gar nichts mehr über die Stelle aussagt — ohne diese Deckelung würde die
-Unschärfe im Geradenfall `x² + y² − 2xy + 1` (Eigenwerte `4` und exakt `0`)
-unendlich, und die ganze Gerade schrumpfte fälschlich auf einen Punkt
-zusammen. Eine feste Zahl allein muss sich zwischen einer entarteten
-Stelle, an der weit verstreute Läufe zusammengehören, und zwei echten,
-nah beieinanderliegenden Stellen entscheiden und liegt dann bei einer von
-beiden falsch — die Lage einer stationären Stelle ist eben nur so genau
-bestimmt, wie die Krümmung dort es zulässt. Behalten wird bei einer
-Kollision der Treffer mit dem kleineren Gradientenbetrag. Die Liste wird
-nach `x` sortiert, bei Gleichstand nach `y` — damit dieselbe Eingabe
-dieselbe Reihenfolge liefert.
+Abstand kleiner ist als `2h` — die doppelte Differenzenschrittweite, und
+sonst nichts. Weiter reicht die Aussagekraft der Rechnung nicht: unterhalb
+von `h` sind alle Ableitungen über diese Länge gemittelt, zwei Stellen
+darunter kann das Verfahren grundsätzlich nicht trennen. Dieselbe Zahl
+begrenzt also die Auflösung nach unten und die Toleranz nach oben; das ist
+kein Zufall, sondern dieselbe Aussage.
+
+Eine feinere Toleranz behauptet eine Genauigkeit, die es nicht gibt. Die
+erste Fassung dieser Spec nannte `eps = 1e-6 · (1 + r)` — bei `r = 4`
+hundertmal feiner als `h` — und dazu eine aus dem betragskleineren
+Eigenwert von `H` geschätzte Unschärfe, gedeckelt bei `2h`. Diese Schätzung
+ist ersatzlos entfallen: sie konnte die Toleranz nur **unter** `2h` drücken,
+gebraucht wird aber genau die andere Richtung. Bei `x⁴ + y⁴` schätzte sie
+`9·10⁻⁵`, während die Treffer `7·10⁻⁴` auseinanderlagen, und die eine
+entartete Stelle zerfiel in acht angebliche.
+
+Behalten wird bei einer Kollision der Treffer mit dem kleineren
+Gradientenbetrag. Die Liste wird nach `x` sortiert, bei Gleichstand nach `y`
+— damit dieselbe Eingabe dieselbe Reihenfolge liefert.
 
 **Einordnung.** Mit `det = f_xx · f_yy − f_xy²`:
 
@@ -184,12 +197,18 @@ gehören deshalb zur Rückgabe, nicht in die Dokumentation:
 - **`amRand`** — wahr, wenn eine gefundene Stelle näher als `0,1 · r` am Rand
   des Suchbereichs liegt. Dann ist der Bereich vermutlich zu klein gewählt.
 - **`kurvenfall`** — wahr, wenn mehr als acht Stellen gefunden wurden. Das
-  bedeutet in aller Regel, dass die Bedingung nicht in Punkten, sondern
-  entlang einer ganzen Kurve erfüllt ist. `f(x,y) = x² + y² − 2xy + 1`
-  (MV 24b) ist dieser Fall: der Gradient verschwindet auf der ganzen Geraden
-  `y = x`. Im Kurvenfall werden höchstens acht Stellen zurückgegeben; die
-  Anzeige sagt, dass es eine Kurve ist, statt eine willkürliche Auswahl zu
-  präsentieren.
+  bedeutet **in aller Regel**, aber nicht immer, dass die Bedingung nicht in
+  Punkten, sondern entlang einer ganzen Kurve erfüllt ist.
+  `f(x,y) = x² + y² − 2xy + 1` (MV 24b) ist dieser Fall: der Gradient
+  verschwindet auf der ganzen Geraden `y = x`. `f(x,y) = cos x + cos y` ist
+  es **nicht**: dort liegen in `[−4, 4]²` neun einzelne Stellen, und mehr
+  nicht. Im Kurvenfall werden höchstens acht Stellen zurückgegeben.
+
+  Die Anzeige muss deshalb sagen, was sie weiß, und nicht mehr: dass mehr als
+  acht Stellen gefunden wurden, dass die ersten acht darunter stehen, und
+  dass das häufig eine ganze Kurve bedeutet. Ein Satz, der die Kurve
+  behauptet, ist bei `cos x + cos y` schlicht falsch — und ein Werkzeug zur
+  Kontrolle darf nicht mehr behaupten, als es geprüft hat.
 
 Zusätzlich trägt jede einzelne Stelle mit `art: 'unentschieden'` ihre eigene
 Grenze.
@@ -330,6 +349,24 @@ Handrechnung gehalten. Die Werte unten sind die erwarteten.
 Die beiden Zeilen mit `unentschieden` sind die wichtigsten der Tabelle. Ein
 Werkzeug, das dort ein Urteil fällt, ist schlimmer als eines, das gar nichts
 sagt.
+
+**Rechenprobe R, zweite Hälfte: Robustheit.** Die sieben Zeilen oben prüfen
+den Stoff des Übungsblattes. Sie prüfen nicht, ob das Verfahren an seinen
+eigenen numerischen Grenzen ehrlich bleibt — und genau dort log es. Die
+folgenden fünf Zeilen sind deshalb Teil der Rechenprobe, nicht Beiwerk. Jede
+steht für einen Fehler, der einmal wirklich auftrat; alle fünf werden bei
+`bereich = 4` gefahren.
+
+| Term (so einzugeben) | Muss liefern | Was sonst passierte |
+|---|---|---|
+| `x^3 + y^3` | eine Stelle bei (0\|0), keine leere Antwort | „keine Stelle“ — der genäherte Gradient `3x² + h²` hat gar keine Nullstelle |
+| `x^3 - 3*x*y^2` | **genau eine** Stelle bei (0\|0), `unentschieden` | zwei erfundene Sattelpunkte bei (0\|±0,0003), dort wo `3x² + h² − 3y²` verschwindet |
+| `cos(x) + cos(y)` | keine Behauptung einer Kurve | „entlang einer ganzen Kurve“ — es sind neun einzelne Stellen |
+| `5*x^2 + 5*y^2` | der Block zeigt `det = 100` | `det = 1`, weil die Zahlenausgabe die Nullen ganzer Zahlen abschnitt |
+| `x^2/4000 + y^2/8000` | kein `det = 0` neben einem Urteil | `det = 0 · Minimum` — im Widerspruch zur Regeltafel der Karte |
+
+Der Affensattel `x³ − 3xy²` ist keine ausgedachte Eingabe: er ist MV 14c
+desselben Übungsblattes.
 
 Die tatsächlich verwendeten Zahlenwerte für Schrittweite, Toleranzen und
 Rasterweite sind an dieser Tabelle zu validieren. Schlägt ein Fall fehl, sind
