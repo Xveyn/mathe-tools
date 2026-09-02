@@ -87,9 +87,17 @@
           <circle cx="130" cy="130" r="30" fill="none" stroke="var(--dim)" stroke-width="1.2"/>
           <circle cx="130" cy="130" r="90" fill="none" stroke="var(--dim)" stroke-width="1.2"/>
           <circle cx="130" cy="130" r="67.08" fill="none" stroke="var(--gold)" stroke-width="1.6"/>
-          <text x="96" y="126" text-anchor="middle" font-size="9" fill="var(--dim)">c=1</text>
-          <text x="58.92" y="126" text-anchor="middle" font-size="9" fill="var(--gold)">c=5</text>
-          <text x="36" y="126" text-anchor="middle" font-size="9" fill="var(--dim)">c=9</text>
+          <!-- Beschriftungen: jede sitzt links neben ihrem eigenen Kreis, nicht
+               darauf. Basislinie 124,5 statt 126 — der Kasten einer 9-px-Zeile
+               ist 12,11 hoch und reichte sonst bis 128,42, also fast an die
+               x-Achse bei y=130. Naechster Nachbar jeder Beschriftung ist jetzt
+               2,08 (die x-Achse); kein Element wird mehr geschnitten. Jede
+               Beschriftung steht ausserdem naeher an ihrem eigenen Kreis als am
+               naechstgroesseren — sonst waere sie zwar frei, aber nicht mehr
+               eindeutig zuzuordnen. -->
+          <text x="88" y="124.5" text-anchor="middle" font-size="9" fill="var(--dim)">c=1</text>
+          <text x="52.25" y="124.5" text-anchor="middle" font-size="9" fill="var(--gold)">c=5</text>
+          <text x="29" y="124.5" text-anchor="middle" font-size="9" fill="var(--dim)">c=9</text>
 
           <!-- Tangente an die aktive Höhenlinie im Punkt (1,2) -->
           <line x1="137.64" y1="58.82" x2="182.36" y2="81.18" stroke="var(--gold)" stroke-width="1.4"/>
@@ -115,7 +123,7 @@
 
     <p class="fehler">Den Gradienten für einen Skalar halten. Er ist ein Vektor &#x2014; die Zahl daran ist sein Betrag.</p>
 
-    <p>Gib dort <code>x^2 + y^2</code> ein; die Höhenlinien-Ansicht von oben zeigt genau diese Kreise.</p>
+    <p>Gib dort <code>x^2 + y^2</code> ein und fahre den Regler <span class="regler">Höhe c</span> nacheinander auf <math><mn>1</mn></math>, <math><mn>5</mn></math> und <math><mn>9</mn></math>: die Höhenlinien-Ansicht von oben zeigt dann genau diese drei Kreise, einen nach dem anderen. Ohne den Regler bleibt <math><mi>c</mi></math> auf <math><mo>&#x2212;</mo><mn>2</mn></math> stehen, und das Werkzeug meldet <span class="regler">leere Menge</span> — <math><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></math> wird nie negativ.</p>
 
     <a class="querlink" href="../tools/flaechenrechner/index.html">Selbst durchfahren &#x2192; Flächenrechner</a>
   </article>
@@ -164,14 +172,14 @@
 
       <p>Zum Vergleich: die größte mögliche Steigung ist <math><mo lspace="0" rspace="0">|</mo><mo>&#x2207;</mo><mi>f</mi><mo lspace="0" rspace="0">|</mo><mo>&#x2248;</mo><mn>4,47</mn></math>. <math><mn>4,4</mn></math> liegt knapp darunter &#x2014; <math><mi>v</mi></math> zeigt fast, aber nicht ganz bergauf.</p>
 
-      <p>Ein eigenes Bild dazu braucht diese Karte nicht: oben, bei der Karte „Gradient“, zeigt derselbe Punkt (1, 2) bereits den Pfeil <math><mo>&#x2207;</mo><mi>f</mi></math>. Die Richtung <math><mi>v</mi></math> läge dort nur wenig neben diesem Pfeil &#x2014; nah genug, dass <math><mn>4,4</mn></math> knapp unter dem Maximalwert <math><mo lspace="0" rspace="0">|</mo><mo>&#x2207;</mo><mi>f</mi><mo lspace="0" rspace="0">|</mo></math> bleibt.</p>
+      <p>Ein eigenes Bild dazu braucht diese Karte nicht: oben, bei der <a href="#gradient">Karte „Gradient“</a>, zeigt derselbe Punkt (1, 2) bereits den Pfeil <math><mo>&#x2207;</mo><mi>f</mi></math>. Die Richtung <math><mi>v</mi></math> läge dort nur wenig neben diesem Pfeil &#x2014; nah genug, dass <math><mn>4,4</mn></math> knapp unter dem Maximalwert <math><mo lspace="0" rspace="0">|</mo><mo>&#x2207;</mo><mi>f</mi><mo lspace="0" rspace="0">|</mo></math> bleibt.</p>
     </div>
 
     <p class="merksatz">Die Richtungsableitung ist die Projektion des Gradienten auf die Richtung &#x2014; am größten, wenn beide gleich zeigen.</p>
 
     <p class="fehler"><math><mi>v</mi></math> nicht normieren. Mit <math><mi>v</mi><mo>=</mo><mo>(</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>)</mo></math> statt <math><mo>(</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo>,</mo><mfrac><mn>4</mn><mn>5</mn></mfrac><mo>)</mo></math> käme <math><mn>22</mn></math> heraus statt <math><mn>4,4</mn></math> &#x2014; das Fünffache, weil <math><mo lspace="0" rspace="0">|</mo><mo>(</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>)</mo><mo lspace="0" rspace="0">|</mo><mo>=</mo><mn>5</mn></math>.</p>
 
-    <p>Gib dort <code>x^2 + y^2</code> ein; die Höhenlinien-Ansicht von oben zeigt genau diese Kreise.</p>
+    <p>Gib dort <code>x^2 + y^2</code> ein und stelle den Regler <span class="regler">Höhe c</span> auf <math><mn>5</mn></math>: die Höhenlinien-Ansicht zeigt dann den Kreis durch <math><mo>(</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>)</mo></math>, auf dem der Pfeil der Karte oben senkrecht steht. Anfangs steht der Regler auf <math><mo>&#x2212;</mo><mn>2</mn></math>, und dort ist die Höhenlinie leer.</p>
 
     <a class="querlink" href="../tools/flaechenrechner/index.html">Selbst durchfahren &#x2192; Flächenrechner</a>
   </article>

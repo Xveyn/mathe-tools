@@ -30,6 +30,17 @@
 .karte .mint{color:var(--mint)}
 .karte .rose{color:var(--rose)}
 .karte code{font-size:.92em;color:var(--gold);background:var(--panel-b);border:1px solid var(--edge);border-radius:2px;padding:1px 5px}
+/* Ein Link mitten im Fließtext einer Karte. Ohne eigene Regel fällt er auf
+   die Browservorgabe zurück — blau und unterstrichen mitten in einer
+   Georgia-Karte. Optik wie die Verweiszeilen in shared/ui.css. */
+.karte p a{color:var(--gold);text-decoration:none}
+.karte p a:hover{text-decoration:underline}
+.karte p a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+/* Der Name eines Bedienelements im Werkzeug, im Fließtext genannt. Bewusst
+   nicht <code>: das steht auf den Karten für etwas, das man eintippt, und
+   ein Regler wird gezogen, nicht getippt. Die Schrift ist deshalb die der
+   Reglerbeschriftungen im Werkzeug (.sl label in shared/ui.css). */
+.karte .regler{font-family:Georgia,serif;font-style:italic;color:var(--dim)}
 
 .voraussetzung{color:var(--dim);font-size:.85rem;margin:0 0 14px;max-width:64ch}
 
