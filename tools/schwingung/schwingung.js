@@ -1,6 +1,6 @@
 /* Schwingungsrechner: Eingaben einlesen, MT.dgl.loese aufrufen, den
    Rechenweg als Text ausgeben und die Lösung auf die Tafel zeichnen.
-   Ein Dämpfungsregler kommt in einer späteren Aufgabe dazu. */
+   Dazu ein Dämpfungsregler für a, dessen Bereich sich nach b richtet. */
 (function(){
 "use strict";
 
@@ -409,6 +409,36 @@ var elFa = document.getElementById('fa'), elFb = document.getElementById('fb');
 var elFanfang = document.getElementById('fanfang'),
     elFy0 = document.getElementById('fy0'), elFy0s = document.getElementById('fy0s');
 var elAna = document.getElementById('ana');
+var elRa = document.getElementById('ra'), elGrenzfall = document.getElementById('grenzfall');
+
+/* Der Daempfungsregler: Bereich und Schrittweite haengen von b ab und
+   muessen bei jeder Neurechnung neu bestimmt werden -- ein einmal aus
+   dem Start-b berechneter Bereich waere falsch, sobald jemand ein
+   anderes b eintippt. Fuer b > 0 laeuft der Regler von 0 bis 3·√b in
+   400 Schritten, so dass der Grenzfall 2·√b deutlich innerhalb liegt;
+   fuer b <= 0 gibt es keinen Grenzfall (die Nullstellen sind dann immer
+   reell, siehe MT.dgl), der Regler wird deshalb abgeschaltet statt mit
+   einem erfundenen Bereich weiterzulaufen.
+
+   Die Gegenrichtung -- a stellt den Reglerstand nach -- braucht hier
+   keine eigene Klammerung: liegt a ausserhalb von [0, 3·√b], klemmt ein
+   <input type="range"> beim Setzen von .value von selbst auf seine
+   Grenze. */
+function aktualisiereRegler(a, b){
+  var max;
+  if (b > 0){
+    max = 3 * Math.sqrt(b);
+    elRa.min = 0;
+    elRa.max = max;
+    elRa.step = max / 400;
+    elRa.disabled = false;
+    if (isFinite(a)) elRa.value = a;
+    elGrenzfall.textContent = 'Aperiodischer Grenzfall bei a = 2√b = ' + num(2 * Math.sqrt(b)) + '.';
+  } else {
+    elRa.disabled = true;
+    elGrenzfall.textContent = 'Für b ≤ 0 gibt es keinen Grenzfall; die Nullstellen sind stets reell.';
+  }
+}
 
 function gliedFelder(nr){
   return {
@@ -451,6 +481,7 @@ function gliedAusFeldern(g){
 
 function neuRechnen(){
   var a = parseFloat(elFa.value), b = parseFloat(elFb.value);
+  aktualisiereRegler(a, b);
   var glieder = [], teil, anfang, res;
   try{
     teil = gliedAusFeldern(g1); if (teil) glieder.push(teil);
@@ -533,6 +564,10 @@ BEISPIELE.forEach(function(bsp){
 
 elFa.addEventListener('input', neuRechnen);
 elFb.addEventListener('input', neuRechnen);
+elRa.addEventListener('input', function(){
+  elFa.value = this.value;
+  neuRechnen();
+});
 elFanfang.addEventListener('change', neuRechnen);
 elFy0.addEventListener('input', neuRechnen);
 elFy0s.addEventListener('input', neuRechnen);
