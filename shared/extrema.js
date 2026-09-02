@@ -82,11 +82,16 @@ var MT = MT || {};
      bricht ab, sobald der Gradient unter die Schranke tau fällt, und aus
      |g| < tau folgt über die Hesse-Matrix nur |Abstand zur wahren
      Stelle| ≲ tau / |Krümmung|. Maßgeblich ist dabei die WEICHSTE
-     Richtung, also der betragskleinere der beiden Eigenwerte von H, nicht
-     der größte Matrixeintrag — bei H = [[1,0],[0,1]] ist nichts weich,
-     obwohl fxy = 0 wäre. Ist die weichste Richtung fast flach (entartete
-     Stelle wie bei x^4 + y^4), wird die Unschärfe groß. Gedeckelt wird bei
-     2h: jenseits der doppelten Differenzenschrittweite tastet der zweite
+     Richtung, also der betragskleinere der beiden Eigenwerte von H. Nicht
+     der größte Matrixeintrag: der greift die am besten bestimmte Richtung
+     ab, während die Unschärfe von der weichsten herrührt — bei einer
+     Stelle mit fxx klein und fyy = 1 maskiert fyy das eigentlich weiche
+     fxx. Auch nicht min(|fxx|,|fxy|,|fyy|): bei H = [[1,0],[0,1]] wäre das
+     0, obwohl beide Eigenwerte 1 sind und nichts weich ist — es müssen die
+     Eigenwerte sein, kein einzelner Matrixeintrag. Ist die weichste
+     Richtung fast flach (entartete Stelle wie bei x^4 + y^4), wird die
+     Unschärfe entsprechend groß. Gedeckelt wird bei 2h: jenseits der
+     doppelten Differenzenschrittweite tastet der zweite
      Differenzenquotient gar nichts mehr über diese Stelle aus, seine Werte
      sind dort bedeutungslos — weiter darf keine Toleranz reichen, egal wie
      flach die Stelle ist. Ohne diese Deckelung würde bei einer exakt

@@ -126,20 +126,29 @@ Drei Sicherungen, ohne die das Verfahren an Polstellen davonläuft:
   aufgegeben — dort ist keine Lösung.
 
 **Entartete Stellen.** Wo `H` an der Lösung selbst singulär ist, fällt `|g|`
-nur linear statt quadratisch; die gemeldete Lage kann in den letzten Stellen
-ungenau sein. Bei `x⁴ + y⁴` liegt die gefundene Stelle deshalb nicht exakt
-auf (0 | 0), sondern in dessen Nähe. Die Anzeige rundet auf vier
-Nachkommastellen; die Rechenprobe akzeptiert das entsprechend.
+nur linear statt quadratisch, und Läufe von verschiedenen Startpunkten
+bleiben unterschiedlich weit von der wahren Stelle entfernt stehen. Beim
+Zusammenfassen gewinnt aber der Treffer mit dem kleineren Gradientenbetrag:
+trifft das Startraster die Stelle selbst, wie bei `x⁴ + y⁴` den
+Rasterpunkt (0 | 0), überlebt dieser exakte Treffer und wird nicht zugunsten
+eines schlechter konvergierten verworfen. Die Grenze, die bleibt, ist eine
+andere: Stellen, die enger beieinanderliegen als die Differenzenschrittweite
+`h`, kann das Verfahren nicht trennen (siehe „Grenzen, die der Baustein
+selbst meldet").
 
 **Einsammeln.** Verworfen wird ein Treffer, der außerhalb `[−r, r]²` liegt
 oder nicht konvergiert ist. Zwei Treffer gelten als dieselbe Stelle, wenn ihr
 Abstand kleiner ist als das Größere aus dem festen Wert `eps = 1e-6 · (1 + r)`
 und der Unschärfe beider Treffer. Die Unschärfe eines Treffers ist
 `min(tau / max(weich, sehr_klein), 2h)`, mit `tau = 1e-10 · (1 + |f|)` und
-`weich` dem betragskleineren Eigenwert der Hesse-Matrix an dieser Stelle —
-nicht dem größten Matrixeintrag, denn bei `H = [[1,0],[0,1]]` wäre das null,
-obwohl dort nichts weich ist; maßgeblich ist die weichste Richtung, in der
-die Lage am schlechtesten bestimmt ist. Gedeckelt wird bei `2h` (`h` die
+`weich` dem betragskleineren Eigenwert der Hesse-Matrix an dieser Stelle.
+Nicht der größte Matrixeintrag: der greift die am besten bestimmte Richtung
+ab, während die Unschärfe von der weichsten herrührt — bei der
+Gegenfunktion `x⁴/4 − w²/2·x² + y²/2` maskiert `f_yy = 1` das kleine
+`f_xx ≈ 1,5·10⁻⁶` an den Minima. Auch nicht `min(|f_xx|, |f_xy|, |f_yy|)`:
+bei `H = [[1,0],[0,1]]` wäre das `0`, obwohl beide Eigenwerte `1` sind und
+nichts weich ist. Maßgeblich ist die weichste Richtung, in der die Lage am
+schlechtesten bestimmt ist. Gedeckelt wird bei `2h` (`h` die
 Differenzenschrittweite), weil der zweite Differenzenquotient jenseits davon
 gar nichts mehr über die Stelle aussagt — ohne diese Deckelung würde die
 Unschärfe im Geradenfall `x² + y² − 2xy + 1` (Eigenwerte `4` und exakt `0`)
@@ -314,7 +323,7 @@ Handrechnung gehalten. Die Werte unten sind die erwarteten.
 | `x^2 + x*y + y^2 + x + y + 1` | MV 24c, 29c | (−0,3333\|−0,3333) Minimum, `det = 3`, `f = 0,6667` |
 | `x^2 + y^2 - 2*x*y + 1` | MV 24b, 29b | `kurvenfall`: der Gradient verschwindet auf der ganzen Geraden `y = x`. Viele Treffer, alle mit `det = 0` → `unentschieden`. Die Anzeige nennt die Kurve, nicht acht willkürliche Punkte |
 | `(x^2 + y^2)*exp(-x)` | MV 26a | (0\|0) Minimum, `det = 4`; (2\|0) Sattel, `det = −4e⁻⁴ ≈ −0,0733` |
-| `x^4 + y^4` | MV 28a | Eine Stelle bei (0\|0) — wegen der Entartung nur auf wenige Nachkommastellen genau —, `det ≈ 0` → `unentschieden`. In Wahrheit ein Minimum; das Kriterium kann es nicht entscheiden, und genau das muss das Werkzeug sagen |
+| `x^4 + y^4` | MV 28a | Eine Stelle exakt bei (0\|0) (der Rasterstartpunkt trifft die Stelle selbst, und beim Zusammenfassen gewinnt der bestkonvergierte Treffer), `det ≈ 0` → `unentschieden`. In Wahrheit ein Minimum; das Kriterium kann es nicht entscheiden, und genau das muss das Werkzeug sagen |
 | `-x*exp(-x^2-y^2)` | MV 31 | (0,7071\|0) Minimum; (−0,7071\|0) Maximum |
 | `4*x^3 - 0.5*y^3 + 3*x*y` | MV 30 | (0\|0) Sattel, `det = −9`; (0,5\|−1) Minimum, `det = 27`, `f_xx = 12` |
 
