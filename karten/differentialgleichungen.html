@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lineare Differentialgleichungen zweiter Ordnung</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/karten.css">
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Lineare Differentialgleichungen zweiter Ordnung</h1>
+  <p class="lede">Eine homogene lineare Differentialgleichung mit konstanten Koeffizienten löst der Ansatz <math><mi>y</mi><mo>=</mo><msup><mi>e</mi><mrow><mi>&#x3BB;</mi><mi>x</mi></mrow></msup></math>: er macht aus der Differentialgleichung eine gewöhnliche quadratische Gleichung. Steht rechts nicht 0, sondern eine rechte Seite s(x), kommt ein Ansatz vom Typ dieser Seite dazu &#x2014; und manchmal ein Faktor x, wenn diese Seite mit der homogenen Lösung in Resonanz gerät.</p>
+
+  <div class="abfrage-leiste">
+    <button type="button" id="abfrage-schalter" aria-pressed="false">Abfragen</button>
+  </div>
+
+  <article class="karte" id="charakteristisches-polynom">
+    <h3>Charakteristisches Polynom &#x2014; drei Fälle</h3>
+
+    <div class="voraussetzung"><math><msup><mi>y</mi><mrow><mo>&#x2032;&#x2032;</mo></mrow></msup><mo>+</mo><mi>a</mi><msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>+</mo><mi>b</mi><mi>y</mi><mo>=</mo><mn>0</mn></math> mit konstanten reellen <math><mi>a</mi></math> und <math><mi>b</mi></math>.</div>
+
+    <div class="formel" data-verdeckbar>
+      <p>Der Ansatz <math><mi>y</mi><mo>=</mo><msup><mi>e</mi><mrow><mi>&#x3BB;</mi><mi>x</mi></mrow></msup></math> führt, eingesetzt, auf die charakteristische Gleichung:</p>
+      <math display="block">
+        <mrow><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><mi>&#x3BB;</mi><mo>+</mo><mi>b</mi><mo>=</mo><mn>0</mn></mrow>
+      </math>
+      <p>Ihre Diskriminante <math><mi>D</mi><mo>=</mo><msup><mi>a</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>4</mn><mi>b</mi></math> entscheidet über drei Fälle:</p>
+      <math display="block">
+        <mtable>
+          <mtr>
+            <mtd><mi>D</mi><mo>&gt;</mo><mn>0</mn></mtd>
+            <mtd><mrow><mtext>zwei reelle Nullstellen &#x2014; Kriechfall:&#xA0;</mtext><mi>y</mi><mo>=</mo><msub><mi>C</mi><mn>1</mn></msub><msup><mi>e</mi><mrow><msub><mi>&#x3BB;</mi><mn>1</mn></msub><mi>x</mi></mrow></msup><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub><msup><mi>e</mi><mrow><msub><mi>&#x3BB;</mi><mn>2</mn></msub><mi>x</mi></mrow></msup></mrow></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mi>D</mi><mo>=</mo><mn>0</mn></mtd>
+            <mtd><mrow><mtext>doppelte Nullstelle &#x2014; aperiodischer Grenzfall:&#xA0;</mtext><mi>y</mi><mo>=</mo><mo>(</mo><msub><mi>C</mi><mn>1</mn></msub><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub><mi>x</mi><mo>)</mo><msup><mi>e</mi><mrow><mi>&#x3BB;</mi><mi>x</mi></mrow></msup></mrow></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mi>D</mi><mo>&lt;</mo><mn>0</mn></mtd>
+            <mtd><mrow><mtext>konjugiert komplexe Nullstellen &#x2014; Schwingfall:&#xA0;</mtext><mi>y</mi><mo>=</mo><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mfrac><mi>a</mi><mn>2</mn></mfrac><mi>x</mi></mrow></msup><mo>(</mo><msub><mi>C</mi><mn>1</mn></msub><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>)</mo></mrow></mtd>
+          </mtr>
+        </mtable>
+      </math>
+      <p>Im dritten Fall ist <math><mi>&#x3C9;</mi><mo>=</mo><mfrac><msqrt><mo>&#x2212;</mo><mi>D</mi></msqrt><mn>2</mn></mfrac></math>, und der Realteil <math><mo>&#x2212;</mo><mfrac><mi>a</mi><mn>2</mn></mfrac></math> bestimmt, wie schnell die Schwingung abklingt.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p><math><msup><mi>y</mi><mrow><mo>&#x2032;&#x2032;</mo></mrow></msup><mo>+</mo><mn>4</mn><msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>+</mo><mn>13</mn><mi>y</mi><mo>=</mo><mn>0</mn></math></p>
+
+      <p><math><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>+</mo><mn>4</mn><mi>&#x3BB;</mi><mo>+</mo><mn>13</mn><mo>=</mo><mn>0</mn></math></p>
+
+      <p><math><mi>D</mi><mo>=</mo><msup><mn>4</mn><mn>2</mn></msup><mo>&#x2212;</mo><mn>4</mn><mo>&#x22C5;</mo><mn>13</mn><mo>=</mo><mn>16</mn><mo>&#x2212;</mo><mn>52</mn><mo>=</mo><mo>&#x2212;</mo><mn>36</mn></math> &#x2014; der Schwingfall.</p>
+
+      <p><math><mi>&#x3BB;</mi><mo>=</mo><mfrac><mrow><mo>&#x2212;</mo><mn>4</mn><mo>&#xB1;</mo><msqrt><mo>&#x2212;</mo><mn>36</mn></msqrt></mrow><mn>2</mn></mfrac><mo>=</mo><mo>&#x2212;</mo><mn>2</mn><mo>&#xB1;</mo><mn>3</mn><mi>i</mi></math></p>
+
+      <p><math><mi>y</mi><mo>=</mo><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mn>2</mn><mi>x</mi></mrow></msup><mo>(</mo><msub><mi>C</mi><mn>1</mn></msub><mi>cos</mi><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub><mi>sin</mi><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo><mo>)</mo></math></p>
+
+      <p>Das Bild unten zeigt alle drei Fälle nebeneinander, mit je einer eigenen Gleichung und stets <math><mi>y</mi><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>1</mn></math>, <math><msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>0</mn></math>:</p>
+
+      <p><math><msup><mi>y</mi><mrow><mo>&#x2032;&#x2032;</mo></mrow></msup><mo>+</mo><mn>2</mn><msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>+</mo><mn>5</mn><mi>y</mi><mo>=</mo><mn>0</mn></math> (Schwingfall, <math><mi>D</mi><mo>=</mo><mo>&#x2212;</mo><mn>16</mn></math>): <math><mi>y</mi><mo>=</mo><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mi>x</mi></mrow></msup><mo>(</mo><mi>cos</mi><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>+</mo><mn>0,5</mn><mi>sin</mi><mo>(</mo><mn>2</mn><mi>x</mi><mo>)</mo><mo>)</mo></math></p>
+
+      <p><math><msup><mi>y</mi><mrow><mo>&#x2032;&#x2032;</mo></mrow></msup><mo>+</mo><mn>4</mn><msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>+</mo><mn>4</mn><mi>y</mi><mo>=</mo><mn>0</mn></math> (Grenzfall, <math><mi>D</mi><mo>=</mo><mn>0</mn></math>): <math><mi>y</mi><mo>=</mo><mo>(</mo><mn>1</mn><mo>+</mo><mn>2</mn><mi>x</mi><mo>)</mo><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mn>2</mn><mi>x</mi></mrow></msup></math></p>
+
+      <p><math><msup><mi>y</mi><mrow><mo>&#x2032;&#x2032;</mo></mrow></msup><mo>+</mo><mn>5</mn><msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>+</mo><mn>4</mn><mi>y</mi><mo>=</mo><mn>0</mn></math> (Kriechfall, <math><mi>D</mi><mo>=</mo><mn>9</mn></math>): <math><mi>y</mi><mo>=</mo><mfrac><mn>4</mn><mn>3</mn></mfrac><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mi>x</mi></mrow></msup><mo>&#x2212;</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mn>4</mn><mi>x</mi></mrow></msup></math></p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 700 190" role="img" aria-label="Drei kleine Achsenkreuze nebeneinander. Links eine gedämpft schwingende, abklingende Kurve (Schwingfall), in der Mitte eine ohne Überschwingen monoton fallende Kurve (aperiodischer Grenzfall), rechts eine ähnliche, aber langsamer fallende Kurve (Kriechfall). Alle drei starten bei y gleich 1 mit waagerechter Tangente.">
+          <text x="115" y="14" text-anchor="middle" font-size="10" fill="var(--ink)">Schwingfall</text>
+          <line x1="32" y1="30" x2="32" y2="168" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="28" y1="136.93" x2="216" y2="136.93" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="28" y1="43.36" x2="32" y2="43.36" stroke="var(--axis)" stroke-width="1"/>
+          <text x="25" y="46.36" text-anchor="end" font-size="9" fill="var(--dim)">1</text>
+          <polyline fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linejoin="round"
+            points="32.00,43.36 36.62,46.23 41.23,53.87 45.85,64.85 50.46,77.83 55.08,91.62 59.69,105.25 64.31,117.95 68.92,129.15 73.54,138.50 78.15,145.83 82.77,151.13 87.38,154.49 92.00,156.13 96.62,156.29 101.23,155.27 105.85,153.38 110.46,150.91 115.08,148.11 119.69,145.24 124.31,142.46 128.92,139.93 133.54,137.75 138.15,135.96 142.77,134.60 147.38,133.66 152.00,133.11 156.62,132.89 161.23,132.96 165.85,133.25 170.46,133.70 175.08,134.24 179.69,134.83 184.31,135.43 188.92,135.99 193.54,136.49 198.15,136.91 202.77,137.25 207.38,137.50 212.00,137.66"/>
+
+          <text x="345" y="14" text-anchor="middle" font-size="10" fill="var(--ink)">Aperiodischer Grenzfall</text>
+          <line x1="262" y1="30" x2="262" y2="168" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="258" y1="159.30" x2="446" y2="159.30" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="258" y1="45.39" x2="262" y2="45.39" stroke="var(--axis)" stroke-width="1"/>
+          <text x="255" y="48.39" text-anchor="end" font-size="9" fill="var(--dim)">1</text>
+          <polyline fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linejoin="round"
+            points="262.00,45.39 266.62,46.61 271.23,49.80 275.85,54.36 280.46,59.86 285.08,65.92 289.69,72.27 294.31,78.71 298.92,85.09 303.54,91.28 308.15,97.22 312.77,102.84 317.38,108.13 322.00,113.05 326.62,117.62 331.23,121.82 335.85,125.67 340.46,129.18 345.08,132.38 349.69,135.28 354.31,137.89 358.92,140.25 363.54,142.38 368.15,144.28 372.77,145.99 377.38,147.51 382.00,148.87 386.62,150.08 391.23,151.16 395.85,152.12 400.46,152.97 405.08,153.73 409.69,154.39 414.31,154.99 418.92,155.51 423.54,155.97 428.15,156.38 432.77,156.73 437.38,157.05 442.00,157.33"/>
+
+          <text x="575" y="14" text-anchor="middle" font-size="10" fill="var(--ink)">Kriechfall</text>
+          <line x1="492" y1="30" x2="492" y2="168" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="488" y1="159.30" x2="676" y2="159.30" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="488" y1="45.39" x2="492" y2="45.39" stroke="var(--axis)" stroke-width="1"/>
+          <text x="485" y="48.39" text-anchor="end" font-size="9" fill="var(--dim)">1</text>
+          <polyline fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linejoin="round"
+            points="492.00,45.39 496.62,47.42 501.23,52.30 505.85,58.74 510.46,65.89 515.08,73.24 519.69,80.46 524.31,87.37 528.92,93.87 533.54,99.91 538.15,105.47 542.77,110.57 547.38,115.22 552.00,119.45 556.62,123.29 561.23,126.77 565.85,129.93 570.46,132.78 575.08,135.35 579.69,137.68 584.31,139.79 588.92,141.69 593.54,143.40 598.15,144.95 602.77,146.35 607.38,147.61 612.00,148.75 616.62,149.78 621.23,150.71 625.85,151.55 630.46,152.30 635.08,152.99 639.69,153.60 644.31,154.16 648.92,154.66 653.54,155.11 658.15,155.52 662.77,155.89 667.38,156.22 672.00,156.52"/>
+        </svg>
+        <figcaption>Drei verschiedene Gleichungen, dieselben Anfangswerte <math><mi>y</mi><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>1</mn></math>, <math><msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>0</mn></math> (Text oben). Links schwingt die Kurve um die Nullinie und klingt dabei ab. Mitte und rechts fallen beide monoton, ohne zu schwingen &#x2014; der Grenzfall erreicht die Nullinie am schnellsten, der Kriechfall braucht länger, weil seine langsamere Basislösung <math><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mi>x</mi></mrow></msup></math> das Bild am Ende dominiert.</figcaption>
+      </figure>
+    </div>
+
+    <p class="fehler">Bei doppelter Nullstelle den Faktor <math><mi>x</mi></math> vergessen. Ohne ihn hat <math><mi>y</mi><mo>=</mo><msub><mi>C</mi><mn>1</mn></msub><msup><mi>e</mi><mrow><mi>&#x3BB;</mi><mi>x</mi></mrow></msup></math> nur eine Basislösung, und zwei Anfangswerte lassen sich mit einer einzigen Konstante nicht erfüllen.</p>
+
+    <p>Trage dort bei <math><mi>a</mi></math> den Wert <code>4</code> und bei <math><mi>b</mi></math> den Wert <code>13</code> ein, ohne Störglied: das Werkzeug nennt Diskriminante <math><mo>&#x2212;</mo><mn>36</mn></math>, die Wurzeln <math><mo>&#x2212;</mo><mn>2</mn><mo>&#xB1;</mo><mn>3</mn><mi>i</mi></math> und denselben <math><msub><mi>y</mi><mi>h</mi></msub></math> wie oben.</p>
+
+    <a class="querlink" href="../tools/schwingung/index.html">Selbst durchfahren &#x2192; Schwingungsrechner</a>
+  </article>
+
+  <article class="karte" id="ansatz">
+    <h3>Ansatz vom Typ der rechten Seite</h3>
+
+    <div class="voraussetzung"><math><msub><mi>y</mi><mi>h</mi></msub></math> ist bereits bestimmt (vorige Karte).</div>
+
+    <div class="formel" data-verdeckbar>
+      <p>Für die partikuläre Lösung <math><msub><mi>y</mi><mi>p</mi></msub></math> richtet sich der Ansatz nach der Bauart der rechten Seite <math><mi>s</mi><mo>(</mo><mi>x</mi><mo>)</mo></math>:</p>
+      <math display="block">
+        <mtable>
+          <mtr>
+            <mtd><msub><mi>P</mi><mi>n</mi></msub><mo>(</mo><mi>x</mi><mo>)</mo></mtd>
+            <mtd><mtext>Polynom vom Grad n</mtext></mtd>
+            <mtd><mo>&#x21D2;</mo></mtd>
+            <mtd><msup><mi>x</mi><mi>k</mi></msup><mo>(</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><msub><mi>A</mi><mn>1</mn></msub><mi>x</mi><mo>+</mo><mo>&#x22EF;</mo><mo>+</mo><msub><mi>A</mi><mi>n</mi></msub><msup><mi>x</mi><mi>n</mi></msup><mo>)</mo></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mi>c</mi><mo>&#x22C5;</mo><msup><mi>e</mi><mrow><mi>&#x3BC;</mi><mi>x</mi></mrow></msup></mtd>
+            <mtd><mtext>Exponentialglied</mtext></mtd>
+            <mtd><mo>&#x21D2;</mo></mtd>
+            <mtd><msup><mi>x</mi><mi>k</mi></msup><mo>&#x22C5;</mo><mi>A</mi><mo>&#x22C5;</mo><msup><mi>e</mi><mrow><mi>&#x3BC;</mi><mi>x</mi></mrow></msup></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mi>c</mi><mo>&#x22C5;</mo><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><mi>d</mi><mo>&#x22C5;</mo><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo></mtd>
+            <mtd><mtext>harmonisches Glied</mtext></mtd>
+            <mtd><mo>&#x21D2;</mo></mtd>
+            <mtd><msup><mi>x</mi><mi>k</mi></msup><mo>(</mo><mi>A</mi><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><mi>B</mi><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>)</mo></mtd>
+          </mtr>
+        </mtable>
+      </math>
+      <p><math><mi>k</mi></math> ist meist 0 und wird erst durch Resonanz größer &#x2014; das ist der Gegenstand der nächsten Karte. Die unbekannten Koeffizienten <math><mi>A</mi></math> (und <math><mi>B</mi></math>) folgen aus einem Koeffizientenvergleich, nachdem der Ansatz in die Differentialgleichung eingesetzt wurde.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p><math><msup><mi>y</mi><mrow><mo>&#x2032;&#x2032;</mo></mrow></msup><mo>+</mo><mn>4</mn><msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>+</mo><mn>5</mn><mi>y</mi><mo>=</mo><mn>5</mn><msup><mi>x</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>32</mn><mi>x</mi><mo>+</mo><mn>5</mn></math></p>
+
+      <p>Die rechte Seite ist ein Polynom vom Grad 2, also <math><msub><mi>y</mi><mi>p</mi></msub><mo>=</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><msub><mi>A</mi><mn>1</mn></msub><mi>x</mi><mo>+</mo><msub><mi>A</mi><mn>2</mn></msub><msup><mi>x</mi><mn>2</mn></msup></math> &#x2014; sofern keine Resonanz vorliegt. Char. Gleichung <math><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>+</mo><mn>4</mn><mi>&#x3BB;</mi><mo>+</mo><mn>5</mn><mo>=</mo><mn>0</mn></math> hat die Nullstellen <math><mo>&#x2212;</mo><mn>2</mn><mo>&#xB1;</mo><mi>i</mi></math>; <math><mi>&#x3BC;</mi><mo>=</mo><mn>0</mn></math> ist keine davon, also <math><mi>k</mi><mo>=</mo><mn>0</mn></math>.</p>
+
+      <p><math><msup><msub><mi>y</mi><mi>p</mi></msub><mo>&#x2032;</mo></msup><mo>=</mo><msub><mi>A</mi><mn>1</mn></msub><mo>+</mo><mn>2</mn><msub><mi>A</mi><mn>2</mn></msub><mi>x</mi></math>, <math><msup><msub><mi>y</mi><mi>p</mi></msub><mrow><mo>&#x2032;&#x2032;</mo></mrow></msup><mo>=</mo><mn>2</mn><msub><mi>A</mi><mn>2</mn></msub></math></p>
+
+      <p>Eingesetzt und nach Potenzen von <math><mi>x</mi></math> geordnet:</p>
+
+      <p><math><mn>5</mn><msub><mi>A</mi><mn>2</mn></msub><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mo>(</mo><mn>8</mn><msub><mi>A</mi><mn>2</mn></msub><mo>+</mo><mn>5</mn><msub><mi>A</mi><mn>1</mn></msub><mo>)</mo><mi>x</mi><mo>+</mo><mo>(</mo><mn>2</mn><msub><mi>A</mi><mn>2</mn></msub><mo>+</mo><mn>4</mn><msub><mi>A</mi><mn>1</mn></msub><mo>+</mo><mn>5</mn><msub><mi>A</mi><mn>0</mn></msub><mo>)</mo><mo>=</mo><mn>5</mn><msup><mi>x</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>32</mn><mi>x</mi><mo>+</mo><mn>5</mn></math></p>
+
+      <p>Koeffizientenvergleich, Grad für Grad:</p>
+      <p><math><mn>5</mn><msub><mi>A</mi><mn>2</mn></msub><mo>=</mo><mn>5</mn></math> &#x27F9; <math><msub><mi>A</mi><mn>2</mn></msub><mo>=</mo><mn>1</mn></math></p>
+      <p><math><mn>8</mn><msub><mi>A</mi><mn>2</mn></msub><mo>+</mo><mn>5</mn><msub><mi>A</mi><mn>1</mn></msub><mo>=</mo><mo>&#x2212;</mo><mn>32</mn></math> &#x27F9; <math><mn>8</mn><mo>+</mo><mn>5</mn><msub><mi>A</mi><mn>1</mn></msub><mo>=</mo><mo>&#x2212;</mo><mn>32</mn></math> &#x27F9; <math><msub><mi>A</mi><mn>1</mn></msub><mo>=</mo><mo>&#x2212;</mo><mn>8</mn></math></p>
+      <p><math><mn>2</mn><msub><mi>A</mi><mn>2</mn></msub><mo>+</mo><mn>4</mn><msub><mi>A</mi><mn>1</mn></msub><mo>+</mo><mn>5</mn><msub><mi>A</mi><mn>0</mn></msub><mo>=</mo><mn>5</mn></math> &#x27F9; <math><mn>2</mn><mo>&#x2212;</mo><mn>32</mn><mo>+</mo><mn>5</mn><msub><mi>A</mi><mn>0</mn></msub><mo>=</mo><mn>5</mn></math> &#x27F9; <math><msub><mi>A</mi><mn>0</mn></msub><mo>=</mo><mn>7</mn></math></p>
+
+      <p><math><msub><mi>y</mi><mi>p</mi></msub><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>8</mn><mi>x</mi><mo>+</mo><mn>7</mn></math></p>
+    </div>
+
+    <p class="merksatz"><strong>Superposition:</strong> steht rechts eine Summe mehrerer Bauarten, wird jeder Summand einzeln gelöst und am Ende addiert.</p>
+
+    <p class="fehler">Den Ansatz wählen, ohne vorher die Nullstellen des charakteristischen Polynoms anzusehen. Ohne diesen Blick bleibt eine mögliche Resonanz unbemerkt, und der folgende Koeffizientenvergleich führt auf ein unlösbares Gleichungssystem.</p>
+
+    <p>Trage dort bei <math><mi>a</mi></math> den Wert <code>4</code> und bei <math><mi>b</mi></math> den Wert <code>5</code> ein und stelle das 1. Glied der rechten Seite auf <code>polyexp</code>, mit <math><mi>&#x3BC;</mi></math> = <code>0</code> und den Koeffizienten <code>5, -32, 5</code>: der Rechenweg meldet „Keine Resonanz“ und dieselbe partikuläre Lösung <math><msub><mi>y</mi><mi>p</mi></msub><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>8</mn><mi>x</mi><mo>+</mo><mn>7</mn></math> wie oben.</p>
+
+    <a class="querlink" href="../tools/schwingung/index.html">Selbst durchfahren &#x2192; Schwingungsrechner</a>
+  </article>
+
+  <article class="karte" id="resonanz">
+    <h3>Resonanz: wann der Ansatz mit x zu multiplizieren ist</h3>
+
+    <div class="voraussetzung">Ansatztabelle der vorigen Karte, mit dem noch offenen Faktor <math><msup><mi>x</mi><mi>k</mi></msup></math>.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow><mi>k</mi><mo>=</mo><mtext>&#xA0;Vielfachheit von&#xA0;</mtext><mi>&#x3BC;</mi><mtext>&#xA0;als Nullstelle von&#xA0;</mtext><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><mi>&#x3BB;</mi><mo>+</mo><mi>b</mi></mrow>
+      </math>
+      <p>Bei einem harmonischen Glied <math><mi>c</mi><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><mi>d</mi><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo></math> heißt das: <math><mi>k</mi><mo>=</mo><mn>1</mn></math>, wenn <math><mo>&#xB1;</mo><mi>i</mi><mi>&#x3C9;</mi></math> Nullstellen sind &#x2014; also genau dann, wenn <math><mi>a</mi><mo>=</mo><mn>0</mn></math> und <math><mi>b</mi><mo>=</mo><msup><mi>&#x3C9;</mi><mn>2</mn></msup></math>. Der Ansatz aus der vorigen Karte bekommt den Faktor <math><msup><mi>x</mi><mi>k</mi></msup></math>.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p><math><msup><mi>y</mi><mrow><mo>&#x2032;&#x2032;</mo></mrow></msup><mo>+</mo><mn>2</mn><msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>+</mo><mi>y</mi><mo>=</mo><mn>6</mn><mi>x</mi><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mi>x</mi></mrow></msup></math></p>
+
+      <p><math><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>&#x3BB;</mi><mo>+</mo><mn>1</mn><mo>=</mo><msup><mrow><mo>(</mo><mi>&#x3BB;</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></msup></math></p>
+      <p><math><msup><mrow><mo>(</mo><mi>&#x3BB;</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><mn>0</mn></math>, also ist <math><mi>&#x3BC;</mi><mo>=</mo><mo>&#x2212;</mo><mn>1</mn></math> <strong>doppelte</strong> Nullstelle des charakteristischen Polynoms &#x2014; also <math><mi>k</mi><mo>=</mo><mn>2</mn></math>.</p>
+
+      <p>Ansatz: <math><msub><mi>y</mi><mi>p</mi></msub><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>(</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><msub><mi>A</mi><mn>1</mn></msub><mi>x</mi><mo>)</mo><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mi>x</mi></mrow></msup></math></p>
+
+      <p>Koeffizientenvergleich liefert <math><msub><mi>A</mi><mn>0</mn></msub><mo>=</mo><mn>0</mn></math>, <math><msub><mi>A</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn></math>, also:</p>
+
+      <p><math><msub><mi>y</mi><mi>p</mi></msub><mo>=</mo><msup><mi>x</mi><mn>3</mn></msup><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mi>x</mi></mrow></msup></math></p>
+
+      <p>Ein zweites Beispiel, ungedämpft: <math><msup><mi>y</mi><mrow><mo>&#x2032;&#x2032;</mo></mrow></msup><mo>+</mo><mn>9</mn><mi>y</mi><mo>=</mo><mi>sin</mi><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo></math>. Char. Gleichung <math><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>+</mo><mn>9</mn><mo>=</mo><mn>0</mn></math> hat die Nullstellen <math><mo>&#xB1;</mo><mn>3</mn><mi>i</mi></math> &#x2014; genau die Kreisfrequenz der rechten Seite, also Resonanz mit <math><mi>k</mi><mo>=</mo><mn>1</mn></math>. Der Ansatz <math><mi>x</mi><mo>(</mo><mi>A</mi><mi>cos</mi><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo><mo>+</mo><mi>B</mi><mi>sin</mi><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo><mo>)</mo></math> liefert <math><mi>A</mi><mo>=</mo><mo>&#x2212;</mo><mfrac><mn>1</mn><mn>6</mn></mfrac></math>, <math><mi>B</mi><mo>=</mo><mn>0</mn></math>, also:</p>
+
+      <p><math><msub><mi>y</mi><mi>p</mi></msub><mo>=</mo><mo>&#x2212;</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><mi>x</mi><mi>cos</mi><mo>(</mo><mn>3</mn><mi>x</mi><mo>)</mo></math></p>
+
+      <p>Der Faktor <math><mi>x</mi></math> vor der Klammer lässt die Amplitude linear wachsen, statt sie &#x2014; wie ohne Resonanz &#x2014; konstant zu lassen:</p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 420 230" role="img" aria-label="Die Kurve y_p gleich minus ein Sechstel mal x mal Kosinus 3x: eine Schwingung, deren Amplitude linear zwischen den beiden gestrichelten Geraden x/6 und minus x/6 anwächst, statt konstant zu bleiben.">
+          <line x1="34" y1="20" x2="34" y2="200" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="34" y1="110" x2="400" y2="110" stroke="var(--axis)" stroke-width="1"/>
+
+          <line x1="30" y1="31.74" x2="34" y2="31.74" stroke="var(--axis)" stroke-width="1"/>
+          <text x="27" y="34.74" text-anchor="end" font-size="9" fill="var(--dim)">2</text>
+          <line x1="30" y1="188.26" x2="34" y2="188.26" stroke="var(--axis)" stroke-width="1"/>
+          <text x="27" y="191.26" text-anchor="end" font-size="9" fill="var(--dim)">&#x2212;2</text>
+
+          <line x1="34" y1="110" x2="400" y2="29.60" stroke="var(--dim)" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="34" y1="110" x2="400" y2="190.40" stroke="var(--dim)" stroke-width="1" stroke-dasharray="3 3"/>
+
+          <polyline fill="none" stroke="var(--rose)" stroke-width="1.6" stroke-linejoin="round"
+            points="34.00,110.00 37.81,110.77 41.62,111.18 45.44,110.96 49.25,110.00 53.06,108.40 56.88,106.45 60.69,104.58 64.50,103.30 68.31,103.04 72.12,104.08 75.94,106.47 79.75,110.00 83.56,114.17 87.38,118.29 91.19,121.61 95.00,123.40 98.81,123.15 102.62,120.66 106.44,116.09 110.25,110.00 114.06,103.27 117.88,96.97 121.69,92.20 125.50,89.90 129.31,90.66 133.12,94.60 136.94,101.35 140.75,110.00 144.56,119.29 148.38,127.77 152.19,133.99 156.00,136.80 159.81,135.53 163.62,130.14 167.44,121.22 171.25,110.00 175.06,98.14 178.88,87.50 182.69,79.82 186.50,76.50 190.31,78.28 194.12,85.13 197.94,96.22 201.75,110.00 205.56,124.42 209.38,137.24 213.19,146.37 217.00,150.20 220.81,147.91 224.62,139.61 228.44,126.35 232.25,110.00 236.06,93.01 239.88,78.02 243.69,67.44 247.50,63.10 251.31,65.89 255.13,75.65 258.94,91.09 262.75,110.00 266.56,129.55 270.38,146.72 274.19,158.75 278.00,163.60 281.81,160.30 285.62,149.09 289.44,131.47 293.25,110.00 297.06,87.88 300.88,68.54 304.69,55.06 308.50,49.70 312.31,53.51 316.12,66.18 319.94,85.96 323.75,110.00 327.56,134.68 331.37,156.19 335.19,171.13 339.00,177.00 342.81,172.68 346.62,158.56 350.44,136.60 354.25,110.00 358.06,82.76 361.88,59.07 365.69,42.68 369.50,36.30 373.31,41.13 377.13,56.70 380.94,80.83 384.75,110.00 388.56,139.81 392.38,165.67 396.19,183.51 400.00,190.40"/>
+
+          <text x="38" y="17" font-size="9" fill="var(--rose)">y_p</text>
+          <text x="405" y="114" font-size="9" fill="var(--dim)">x</text>
+          <text x="405" y="33" font-size="9" fill="var(--dim)">x/6</text>
+          <text x="405" y="193.40" font-size="9" fill="var(--dim)">&#x2212;x/6</text>
+        </svg>
+        <figcaption>Die Kurve <math><msub><mi>y</mi><mi>p</mi></msub></math> bleibt zwischen den beiden gestrichelten Geraden <math><mi>y</mi><mo>=</mo><mo>&#xB1;</mo><mfrac><mi>x</mi><mn>6</mn></mfrac></math> und berührt sie abwechselnd &#x2014; die aufschaukelnde Amplitude, die jede Resonanz kennzeichnet.</figcaption>
+      </figure>
+    </div>
+
+    <p class="fehler">Die Resonanz übersehen. Dann ist das Gleichungssystem für die Koeffizienten unlösbar, und man sucht den Fehler in der Rechnung statt im Ansatz.</p>
+
+    <p>Trage dort bei <math><mi>a</mi></math> den Wert <code>2</code> und bei <math><mi>b</mi></math> den Wert <code>1</code> ein und stelle das 1. Glied der rechten Seite auf <code>polyexp</code>, mit <math><mi>&#x3BC;</mi></math> = <code>-1</code> und den Koeffizienten <code>0, 6</code>: der Rechenweg meldet „Doppelte Resonanz“ und <math><msub><mi>y</mi><mi>p</mi></msub><mo>=</mo><msup><mi>x</mi><mn>3</mn></msup><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mi>x</mi></mrow></msup></math>, wie oben. Für das zweite Beispiel &#x2014; das Bild mit der wachsenden Amplitude &#x2014; klicke stattdessen den Beispiel-Chip „(d) Resonanz“.</p>
+
+    <a class="querlink" href="../tools/schwingung/index.html">Selbst durchfahren &#x2192; Schwingungsrechner</a>
+  </article>
+
+  <p class="seitenfuss"><a href="index.html">&#x2190; Alle Karten im Überblick</a></p>
+
+</div>
+
+<script src="../shared/abfrage.js"></script>
+<script>MT.abfrage.start();</script>
+</body>
+</html>
