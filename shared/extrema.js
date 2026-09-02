@@ -102,40 +102,57 @@ var MT = MT || {};
       }
     }
 
-    /* Die Zusammenfass-Toleranz darf nicht schärfer sein als die
-       Auflösung der numerischen Differentiation: an einer entarteten
-       Stelle (z. B. x^4 + y^4, wo der Gradient wie x^3 verschwindet)
-       bricht der Lauf schon ab, wenn der Gradient unterhalb der
-       Konvergenzschwelle liegt, und das kann je nach Startpunkt an
-       leicht verschiedenen Stellen sein, die aber alle näher beieinander
-       liegen als h — Positionen feiner als h aufzulösen ist mit
-       Differenzenquotienten der Schrittweite h ohnehin nicht möglich. */
-    var eps = h, stellen = [], k, m, neu, e;
+    /* Zusammenfassen nach echtem Abstand, nicht nach Kästchen um jeden
+       Punkt — über die Diagonale wäre ein Kästchenvergleich um den
+       Faktor Wurzel 2 zu großzügig. Von zwei Treffern, die näher als
+       eps beieinanderliegen, gewinnt der mit dem kleineren
+       Gradientenbetrag, nicht der zuerst gefundene: an einer entarteten
+       Stelle (z. B. x^4 + y^4) greift die Konvergenzschwelle
+       |g| < 1e-10*(1+|f|) schon in einem Umkreis der Größenordnung 3e-4
+       um die wahre Stelle, und je nach Startpunkt bleiben Läufe an
+       verstreuten Positionen in diesem Umkreis stehen. Wer den
+       zuerst gefundenen Treffer behält, kann so einen schlechter
+       konvergierten Lauf über einen exakten stellen — trifft das
+       Rasters selbst die stationäre Stelle, wie bei x^4 + y^4 den
+       Startpunkt (0|0), geht das exakte Ergebnis sonst verloren. */
+    var eps = 1e-6 * (1 + r), gewaehlt = [], k, m, treffer, dx, dy, abstand;
     for (k = 0; k < roh.length; k++) {
-      neu = true;
-      for (m = 0; m < stellen.length; m++) {
-        if (Math.abs(stellen[m].x - roh[k].x) < eps &&
-            Math.abs(stellen[m].y - roh[k].y) < eps) { neu = false; break; }
+      treffer = -1;
+      for (m = 0; m < gewaehlt.length; m++) {
+        dx = gewaehlt[m].x - roh[k].x;
+        dy = gewaehlt[m].y - roh[k].y;
+        abstand = Math.sqrt(dx * dx + dy * dy);
+        if (abstand < eps) { treffer = m; break; }
       }
-      if (!neu) continue;
-      e = einordnen(roh[k].d);
+      if (treffer < 0) {
+        gewaehlt.push(roh[k]);
+      } else if (betrag(roh[k].d) < betrag(gewaehlt[treffer].d)) {
+        gewaehlt[treffer] = roh[k];
+      }
+    }
+
+    var stellen = [], e;
+    for (k = 0; k < gewaehlt.length; k++) {
+      e = einordnen(gewaehlt[k].d);
       stellen.push({
-        x: roh[k].x, y: roh[k].y, z: roh[k].d.f,
-        fxx: roh[k].d.fxx, fxy: roh[k].d.fxy, fyy: roh[k].d.fyy,
+        x: gewaehlt[k].x, y: gewaehlt[k].y, z: gewaehlt[k].d.f,
+        fxx: gewaehlt[k].d.fxx, fxy: gewaehlt[k].d.fxy, fyy: gewaehlt[k].d.fyy,
         det: e.det, art: e.art
       });
     }
 
     stellen.sort(function(p, q){ return (p.x - q.x) || (p.y - q.y); });
 
-    var kurvenfall = stellen.length > 8;
-    if (kurvenfall) stellen = stellen.slice(0, 8);
-
+    /* amRand vor dem Abschneiden auf acht Stellen prüfen — sonst kann
+       eine weggeschnittene Stelle die Randwarnung nicht mehr auslösen. */
     var amRand = false;
     for (k = 0; k < stellen.length; k++) {
       if (r - Math.abs(stellen[k].x) < 0.1 * r ||
           r - Math.abs(stellen[k].y) < 0.1 * r) amRand = true;
     }
+
+    var kurvenfall = stellen.length > 8;
+    if (kurvenfall) stellen = stellen.slice(0, 8);
 
     return { stellen: stellen, bereich: r, amRand: amRand, kurvenfall: kurvenfall };
   }
