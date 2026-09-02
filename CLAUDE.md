@@ -66,6 +66,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | `shared/scene3d.js` | `MT.scene3d` — Projektion, Drehen, Zoomen. Die Höhe wird normiert, siehe „Bekannte Grenzen“ |
 | `shared/abfrage.js` | `MT.abfrage` — Verdecken und Aufdecken auf Karten |
 | `shared/extrema.js` | `MT.extrema` — stationäre Stellen suchen und einordnen |
+| `shared/dgl.js` | `MT.dgl.loese(a, b, glieder, anfang)` — lineare Differentialgleichungen zweiter Ordnung mit konstanten Koeffizienten, geschlossen gelöst |
 
 Jede `shared/*.js` beginnt mit `var MT = MT || {};` und hängt genau einen
 Teilbereich an. Damit ist ihre Ladereihenfolge untereinander egal — nur

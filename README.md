@@ -13,6 +13,7 @@ rechnen etwas vor, Karten erklären etwas.
 | Werkzeug | Worum es geht |
 |---|---|
 | [Flächenrechner](tools/flaechenrechner/index.html) | Eine Funktion `z = f(x, y)` als Fläche im Raum, ihre Höhenlinien und die beiden senkrechten Schnitte — gleichzeitig und farblich verknüpft. Dazu sucht er die stationären Stellen im gezeigten Bereich, ordnet sie über die Hesse-Matrix ein (Determinante und Urteil im Klartext) und markiert sie im Höhenlinienbild. |
+| [Schwingungsrechner](tools/schwingung/index.html) | Eine lineare Differentialgleichung zweiter Ordnung mit konstanten Koeffizienten `y'' + a·y' + b·y = s(x)`: charakteristisches Polynom, homogene Lösung, Ansatz für die rechte Seite samt Resonanzprüfung und, mit Anfangswerten, die Konstanten C₁ und C₂. |
 
 **Karten**
 
@@ -22,8 +23,9 @@ rechnen etwas vor, Karten erklären etwas.
 | [Gradient und Richtungsableitung](karten/gradient.html) | Der Gradient bündelt beide partiellen Ableitungen zu einem Vektor; die Richtungsableitung fragt nach der Steigung in einer beliebigen anderen Richtung. |
 | [Extrema mit Nebenbedingung](karten/extrema-mit-nebenbedingung.html) | Extrema, die nur auf einer Nebenbedingung gesucht sind — der Multiplikator von Lagrange liefert die Kandidaten. |
 | [Extremwerte](karten/extremwerte.html) | Erst liefert der Gradient die stationären Stellen, dann entscheidet die Hesse-Matrix, ob jede davon ein Minimum, ein Maximum oder ein Sattelpunkt ist. |
+| [Lineare Differentialgleichungen zweiter Ordnung](karten/differentialgleichungen.html) | Charakteristisches Polynom und die drei Fälle seiner Nullstellen, der Ansatz vom Typ der rechten Seite und die Resonanz, die ihn um den Faktor x erweitert. |
 
-Alle vier sind auch von der Startseite aus erreichbar, dazu über
+Alle fünf sind auch von der Startseite aus erreichbar, dazu über
 [karten/index.html](karten/index.html), das alle Themen im Überblick zeigt.
 
 ## Wie es gebaut ist
@@ -47,11 +49,12 @@ Die gemeinsamen Bausteine:
 | `shared/expr.js` | `MT.expr.compile(term, vars)` — Terme wie `-x^2/4 - y^2/9` in aufrufbare Funktionen übersetzen |
 | `shared/canvas.js` | `MT.canvas` — scharfe Zeichenflächen, lineare Achsen, Farben aus dem Stylesheet |
 | `shared/plot2d.js` | `MT.plot2d` — Höhenlinien nach Marching Squares, unterbrochene Linienzüge |
-| `shared/scene3d.js` | `MT.scene3d` — Projektion in den Raum und Drehen per Maus |
+| `shared/scene3d.js` | `MT.scene3d` — Projektion in den Raum, Drehen und Zoomen per Maus oder Regler; die Höhe wird normiert statt im Maßstab von x und y gezeichnet |
 | `shared/abfrage.js` | `MT.abfrage` — Verdecken und Aufdecken auf Karten |
 | `shared/extrema.js` | `MT.extrema` — stationäre Stellen suchen und einordnen |
+| `shared/dgl.js` | `MT.dgl.loese(a, b, glieder, anfang)` — lineare Differentialgleichungen zweiter Ordnung mit konstanten Koeffizienten, geschlossen gelöst |
 | `shared/theme.css` | Farbtokens und Grundtypografie |
-| `shared/ui.css` | Panels, Regler, Chips, Raster, dazu die Katalog-Kacheln, die Startseite und Kartenübersicht teilen |
+| `shared/ui.css` | Panels, Regler, Chips, Raster, dazu die Katalog-Kacheln und die Ansichtsregler-Gruppe `.blick` an einer Zeichentafel — die Startseite und Kartenübersicht teilen die Kacheln mit |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
 
 Eingebunden wird mit klassischen `<script src="…">`-Tags, absichtlich
