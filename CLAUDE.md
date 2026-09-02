@@ -306,7 +306,7 @@ hat sie hier schon gefunden.
   hatte das Werkzeug überhaupt kein Druck-Stylesheet. Wer es beheben will,
   müsste bei `beforeprint` neu zeichnen; das rührt an
   `shared/canvas.js`, also an einer Datei, die diese Runde nicht anfasst.
-- **Fünfzehn Farbliterale bestehen fort, und die Regel oben gilt trotzdem.**
+- **Zwanzig Farbliterale bestehen fort, und die Regel oben gilt trotzdem.**
   Sie ist eine Regel für neuen Code; der Bestand ist geprüft und so
   gelassen. Wer eines davon „entdeckt", hat es hier schon gefunden:
 
@@ -347,6 +347,25 @@ hat sie hier schon gefunden.
   das kostete einmal einen vollen Vergleichslauf dieses Plans. Wer die
   Routine erneut laufen lässt, muss den Term auf demselben Weg setzen wie
   die Referenzaufnahme.
+- **Die Akzeptanzschwelle in `shared/extrema.js` ist relativ zum
+  Funktionswert, nicht zur Größenordnung des Gradienten.** `nahGenug` prüft
+  `|g| < 1e-10 · (1 + |f|)`; trägt die Funktion eine große additive
+  Konstante, wächst diese Schwelle mit, und Stellen werden akzeptiert, die
+  gar nicht stationär sind. Gemessen: `x^2 + y^2 + 100000000` (die Ziffern
+  ausgeschrieben) meldet acht Stellen, verstreut innerhalb rund `3·10⁻³` um
+  den Ursprung, statt des einen Minimums bei (0 | 0). Der Umschlag liegt bei
+  rund `10⁸`; bei `10⁶` rechnet der Baustein noch richtig.
+
+  Zwei Dinge gehören für den nächsten, der das anfasst, dazu: Die Eingabe
+  ist aus den Übungsaufgaben nicht erreichbar, deshalb steht sie hier
+  vermerkt statt behoben — die eigentliche Reparatur ist ein Kriterium
+  relativ zur eigenen Größenordnung des Gradienten, und sie gehört in die
+  Runde, die dieses Modul als Nächstes anfasst. Und: **`MT.expr` kennt keine
+  Exponentialschreibweise.** `e` ist die Euler'sche Zahl, `1e8` wird also als
+  `1 · e · 8 = 21,746` gelesen, nicht als 100 000 000 — eine Prüfung genau
+  dieser Grenze meldete einmal „bestanden", weil sie als `1e8` eingetippt war
+  und damit eine völlig andere Funktion maß. Wer große Werte testet, muss
+  die Ziffern ausschreiben.
 
 ## Ton
 

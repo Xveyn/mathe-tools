@@ -149,18 +149,28 @@ zusammen. Dabei gewinnt der Treffer mit dem kleineren Gradientenbetrag:
 trifft das Startraster die Stelle selbst, wie bei `x⁴ + y⁴` den
 Rasterpunkt (0 | 0), überlebt dieser exakte Treffer und wird nicht zugunsten
 eines schlechter konvergierten verworfen. Die Grenze, die bleibt, ist eine
-andere: Stellen, die enger beieinanderliegen als die Differenzenschrittweite
-`h`, kann das Verfahren nicht trennen (siehe „Grenzen, die der Baustein
-selbst meldet").
+andere: Stellen, die enger beieinanderliegen als die doppelte
+Differenzenschrittweite `2h`, kann das Verfahren nicht zuverlässig trennen
+(siehe „Grenzen, die der Baustein selbst meldet").
 
 **Einsammeln.** Verworfen wird ein Treffer, der außerhalb `[−r, r]²` liegt
 oder nicht konvergiert ist. Zwei Treffer gelten als dieselbe Stelle, wenn ihr
 Abstand kleiner ist als `2h` — die doppelte Differenzenschrittweite, und
 sonst nichts. Weiter reicht die Aussagekraft der Rechnung nicht: unterhalb
 von `h` sind alle Ableitungen über diese Länge gemittelt, zwei Stellen
-darunter kann das Verfahren grundsätzlich nicht trennen. Dieselbe Zahl
-begrenzt also die Auflösung nach unten und die Toleranz nach oben; das ist
-kein Zufall, sondern dieselbe Aussage.
+darunter kann das Verfahren grundsätzlich nicht trennen. Die Toleranz `2h`
+ist dabei nicht dieselbe Zahl wie diese Auflösungsgrenze `h`, sondern ihr
+Doppeltes — und genau im Band dazwischen kann das Zusammenfassen echte,
+verschiedene Stellen verschlucken. Eine Prüfung an der Probefunktion
+`x⁴/4 − w²/2·x² + y²/2` — Sattel bei (0 | 0), Minima bei (±w | 0) — fand
+dieses Band: für `w/h` zwischen rund 1,15 und 1,95 werden die beiden Minima
+zum Sattel hin wegverschmolzen und nur er wird gemeldet, außerhalb des
+Bandes werden alle drei Stellen gefunden. Die Breite des Bandes hängt vom
+Suchbereich ab: bei `r = 1` kein Band, bei `r = 2` etwa 1,65…1,70, bei
+`r = 4` etwa 1,15…1,95, bei `r = 20` etwa 1,05…1,95. Das ist keine zu
+behebende Schwäche, sondern eine dokumentierte Grenze: Zwei stationäre
+Stellen, die enger als `2h` beieinanderliegen, sind aus den Aufgaben dieses
+Repos nicht erreichbar.
 
 Eine feinere Toleranz behauptet eine Genauigkeit, die es nicht gibt. Die
 erste Fassung dieser Spec nannte `eps = 1e-6 · (1 + r)` — bei `r = 4`
@@ -213,9 +223,10 @@ gehören deshalb zur Rückgabe, nicht in die Dokumentation:
 Zusätzlich trägt jede einzelne Stelle mit `art: 'unentschieden'` ihre eigene
 Grenze.
 
-Stellen, die enger beieinanderliegen als die Differenzenschrittweite, kann
-das Verfahren nicht trennen; sie erscheinen als eine. Das ist eine
-Eigenschaft der numerischen Ableitung, keine der Suche.
+Stellen, die enger beieinanderliegen als die doppelte Differenzenschrittweite
+`2h`, kann das Verfahren nicht zuverlässig trennen; sie erscheinen als eine.
+Das ist eine Eigenschaft der numerischen Ableitung und der Toleranz beim
+Einsammeln, keine der Suche.
 
 ### Warum kein `shared/numerik.js`
 
@@ -340,7 +351,7 @@ Handrechnung gehalten. Die Werte unten sind die erwarteten.
 |---|---|---|
 | `x^3 + y^3 - 3*x*y` | MV 24a, 29a | (0\|0) Sattel, `det = −9`; (1\|1) Minimum, `det = 27`, `f_xx = 6`, `f = −1` |
 | `x^2 + x*y + y^2 + x + y + 1` | MV 24c, 29c | (−0,3333\|−0,3333) Minimum, `det = 3`, `f = 0,6667` |
-| `x^2 + y^2 - 2*x*y + 1` | MV 24b, 29b | `kurvenfall`: der Gradient verschwindet auf der ganzen Geraden `y = x`. Viele Treffer, alle mit `det = 0` → `unentschieden`. Die Anzeige nennt die Kurve, nicht acht willkürliche Punkte |
+| `x^2 + y^2 - 2*x*y + 1` | MV 24b, 29b | `kurvenfall`: der Gradient verschwindet auf der ganzen Geraden `y = x`. Mehr als acht Treffer, alle auf `y = x`, alle mit `det = 0` → `unentschieden`. Die Anzeige behauptet dazu keine Kurve als Tatsache — sie sagt, dass mehr als acht Stellen gefunden wurden, dass die ersten acht darunter stehen, und dass das häufig eine ganze Kurve bedeutet |
 | `(x^2 + y^2)*exp(-x)` | MV 26a | (0\|0) Minimum, `det = 4`; (2\|0) Sattel, `det = −4e⁻⁴ ≈ −0,0733` |
 | `x^4 + y^4` | MV 28a | Eine Stelle exakt bei (0\|0) (der Rasterstartpunkt trifft die Stelle selbst, und beim Zusammenfassen gewinnt der bestkonvergierte Treffer), `det ≈ 0` → `unentschieden`. In Wahrheit ein Minimum; das Kriterium kann es nicht entscheiden, und genau das muss das Werkzeug sagen |
 | `-x*exp(-x^2-y^2)` | MV 31 | (0,7071\|0) Minimum; (−0,7071\|0) Maximum |
