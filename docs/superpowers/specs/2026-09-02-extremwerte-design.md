@@ -133,16 +133,25 @@ Nachkommastellen; die Rechenprobe akzeptiert das entsprechend.
 
 **Einsammeln.** Verworfen wird ein Treffer, der außerhalb `[−r, r]²` liegt
 oder nicht konvergiert ist. Zwei Treffer gelten als dieselbe Stelle, wenn ihr
-Abstand kleiner ist als das Größere aus dem festen Wert `1e-6 · (1 + r)` und
-der Unschärfe `tau / max(|f_xx|, |f_xy|, |f_yy|)` (mit
-`tau = 1e-10 · (1 + |f|)`) beider Treffer — eine feste Zahl allein muss sich
-zwischen einer entarteten Stelle, an der weit verstreute Läufe
-zusammengehören, und zwei echten, nah beieinanderliegenden Stellen
-entscheiden und liegt dann bei einer von beiden falsch, während die Lage
-einer stationären Stelle ohnehin nur so genau bestimmt ist, wie die
-Krümmung dort es zulässt. Behalten wird bei einer Kollision der Treffer mit
-dem kleineren Gradientenbetrag. Die Liste wird nach `x` sortiert, bei
-Gleichstand nach `y` — damit dieselbe Eingabe dieselbe Reihenfolge liefert.
+Abstand kleiner ist als das Größere aus dem festen Wert `eps = 1e-6 · (1 + r)`
+und der Unschärfe beider Treffer. Die Unschärfe eines Treffers ist
+`min(tau / max(weich, sehr_klein), 2h)`, mit `tau = 1e-10 · (1 + |f|)` und
+`weich` dem betragskleineren Eigenwert der Hesse-Matrix an dieser Stelle —
+nicht dem größten Matrixeintrag, denn bei `H = [[1,0],[0,1]]` wäre das null,
+obwohl dort nichts weich ist; maßgeblich ist die weichste Richtung, in der
+die Lage am schlechtesten bestimmt ist. Gedeckelt wird bei `2h` (`h` die
+Differenzenschrittweite), weil der zweite Differenzenquotient jenseits davon
+gar nichts mehr über die Stelle aussagt — ohne diese Deckelung würde die
+Unschärfe im Geradenfall `x² + y² − 2xy + 1` (Eigenwerte `4` und exakt `0`)
+unendlich, und die ganze Gerade schrumpfte fälschlich auf einen Punkt
+zusammen. Eine feste Zahl allein muss sich zwischen einer entarteten
+Stelle, an der weit verstreute Läufe zusammengehören, und zwei echten,
+nah beieinanderliegenden Stellen entscheiden und liegt dann bei einer von
+beiden falsch — die Lage einer stationären Stelle ist eben nur so genau
+bestimmt, wie die Krümmung dort es zulässt. Behalten wird bei einer
+Kollision der Treffer mit dem kleineren Gradientenbetrag. Die Liste wird
+nach `x` sortiert, bei Gleichstand nach `y` — damit dieselbe Eingabe
+dieselbe Reihenfolge liefert.
 
 **Einordnung.** Mit `det = f_xx · f_yy − f_xy²`:
 
@@ -175,6 +184,10 @@ gehören deshalb zur Rückgabe, nicht in die Dokumentation:
 
 Zusätzlich trägt jede einzelne Stelle mit `art: 'unentschieden'` ihre eigene
 Grenze.
+
+Stellen, die enger beieinanderliegen als die Differenzenschrittweite, kann
+das Verfahren nicht trennen; sie erscheinen als eine. Das ist eine
+Eigenschaft der numerischen Ableitung, keine der Suche.
 
 ### Warum kein `shared/numerik.js`
 

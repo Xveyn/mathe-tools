@@ -81,14 +81,28 @@ var MT = MT || {};
   /* Wie unscharf die Lage einer gefundenen Stelle ist: die Konvergenz
      bricht ab, sobald der Gradient unter die Schranke tau fällt, und aus
      |g| < tau folgt über die Hesse-Matrix nur |Abstand zur wahren
-     Stelle| ≲ tau / |Krümmung|. Ist die Krümmung groß (gewöhnliche
-     Stelle), ist das eine winzige Unschärfe. Ist sie fast null (entartete
-     Stelle wie bei x^4 + y^4), wird die Unschärfe groß — die Lage ist
-     dann wirklich nur so genau bestimmt, wie die Krümmung es zulässt. */
-  function unschaerfe(d){
+     Stelle| ≲ tau / |Krümmung|. Maßgeblich ist dabei die WEICHSTE
+     Richtung, also der betragskleinere der beiden Eigenwerte von H, nicht
+     der größte Matrixeintrag — bei H = [[1,0],[0,1]] ist nichts weich,
+     obwohl fxy = 0 wäre. Ist die weichste Richtung fast flach (entartete
+     Stelle wie bei x^4 + y^4), wird die Unschärfe groß. Gedeckelt wird bei
+     2h: jenseits der doppelten Differenzenschrittweite tastet der zweite
+     Differenzenquotient gar nichts mehr über diese Stelle aus, seine Werte
+     sind dort bedeutungslos — weiter darf keine Toleranz reichen, egal wie
+     flach die Stelle ist. Ohne diese Deckelung würde bei einer exakt
+     singulären Hesse-Matrix (der Geradenfall x² + y² − 2xy + 1, Eigenwerte
+     4 und exakt 0) die Unschärfe unendlich, und die ganze Gerade schrumpfte
+     fälschlich auf einen einzigen Punkt zusammen. */
+  function unschaerfe(d, h){
+    var a = d.fxx, b = d.fxy, c = d.fyy;
+    var spur = a + c;
+    var wurzel = Math.sqrt((a - c) * (a - c) + 4 * b * b);
+    var ew1 = (spur + wurzel) / 2;
+    var ew2 = (spur - wurzel) / 2;
+    var weich = Math.min(Math.abs(ew1), Math.abs(ew2));
+    var sehrKlein = 1e-300;
     var tau = 1e-10 * (1 + Math.abs(d.f));
-    var kruemmung = Math.max(Math.abs(d.fxx), Math.abs(d.fxy), Math.abs(d.fyy));
-    return kruemmung > 0 ? tau / kruemmung : Infinity;
+    return Math.min(tau / Math.max(weich, sehrKlein), 2 * h);
   }
 
   /* Das Schulkriterium. Die Schwelle wird zuerst geprüft: eine
@@ -138,7 +152,7 @@ var MT = MT || {};
         dx = gewaehlt[m].x - roh[k].x;
         dy = gewaehlt[m].y - roh[k].y;
         abstand = Math.sqrt(dx * dx + dy * dy);
-        toleranz = Math.max(eps, unschaerfe(gewaehlt[m].d), unschaerfe(roh[k].d));
+        toleranz = Math.max(eps, unschaerfe(gewaehlt[m].d, h), unschaerfe(roh[k].d, h));
         if (abstand < toleranz) { treffer = m; break; }
       }
       if (treffer < 0) {
