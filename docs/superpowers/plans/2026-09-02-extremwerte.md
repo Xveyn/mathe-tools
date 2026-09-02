@@ -643,10 +643,19 @@ Die Kartentabelle bekommt eine Zeile für das neue Thema, die Bausteintabelle ei
 - [ ] **Schritt 5: Datensuche**
 
 ```bash
-cd "<REPO>" && git status --short && echo "---" && git ls-files && echo "---" && git ls-files -z | xargs -0 grep -niE "<VORNAME>|<NACHNAME>|appdat[a]|einige_dateie[n]|(th[ _-]?)?k[oö]e?l[n]|scratchpa[d]|<MAILKONTO>|<MAILANBIETER>" ; echo "Suche beendet"
+cd "<REPO>" && git status --short && echo "---" && git ls-files && echo "---" && git ls-files -z | xargs -0 grep -niE "<MUSTER>" ; echo "Suche beendet"
 ```
 
-Erwartet: sauberer Arbeitsbaum, die erwartete Dateiliste, und als einziger Treffer die Musterzeile in `docs/superpowers/plans/2026-09-01-karteikarten.md` selbst. Erscheint irgendetwas anderes, **halte an und melde es** — das ist der Fund, der in der vorigen Runde erst die Gesamtprüfung fand.
+`<MUSTER>` ist ein Platzhalter. Die ausgeschriebene Alternativenliste gehört
+**nicht** ins Repo — sie deckt Klarnamen, Mailadresse und lokale Pfadfragmente
+des Eigentümers ab und wäre, hier hingeschrieben, selbst der Fund. Wie sie
+gebaut wird und warum ein sich selbst verschleierndes Muster jede Suche
+blendet, steht in `2026-09-01-karteikarten.md`, Aufgabe 7, Schritt 3.
+
+Erwartet: sauberer Arbeitsbaum, die erwartete Dateiliste, und nur
+`Suche beendet` — kein einziger Treffer. Erscheint irgendetwas, **halte an und
+melde es** — das ist der Fund, der in einer früheren Runde erst die
+Gesamtprüfung fand.
 
 Der absolute Pfad zur Probeseite aus Aufgabe 2 darf nirgends im Repo stehen.
 

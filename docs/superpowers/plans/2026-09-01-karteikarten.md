@@ -667,23 +667,34 @@ Nur wenn keine Datei erscheint, den Ordner entfernen. Erscheint irgendetwas, **h
 - [ ] **Schritt 3: Vollständigkeit prüfen**
 
 ```bash
-cd "<REPO>" && git status --short && echo "---" && git ls-files && echo "---" && git ls-files -z | xargs -0 grep -niE "<VORNAME>|<NACHNAME>|appdat[a]|einige_dateie[n]|(th[ _-]?)?k[oö]e?l[n]|scratchpa[d]|<MAILKONTO>|<MAILANBIETER>" ; echo "Suche beendet"
+cd "<REPO>" && git status --short && echo "---" && git ls-files && echo "---" && git ls-files -z | xargs -0 grep -niE "<MUSTER>" ; echo "Suche beendet"
 ```
 
 Erwartet: sauberes Arbeitsverzeichnis, die erwartete Dateiliste, und nur `Suche beendet` — keine privaten Daten. Das war in der vorigen Runde der kritische Fund.
 
-Zum Muster, drei Punkte:
+Zum Muster, vier Punkte:
 
-1. **Vor- und Nachname stehen getrennt darin**, und gesucht wird mit `-i`. Ein
-   Muster, das nur zusammengeschriebene Kennungen kennt, fängt einen Namen mit
-   Leerzeichen nicht — genau daran ist die Suche der vorigen Runde
-   vorbeigelaufen, während der ausgeschriebene Klarname im Fundament-Plan
-   stehen blieb.
-2. **Der letzte Buchstabe jedes Wortes steht in einer Zeichenklasse.** Das
-   ändert nichts daran, was gefunden wird, verhindert aber, dass die
-   Musterzeile dieses Plans sich selbst findet — sonst meldet die Suche jedes
-   Mal einen Treffer, und man gewöhnt sich an, ihn zu übersehen.
-3. **Gesucht wird über `git ls-files`**, nicht über eine von Hand gepflegte
+1. **Das Muster steht nicht in diesem Repo.** `<MUSTER>` ist ein Platzhalter;
+   die ausgeschriebene Alternativenliste hält der Ausführende außerhalb des
+   Repos und setzt sie beim Lauf ein. Ein Suchmuster für private Daten, das
+   selbst im Repo liegt, ist eine Veröffentlichung genau der Daten, die es
+   schützen soll.
+2. **Es deckt drei Kategorien ab:** den Klarnamen des Eigentümers (Vor- und
+   Nachname **getrennt**, dazu die Hochschule und ihren Ort in Umlaut- wie
+   Ersatzschreibweise), seine Mailadresse (Kontoname und Anbieter je für sich)
+   und Fragmente lokaler Pfade (Laufwerksordner der Arbeitskopie, das
+   Notizverzeichnis der Sitzung). Gesucht wird mit `-i`. Ein Muster, das nur
+   zusammengeschriebene Kennungen kennt, fängt einen Namen mit Leerzeichen
+   nicht — genau daran ist die Suche einer früheren Runde vorbeigelaufen,
+   während der ausgeschriebene Klarname in einem Plan stehen blieb.
+3. **Ein Muster, das sich selbst verschleiert, blendet jede Suche.** Der
+   naheliegende Ausweg, das Muster im Repo zu lassen und den letzten
+   Buchstaben jedes Wortes in eine Zeichenklasse zu setzen, damit die
+   Musterzeile sich nicht selbst findet, ist genau falsch: er nimmt der Suche
+   auch die Fähigkeit, dieselben Daten irgendwo **sonst** im Repo zu finden.
+   Zwei Sweeps meldeten so nacheinander „sauber“, obwohl die Klardaten
+   getrennt durch Klammern in zwei Plandateien standen. Deshalb Punkt 1.
+4. **Gesucht wird über `git ls-files`**, nicht über eine von Hand gepflegte
    Pfadliste: eine neu angelegte Datei wäre sonst von Anfang an aus der
    Prüfung heraus.
 
