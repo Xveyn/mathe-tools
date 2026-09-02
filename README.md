@@ -12,7 +12,7 @@ rechnen etwas vor, Karten erklären etwas.
 
 | Werkzeug | Worum es geht |
 |---|---|
-| [Flächenrechner](tools/flaechenrechner/index.html) | Eine Funktion `z = f(x, y)` als Fläche im Raum, ihre Höhenlinien und die beiden senkrechten Schnitte — gleichzeitig und farblich verknüpft. |
+| [Flächenrechner](tools/flaechenrechner/index.html) | Eine Funktion `z = f(x, y)` als Fläche im Raum, ihre Höhenlinien und die beiden senkrechten Schnitte — gleichzeitig und farblich verknüpft. Dazu sucht er die stationären Stellen im gezeigten Bereich, ordnet sie über die Hesse-Matrix ein (Determinante und Urteil im Klartext) und markiert sie im Höhenlinienbild. |
 
 **Karten**
 

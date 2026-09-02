@@ -38,9 +38,9 @@ ein Fehler, kein Kompromiss.
   `const`, keine Pfeilfunktionen, keine Template-Literale.
 - **Farben und Grundformen kommen aus `shared/`.** Keine Farbliterale in
   einer Seite. Wer eine Farbe braucht, nimmt eine CSS-Variable; fehlt sie,
-  kommt sie nach `shared/theme.css`. Eine einzige Ausnahme besteht und ist
-  unter „Bekannte Grenzen" festgehalten: die Druckpalette im
-  `@media print`-Block von `shared/karten.css`.
+  kommt sie nach `shared/theme.css`. Für neuen Code gilt das ohne Ausnahme.
+  Bestehende Ausnahmen gibt es, sie sind unter „Bekannte Grenzen" gezählt
+  und aufgeführt — sie sind Bestand, kein Vorbild.
 
 ## Aufbau
 
@@ -165,6 +165,18 @@ MathML, direkt im HTML, ohne Bibliothek.
   `<mi>` werfen — Abstände und Kursivsatz hängen daran.
 - Brüche `<mfrac>`, Indizes `<msub>`, Exponenten `<msup>`, Wurzeln
   `<msqrt>`.
+
+**Punkte schreiben sich `(0 | 0)`**, mit senkrechtem Strich, nicht
+`(0, 0)` — in Fließtext, MathML, SVG-Beschriftung und `figcaption`
+gleichermaßen. So gibt der Flächenrechner sie aus, und er kann es nicht
+leicht anders. Eine Karte, die daneben eine zweite Schreibweise stellt,
+macht aus einer Kleinigkeit eine Frage; `karten/extremwerte.html` tat das
+eine Runde lang auf einer einzigen Seite. Sie ist jetzt durchgehend in der
+Strichform gesetzt. Die drei älteren Karten —
+`partielle-ableitungen.html`, `gradient.html`,
+`extrema-mit-nebenbedingung.html` — tragen noch die Kommaform; sie
+umzustellen ist eine eigene, noch offene Aufgabe und war nicht Teil der
+Extremwert-Runde.
 
 **Verboten:** Formeln als Bild. Formeln als Text mit Sonderzeichen
 (`∂f/∂x` hingeschrieben). Eine Formelbibliothek ins Repo legen.
@@ -294,12 +306,29 @@ hat sie hier schon gefunden.
   hatte das Werkzeug überhaupt kein Druck-Stylesheet. Wer es beheben will,
   müsste bei `beforeprint` neu zeichnen; das rührt an
   `shared/canvas.js`, also an einer Datei, die diese Runde nicht anfasst.
-- **Die Druckpalette steht in `shared/karten.css`, nicht in
-  `shared/theme.css`.** Das ist die einzige Stelle im Repo, an der
-  Farbtokens außerhalb von `theme.css` definiert werden — eine Ausnahme
-  von der harten Regel weiter oben. Sie steht dort, weil sie zum
-  Druck-Stylesheet der Karten gehört und mit ihm gelesen wird. Bewusst so
-  gelassen; wer die Tokens sucht, findet sie über diesen Absatz.
+- **Fünfzehn Farbliterale bestehen fort, und die Regel oben gilt trotzdem.**
+  Sie ist eine Regel für neuen Code; der Bestand ist geprüft und so
+  gelassen. Wer eines davon „entdeckt", hat es hier schon gefunden:
+
+  - **Die Druckpalette** im `@media print`-Block von `shared/karten.css`
+    (sechs Zeilen). Die einzige Stelle im Repo, an der Farbtokens außerhalb
+    von `theme.css` definiert werden. Sie steht dort, weil sie zum
+    Druck-Stylesheet der Karten gehört und mit ihm gelesen wird.
+  - **Acht in `shared/ui.css`**: die beiden Fehlerfarben `#E06C5A` und
+    `#E89383` an `.term.bad` und `.err`, dazu sechs `rgba()`-Werte für
+    Trennlinien, Reglerschienen und den Feldgrund. Sie sind Aufhellungen
+    und Abtönungen derselben Tokenfamilie; als Token hätte jede einen
+    eigenen Namen gebraucht, den nur eine einzige Regel benutzt.
+  - **Sechs in `tools/flaechenrechner/flaechenrechner.js`**: die
+    Flächenschattierung der 3D-Ansicht (dort wird die Farbe je Kachel aus
+    Tiefe und Beleuchtung gerechnet, sie ist gar kein fester Wert), die
+    Schnittebene, die Kachelkanten, die Höhenlinienschar und zwei
+    Goldabstufungen. Ein `canvas` liest keine CSS-Variablen; `shared/canvas.js`
+    reicht mit `MT.canvas.colors()` genau die Tokens durch, die es kennt.
+
+  Der Grund, warum das hier steht und nicht behoben ist: die Regel schützt
+  den **Druck** (siehe den Eintrag darüber), und keiner der fünfzehn Werte
+  erreicht das Papier anders, als er es ohnehin täte.
 - **Die Klammern der Hesse-Matrix sind von Hand bemessen, nicht
   gestreckt.** Chromium und Edge rendern `<mtable>` nur über den
   UA-Fallback `display: inline-table`, und in diesem Fallback greift die
