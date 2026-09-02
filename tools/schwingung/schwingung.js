@@ -273,38 +273,54 @@ function darstellen(res){
    Eine Tafel mit drei Kurven: y (gold), y_h (mint), y_p (rose) über der
    Zeit x ab 0. Ohne Anfangswerte ist y_h nicht bestimmt (MT.dgl.loese
    liefert dann yh ≡ 0 und y = y_p) -- gezeichnet wird in dem Fall nur
-   y_p, mit einem Hinweistext auf der Tafel selbst. */
+   y_p, mit einem Hinweis in der figcaption. */
 
 var elCy = document.getElementById('cy'), gCy = elCy.getContext('2d');
+var elCyHinweis = document.getElementById('cyHinweis');
 var letztesErgebnis = null;
 
 /* Das Zeitfenster T: fünffache Abkling- bzw. Kriechzeit, mindestens
    fünf Perioden eines Schwingungs- oder harmonischen Störgliedes,
+   mindestens die fünffache Abklingzeit 1/|μ| eines polyexp-Störgliedes,
    gedeckelt bei 100. wurzeln.re/wurzeln[i] gehen hier immer durch
    Math.abs() -- so spielt das Vorzeichen von re (das bei a = 0 als −0
-   vorliegt) nirgends eine Rolle. */
+   vorliegt) nirgends eine Rolle.
+
+   Jeder Kandidat, der auf einer Abklingzeit beruht (delta, lmin, μ),
+   nimmt nur teil, wenn er > 0 ist -- eine Abklingzeit von 1/0 ist
+   *undefiniert*, kein sehr großer, aber gültiger Wert. Vorher stand hier
+   Infinity, und Infinity gewinnt jedes Math.max: bei Chip (d) (a = 0,
+   also δ = 0) verschluckte das den wohldefinierten Fünf-Perioden-Kandidaten
+   und drückte T bis an den Deckel -- 48 Schwingungen statt der
+   verlangten fünf. Erst wenn am Ende gar kein Kandidat etwas Positives
+   geliefert hat (T ist dann noch 0), tritt der Deckel selbst als
+   Ersatzwert ein. */
 function berechneT(res){
-  var w = res.wurzeln, T, delta, l1, l2, lmin, i, teil, periode;
+  var w = res.wurzeln, T = 0, delta, l1, l2, lmin, i, teil, periode, mu;
   if (res.fall === 'komplex'){
     delta = Math.abs(w.re);
-    T = (delta > 0) ? 5 / delta : Infinity;
+    if (delta > 0) T = Math.max(T, 5 / delta);
     periode = 2 * Math.PI / w.im;
     T = Math.max(T, 5 * periode);
   } else if (res.fall === 'zwei-reelle'){
     l1 = Math.abs(w[0]); l2 = Math.abs(w[1]);
     lmin = Math.min(l1, l2);
-    T = (lmin > 0) ? 5 / lmin : Infinity;
+    if (lmin > 0) T = Math.max(T, 5 / lmin);
   } else {
     lmin = Math.abs(w[0]);
-    T = (lmin > 0) ? 5 / lmin : Infinity;
+    if (lmin > 0) T = Math.max(T, 5 / lmin);
   }
   for (i = 0; i < res.teile.length; i++){
     teil = res.teile[i];
     if (teil.art === 'harmonisch'){
       periode = 2 * Math.PI / teil.omega;
       T = Math.max(T, 5 * periode);
+    } else if (teil.art === 'polyexp'){
+      mu = Math.abs(teil.mu);
+      if (mu > 0) T = Math.max(T, 5 / mu);
     }
   }
+  if (!(T > 0)) T = 100;
   return Math.min(T, 100);
 }
 
@@ -377,9 +393,14 @@ function zeichneY(res){
   } else {
     gCy.strokeStyle = COL.rose; gCy.lineWidth = 1.2;
     MT.plot2d.polyline(gCy, punkte(werteYp));
-    gCy.fillStyle = COL.dim; gCy.font = '12px Georgia, serif';
-    gCy.fillText('Ohne Anfangswerte hängt der homogene Anteil von C₁ und C₂ ab und wird nicht gezeichnet.', padL + 4, padT + 24);
   }
+
+  /* Der Hinweis ohne Anfangswerte steht nicht auf der Leinwand: fillText
+     bricht nicht um, und der Satz ist bei schmalen Fenstern länger als
+     die Tafel breit ist -- er stünde abgeschnitten da. Er wohnt deshalb
+     als eigenes, standardmäßig verstecktes Element in der figcaption
+     (siehe index.html) und wird hier nur ein- oder ausgeblendet. */
+  elCyHinweis.hidden = mitYh;
 }
 
 /* ==================== Formularzugriff ==================== */
@@ -458,7 +479,13 @@ var BEISPIELE = [
   { label: '(b) Kriechfall', a: 250, b: 10000, glied1: null, glied2: null, anfang: true, y0: 0.005, y0s: 0 },
   { label: '(c) Grenzfall', a: 200, b: 10000, glied1: null, glied2: null, anfang: true, y0: 0.005, y0s: 0 },
   { label: '(d) Resonanz', a: 0, b: 9, glied1: { art: 'harmonisch', c: 0, d: 1, omega: 3 }, glied2: null, anfang: false },
-  { label: '(e) doppelte Resonanz', a: 2, b: 1, glied1: { art: 'polyexp', mu: -1, koeff: '0, 6' }, glied2: null, anfang: false }
+  { label: '(e) doppelte Resonanz', a: 2, b: 1, glied1: { art: 'polyexp', mu: -1, koeff: '0, 6' }, glied2: null, anfang: false },
+  /* Der einzige Chip, bei dem alle drei Kurven gezeichnet werden UND sich
+     unterscheiden: (a)-(c) haben y_p = 0 (y deckt sich mit y_h), (d) und
+     (e) laufen ohne Anfangswerte (nur y_p). Ohne diesen Chip zeigt kein
+     einziges Beispiel die Kernaussage der Seite -- der homogene Anteil
+     klingt ab, der partikuläre bleibt. */
+  { label: '(f) erzwungene Schwingung', a: 1, b: 4, glied1: { art: 'harmonisch', c: 1, d: 0, omega: 1 }, glied2: null, anfang: true, y0: 2, y0s: 0 }
 ];
 
 function setzeGlied(g, def){
