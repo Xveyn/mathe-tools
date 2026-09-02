@@ -472,8 +472,13 @@ function renderStellen(res){
   var rTxt=RANGE.toFixed(1).replace('.',',');
   var teile=[];
 
+  /* Was hier steht, ist genau das Gemessene: mehr als acht Stellen. Der
+     Satz behauptete früher rundheraus eine Kurve; bei cos(x) + cos(y)
+     sind es aber neun einzelne Stellen und keine Kurve. Der Baustein
+     zählt nur, er unterscheidet die beiden Fälle nicht — also darf die
+     Anzeige es auch nicht. */
   if(res.kurvenfall){
-    teile.push('<p>Die Bedingung ist hier nicht in einzelnen Punkten erfüllt, sondern entlang einer ganzen Kurve. Unten stehen die ersten Treffer, nicht alle.</p>');
+    teile.push('<p>Es wurden mehr als acht Stellen gefunden; unten stehen die ersten acht. Häufig heißt das, dass die Bedingung nicht in einzelnen Punkten erfüllt ist, sondern entlang einer ganzen Kurve — es können aber auch einfach viele einzelne Stellen sein. Sieh im Höhenlinienbild nach, welches von beidem hier vorliegt.</p>');
   }
 
   if(res.stellen.length===0){
@@ -481,8 +486,19 @@ function renderStellen(res){
   } else {
     teile.push(block(res.stellen.map(function(s){
       var skala=Math.max(Math.abs(s.fxx),Math.abs(s.fxy),Math.abs(s.fyy),1);
+      /* Die Determinante wird NUR dort auf null gerundet, wo das Urteil
+         ohnehin 'unentschieden' lautet. Sonst geriete die Anzeige in
+         Widerspruch zur Regeltafel der Karte: die Anzeigeschwelle hier
+         ist 1e-6 mal der größten zweiten Ableitung, also LINEAR in
+         ihnen, die Entscheidungsschwelle in shared/extrema.js dagegen
+         1e-7 mal ihrem Quadrat. Die beiden kreuzen sich, und bei
+         x^2/4000 + y^2/8000 stand deshalb "det = 0 · Minimum" da —
+         während die Karte lehrt, dass det H = 0 gar nichts entscheidet.
+         So herum ist der Widerspruch nicht mehr möglich, nicht nur
+         unwahrscheinlich. */
       var fxxA=fuerAnzeige(s.fxx,skala), fxyA=fuerAnzeige(s.fxy,skala),
-          fyyA=fuerAnzeige(s.fyy,skala), detA=fuerAnzeige(s.det,skala);
+          fyyA=fuerAnzeige(s.fyy,skala),
+          detA=(s.art==='unentschieden') ? fuerAnzeige(s.det,skala) : s.det;
       var text='f = '+num(s.z)+' · Hesse: fxx = '+num(fxxA)+', fxy = '+num(fxyA)+', fyy = '+num(fyyA)+
                ' · det = '+num(detA)+' · '+urteilstext(s.art);
       return ['('+num4(s.x)+' | '+num4(s.y)+')', text];
