@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schwingungsrechner für lineare Differentialgleichungen zweiter Ordnung</title>
+<link rel="stylesheet" href="../../shared/theme.css">
+<link rel="stylesheet" href="../../shared/ui.css">
+<link rel="stylesheet" href="../../shared/karten.css">
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Schwingungsrechner für lineare Differentialgleichungen zweiter Ordnung</h1>
+  <p class="lede">Gib die Gleichung y'' + a·y' + b·y = s(x) ein und sieh den vollständigen Rechenweg: charakteristisches Polynom, den Fall der Nullstellen, die homogene Lösung, den Ansatz für die rechte Seite mitsamt Resonanzprüfung und, wenn Anfangswerte vorliegen, die Konstanten C₁ und C₂.</p>
+
+  <div class="chips" id="chips"></div>
+
+  <div class="gleichung">
+    <span class="mathzeile">y'' +</span>
+    <input id="fa" type="number" step="any" aria-label="Koeffizient a">
+    <span class="mathzeile">· y' +</span>
+    <input id="fb" type="number" step="any" aria-label="Koeffizient b">
+    <span class="mathzeile">· y = s(x)</span>
+  </div>
+
+  <div class="glieder">
+    <div class="glied">
+      <div class="glied-kopf">
+        <label for="g1art">1. Glied der rechten Seite</label>
+        <select id="g1art">
+          <option value="keine">keine</option>
+          <option value="polyexp">polyexp — (c₀ + c₁x + …)·e^(μx)</option>
+          <option value="harmonisch">harmonisch — c·cos(ωx) + d·sin(ωx)</option>
+        </select>
+      </div>
+      <div class="glied-felder" id="g1-polyexp" hidden>
+        <label>μ <input id="g1mu" type="number" step="any" aria-label="1. Glied, μ"></label>
+        <label>Koeffizienten <input id="g1koeff" type="text" value="0, 6" spellcheck="false" autocomplete="off" aria-label="1. Glied, Koeffizienten, mit Komma getrennt"></label>
+      </div>
+      <div class="glied-felder" id="g1-harmonisch" hidden>
+        <label>c <input id="g1c" type="number" step="any" aria-label="1. Glied, c"></label>
+        <label>d <input id="g1d" type="number" step="any" aria-label="1. Glied, d"></label>
+        <label>ω <input id="g1omega" type="number" step="any" aria-label="1. Glied, Kreisfrequenz omega"></label>
+      </div>
+    </div>
+    <div class="glied">
+      <div class="glied-kopf">
+        <label for="g2art">2. Glied der rechten Seite</label>
+        <select id="g2art">
+          <option value="keine">keine</option>
+          <option value="polyexp">polyexp — (c₀ + c₁x + …)·e^(μx)</option>
+          <option value="harmonisch">harmonisch — c·cos(ωx) + d·sin(ωx)</option>
+        </select>
+      </div>
+      <div class="glied-felder" id="g2-polyexp" hidden>
+        <label>μ <input id="g2mu" type="number" step="any" aria-label="2. Glied, μ"></label>
+        <label>Koeffizienten <input id="g2koeff" type="text" value="0, 6" spellcheck="false" autocomplete="off" aria-label="2. Glied, Koeffizienten, mit Komma getrennt"></label>
+      </div>
+      <div class="glied-felder" id="g2-harmonisch" hidden>
+        <label>c <input id="g2c" type="number" step="any" aria-label="2. Glied, c"></label>
+        <label>d <input id="g2d" type="number" step="any" aria-label="2. Glied, d"></label>
+        <label>ω <input id="g2omega" type="number" step="any" aria-label="2. Glied, Kreisfrequenz omega"></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="anfang">
+    <label><input type="checkbox" id="fanfang"> Anfangswerte verwenden</label>
+    <label>y(0) <input id="fy0" type="number" step="any" aria-label="Anfangswert y von 0"></label>
+    <label>y'(0) <input id="fy0s" type="number" step="any" aria-label="Anfangswert y Strich von 0"></label>
+  </div>
+
+  <div class="ansichten">
+    <figure class="tafel">
+      <canvas id="cy"></canvas>
+      <figcaption><span>Die Lösung über der Zeit — folgt in einer späteren Aufgabe.</span><em>y(x)</em></figcaption>
+    </figure>
+  </div>
+
+  <div class="analysis">
+    <div>
+      <h2>Rechenweg</h2>
+      <div id="ana"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="../../shared/canvas.js"></script>
+<script src="../../shared/plot2d.js"></script>
+<script src="../../shared/dgl.js"></script>
+<script src="schwingung.js"></script>
+</body>
+</html>
