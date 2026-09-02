@@ -1,7 +1,6 @@
-/* Schwingungsrechner: Eingaben einlesen, MT.dgl.loese aufrufen und den
-   Rechenweg als Text ausgeben. Die Zeichnung und der Dämpfungsregler
-   kommen in späteren Aufgaben dazu -- diese Datei zeichnet noch nichts
-   auf die Tafel. */
+/* Schwingungsrechner: Eingaben einlesen, MT.dgl.loese aufrufen, den
+   Rechenweg als Text ausgeben und die Lösung auf die Tafel zeichnen.
+   Ein Dämpfungsregler kommt in einer späteren Aufgabe dazu. */
 (function(){
 "use strict";
 
@@ -270,6 +269,119 @@ function darstellen(res){
   document.getElementById('ana').innerHTML = block(zeilen);
 }
 
+/* ==================== Die Zeichnung ====================
+   Eine Tafel mit drei Kurven: y (gold), y_h (mint), y_p (rose) über der
+   Zeit x ab 0. Ohne Anfangswerte ist y_h nicht bestimmt (MT.dgl.loese
+   liefert dann yh ≡ 0 und y = y_p) -- gezeichnet wird in dem Fall nur
+   y_p, mit einem Hinweistext auf der Tafel selbst. */
+
+var elCy = document.getElementById('cy'), gCy = elCy.getContext('2d');
+var letztesErgebnis = null;
+
+/* Das Zeitfenster T: fünffache Abkling- bzw. Kriechzeit, mindestens
+   fünf Perioden eines Schwingungs- oder harmonischen Störgliedes,
+   gedeckelt bei 100. wurzeln.re/wurzeln[i] gehen hier immer durch
+   Math.abs() -- so spielt das Vorzeichen von re (das bei a = 0 als −0
+   vorliegt) nirgends eine Rolle. */
+function berechneT(res){
+  var w = res.wurzeln, T, delta, l1, l2, lmin, i, teil, periode;
+  if (res.fall === 'komplex'){
+    delta = Math.abs(w.re);
+    T = (delta > 0) ? 5 / delta : Infinity;
+    periode = 2 * Math.PI / w.im;
+    T = Math.max(T, 5 * periode);
+  } else if (res.fall === 'zwei-reelle'){
+    l1 = Math.abs(w[0]); l2 = Math.abs(w[1]);
+    lmin = Math.min(l1, l2);
+    T = (lmin > 0) ? 5 / lmin : Infinity;
+  } else {
+    lmin = Math.abs(w[0]);
+    T = (lmin > 0) ? 5 / lmin : Infinity;
+  }
+  for (i = 0; i < res.teile.length; i++){
+    teil = res.teile[i];
+    if (teil.art === 'harmonisch'){
+      periode = 2 * Math.PI / teil.omega;
+      T = Math.max(T, 5 * periode);
+    }
+  }
+  return Math.min(T, 100);
+}
+
+/* Passt die Höhe der Tafel an ihre Breite an -- ein <canvas> ohne
+   eigenes CSS-Seitenverhältnis bliebe sonst bei der Browser-Vorgabe
+   von 150px stehen. */
+function groesseCy(){
+  elCy.style.height = Math.max(220, Math.min(420, elCy.clientWidth * 0.4)) + 'px';
+}
+
+function zeichneY(res){
+  var COL = MT.canvas.colors();
+  var masse = MT.canvas.fit(elCy, gCy), w = masse.w, h = masse.h;
+  var T = berechneT(res);
+  var n = 400, dx = T / (n - 1), mitYh = !!res.konstanten;
+  var werteY = [], werteYh = [], werteYp = [], maxAbs = 0, i, x, v;
+
+  for (i = 0; i < n; i++){
+    x = i * dx;
+    v = res.yp(x); werteYp.push(v);
+    if (isFinite(v) && Math.abs(v) > maxAbs) maxAbs = Math.abs(v);
+    if (mitYh){
+      v = res.y(x); werteY.push(v);
+      if (isFinite(v) && Math.abs(v) > maxAbs) maxAbs = Math.abs(v);
+      v = res.yh(x); werteYh.push(v);
+      if (isFinite(v) && Math.abs(v) > maxAbs) maxAbs = Math.abs(v);
+    }
+  }
+  if (!(maxAbs > 0)) maxAbs = 1;
+  var yGrenze = maxAbs * 1.12, yMin = -yGrenze, yMax = yGrenze;
+
+  var padL = 16, padR = 14, padT = 14, padB = 22;
+  var X = MT.canvas.linear(0, T, padL, w - padR);
+  var Y = MT.canvas.linear(yMin, yMax, h - padB, padT);
+
+  gCy.strokeStyle = COL.grid; gCy.lineWidth = 1;
+  var xstep = MT.canvas.tickStep(T), xt;
+  for (xt = 0; xt <= T + 1e-9; xt += xstep){
+    gCy.beginPath(); gCy.moveTo(X(xt), padT); gCy.lineTo(X(xt), h - padB); gCy.stroke();
+  }
+  var ystep = MT.canvas.tickStep(yMax - yMin), yt;
+  for (yt = Math.ceil(yMin / ystep) * ystep; yt <= yMax; yt += ystep){
+    gCy.beginPath(); gCy.moveTo(padL, Y(yt)); gCy.lineTo(w - padR, Y(yt)); gCy.stroke();
+  }
+
+  gCy.strokeStyle = COL.axis; gCy.lineWidth = 1.1;
+  gCy.beginPath(); gCy.moveTo(padL, Y(0)); gCy.lineTo(w - padR, Y(0)); gCy.stroke();
+  gCy.beginPath(); gCy.moveTo(X(0), padT); gCy.lineTo(X(0), h - padB); gCy.stroke();
+  gCy.fillStyle = COL.dim; gCy.font = 'italic 12px Georgia, serif';
+  gCy.fillText('x', w - padR - 8, Y(0) - 6);
+  gCy.fillText('y', X(0) + 6, padT + 11);
+
+  function punkte(werte){
+    var out = [], j, val;
+    for (j = 0; j < werte.length; j++){
+      val = werte[j];
+      if (!isFinite(val) || val < yMin || val > yMax) out.push(null);
+      else out.push({ x: X(j * dx), y: Y(val) });
+    }
+    return out;
+  }
+
+  if (mitYh){
+    gCy.strokeStyle = COL.mint; gCy.lineWidth = 1.2;
+    MT.plot2d.polyline(gCy, punkte(werteYh));
+    gCy.strokeStyle = COL.rose; gCy.lineWidth = 1.2;
+    MT.plot2d.polyline(gCy, punkte(werteYp));
+    gCy.strokeStyle = COL.gold; gCy.lineWidth = 2.4;
+    MT.plot2d.polyline(gCy, punkte(werteY));
+  } else {
+    gCy.strokeStyle = COL.rose; gCy.lineWidth = 1.2;
+    MT.plot2d.polyline(gCy, punkte(werteYp));
+    gCy.fillStyle = COL.dim; gCy.font = '12px Georgia, serif';
+    gCy.fillText('Ohne Anfangswerte hängt der homogene Anteil von C₁ und C₂ ab und wird nicht gezeichnet.', padL + 4, padT + 24);
+  }
+}
+
 /* ==================== Formularzugriff ==================== */
 
 var elFa = document.getElementById('fa'), elFb = document.getElementById('fb');
@@ -330,8 +442,12 @@ function neuRechnen(){
 
     res = MT.dgl.loese(a, b, glieder, anfang);
     darstellen(res);
+    letztesErgebnis = res;
+    zeichneY(res);
   } catch(e){
     elAna.innerHTML = '<p class="err">' + e.message + '</p>';
+    letztesErgebnis = null;
+    MT.canvas.fit(elCy, gCy);
   }
 }
 
@@ -403,5 +519,11 @@ elFy0s.addEventListener('input', neuRechnen);
   g.omega.addEventListener('input', neuRechnen);
 });
 
+window.addEventListener('resize', function(){
+  groesseCy();
+  if (letztesErgebnis) zeichneY(letztesErgebnis);
+});
+
+groesseCy();
 setzeBeispiel(BEISPIELE[0]);
 })();
