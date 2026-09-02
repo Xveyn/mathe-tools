@@ -355,6 +355,32 @@ function draw2Dmap(){
     GM.fillStyle='rgba(240,180,41,.75)'; GM.font='italic 15px Georgia, serif';
     GM.fillText('leere Menge', pad+4, pad+8);
   }
+
+  // Marken der stationären Stellen, obenauf über den Höhenlinien.
+  // Radius fest in Bildschirmpunkten — die Marke bezeichnet eine Stelle,
+  // sie ist kein Objekt der Zeichnung und wächst beim Zoomen nicht mit.
+  if(stellen){
+    var mr=4, mw=1.5;
+    stellen.stellen.forEach(function(st){
+      var px=X(st.x), py=Y(st.y);
+      if(st.art==='minimum'){
+        GM.fillStyle=COL.mint;
+        GM.beginPath(); GM.arc(px,py,mr,0,2*Math.PI); GM.fill();
+      } else if(st.art==='maximum'){
+        GM.strokeStyle=COL.rose; GM.lineWidth=mw;
+        GM.beginPath(); GM.arc(px,py,mr,0,2*Math.PI); GM.stroke();
+      } else if(st.art==='sattel'){
+        GM.strokeStyle=COL.gold; GM.lineWidth=mw;
+        GM.beginPath();
+        GM.moveTo(px-mr,py-mr); GM.lineTo(px+mr,py+mr);
+        GM.moveTo(px-mr,py+mr); GM.lineTo(px+mr,py-mr);
+        GM.stroke();
+      } else {
+        GM.strokeStyle=COL.dim; GM.lineWidth=mw;
+        GM.strokeRect(px-mr,py-mr,2*mr,2*mr);
+      }
+    });
+  }
 }
 
 /* ---------- Schnittkurven ---------- */
