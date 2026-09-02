@@ -411,34 +411,62 @@ var elFanfang = document.getElementById('fanfang'),
 var elAna = document.getElementById('ana');
 var elRa = document.getElementById('ra'), elGrenzfall = document.getElementById('grenzfall');
 
+/* Der exakte Grenzwert 2*sqrt(b) der zuletzt aufgebauten Beschriftung --
+   null, wenn b <= 0 und es also keinen gibt. Der Klick auf die Zahl in
+   der Beschriftung (siehe die Bedienung weiter unten) braucht den vollen
+   Wert, nicht die auf drei Stellen gerundete Anzeige. */
+var grenzwertAktuell = null;
+
 /* Der Daempfungsregler: Bereich und Schrittweite haengen von b ab und
    muessen bei jeder Neurechnung neu bestimmt werden -- ein einmal aus
    dem Start-b berechneter Bereich waere falsch, sobald jemand ein
-   anderes b eintippt. Fuer b > 0 laeuft der Regler von 0 bis 3·√b in
-   400 Schritten, so dass der Grenzfall 2·√b deutlich innerhalb liegt;
-   fuer b <= 0 gibt es keinen Grenzfall (die Nullstellen sind dann immer
-   reell, siehe MT.dgl), der Regler wird deshalb abgeschaltet statt mit
-   einem erfundenen Bereich weiterzulaufen.
+   anderes b eintippt. Fuer b > 0 laeuft der Regler von 0 bis 3·√b in 300
+   Schritten -- absichtlich durch drei teilbar, denn der Grenzfall 2·√b
+   liegt immer bei zwei Dritteln der Strecke; bei 300 Schritten ist er
+   damit genau der 200. Gitterpunkt, statt zwischen zwei Schritten zu
+   verschwinden (das war bei 400 Schritten der Fall -- 2/3 von 400 ist
+   266,667, nie ganzzahlig). Fuer b <= 0 gibt es keinen Grenzfall (die
+   Nullstellen sind dann immer reell, siehe MT.dgl), der Regler wird
+   deshalb abgeschaltet statt mit einem erfundenen Bereich
+   weiterzulaufen.
 
    Die Gegenrichtung -- a stellt den Reglerstand nach -- braucht hier
    keine eigene Klammerung: liegt a ausserhalb von [0, 3·√b], klemmt ein
    <input type="range"> beim Setzen von .value von selbst auf seine
    Grenze. */
 function aktualisiereRegler(a, b){
-  var max;
+  var max, krit;
   if (b > 0){
     max = 3 * Math.sqrt(b);
+    krit = 2 * Math.sqrt(b);
     elRa.min = 0;
     elRa.max = max;
-    elRa.step = max / 400;
+    elRa.step = max / 300;
     elRa.disabled = false;
     if (isFinite(a)) elRa.value = a;
-    elGrenzfall.textContent = 'Aperiodischer Grenzfall bei a = 2√b = ' + num(2 * Math.sqrt(b)) + '.';
+    grenzwertAktuell = krit;
+    elGrenzfall.innerHTML = 'Aperiodischer Grenzfall bei a = 2√b = ' +
+      '<button type="button" class="grenzwert" aria-label="a auf den Grenzfall setzen">' +
+      num(krit) + '</button>.';
   } else {
     elRa.disabled = true;
+    grenzwertAktuell = null;
     elGrenzfall.textContent = 'Für b ≤ 0 gibt es keinen Grenzfall; die Nullstellen sind stets reell.';
   }
 }
+
+/* Klick (oder Enter/Leertaste, wie bei jeder <button>) auf die Zahl in
+   der Beschriftung: a wird exakt auf den Grenzwert gesetzt, Regler und
+   Zahlenfeld ziehen mit, denn das laeuft ueber denselben Weg wie jede
+   Eingabe in fa. Delegiert auf elGrenzfall, weil aktualisiereRegler()
+   die <button> bei jeder Neurechnung neu aufbaut (innerHTML) -- eine
+   Bindung direkt am Element waere nach der ersten Neurechnung verwaist. */
+elGrenzfall.addEventListener('click', function(e){
+  if (!e.target.classList || !e.target.classList.contains('grenzwert')) return;
+  if (grenzwertAktuell === null) return;
+  elFa.value = grenzwertAktuell;
+  neuRechnen();
+});
 
 function gliedFelder(nr){
   return {
