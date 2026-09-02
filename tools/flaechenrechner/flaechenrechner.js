@@ -78,10 +78,19 @@ function isRadial(f){
   return { v0:v0, vEnd:ve, decreasing:dec };
 }
 
+/* Nachkommanullen abschneiden, aber nur INNERHALB eines Bruchteils: das
+   Muster verlangt einen Punkt vor den Nullen. Ein Muster ohne ihn
+   (/\.?0+$/) hing am Ende der ganzen Zeichenkette und fraß die Nullen
+   ganzer Zahlen mit — aus toPrecision(3) von 100 wurde "1", aus 150
+   "15". Da toPrecision vorher rundet, traf das jeden Wert in
+   [99,95; 100,5). Das Minuszeichen wird global ersetzt, sonst bleibt bei
+   einer negativen Zahl in Exponentenschreibweise das Minus des Exponenten
+   als ASCII stehen ("−2,84e-8"). */
 function num(v){
   if(Math.abs(v)<1e-10) return '0';
   var s=(Math.abs(v)>=100||Math.abs(v)<0.01) ? v.toPrecision(3) : v.toFixed(2);
-  return s.replace(/\.?0+$/,'').replace('.',',').replace('-','−');
+  return s.replace(/(\.\d*?)0+$/,'$1').replace(/\.$/,'')
+          .replace('.',',').replace(/-/g,'−');
 }
 
 // wie num(), aber mit fest vier Nachkommastellen — für die Koordinaten
