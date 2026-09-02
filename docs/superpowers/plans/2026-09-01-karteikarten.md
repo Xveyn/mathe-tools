@@ -654,10 +654,25 @@ Nur wenn keine Datei erscheint, den Ordner entfernen. Erscheint irgendetwas, **h
 - [ ] **Schritt 3: Vollständigkeit prüfen**
 
 ```bash
-cd "<REPO>" && git status --short && echo "---" && git ls-files && echo "---" && grep -rn "<NUTZER>\|AppData\|Einige_Dateien\|TH_Koeln\|scratchpad" README.md CLAUDE.md docs/ karten/ shared/ index.html tools/ ; echo "Suche beendet"
+cd "<REPO>" && git status --short && echo "---" && git ls-files && echo "---" && git ls-files -z | xargs -0 grep -niE "<VORNAME>|<NACHNAME>|appdat[a]|einige_dateie[n]|th_koel[n]|scratchpa[d]" ; echo "Suche beendet"
 ```
 
 Erwartet: sauberes Arbeitsverzeichnis, die erwartete Dateiliste, und nur `Suche beendet` — keine privaten Daten. Das war in der vorigen Runde der kritische Fund.
+
+Zum Muster, drei Punkte:
+
+1. **Vor- und Nachname stehen getrennt darin**, und gesucht wird mit `-i`. Ein
+   Muster, das nur zusammengeschriebene Kennungen kennt, fängt einen Namen mit
+   Leerzeichen nicht — genau daran ist die Suche der vorigen Runde
+   vorbeigelaufen, während der ausgeschriebene Klarname im Fundament-Plan
+   stehen blieb.
+2. **Der letzte Buchstabe jedes Wortes steht in einer Zeichenklasse.** Das
+   ändert nichts daran, was gefunden wird, verhindert aber, dass die
+   Musterzeile dieses Plans sich selbst findet — sonst meldet die Suche jedes
+   Mal einen Treffer, und man gewöhnt sich an, ihn zu übersehen.
+3. **Gesucht wird über `git ls-files`**, nicht über eine von Hand gepflegte
+   Pfadliste: eine neu angelegte Datei wäre sonst von Anfang an aus der
+   Prüfung heraus.
 
 - [ ] **Schritt 4: Commit und Push**
 
