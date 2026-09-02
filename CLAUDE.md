@@ -65,6 +65,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | `shared/plot2d.js` | `MT.plot2d` — Höhenlinien, Linienzüge |
 | `shared/scene3d.js` | `MT.scene3d` — Projektion, Drehen |
 | `shared/abfrage.js` | `MT.abfrage` — Verdecken und Aufdecken auf Karten |
+| `shared/extrema.js` | `MT.extrema` — stationäre Stellen suchen und einordnen |
 
 Jede `shared/*.js` beginnt mit `var MT = MT || {};` und hängt genau einen
 Teilbereich an. Damit ist ihre Ladereihenfolge untereinander egal — nur
@@ -299,6 +300,24 @@ hat sie hier schon gefunden.
   von der harten Regel weiter oben. Sie steht dort, weil sie zum
   Druck-Stylesheet der Karten gehört und mit ihm gelesen wird. Bewusst so
   gelassen; wer die Tokens sucht, findet sie über diesen Absatz.
+- **Die Klammern der Hesse-Matrix sind von Hand bemessen, nicht
+  gestreckt.** Chromium und Edge rendern `<mtable>` nur über den
+  UA-Fallback `display: inline-table`, und in diesem Fallback greift die
+  Streck-Mechanik für `<mo>` nicht — `minsize`/`maxsize` bleiben innerhalb
+  von `article.karte` wirkungslos, die Klammern wachsen also nicht mit der
+  Matrix mit. Die Größe steht deshalb fest, `font-size:3.8em` in der
+  Klasse `.matrix-klammer` (`shared/karten.css`), abgestimmt auf eine
+  zweizeilige Matrix. Eine dritte Zeile oder eine geänderte Schriftgröße
+  der Umgebung verstimmt die Klammern lautlos gegen die Matrix — dann muss
+  neu vermessen werden.
+- **Prüfroutine P sagt nicht, wie der Term für ihre 21 Zustände gesetzt
+  wird — das ist nicht egal.** Ein angeklickter Beispiel-Chip bleibt aktiv
+  markiert (Goldrand); derselbe Term von Hand ins Feld getippt markiert
+  keinen Chip. Der Unterschied zeigt sich in der Chip-Zeile von 20 der 21
+  Bilder und hat mit dem eigentlich geprüften Verhalten nichts zu tun —
+  das kostete einmal einen vollen Vergleichslauf dieses Plans. Wer die
+  Routine erneut laufen lässt, muss den Term auf demselben Weg setzen wie
+  die Referenzaufnahme.
 
 ## Ton
 

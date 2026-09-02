@@ -21,8 +21,9 @@ rechnen etwas vor, Karten erklären etwas.
 | [Partielle Ableitungen](karten/partielle-ableitungen.html) | Eine Funktion zweier Veränderlicher wird nach einer Variablen abgeleitet, während die andere festgehalten wird. |
 | [Gradient und Richtungsableitung](karten/gradient.html) | Der Gradient bündelt beide partiellen Ableitungen zu einem Vektor; die Richtungsableitung fragt nach der Steigung in einer beliebigen anderen Richtung. |
 | [Extrema mit Nebenbedingung](karten/extrema-mit-nebenbedingung.html) | Extrema, die nur auf einer Nebenbedingung gesucht sind — der Multiplikator von Lagrange liefert die Kandidaten. |
+| [Extremwerte](karten/extremwerte.html) | Erst liefert der Gradient die stationären Stellen, dann entscheidet die Hesse-Matrix, ob jede davon ein Minimum, ein Maximum oder ein Sattelpunkt ist. |
 
-Alle drei sind auch von der Startseite aus erreichbar, dazu über
+Alle vier sind auch von der Startseite aus erreichbar, dazu über
 [karten/index.html](karten/index.html), das alle Themen im Überblick zeigt.
 
 ## Wie es gebaut ist
@@ -48,6 +49,7 @@ Die gemeinsamen Bausteine:
 | `shared/plot2d.js` | `MT.plot2d` — Höhenlinien nach Marching Squares, unterbrochene Linienzüge |
 | `shared/scene3d.js` | `MT.scene3d` — Projektion in den Raum und Drehen per Maus |
 | `shared/abfrage.js` | `MT.abfrage` — Verdecken und Aufdecken auf Karten |
+| `shared/extrema.js` | `MT.extrema` — stationäre Stellen suchen und einordnen |
 | `shared/theme.css` | Farbtokens und Grundtypografie |
 | `shared/ui.css` | Panels, Regler, Chips, Raster, dazu die Katalog-Kacheln, die Startseite und Kartenübersicht teilen |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |

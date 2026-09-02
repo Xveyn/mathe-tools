@@ -57,6 +57,14 @@
 .beispiel small{color:var(--dim);font-size:.82rem;margin-left:.7em}
 .beispiel p:last-of-type{margin-bottom:0}
 
+/* Handgesetzte Umklammerung einer mtable (etwa der Hesse-Matrix): die
+   Streck-Mechanik von minsize/maxsize an <mo> greift innerhalb von
+   article.karte nicht, siehe „Bekannte Grenzen" in CLAUDE.md. Auf eine
+   zweizeilige Matrix abgestimmt; eine dritte Zeile braucht eine neue
+   Maßnahme. */
+.matrix-rahmen{display:inline-flex;align-items:center}
+.matrix-klammer{font-size:3.8em}
+
 .bild{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:10px 16px;margin:16px 0 0;
