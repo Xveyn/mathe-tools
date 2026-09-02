@@ -127,9 +127,12 @@ MT.dgl = (function(){
      ist die Vielfachheit von mu als Wurzel: p(mu) = 0 heisst mindestens
      einfach, zusaetzlich p'(mu) = 0 heisst doppelt. */
   function teilPolyexp(a, b, glied, nummer){
-    var mu = glied.mu, P = glied.koeff;
+    var mu = glied.mu, P = glied.koeff, idx;
     if (!P || !P.length) throw new Error('Das ' + nummer + '. Glied hat keine Koeffizienten.');
     pruefeGliedZahl(mu, 'mu', nummer);
+    for (idx = 0; idx < P.length; idx++){
+      if (!isFinite(P[idx])) throw new Error('Das ' + nummer + '. Glied hat im ' + (idx + 1) + '. Koeffizienten keine endliche Zahl.');
+    }
 
     var s = schwelle(a, b);
     var pMu = mu * mu + a * mu + b;
