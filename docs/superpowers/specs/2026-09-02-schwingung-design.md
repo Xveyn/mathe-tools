@@ -70,16 +70,22 @@ Rückgabe:
   fall:      'zwei-reelle' | 'doppelt' | 'komplex',
   wurzeln:   …,
   homogen:   { basis: [f1, f2], ableitung: [f1s, f2s] },
-  teile:     [ { glied, k, ansatz, koeff, fn, fnAbleitung } ],
+  teile:     [ { art, k, ansatzGrad, mu | omega, koeff, fn, fnEins, fnZwei } ],
   konstanten: [C1, C2] | null,
   yh: fn, yp: fn, y: fn
 }
 ```
 
-`teile` enthält je Glied der rechten Seite die Resonanz-Vielfachheit `k`, die
-Ansatzform und die berechneten Koeffizienten. Das Werkzeug zeigt genau diese
-Zwischenschritte an — sie sind der Gegenstand der Aufgabe, nicht nur ein
-Rechenweg.
+`teile` enthält je Glied der rechten Seite die Bauart `art` (`'polyexp'`
+oder `'harmonisch'`), die Resonanz-Vielfachheit `k`, den Ansatzgrad
+`ansatzGrad` (bei `polyexp` der Grad des Polynomfaktors `v`, bei
+`harmonisch` gleich `k`, also 0 oder 1 — der Faktor `x^k` ist alles, was
+dort variiert), das Kennzeichen des Glieds (`mu` bei `polyexp`, `omega` bei
+`harmonisch`) und die berechneten Koeffizienten. Bewusst kein fertiger
+`ansatz`-String: ein geteilter Baustein, der deutsche Oberflächentexte
+zurückgibt, verschiebt die Schichtgrenze — die Daten gehören ins Modul, der
+Satz ins Werkzeug. Das Werkzeug zeigt diese Zwischenschritte an — sie sind
+der Gegenstand der Aufgabe, nicht nur ein Rechenweg.
 
 ### Der homogene Teil
 

@@ -6,7 +6,7 @@
    Spec, keine Vorliebe: eine Ableitung, die man ausrechnen kann, wird
    ausgerechnet. */
 var MT = MT || {};
-(function(){
+MT.dgl = (function(){
   "use strict";
 
   /* Ein Polynom ist ein Koeffizientenarray: [c0, c1, c2] meint
@@ -52,6 +52,17 @@ var MT = MT || {};
     return x;
   }
 
+  /* Ein leeres Zahlenfeld im Werkzeug liefert NaN, und NaN faellt an jeder
+     Vergleichsoperation stillschweigend durch -- ohne diese Wache landet
+     es zum Beispiel im komplexen Fall, mit selbstbewusstem D=NaN. Darum
+     wird hier geprueft statt gerechnet. */
+  function pruefeZahl(x, bezeichnung){
+    if (!isFinite(x)) throw new Error(bezeichnung + ' muss eine endliche Zahl sein.');
+  }
+  function pruefeGliedZahl(x, name, nummer){
+    if (!isFinite(x)) throw new Error('Das ' + nummer + '. Glied hat kein endliches ' + name + '.');
+  }
+
   /* Was als null gilt. Ohne eine Schwelle traefe man den aperiodischen
      Grenzfall mit getippten Zahlen so gut wie nie. */
   function schwelle(a, b){
@@ -63,11 +74,20 @@ var MT = MT || {};
     if (Math.abs(D) < schwelle(a, b)) D = 0;
 
     if (D > 0){
-      var w = Math.sqrt(D), l1 = (-a + w) / 2, l2 = (-a - w) / 2;
+      /* Mitternachtsformel loescht aus, wenn a und die Wurzel fast gleich
+         gross sind. Die nicht-ausloeschende Wurzel direkt rechnen, die
+         andere ueber Vieta (l1*l2=b) -- und dabei l1 immer die groessere
+         Wurzel bleiben lassen, denn die Reihenfolge traegt (Anfangswerte,
+         siehe MT.dgl Aufgabe D10). */
+      var w = Math.sqrt(D), l1, l2;
+      if (a <= 0){ l1 = (-a + w) / 2; l2 = b / l1; }
+      else       { l2 = (-a - w) / 2; l1 = b / l2; }
       return {
         fall: 'zwei-reelle', diskriminante: D, wurzeln: [l1, l2],
         basis: [ function(x){ return Math.exp(l1 * x); },
                  function(x){ return Math.exp(l2 * x); } ],
+        ableitung: [ function(x){ return l1 * Math.exp(l1 * x); },
+                     function(x){ return l2 * Math.exp(l2 * x); } ],
         beiNull: [[1, 1], [l1, l2]]
       };
     }
@@ -77,6 +97,8 @@ var MT = MT || {};
         fall: 'doppelt', diskriminante: 0, wurzeln: [l],
         basis: [ function(x){ return Math.exp(l * x); },
                  function(x){ return x * Math.exp(l * x); } ],
+        ableitung: [ function(x){ return l * Math.exp(l * x); },
+                     function(x){ return (1 + l * x) * Math.exp(l * x); } ],
         beiNull: [[1, 0], [l, 1]]
       };
     }
@@ -85,6 +107,14 @@ var MT = MT || {};
       fall: 'komplex', diskriminante: D, wurzeln: { re: -delta, im: om },
       basis: [ function(x){ return Math.exp(-delta * x) * Math.cos(om * x); },
                function(x){ return Math.exp(-delta * x) * Math.sin(om * x); } ],
+      ableitung: [
+        function(x){
+          return Math.exp(-delta * x) * (-delta * Math.cos(om * x) - om * Math.sin(om * x));
+        },
+        function(x){
+          return Math.exp(-delta * x) * (om * Math.cos(om * x) - delta * Math.sin(om * x));
+        }
+      ],
       beiNull: [[1, 0], [-delta, om]]
     };
   }
@@ -99,6 +129,7 @@ var MT = MT || {};
   function teilPolyexp(a, b, glied, nummer){
     var mu = glied.mu, P = glied.koeff;
     if (!P || !P.length) throw new Error('Das ' + nummer + '. Glied hat keine Koeffizienten.');
+    pruefeGliedZahl(mu, 'mu', nummer);
 
     var s = schwelle(a, b);
     var pMu = mu * mu + a * mu + b;
@@ -147,7 +178,9 @@ var MT = MT || {};
      +-i*omega Wurzeln. */
   function teilHarmonisch(a, b, glied, nummer){
     var om = glied.omega, c = glied.c, d = glied.d;
-    if (!(om > 0)) throw new Error('Das ' + nummer + '. Glied braucht ein omega groesser null.');
+    if (!(isFinite(om) && om > 0)) throw new Error('Das ' + nummer + '. Glied braucht ein endliches omega groesser null.');
+    pruefeGliedZahl(c, 'c', nummer);
+    pruefeGliedZahl(d, 'd', nummer);
 
     var s = schwelle(a, b);
     var A, B, k;
@@ -157,7 +190,7 @@ var MT = MT || {};
       A = -d / (2 * om);
       B =  c / (2 * om);
       return {
-        art: 'harmonisch', k: k, omega: om, koeff: [A, B],
+        art: 'harmonisch', k: k, omega: om, koeff: [A, B], ansatzGrad: k,
         fn: function(x){
           return x * (A * Math.cos(om * x) + B * Math.sin(om * x));
         },
@@ -178,7 +211,7 @@ var MT = MT || {};
     A = (c * e - d * f) / det;
     B = (c * f + d * e) / det;
     return {
-      art: 'harmonisch', k: k, omega: om, koeff: [A, B],
+      art: 'harmonisch', k: k, omega: om, koeff: [A, B], ansatzGrad: k,
       fn: function(x){ return A * Math.cos(om * x) + B * Math.sin(om * x); },
       fnEins: function(x){ return om * (B * Math.cos(om * x) - A * Math.sin(om * x)); },
       fnZwei: function(x){ return -om * om * (A * Math.cos(om * x) + B * Math.sin(om * x)); }
@@ -186,6 +219,9 @@ var MT = MT || {};
   }
 
   function loese(a, b, glieder, anfang){
+    pruefeZahl(a, 'a');
+    pruefeZahl(b, 'b');
+
     var h = homogen(a, b), teile = [], i, g;
     glieder = glieder || [];
     for (i = 0; i < glieder.length; i++){
@@ -206,6 +242,8 @@ var MT = MT || {};
 
     var konstanten = null;
     if (anfang){
+      pruefeZahl(anfang.y0, 'anfang.y0');
+      pruefeZahl(anfang.y0strich, 'anfang.y0strich');
       konstanten = loeseSystem(
         [[h.beiNull[0][0], h.beiNull[0][1]], [h.beiNull[1][0], h.beiNull[1][1]]],
         [anfang.y0 - yp(0), anfang.y0strich - ypEins(0)], 2);
@@ -220,7 +258,7 @@ var MT = MT || {};
       polynom: { a: a, b: b, diskriminante: h.diskriminante },
       fall: h.fall,
       wurzeln: h.wurzeln,
-      basis: h.basis,
+      homogen: { basis: h.basis, ableitung: h.ableitung },
       teile: teile,
       konstanten: konstanten,
       yh: yh,
@@ -231,5 +269,5 @@ var MT = MT || {};
     };
   }
 
-  MT.dgl = { loese: loese };
+  return { loese: loese };
 })();
