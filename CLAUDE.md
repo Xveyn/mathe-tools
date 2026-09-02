@@ -63,7 +63,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | `shared/expr.js` | `MT.expr.compile(term, vars)` — Terme in Funktionen |
 | `shared/canvas.js` | `MT.canvas` — Zeichenflächen, Achsen, Farben |
 | `shared/plot2d.js` | `MT.plot2d` — Höhenlinien, Linienzüge |
-| `shared/scene3d.js` | `MT.scene3d` — Projektion, Drehen |
+| `shared/scene3d.js` | `MT.scene3d` — Projektion, Drehen, Zoomen. Die Höhe wird normiert, siehe „Bekannte Grenzen“ |
 | `shared/abfrage.js` | `MT.abfrage` — Verdecken und Aufdecken auf Karten |
 | `shared/extrema.js` | `MT.extrema` — stationäre Stellen suchen und einordnen |
 
@@ -292,10 +292,40 @@ unveränderten Originals vergleicht. Das Original liegt außerhalb des Repos
 und wird nie verändert; die Referenzbilder lassen sich daraus jederzeit
 neu aufnehmen.
 
+**Für die 3D-Tafel gilt dieser Vergleich nicht mehr.** Seit der Normierung
+der Höhe (siehe unten) zeichnet das Werkzeug die Fläche absichtlich anders
+als das Original, und zwar in jedem der 21 Zustände. Ein Pixelvergleich der
+Tafel `#c3d` gegen das Original meldet ab jetzt dauerhaft Unterschiede, die
+keine Fehler sind. Die übrigen drei Tafeln — Höhenlinien und die beiden
+Schnitte — sind von der Änderung nicht berührt und bleiben vergleichbar.
+Wer die Routine fährt, vergleicht `#c3d` gegen eine **neue** Grundlage aus
+dem heutigen Stand, nicht gegen das Original.
+
 ## Bekannte Grenzen
 
 Kein Fehler, sondern geprüft und so gelassen. Wer eine davon „entdeckt",
 hat sie hier schon gefunden.
+
+- **Das 3D-Bild ist in z nicht maßstabstreu, und das ist Absicht.**
+  `MT.scene3d.camera` bildet die z-Spanne auf eine feste Kastenhöhe ab
+  (`KASTEN` mal Grundfläche mal der eingestellten Überhöhung), statt z mit
+  demselben Maßstab wie x und y zu zeichnen. Grund: die z-Spanne wächst bei
+  quadratischen Funktionen mit dem Quadrat des Bereichs, die Grundfläche nur
+  linear — also bestimmte früher allein z den Maßstab. Gemessen an den sechs
+  Beispielen des Flächenrechners bei 620 px Leinwand: die Fläche füllte
+  zwischen 6 % und 94 % der Breite, `-4xy` bei Bereich 4 noch 38 px und bei
+  Bereich 8 noch 19 px; fünf der sechs waren durch z begrenzt statt durch die
+  Bildbreite. Nach der Normierung sind es konstant 450 px (73 %) bei jeder
+  Funktion und jedem Bereich. Mathematica (`BoxRatios -> {1,1,0.4}`),
+  matplotlib (4:4:3) und gnuplot normieren aus demselben Grund; Desmos 3D und
+  GeoGebra gehen den anderen Weg und schneiden die Fläche an einem
+  gezeichneten Quader ab — das setzt einen sichtbaren Kasten voraus, den
+  `draw3D` nicht zeichnet. Der Preis der Normierung: das Bild sagt nicht mehr,
+  wie steil etwas ist, und sieht für jede Funktion gleich dramatisch aus.
+  Dagegen stehen zwei Dinge, die zusammen mit ihr eingebaut wurden und die
+  **nicht** entfernt werden dürfen, ohne den Einwand wieder zu öffnen: die
+  z-Spanne steht als Zahl unter dem Bild (`#zbereich`), und die Überhöhung
+  ist ein Regler.
 
 - **Der Druck erreicht die vier Zeichentafeln nicht.** `@media print` in
   `shared/karten.css` definiert die Farbtokens hell um, und Inline-SVG

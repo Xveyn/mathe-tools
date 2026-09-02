@@ -216,6 +216,10 @@ var f=null, RANGE=4, cH=-2, cY=0, cX=0;
 var stellen=null;
 var zMin=-6, zMax=1;
 var blick={az:-0.62, el:0.58};
+/* Nur das Aussehen des 3D-Bildes, nicht die Rechnung: hoch ist die
+   Überhöhung der z-Achse, zoom die Vergrößerung. Beide werden vom
+   Regler und vom Mausrad in dasselbe Objekt geschrieben. */
+var ansicht={hoch:1, zoom:1};
 var GRID=46;
 var samples=null;
 
@@ -250,11 +254,21 @@ function hoehenlinie(niveau){ return MT.plot2d.contour(samples,niveau); }
 
 function clampZ(v){ return Math.max(zMin,Math.min(zMax,v)); }
 
+/* Das 3D-Bild ist in z normiert und damit nicht mehr maßstabstreu. Die
+   z-Spanne stand bisher nur in den min/max-Attributen des Höhenreglers,
+   die niemand liest; hier steht sie als Zahl. */
+function zeigeZSpanne(){
+  document.getElementById('zbereich').textContent =
+    f ? ('z von '+num(zMin)+' bis '+num(zMax)) : '';
+}
+
 function draw3D(){
   var masse=MT.canvas.fit(C3,G3), w=masse.w, h=masse.h;
+  zeigeZSpanne();
   if(!f) return;
   var cam=MT.scene3d.camera({w:w, h:h, az:blick.az, el:blick.el,
-                             range:RANGE, zMin:zMin, zMax:zMax});
+                             range:RANGE, zMin:zMin, zMax:zMax,
+                             zHoch:ansicht.hoch, zoom:ansicht.zoom});
   var P=function(x,y,z){ return MT.scene3d.project(x,y,z,cam); };
   var polys=[], n=samples.n, step=2;
 
@@ -599,7 +613,26 @@ document.getElementById('sR').addEventListener('input',function(){
   if(f) neuRechnen();
 });
 
+/* Regler und Mausrad schreiben beide in ansicht und rufen denselben Weg:
+   ein Zustand, eine Anzeige, ein Neuzeichnen. */
+function zeigeAnsicht(){
+  document.getElementById('oZ').textContent=num(ansicht.hoch)+'×';
+  document.getElementById('oZoom').textContent=num(ansicht.zoom)+'×';
+  document.getElementById('sZ').value=ansicht.hoch;
+  document.getElementById('sZoom').value=ansicht.zoom;
+}
+function ansichtGeaendert(){ zeigeAnsicht(); draw3D(); }
+
+document.getElementById('sZ').addEventListener('input',function(){
+  ansicht.hoch=parseFloat(this.value); ansichtGeaendert();
+});
+document.getElementById('sZoom').addEventListener('input',function(){
+  ansicht.zoom=parseFloat(this.value); ansichtGeaendert();
+});
+
 MT.scene3d.enableDrag(C3, blick, draw3D);
+MT.scene3d.enableZoom(C3, ansicht, ansichtGeaendert);
+zeigeAnsicht();
 
 function sizeAll(){
   var w=C3.clientWidth;

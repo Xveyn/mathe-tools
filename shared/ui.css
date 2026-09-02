@@ -58,7 +58,11 @@
 .sl{display:flex;align-items:center;gap:12px}
 .sl label{font-family:Georgia,serif;font-style:italic;font-size:.95rem;flex:0 0 auto;width:104px}
 .sl output{font-family:Georgia,serif;font-variant-numeric:tabular-nums;width:56px;text-align:right;flex:0 0 auto}
-input[type=range]{flex:1 1 auto;-webkit-appearance:none;appearance:none;height:22px;background:transparent;min-width:80px}
+/* color:inherit ist noetig, damit currentColor im Daumen und im Fokusring
+   die Farbe der .sl-Zeile trifft. Formularelemente erben color nicht von
+   selbst; ohne die Zeile stehen beide auf der Vorgabe des Browsers
+   (gemessen ein Grauwert nahe Schwarz) und verschwinden auf dem Grund. */
+input[type=range]{flex:1 1 auto;-webkit-appearance:none;appearance:none;height:22px;background:transparent;min-width:80px;color:inherit}
 input[type=range]::-webkit-slider-runnable-track{height:2px;background:rgba(94,158,182,.5)}
 input[type=range]::-moz-range-track{height:2px;background:rgba(94,158,182,.5)}
 input[type=range]::-webkit-slider-thumb{
@@ -68,6 +72,21 @@ input[type=range]::-webkit-slider-thumb{
 input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:currentColor;border:none;cursor:pointer}
 input[type=range]:focus-visible{outline:2px solid currentColor;outline-offset:4px}
 .sl.h{color:var(--gold)} .sl.y{color:var(--mint)} .sl.x{color:var(--rose)} .sl.r{color:var(--dim)}
+
+/* Ansichtsregler unmittelbar an der Tafel: sie ändern nur, wie das Bild
+   aussieht, während die vier Regler in .sliders ändern, was gerechnet und
+   geschnitten wird. Deshalb stehen sie bewusst nicht in derselben Reihe. */
+.blick{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:2px 18px;margin-top:7px;padding:7px 3px 0;
+  border-top:1px solid var(--edge);color:var(--dim);
+}
+.blick .sl label{width:88px;font-size:.85rem}
+.blick .sl output{width:44px;font-size:.85rem}
+.blick .zspanne{
+  grid-column:1/-1;margin:1px 0 0;font-family:Georgia,serif;
+  font-size:.78rem;font-variant-numeric:tabular-nums;color:var(--dim);
+}
 .sl label{color:var(--dim)}
 
 /* Der anklickbare Zahlenwert in einer Grenzfall-Beschriftung (siehe

@@ -24,7 +24,12 @@
   <div class="ansichten">
     <figure class="tafel">
       <canvas id="c3d" class="drehbar"></canvas>
-      <figcaption><span>Die Fläche im Raum. Ziehen dreht die Ansicht.</span><em>z = f(x, y)</em></figcaption>
+      <div class="blick">
+        <div class="sl"><label for="sZ">Überhöhung</label><input id="sZ" type="range" step="0.05" min="0.3" max="3" value="1"><output id="oZ"></output></div>
+        <div class="sl"><label for="sZoom">Zoom</label><input id="sZoom" type="range" step="0.05" min="1" max="4" value="1"><output id="oZoom"></output></div>
+        <p class="zspanne" id="zbereich"></p>
+      </div>
+      <figcaption><span>Die Fläche im Raum. Ziehen dreht, das Mausrad zoomt.</span><em>z = f(x, y)</em></figcaption>
     </figure>
     <figure class="tafel">
       <canvas id="cmap"></canvas>
