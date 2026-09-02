@@ -24,13 +24,23 @@ ein Fehler, kein Kompromiss.
 - **Ein Verzeichnis-Link ist kein Datei-Link.** `href="tools/x/"`
   funktioniert über HTTP, zeigt über `file://` aber eine
   Verzeichnisliste. Immer auf `index.html` verlinken.
-- **Deutsch.** Oberfläche, Kommentare, Bezeichner, README,
-  Commit-Nachrichten.
+- **Deutsch.** Oberfläche, Fließtext, Kommentare, README,
+  Commit-Nachrichten — und die Namen, die man beim Lesen einer Datei
+  ständig vor sich hat: lokale Variablen, Funktionen, CSS-Klassen,
+  `id`-Werte, Dateinamen. **Nicht** die geteilte Schnittstelle an `MT`:
+  dort stehen seit dem Fundament kurze, eingeführte Namen
+  (`MT.expr.compile`, `MT.canvas.fit/linear/tickStep/colors`,
+  `MT.plot2d.contour/segments/polyline`,
+  `MT.scene3d.camera/project/enableDrag`), und `MT.abfrage.start()` folgt
+  ihnen mit Absicht. Wer etwas Neues an `MT` hängt, bleibt bei dieser
+  Schreibweise, statt eine zweite Konvention danebenzustellen.
 - **ES5-artiger Stil.** `var`, IIFE, `"use strict"`. Kein `let`, kein
   `const`, keine Pfeilfunktionen, keine Template-Literale.
 - **Farben und Grundformen kommen aus `shared/`.** Keine Farbliterale in
   einer Seite. Wer eine Farbe braucht, nimmt eine CSS-Variable; fehlt sie,
-  kommt sie nach `shared/theme.css`.
+  kommt sie nach `shared/theme.css`. Eine einzige Ausnahme besteht und ist
+  unter „Bekannte Grenzen" festgehalten: die Druckpalette im
+  `@media print`-Block von `shared/karten.css`.
 
 ## Aufbau
 
@@ -38,6 +48,7 @@ ein Fehler, kein Kompromiss.
 index.html            Startseite: Abschnitt Werkzeuge, Abschnitt Karten
 shared/               gemeinsame Bausteine, alle am globalen Objekt MT
 tools/<name>/         ein Ordner je Werkzeug, mit index.html
+karten/index.html     Überblick über alle Kartenthemen
 karten/<thema>.html   eine Datei je Thema, mit mehreren Karten darin
 docs/superpowers/     Design- und Planungsdokumente
 ```
@@ -47,7 +58,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | Datei | Was drin ist |
 |---|---|
 | `shared/theme.css` | Farbtokens, Grundtypografie |
-| `shared/ui.css` | Bausteine der Werkzeug-Oberfläche |
+| `shared/ui.css` | Panels, Regler, Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`) und die Verweiszeilen (`.querlink`, `.seitenfuss`). Beides brauchen auch Startseite und Kartenübersicht, also Seiten, die keine Werkzeuge sind |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
 | `shared/expr.js` | `MT.expr.compile(term, vars)` — Terme in Funktionen |
 | `shared/canvas.js` | `MT.canvas` — Zeichenflächen, Achsen, Farben |
@@ -118,6 +129,25 @@ sichtbar, bis zum Ergebnis. Dazu ein Bild.
 Formel und Beispiel, an sonst nichts. Eine Karte ohne ihn funktioniert,
 sie lässt sich nur nicht abfragen.
 
+**Eintragen — an zwei Stellen.** Eine neue Themendatei ist sonst von
+nirgends aus erreichbar; man kommt nur hin, wenn man den Dateinamen
+kennt. Also:
+
+1. Eine `.kachel` im Abschnitt Karten von `index.html` (Pfad
+   `karten/<thema>.html`).
+2. Eine `.kachel` in `karten/index.html` (Pfad `<thema>.html`, weil die
+   Übersicht im selben Ordner liegt).
+
+Beide Kacheln nutzen denselben Baustein aus `shared/ui.css`. Der
+Kacheltitel ist auf der Startseite ein `h3` (er steht unter der
+Abschnittsüberschrift `h2`), in der Übersicht ein `h2` (er steht direkt
+unter der `h1`). Dazu gehört am Fuß der neuen Seite die
+`.seitenfuss`-Zeile zurück zur Übersicht, wie sie die bestehenden Karten
+tragen.
+
+Eine neue **Karte** in einer schon eingetragenen Themendatei braucht das
+nicht — nur eine neue **Datei**.
+
 ## Formeln
 
 MathML, direkt im HTML, ohne Bibliothek.
@@ -138,7 +168,16 @@ Inline-SVG, von Hand gezeichnet, direkt in der Karte.
 - Immer `viewBox`, nie feste Pixelmaße für `width`/`height`.
 - Farben als `stroke="var(--gold)"`, nie als Literal — sonst bleiben sie
   im Druck auf ihren Bildschirmwerten stehen.
-- Beschriftungen als `<text>` im SVG.
+- Beschriftungen als `<text>` im SVG. **Eine Beschriftung wird gegen
+  *jedes* andere Element im selben SVG gerechnet**, nicht nur gegen das,
+  woran man gerade denkt: Achsen, Teilstriche und deren Zahlen, alle
+  Kurven, Marken und die anderen Beschriftungen. Ihr Kasten steht in
+  `getBBox()`; eine 9-px-Zeile ist gut 12 px hoch und reicht damit weiter
+  unter die Basislinie, als man schätzt. Das war auf zwei Karten
+  nacheinander derselbe Fehler — und eine Beschriftung, die aus einer
+  Kollision heraus- und in die nächste hineingerückt wird, ist nicht
+  behoben. Eine, die frei steht, aber gleich weit von zwei Kurven,
+  ebenfalls nicht: sie muss näher an ihrer eigenen stehen.
 - Was gerechnet sein müsste, um ehrlich zu sein, wird nicht geschätzt.
   Entweder die Punkte einmal ausrechnen und eintragen, oder auf das
   Werkzeug verlinken, das es live zeigt.
@@ -149,7 +188,13 @@ Karte, die interaktiv sein will, verlinkt stattdessen.
 ## Querverlinkung
 
 Karte → Werkzeug als `.querlink` am Fuß der Karte. Werkzeug → Karte als
-Zeile unter den Ansichten.
+`.querlink`-Zeile am **Fuß der Werkzeugseite**, hinter dem Analysebereich.
+Direkt unter den Ansichten stünde sie zwischen Bild und Erklärung; am
+Seitenfuß steht sie dort, wo man mit dem Werkzeug fertig ist.
+
+Jede Kartenseite trägt außerdem am Fuß eine `.seitenfuss`-Zeile zurück zum
+Überblick `karten/index.html`. Ohne sie ist eine Kartenseite eine
+Sackgasse: der einzige Weg hinaus führte ins Werkzeug.
 
 **Kein vorbelegter Term.** Kein `?f=…`, kein URL-Zustand. Die Karte
 schreibt hin, welchen Term man eingeben soll. Das ist eine bewusste
@@ -161,7 +206,8 @@ Entscheidung, keine Lücke — siehe
 1. `tools/<name>/index.html` anlegen, `shared/theme.css` und
    `shared/ui.css` einbinden, dazu die gebrauchten `shared/*.js`.
 2. Werkzeug-eigenes JavaScript nach `tools/<name>/<name>.js`.
-3. Eine Karte im Abschnitt Werkzeuge der Startseite ergänzen.
+3. Eine **Kachel** im Abschnitt Werkzeuge der Startseite ergänzen —
+   `.kachel`, nicht `.karte`; siehe die Namensregel weiter oben.
 
 ## Bevor du „fertig" sagst
 
@@ -169,8 +215,50 @@ Es gibt in diesem Repo **kein Test-Framework** — das ist Absicht, nicht
 Nachlässigkeit. Geprüft wird stattdessen am laufenden Bild:
 
 - Die Seite über `file://` öffnen. Konsole ohne Fehler.
-- Bei Karten: Sind die Formeln gesetzt oder steht da Quelltext? Ein
-  `<mfrac>` muss einen Bruchstrich zeichnen.
+- Bei Karten: Sind die Formeln gesetzt oder steht da Quelltext? Zwei
+  Schritte, und ein dritter nur, wenn die Karte einen Bruch hat:
+
+  1. **Kennt der Browser MathML?** `typeof window.MathMLElement` muss
+     `'function'` sein.
+  2. **Setzt er die Formeln als Formeln?**
+     `getComputedStyle(document.querySelector('math')).display` muss
+     `math` enthalten — `math` im Fließtext, `block math` bei
+     `display="block"`. Steht dort `inline`, ist `<math>` für den Browser
+     ein unbekanntes Element und der Inhalt läuft als Text durch.
+  3. **Nur wenn die Karte ein `<mfrac>` hat:** Es muss höher sein als
+     `1.8 ×` sein eigener Zähler. Wird der Bruch nicht gesetzt, stehen
+     Zähler und Nenner nebeneinander, und der Quotient fällt auf etwa 1.
+
+  ```js
+  () => {
+    var kennt = typeof window.MathMLElement === 'function';
+    var m = document.querySelector('math');
+    var anzeige = m ? getComputedStyle(m).display : null;
+    var bruch = document.querySelector('mfrac');
+    var q = null;
+    if (bruch) {
+      q = bruch.getBoundingClientRect().height /
+          bruch.firstElementChild.getBoundingClientRect().height;
+    }
+    return {
+      mathml: kennt,
+      anzeige: anzeige,
+      bruchquotient: bruch ? q : 'kein Bruch auf dieser Karte',
+      gesetzt: kennt && !!anzeige && anzeige.indexOf('math') >= 0 &&
+               (q === null || q > 1.8)
+    };
+  }
+  ```
+
+  **Eine Karte ohne Bruch ist kein Fehlerfall.** `extrema-mit-nebenbedingung`
+  ist die erste solche Karte: kein `<mfrac>`, kein `<msqrt>`, kein
+  `<msub>`. Schritt 3 entfällt dann, `bruchquotient` meldet das
+  ausdrücklich, und `gesetzt` bleibt trotzdem `true`. Der frühere
+  Maßstab — irgendein `<mfrac>`, gemessen gegen die Körpergröße der
+  Seite — schlug hier blind Alarm und schlug ihn auch auf
+  `gradient.html`, wo der erste Bruch `3/5` nur 20,4 px hoch ist. Der
+  Quotient gegen den eigenen Zähler ist maßstabsfrei: über alle 16
+  Brüche des Repos liegt er zwischen 1,89 und 2,63.
 - Abfragemodus an und aus. Mit abgeschaltetem JavaScript ist alles
   sichtbar.
 - Druckvorschau: heller Grund, nichts verdeckt, kein Umbruch mitten in
@@ -183,6 +271,27 @@ die 21 Zustände als Screenshots aufnimmt und gegen Referenzbilder des
 unveränderten Originals vergleicht. Das Original liegt außerhalb des Repos
 und wird nie verändert; die Referenzbilder lassen sich daraus jederzeit
 neu aufnehmen.
+
+## Bekannte Grenzen
+
+Kein Fehler, sondern geprüft und so gelassen. Wer eine davon „entdeckt",
+hat sie hier schon gefunden.
+
+- **Der Druck erreicht die vier Zeichentafeln nicht.** `@media print` in
+  `shared/karten.css` definiert die Farbtokens hell um, und Inline-SVG
+  zieht mit. Ein `<canvas>` nicht: `shared/canvas.js` liest die Tokens
+  einmal beim Zeichnen (`MT.canvas.colors()`) und brennt die Werte in die
+  Bitmap. Die vier Ansichten des Flächenrechners kommen deshalb in ihren
+  Bildschirmfarben aufs Papier. Keine Verschlechterung — vor dieser Runde
+  hatte das Werkzeug überhaupt kein Druck-Stylesheet. Wer es beheben will,
+  müsste bei `beforeprint` neu zeichnen; das rührt an
+  `shared/canvas.js`, also an einer Datei, die diese Runde nicht anfasst.
+- **Die Druckpalette steht in `shared/karten.css`, nicht in
+  `shared/theme.css`.** Das ist die einzige Stelle im Repo, an der
+  Farbtokens außerhalb von `theme.css` definiert werden — eine Ausnahme
+  von der harten Regel weiter oben. Sie steht dort, weil sie zum
+  Druck-Stylesheet der Karten gehört und mit ihm gelesen wird. Bewusst so
+  gelassen; wer die Tokens sucht, findet sie über diesen Absatz.
 
 ## Ton
 

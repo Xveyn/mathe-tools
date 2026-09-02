@@ -181,8 +181,11 @@ Ohne JavaScript ist schlicht alles sichtbar.
 
 **Karte → Werkzeug:** ein `.querlink` am Fuß der Karte.
 
-**Werkzeug → Karte:** Der Flächenrechner bekommt unter seinen Ansichten
-eine Zeile, die auf die passenden Karten zeigt.
+**Werkzeug → Karte:** Der Flächenrechner bekommt am **Fuß der Seite**,
+hinter dem Analysebereich, eine Zeile, die auf die passenden Karten
+zeigt. Unmittelbar unter den Ansichten stünde sie zwischen Bild und
+Erklärung und trännte beides; am Seitenfuß steht sie da, wo man mit dem
+Werkzeug fertig ist.
 
 **Kein vorbelegter Term.** Ein Link wie `?f=x^2-y^2` würde URL-Zustand
 einführen, den die vorige Ausbaustufe ausdrücklich ausschließt, und er
@@ -262,7 +265,22 @@ nichts, was gegen Referenzbilder zu vergleichen wäre. Geprüft wird:
 1. Jede Kartenseite lädt ohne Konsolenfehler, über `file://` und über
    HTTP.
 2. Die MathML-Formeln werden gesetzt, nicht als Quelltext angezeigt.
-   Prüfbar daran, dass ein `<mfrac>` einen Bruchstrich zeichnet.
+   Prüfbar in zwei Schritten, die auf jeder Karte tragen, plus einem
+   dritten, der nur greift, wenn die Karte einen Bruch hat:
+   `typeof window.MathMLElement === 'function'`; die `display`-Eigenschaft
+   eines `<math>` enthält `math` (`math` im Fließtext, `block math` bei
+   `display="block"`) und nicht `inline`; und ein vorhandenes `<mfrac>`
+   ist höher als `1.8 ×` sein eigener Zähler.
+   **Eine Karte ohne Bruch ist kein Fehlerfall** —
+   `extrema-mit-nebenbedingung` ist die erste solche Karte und trägt
+   weder `<mfrac>` noch `<msqrt>` noch `<msub>`; der dritte Schritt
+   entfällt dort, das Urteil ruht auf den ersten beiden. Der frühere
+   Maßstab — irgendein `<mfrac>` gegen die Körpergröße der Seite
+   gemessen — fand auf dieser Karte kein Element und schlug blind Alarm;
+   auf `gradient.html` schlug er ihn ebenfalls, weil der erste Bruch dort
+   nur 20,4 px hoch ist. Der Quotient gegen den eigenen Zähler ist
+   maßstabsfrei: über alle 16 Brüche des Repos liegt er zwischen 1,89
+   und 2,63. Der ausführliche Ausdruck steht in `CLAUDE.md`.
 3. Der Abfragemodus verdeckt und deckt auf; mit abgeschaltetem JavaScript
    ist alles sichtbar.
 4. Die Druckansicht zeigt hellen Grund, keine verdeckten Stellen und

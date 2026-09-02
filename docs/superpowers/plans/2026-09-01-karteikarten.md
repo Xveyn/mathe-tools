@@ -62,17 +62,30 @@ Mit den `mcp__playwright-edge__*`-Werkzeugen, für die zu prüfende Kartenseite:
 2. Seite laden mit `browser_run_code_unsafe` und `await page.goto(URL)`.
 3. `browser_wait_for` mit `time: 1`.
 4. `browser_console_messages` — **keine** Meldung vom Typ `error`.
-5. **Setzt der Browser die Formeln wirklich?** Ein `<mfrac>` muss deutlich höher sein als eine Textzeile; wird MathML nicht unterstützt oder ist es kaputt, steht der Inhalt einzeilig da.
+5. **Setzt der Browser die Formeln wirklich?** Zwei Schritte, die auf jeder Karte tragen, plus einen dritten nur für Karten mit Bruch. Wird MathML nicht unterstützt, ist `<math>` ein unbekanntes Inline-Element und der Inhalt läuft als Text durch.
    ```js
    () => {
-     const b = document.querySelector('mfrac');
-     if (!b) return 'kein mfrac auf der Seite';
-     const h = b.getBoundingClientRect().height;
-     const zeile = parseFloat(getComputedStyle(document.body).fontSize);
-     return { hoehe: h, zeilenhoehe: zeile, gesetzt: h > zeile * 1.6 };
+     var kennt = typeof window.MathMLElement === 'function';
+     var m = document.querySelector('math');
+     var anzeige = m ? getComputedStyle(m).display : null;
+     var bruch = document.querySelector('mfrac');
+     var q = null;
+     if (bruch) {
+       q = bruch.getBoundingClientRect().height /
+           bruch.firstElementChild.getBoundingClientRect().height;
+     }
+     return {
+       mathml: kennt,
+       anzeige: anzeige,
+       bruchquotient: bruch ? q : 'kein Bruch auf dieser Karte',
+       gesetzt: kennt && !!anzeige && anzeige.indexOf('math') >= 0 &&
+                (q === null || q > 1.8)
+     };
    }
    ```
-   Erwartet: `gesetzt` ist `true`.
+   Erwartet: `gesetzt` ist `true`, `anzeige` ist `math` bzw. `block math`.
+
+   **Eine Karte ohne Bruch ist kein Fehlerfall.** `extrema-mit-nebenbedingung` trägt weder `<mfrac>` noch `<msqrt>` noch `<msub>`; der dritte Schritt entfällt dort. Der frühere Maßstab — ein `<mfrac>` gegen die Körpergröße der Seite, Schwelle `1.6` — fand auf dieser Karte gar kein Element und hätte auf `gradient.html` einen Fehlalarm ausgelöst: der erste Bruch dort (`3/5` im Beispielfeld) ist 20,4 px hoch, die Schwelle läge bei 24 px. Der Quotient gegen den eigenen Zähler ist maßstabsfrei — über alle 16 Brüche des Repos liegt er zwischen 1,89 und 2,63, während er ohne Bruchsatz auf etwa 1 fällt.
 6. **Verdeckt der Abfragemodus?**
    Der Mechanismus setzt **keine** Klasse auf das verdeckte Feld — er blendet dessen Kinder per `visibility` aus. Also wird genau das gemessen:
    ```js
