@@ -275,6 +275,7 @@ Ziel: Die Gestalt steht, geprüft an den beiden Extremen — einer schmalen 2×2
 **Dateien:**
 - Erstellen: `shared/formeln.css`
 - Erstellen: `formeln/drehungen-spiegelungen.html` (zunächst mit zwei Einträgen)
+- Ändern: `shared/ui.css` (nur `.matrix-klammer-4z`, nach der Messung in Schritt 4)
 
 **Schnittstellen:**
 - Nutzt: `shared/theme.css` (Tokens `--ink --dim --edge --panel-a --panel-b --gold`), `shared/ui.css` (`.wrap`, `.querlink`, `.seitenfuss`)
