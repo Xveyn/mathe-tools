@@ -377,6 +377,20 @@ Nachlässigkeit. Geprüft wird stattdessen am laufenden Bild:
   einer Karte.
 - Jeden neuen Link anklicken, über `file://` **und** über HTTP.
 
+**Wer am laufenden Bild nachmisst, stößt auf zwei Cache-Fallen.** Beide
+haben in dieser Runde je einen Prüflauf gekostet:
+
+1. **Der Stylesheet-Cache.** Edge und Chromium behalten `shared/*.css` im
+   Speicher, auch wenn die Datei auf der Platte längst neu ist. Nach jeder
+   CSS-Änderung im schon geöffneten Dokument die `link`-Hrefs mit einem
+   Zeitstempel neu setzen, sonst misst man den alten Stand.
+2. **Der Dokument-Cache.** Ein zweites `page.goto()` auf **dieselbe** URL
+   liefert in Chromium auch das HTML aus dem Speicher, nicht nur die
+   Stylesheets. Das erzeugte einmal eine falsche, unsymmetrische
+   Klammermessung, die erst nach einem Wechsel auf `?nocache=<Nummer>` in
+   der Navigations-URL sauber wurde. Bei jeder erneuten Navigation also
+   die URL selbst variieren, nicht nur die Stylesheet-Hrefs.
+
 **Wird ein Werkzeug geändert**, ist die Prüfung schärfer: Der
 Fundament-Plan unter `docs/superpowers/plans/` beschreibt eine Routine,
 die 21 Zustände als Screenshots aufnimmt und gegen Referenzbilder des
