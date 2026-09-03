@@ -143,8 +143,8 @@ input[type=range]:focus-visible{outline:2px solid currentColor;outline-offset:4p
    Karte, ein Ziel) und mal mehrere Anker als Kinder trägt. Sonst
    unterstriche ein Hover irgendwo auf der Zeile gleich die ganze Zeile.
 
-   Ausgeblendet wird `.seitenfuss` im Druck — die Regel dazu steht bei
-   den übrigen Druckentscheidungen in shared/karten.css. */
+   Ausgeblendet wird `.seitenfuss` im Druck — die Regel dazu steht zwanzig
+   Zeilen tiefer in dieser Datei, bei den übrigen Druckentscheidungen. */
 .querlink,.seitenfuss{
   display:block;font-size:.9rem;border-top:1px solid var(--edge);
 }
@@ -204,3 +204,41 @@ a.querlink:focus-visible,a.seitenfuss:focus-visible,
   padding-top:12px;border-top:1px solid var(--edge);
 }
 .anfang label{display:flex;align-items:center;gap:6px;font-size:.9rem;color:var(--dim)}
+
+/* ---- Katalog: Abschnittsüberschrift ----
+   Trennt die Katalog-Blöcke einer Übersichtsseite (etwa "Werkzeuge" und
+   "Karten" auf der Startseite). Steht hier bei den anderen
+   Katalogbausteinen, nicht seiteneigen — die Startseite hatte sie zuvor
+   in einem eigenen <style>-Block. */
+h2.abschnitt{
+  font-family:Georgia,"Iowan Old Style",serif;font-weight:400;
+  font-size:1.05rem;margin:28px 0 0;color:var(--dim);
+}
+
+/* ---- Matrixklammern ----
+   Handgesetzte Umklammerung einer mtable (etwa der Hesse-Matrix): die
+   Streck-Mechanik von minsize/maxsize an <mo> greift in Chromiums
+   UA-Fallback fuer <mtable> (display:inline-table) nicht, siehe
+   „Bekannte Grenzen" in CLAUDE.md — die Klammern wachsen also nicht von
+   selbst mit der Zeilenzahl der Matrix mit. Je Zeilenzahl ist deshalb eine
+   feste Groesse noetig. Die Werte sind gemessen (Pruefung vom
+   2026-09-03, .eintrag math{font-size:1.02rem}, Zielverhaeltnis 1,07),
+   nicht geschaetzt: eine geschaetzte 7em-Klammer stuende bei der
+   4x4-Matrix 14,8 px ueber und unter ihr. Wer die Schriftgroesse der
+   Umgebung aendert, misst neu. */
+.matrix-rahmen{display:inline-flex;align-items:center}
+.matrix-klammer{font-size:3.8em}      /* zwei Zeilen, an der Hesse-Matrix gemessen */
+.matrix-klammer-3z{font-size:4.6em}   /* drei Zeilen, in Aufgabe 3 nachzumessen */
+.matrix-klammer-4z{font-size:5.3em}   /* vier Zeilen, in Aufgabe 1 nachzumessen */
+
+/* ---- Druck ----
+   .seitenfuss gehört nicht aufs Blatt — die Seitennavigation selbst
+   steht weiter oben in dieser Datei. .querlink bekommt stattdessen die
+   Zieladresse als Text angehängt, weil ein Link auf Papier nicht
+   klickbar ist. Beide Regeln galten zuvor nur auf Kartenseiten, weil sie
+   im Druckblock von shared/karten.css standen, das die Formelsammlung
+   nicht laedt; hier gelten sie fuer jede Seite, die diese Datei laedt. */
+@media print{
+  .seitenfuss{ display:none !important; }
+  a.querlink::after,.querlink a::after{ content:" (" attr(href) ")"; font-size:.85em; color:#555; }
+}

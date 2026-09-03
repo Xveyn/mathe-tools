@@ -1,6 +1,6 @@
 /* Bausteine der Karteikarten, samt Abfragemodus und Druck-Stylesheet.
-   Farben kommen aus shared/theme.css; im Druck werden die Tokens
-   umdefiniert, damit auch Inline-SVG hell wird. */
+   Farben kommen aus shared/theme.css; die Tokens fuer den Druck stehen
+   dort ebenfalls, hier stehen nur die Druckregeln der Karten. */
 
 /* ---- Teil 1: die Kartenbausteine ---- */
 
@@ -97,14 +97,6 @@
   overflow:auto hidden; scrollbar-width:thin; scrollbar-color:var(--dim) transparent;
 }
 
-/* Handgesetzte Umklammerung einer mtable (etwa der Hesse-Matrix): die
-   Streck-Mechanik von minsize/maxsize an <mo> greift innerhalb von
-   article.karte nicht, siehe „Bekannte Grenzen" in CLAUDE.md. Auf eine
-   zweizeilige Matrix abgestimmt; eine dritte Zeile braucht eine neue
-   Maßnahme. */
-.matrix-rahmen{display:inline-flex;align-items:center}
-.matrix-klammer{font-size:3.8em}
-
 .bild{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:10px 16px;margin:16px 0 0;
@@ -176,22 +168,10 @@ body.abfrage [data-verdeckbar].aufgedeckt::before{ content:none; }
    wenn der Abfragemodus gerade an ist. */
 
 @media print{
-  /* Tokens umdefinieren, damit auch die SVG-Farben hell werden. */
-  :root{
-    --ink:#111; --dim:#555; --edge:#bbb;
-    --panel-a:transparent; --panel-b:transparent;
-    --grid:#ddd; --axis:#666;
-    --gold:#8a6300; --mint:#0a7d6c; --rose:#a4457a;
-  }
-  body{ background:#fff; color:#111; }
   .karte{ break-inside:avoid; border-color:#bbb; background:none; }
   .abfrage-leiste, .aufdecken{ display:none !important; }
-  /* Seitennavigation gehört nicht aufs Blatt — der Baustein selbst steht
-     in shared/ui.css, die Druckentscheidung dazu hier bei den anderen. */
-  .seitenfuss{ display:none !important; }
   body.abfrage [data-verdeckbar]{ visibility:visible !important; }
   body.abfrage [data-verdeckbar]::before{ content:none; }
-  a.querlink::after,.querlink a::after{ content:" (" attr(href) ")"; font-size:.85em; color:#555; }
   .formel, .beispiel{ background:none; }
   /* Auf Papier gibt es kein Scrollen: ein Kasten, der auf dem Bildschirm
      schiebt, schnitte hier lautlos ab. Lieber steht eine Formel ueber den
