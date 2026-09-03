@@ -15,7 +15,7 @@
   <h1>Drehungen und Spiegelungen</h1>
   <p class="lede">Orthogonale und unitäre Matrizen und die Abbildungen, die sie beschreiben. Gesucht wird nur auf dieser Seite — was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <article class="eintrag" id="orthogonal-und-unitaer" data-suche="adjungiert transponiert konjugiert">
+  <article class="eintrag" id="orthogonal-und-unitaer" data-suche="adjungiert adjungierte transponiert konjugiert unitaer">
     <h3>Orthogonale und unitäre Matrizen <span class="quelle">Skript S. 82</span></h3>
     <p class="bedingung">A regulär</p>
     <math display="block">
@@ -39,7 +39,7 @@
     <p class="fall">A quer, transponiert, heißt adjungierte Matrix.</p>
   </article>
 
-  <article class="eintrag" id="spalten-bilden-onb" data-suche="onb orthonormalbasis pruefung einheitsmatrix">
+  <article class="eintrag" id="spalten-bilden-onb" data-suche="onb orthonormalbasis pruefung einheitsmatrix orthogonal orthogonalitaet">
     <h3>Prüfung: die Spalten bilden eine ONB <span class="quelle">Skript S. 82</span></h3>
     <p class="bedingung">gilt in beide Richtungen</p>
     <math display="block">
@@ -52,7 +52,7 @@
     <p class="fall">Damit prüft man Orthogonalität, ohne die Inverse zu bestimmen. Gleichwertig: die Spaltenvektoren (und ebenso die Zeilenvektoren) bilden eine Orthonormalbasis.</p>
   </article>
 
-  <article class="eintrag" id="verzerrungsfrei" data-suche="norm skalarprodukt winkel laengentreu">
+  <article class="eintrag" id="verzerrungsfrei" data-suche="norm skalarprodukt winkel laengentreu unitaer">
     <h3>Was orthogonale Abbildungen erhalten <span class="quelle">Skript S. 83</span></h3>
     <p class="bedingung">A orthogonal oder unitär</p>
     <math display="block">
@@ -108,22 +108,22 @@
       <mrow>
         <msub><mi>S</mi><mi>x</mi></msub><mo>=</mo>
         <mrow class="matrix-rahmen">
-          <mo class="matrix-klammer">(</mo>
+          <mo class="matrix-klammer-flach">(</mo>
           <mtable>
             <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
             <mtr><mtd><mn>0</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
           </mtable>
-          <mo class="matrix-klammer">)</mo>
+          <mo class="matrix-klammer-flach">)</mo>
         </mrow>
         <mo>,</mo>
         <msub><mi>S</mi><mi>y</mi></msub><mo>=</mo>
         <mrow class="matrix-rahmen">
-          <mo class="matrix-klammer">(</mo>
+          <mo class="matrix-klammer-flach">(</mo>
           <mtable>
             <mtr><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
             <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
           </mtable>
-          <mo class="matrix-klammer">)</mo>
+          <mo class="matrix-klammer-flach">)</mo>
         </mrow>
       </mrow>
     </math>
@@ -147,11 +147,12 @@
       </mrow>
     </math>
     <p class="fall">Für α = 0 wird daraus <math><msub><mi>S</mi><mi>x</mi></msub></math>, für α = π/2 wird daraus <math><msub><mi>S</mi><mi>y</mi></msub></math>.</p>
+    <p class="fall">Für α = π/4 ist <math><msub><mi>S</mi><mi>&#x3B1;</mi></msub></math> die Spiegelung an der Winkelhalbierenden — die Aufgaben LA 17c und LA 32d verlangen genau diesen Fall.</p>
   </article>
 
-  <article class="eintrag" id="drehungen-im-raum" data-suche="raumdrehung z-achse drehspiegelung">
+  <article class="eintrag" id="drehungen-im-raum" data-suche="raumdrehung z-achse drehspiegelung x,y-ebene xy-ebene x,z-ebene xz-ebene">
     <h3>Drehungen und Spiegelungen im Raum <span class="quelle">Skript S. 84</span></h3>
-    <p class="bedingung">gegen den Uhrzeigersinn, um den Ursprung</p>
+    <p class="bedingung">Dreh- bzw. Spiegelachse liegt auf einer Koordinatenachse; die Drehungen erfolgen gegen den Uhrzeigersinn, um den Ursprung</p>
     <p class="fall">Drehung in der x,y-Ebene, also um die z-Achse:</p>
     <math display="block">
       <mrow>
@@ -281,13 +282,13 @@
     <p class="bedingung">Folgerung aus A·Aᵀ = E; in Aufgabe LA 40j verlangt</p>
     <math display="block">
       <mrow>
-        <mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo><mo>&#xB1;</mo><mn>1</mn>
+        <mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo><mo lspace="0">&#xB1;</mo><mn>1</mn>
       </mrow>
     </math>
     <p class="fall">Die Umkehrung gilt <strong>nicht</strong> — Determinante ±1 macht eine Matrix nicht orthogonal.</p>
   </article>
 
-  <article class="eintrag" id="unitaere-beispiele" data-suche="dft fourier eulersche formel einheitskreis">
+  <article class="eintrag" id="unitaere-beispiele" data-suche="dft fourier eulersche formel einheitskreis unitaer">
     <h3>Unitäre Beispiele <span class="quelle">Skript S. 84, 85</span></h3>
     <p class="bedingung">Die Drehung der Ebene als komplexe 1×1-Matrix; die diskrete Fourier-Transformation in Dimension 4</p>
     <math display="block">
