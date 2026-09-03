@@ -41,12 +41,28 @@ var MT = MT || {};
   }
 
   function start(){
-    var eintraege = [].slice.call(document.querySelectorAll("article.eintrag"));
+    var alle = [].slice.call(document.querySelectorAll("article.eintrag"));
+    if (!alle.length) return;
+
+    /* Ohne id waere der Sprunglink ein "#" und fuehrte an den Seitenanfang,
+       lautlos. Beim Fuellen der uebrigen Themen ist das der wahrscheinlichste
+       Fluechtigkeitsfehler, also wird er gemeldet — und der Eintrag wird
+       vorher aussortiert, damit eintraege[], zeilen[] und schluessel[]
+       ausnahmslos denselben Index teilen. Ein continue mitten im Aufbau der
+       drei Listen wuerde sie stattdessen gegeneinander verschieben. */
+    var eintraege = [], i;
+    for (i = 0; i < alle.length; i++) {
+      if (alle[i].id) {
+        eintraege.push(alle[i]);
+      } else if (window.console) {
+        console.warn("Eintrag ohne id, uebersprungen:", titel(alle[i]));
+      }
+    }
     if (!eintraege.length) return;
 
     var erster = eintraege[0];
     var eltern = erster.parentNode;
-    var i, schluessel = [], zeilen = [];
+    var schluessel = [], zeilen = [];
 
     /* Filterzeile */
     var zeile = document.createElement("div");
@@ -64,13 +80,6 @@ var MT = MT || {};
     nav.setAttribute("aria-label", "Einträge dieser Seite");
     var liste = document.createElement("ul");
     for (i = 0; i < eintraege.length; i++) {
-      /* Ohne id waere der Sprunglink ein "#" und fuehrte an den Seitenanfang,
-         lautlos. Beim Fuellen der uebrigen Themen ist das der wahrscheinlichste
-         Fluechtigkeitsfehler, also wird er gemeldet. */
-      if (!eintraege[i].id) {
-        if (window.console) console.warn("Eintrag ohne id:", titel(eintraege[i]));
-        continue;
-      }
       var li = document.createElement("li");
       var a = document.createElement("a");
       a.href = "#" + eintraege[i].id;

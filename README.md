@@ -1,6 +1,6 @@
 # Mathe-Werkzeuge
 
-Kleine Browser-Seiten, die Begriffe aus der Analysis sichtbar machen.
+Kleine Browser-Seiten, die Begriffe aus der Vorlesung sichtbar machen.
 Entstanden neben der Vorlesung Mathematik 2. Drei Gattungen: Werkzeuge
 rechnen etwas vor, Karten erklären etwas, die Formelsammlung schlägt
 etwas nach.
@@ -34,10 +34,10 @@ zeigt.
 
 | Thema | Worum es geht |
 |---|---|
-| [Grundlagen und Hauptsatz](formeln/integral-grundlagen.html) | Ober- und Untersumme, Hauptsatz, Grundintegrale-Tabelle, uneigentliche Integrale. |
-| [Verfahren und Partialbrüche](formeln/integral-verfahren.html) | Partielle Integration, Substitutionsregel, Partialbruchzerlegung, Polynomdivision. |
-| [Erster Ordnung](formeln/dgl-erster-ordnung.html) | Anfangswertproblem, trennbare Variablen, lineare DGL erster Ordnung, Ansatztabelle. |
-| [Zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) | Charakteristische Gleichung, die drei Fälle der Diskriminante, Ansatztabelle mit Resonanz, drei Schreibweisen nebeneinander. |
+| [Integralrechnung — Grundlagen und Hauptsatz](formeln/integral-grundlagen.html) | Ober- und Untersumme, Hauptsatz, Grundintegrale-Tabelle, uneigentliche Integrale. |
+| [Integralrechnung — Verfahren und Partialbrüche](formeln/integral-verfahren.html) | Partielle Integration, Substitutionsregel, Partialbruchzerlegung, Polynomdivision. |
+| [Differentialgleichungen erster Ordnung](formeln/dgl-erster-ordnung.html) | Anfangswertproblem, trennbare Variablen, lineare DGL erster Ordnung, Ansatztabelle. |
+| [Differentialgleichungen zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) | Charakteristische Gleichung, die drei Fälle der Diskriminante, Ansatztabelle mit Resonanz, drei Schreibweisen nebeneinander. |
 | [Endliche Körper und Restklassen](formeln/endliche-koerper.html) | Gruppen- und Körperaxiome, Restklassen, GF(p), Inversentabellen. |
 | [Vektorräume, lineare Abbildungen, Rang](formeln/vektorraeume-rang.html) | UVR-Kriterium, Abbildungsmatrix, Kern und Bild, Rang, die Äquivalenzkette der Regularität. |
 | [Skalarprodukt und Orthogonalität](formeln/skalarprodukt.html) | Skalarprodukt, komplexes Skalarprodukt, Orthonormalbasis, Projektion, Vektorprodukt. |

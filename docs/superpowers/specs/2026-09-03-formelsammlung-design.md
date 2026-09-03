@@ -158,7 +158,7 @@ Am Fuß eine `.seitenfuss`-Zeile zurück zur Startseite.
   Damit ist jeder Eintrag als `formeln/eigenwerte.html#charakteristisches-polynom`
   verlinkbar.
 - **`.quelle`** nennt die Skriptseite, `Skript S. 28`. Einträge ohne Skriptstelle
-  (die sieben aus der Aufnahme) tragen stattdessen `nicht im Skript` und
+  (die zwölf aus der Aufnahme) tragen stattdessen `nicht im Skript` und
   begründen das in der `.bedingung`-Zeile mit einem Halbsatz.
 - **`.bedingung`** ist **eine** Zeile. Was länger wird, gehört auf die Karte.
 - **`data-suche`** nimmt auf, wonach man sucht, was aber nicht im Titel steht:

@@ -36,9 +36,10 @@ h1{
    dokumentierte Ausnahme, siehe "Bekannte Grenzen" in CLAUDE.md.
 
    Bis zum 2026-09-03 stand sie im Druckblock von karten.css. Die beiden
-   Werkzeugseiten luden karten.css ausschliesslich deswegen, und index.html
-   sowie karten/index.html luden es gar nicht — sie druckten hellblauen Text
-   auf weissem Grund. */
+   Werkzeugseiten luden karten.css bis dahin ausschliesslich deswegen und
+   binden es seit der Formelsammlung-Runde nicht mehr ein — sie brauchen
+   keine einzige seiner Regeln mehr. index.html sowie karten/index.html
+   luden es nie: sie druckten zuvor hellblauen Text auf weissem Grund. */
 @media print{
   :root{
     --ink:#111; --dim:#555; --edge:#bbb;

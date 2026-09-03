@@ -230,7 +230,7 @@ h2.abschnitt{
 .matrix-klammer{font-size:3.8em}      /* zwei Zeilen, an der Hesse-Matrix gemessen */
 .matrix-klammer-3z{font-size:4.6em}   /* drei Zeilen, gemessen 2026-09-03 in Aufgabe 3 an den Drehmatrizen des Raums (Zeilen mit cos/sin und dem Buchstaben α): Verhaeltnis 1,07, Ueberstand 2,2 px oben und unten. Die reine Zahlenmatrix diag(1,-1,1) hat ohne den absteigenden Buchstaben α eine kuerzere Zeilenhoehe und liegt bei 1,35 (8,7 px) — derselbe Klammer-Kompromiss wie bei .matrix-klammer, siehe „Bekannte Grenzen" in CLAUDE.md. */
 .matrix-klammer-4z{font-size:5.3em}   /* vier Zeilen, gemessen 2026-09-03 an der DFT-Matrix: Verhaeltnis 1,06, Ueberstand 2,3 px oben und unten */
-.matrix-klammer-flach{font-size:2.4em} /* zwei Zeilen OHNE Indizes/Winkelbuchstaben (reine Zahlenmatrizen wie Sx, Sy: 1,0;0,-1) — deren Zeilenhoehe ist niedriger als bei einer Matrix mit dem Buchstaben α (siehe .matrix-klammer, an D_alpha und S_alpha gemessen), .matrix-klammer waere fuer sie zu gross (Verhaeltnis 1,66). Gemessen 2026-09-04 in der Fixrunde zu Aufgabe 3 an Sx/Sy in drehungen-spiegelungen.html, nach Cache-Reset von Stylesheet UND HTML-Dokument (siehe Hinweis in CLAUDE.md/Bericht — der Server liefert neue Dateien sofort, aber Chromium hatte auch das HTML selbst zwischengespeichert): Verhaeltnis 1,04, Ueberstand 0,7 px oben und unten. Wer die Schriftgroesse der Umgebung aendert, misst neu. */
+.matrix-klammer-flach{font-size:2.4em} /* zwei Zeilen OHNE Indizes/Winkelbuchstaben (reine Zahlenmatrizen wie Sx, Sy: 1,0;0,-1) — deren Zeilenhoehe ist niedriger als bei einer Matrix mit dem Buchstaben α (siehe .matrix-klammer, an D_alpha und S_alpha gemessen), .matrix-klammer waere fuer sie zu gross (Verhaeltnis 1,66). Gemessen 2026-09-03 in der Fixrunde zu Aufgabe 3 an Sx/Sy in drehungen-spiegelungen.html, nach Cache-Reset von Stylesheet UND HTML-Dokument (siehe Hinweis in CLAUDE.md/Bericht — der Server liefert neue Dateien sofort, aber Chromium hatte auch das HTML selbst zwischengespeichert): Verhaeltnis 1,04, Ueberstand 0,7 px oben und unten. Wer die Schriftgroesse der Umgebung aendert, misst neu. */
 
 /* ---- Druck ----
    .seitenfuss gehört nicht aufs Blatt — die Seitennavigation selbst
@@ -242,4 +242,8 @@ h2.abschnitt{
 @media print{
   .seitenfuss{ display:none !important; }
   a.querlink::after,.querlink a::after{ content:" (" attr(href) ")"; font-size:.85em; color:#555; }
+  /* .karte und .eintrag haben das je in ihrer eigenen Datei; .kachel steht
+     hier, weil formeln/index.html als erste Seite vierzehn Kacheln zeigt und
+     eine sonst zwischen zwei Blaetter fallen koennte. */
+  .kachel{ break-inside:avoid; }
 }

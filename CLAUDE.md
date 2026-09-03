@@ -1,6 +1,6 @@
 # Arbeitsregeln für dieses Repo
 
-Kleine Browser-Seiten, die Begriffe aus der Analysis sichtbar machen.
+Kleine Browser-Seiten, die Begriffe aus der Vorlesung sichtbar machen.
 Drei Gattungen: **Werkzeuge** unter `tools/` rechnen etwas vor, **Karten**
 unter `karten/` erklären etwas, die **Formelsammlung** unter `formeln/`
 schlägt etwas nach. Alle drei teilen sich die Bausteine in `shared/`.
@@ -64,7 +64,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | Datei | Was drin ist |
 |---|---|
 | `shared/theme.css` | Farbtokens, Grundtypografie, dazu die Druckpalette (heller Blattfarben-Satz im `@media print`-Block, gilt für jede Seite) |
-| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
+| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-rahmen`, `.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
 | `shared/formeln.css` | Bausteine der Formelsammlung: der Eintrag `.eintrag`, Verzeichnis und Filterzeile, samt Druck-Stylesheet — lädt nie zusammen mit `karten.css` |
 | `shared/expr.js` | `MT.expr.compile(term, vars)` — Terme in Funktionen |
@@ -214,6 +214,26 @@ eine `.kachel` in `formeln/index.html` (Pfad `<thema>.html`). Es gibt
 keine zweite Formelübersicht und keine eigene Formel-Kachel je Thema auf
 der Startseite — die Startseite verlinkt insgesamt nur auf
 `formeln/index.html`.
+
+**Ein Gerüst zur gefüllten Seite machen.** Ein noch leeres Thema ist eine
+`formeln/<thema>.html` mit `.lede`, einer `p.leer` dahinter
+(„Dieses Thema ist noch nicht gefüllt …") und sonst nichts. Beim Füllen:
+
+1. Die `p.leer`-Zeile entfernen — die Einträge treten an ihre Stelle.
+2. Die `.lede` umschreiben und dabei den Satz zur Reichweite der Suche
+   ergänzen, den die Spec in der `.lede` **jeder** Themenseite verlangt:
+   „Gesucht wird nur auf dieser Seite — was in einem anderen Thema steht,
+   findet das Feld nicht." (Wortlaut aus `drehungen-spiegelungen.html`,
+   der bisher einzigen gefüllten Seite.)
+3. An der Kachel des Themas in `formeln/index.html` das
+   `<em>noch nicht gefüllt</em>` entfernen und durch eine `<em>`-Zeile mit
+   Stichworten ersetzen, wie es Startseite und Kartenübersicht halten
+   (etwa „Stationäre Stellen — Hesse-Kriterium").
+4. **Drei handgepflegte Zähler nachziehen**, sonst stehen sie nach dieser
+   Runde falsch: die `<em>`-Zeile der Formelsammlung-Kachel auf der
+   Startseite („von vierzehn Themen ist bisher eines gefüllt"), die
+   Kachel in `formeln/index.html` selbst und die Zeile in `README.md`
+   („bisher ist eines gefüllt").
 
 ## Formeln
 
@@ -442,7 +462,7 @@ hat sie hier schon gefunden.
   hatte das Werkzeug überhaupt kein Druck-Stylesheet. Wer es beheben will,
   müsste bei `beforeprint` neu zeichnen; das rührt an
   `shared/canvas.js`, also an einer Datei, die diese Runde nicht anfasst.
-- **Sechsundzwanzig Farbliterale bestehen fort, und die Regel oben gilt
+- **Siebenundzwanzig Farbliterale bestehen fort, und die Regel oben gilt
   trotzdem.** Sie ist eine Regel für neuen Code; der Bestand ist geprüft
   und so gelassen. Wer eines davon „entdeckt", hat es hier schon gefunden.
   Gezählt wird **jedes Literal**, nicht nur jede Tokendefinition — die
@@ -450,16 +470,18 @@ hat sie hier schon gefunden.
   Tokennamen ihrer damaligen Fassung und übersah dadurch `#fff`/`#111` im
   `body`-Block, `#bbb` an `.karte` und, seit dem Verschieben der
   Druckregeln in Aufgabe 5, `#555` in `shared/ui.css` — vier Literale, die
-  keinem der drei Posten zugeordnet waren.
+  keinem der drei Posten zugeordnet waren. Die Formelsammlung-Runde übersah
+  dabei selbst noch `#0C2E3E` im `body`-Verlauf von `shared/theme.css`.
 
-  - **Zehn in `shared/theme.css`**: der `@media print`-Block (sieben
+  - **Elf in `shared/theme.css`**: der `@media print`-Block (sieben
     Zeilen), die einzige Stelle im Repo, an der Farbtokens außerhalb der
     eigentlichen Palette umdefiniert werden — `--ink`, `--dim`, `--edge`,
     `--grid`, `--axis`, `--gold`, `--mint`, `--rose` als helle Gegenwerte,
-    dazu `#fff` und `#111` direkt an `body{background;color}`, ohne
-    Umweg über ein Token. Sie steht seit Aufgabe 0 hier, weil sie für
-    jede Seite gilt: Karten, Werkzeuge, die beiden Übersichten und die
-    Formelsammlung.
+    dazu `#fff` und `#111` direkt an `body{background;color}` im
+    Druckblock, ohne Umweg über ein Token. Dazu, außerhalb des
+    Druckblocks, `#0C2E3E` am hellen Ende des radialen `body`-Verlaufs.
+    Der Druckblock steht seit Aufgabe 0 hier, weil er für jede Seite gilt:
+    Karten, Werkzeuge, die beiden Übersichten und die Formelsammlung.
   - **Neun in `shared/ui.css`**: die beiden Fehlerfarben `#E06C5A` und
     `#E89383` an `.term.bad` und `.err`, sechs `rgba()`-Werte für
     Trennlinien, Reglerschienen und den Feldgrund, dazu `#555` an
@@ -495,24 +517,31 @@ hat sie hier schon gefunden.
   (vorher, für die Hesse-Matrix allein, in `shared/karten.css`), und es
   sind vier Größen, nicht mehr eine:
 
-  - `.matrix-klammer` (3,8em) — zweizeilig, mit einem Buchstaben oder
-    Indizes wie α, an der Hesse-Matrix gemessen.
+  - `.matrix-klammer` (3,8em) — zweizeilig, an der Hesse-Matrix gemessen
+    (ihre Zellen tragen Brüche und sind deshalb hoch): Verhältnis 1,03.
   - `.matrix-klammer-3z` (4,6em) — dreizeilig, an den Drehmatrizen des
     Raums gemessen: Verhältnis 1,07, Überstand 2,2 px.
   - `.matrix-klammer-4z` (5,3em) — vierzeilig, an der DFT-Matrix gemessen:
     Verhältnis 1,06, Überstand 2,3 px.
-  - `.matrix-klammer-flach` (2,4em) — zweizeilig, aber ohne Buchstaben
-    oder Indizes (reine Zahlenmatrizen wie `Sx`/`Sy`), an ihnen gemessen:
-    Verhältnis 1,04, Überstand 0,7 px.
+  - `.matrix-klammer-flach` (2,4em) — zweizeilig, ohne Brüche und ohne
+    Winkelbuchstaben (reine Zahlenmatrizen wie `Sx`/`Sy`), an ihnen
+    gemessen: Verhältnis 1,04, Überstand 0,7 px.
 
   **Nicht die Zeilenzahl allein bestimmt die passende Klammer, sondern die
-  Höhe der Zellen.** Eine Matrix mit α oder Indizes ist höher als eine
-  reine Zahlenmatrix mit derselben Zeilenzahl — deshalb braucht `Sx`/`Sy`
-  trotz ebenfalls zwei Zeilen die flachere `.matrix-klammer-flach` statt
-  `.matrix-klammer`: mit `.matrix-klammer` läge das Verhältnis bei 1,66,
-  deutlich zu groß. Eine geänderte Schriftgröße der Umgebung verstimmt
-  jede der vier Klammern lautlos gegen ihre Matrix — dann muss neu
-  vermessen werden.
+  Höhe der Zelle — und die vier Größen decken die häufigen Fälle, nicht
+  jede Zellenhöhe.** Eine Zelle mit einem Bruch ist höher als eine mit
+  `cos(α)`, und eine mit `cos(α)` ist höher als eine mit einer bloßen
+  Zahl; die Anwesenheit eines Buchstabens allein entscheidet nichts.
+  `.matrix-klammer` ist an der bruchtragenden Hesse-Matrix gemessen; an
+  den flacheren Rotationsmatrizen `Dα` und `Sα` (nur `cos`/`sin`, kein
+  Bruch) liegt dieselbe Klasse bei 1,195 — außerhalb des Bandes der
+  übrigen Messungen, der Eintrag bleibt aber lesbar. Deutlicher zeigt es
+  `.matrix-klammer-3z`, an den (ebenfalls `cos`/`sin`-haltigen)
+  Drehmatrizen des Raums gemessen: an der reinen Zahlenmatrix
+  `diag(1,−1,1)`, deren Zellen noch flacher sind, liegt das Verhältnis
+  bei 1,346. Beide Fälle sind bekannt und so gelassen, nicht übersehen.
+  Eine geänderte Schriftgröße der Umgebung verstimmt jede der vier
+  Klammern lautlos gegen ihre Matrix — dann muss neu vermessen werden.
 - **Prüfroutine P sagt nicht, wie der Term für ihre 21 Zustände gesetzt
   wird — das ist nicht egal.** Ein angeklickter Beispiel-Chip bleibt aktiv
   markiert (Goldrand); derselbe Term von Hand ins Feld getippt markiert
