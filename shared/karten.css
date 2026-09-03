@@ -73,12 +73,28 @@
    Der Griff steht deshalb in var(--dim) und nicht in der viel blasseren
    Rahmenfarbe — er ist der einzige Hinweis, dass rechts noch etwas steht.
 
+   Die zweite Achse muss ausdruecklich dastehen. Steht nur overflow-x, macht
+   CSS aus dem uebrigen „visible“ ein „auto“, und Chromium meldet fuer eine
+   Formelzeile mehr Inhaltshoehe, als der Kasten hoch ist (22 gegen 16 px bei
+   einer einzeiligen Formel). Jede Zeile legte sich daraufhin 10 px fuer
+   einen senkrechten Balken zurecht, den niemand braucht — auf der
+   DGL-Karte 35 Stueck, und der Platz fuer die Formel schrumpfte von 267 auf
+   257. Mit „hidden“ auf der zweiten Achse ist der Gutter weg.
+
+   Abgeschnitten wird dadurch nichts, und das ist nachgemessen statt
+   geschaetzt: auf allen fuenf Kartenseiten, bei 390 und bei 1000 px, wurde
+   jeder Nachkomme jedes solchen Kastens gegen dessen Ober- und Unterkante
+   gerechnet — kein einziger ragt hinaus, auch die 3,8em-Klammern der
+   Hesse-Matrix nicht. (Chromiums scrollHeight meldet fuer eine Formelzeile
+   trotzdem mehr, als der Kasten hoch ist; genau diese Meldung war es, die
+   den Balken heraufbeschworen hat.)
+
    Gemessen bei 390 px an der DGL-Karte, der breitesten des Repos: vier
    Kaesten entstehen, alle fangen links buendig an (0 px verdeckt bei
    scrollLeft 0) und lassen sich bis zum letzten Zeichen fahren. Die Seite
    selbst scrollt danach nicht mehr. */
 .formel math[display="block"], .beispiel math[display="block"], .karte p{
-  overflow-x:auto; scrollbar-width:thin; scrollbar-color:var(--dim) transparent;
+  overflow:auto hidden; scrollbar-width:thin; scrollbar-color:var(--dim) transparent;
 }
 
 /* Handgesetzte Umklammerung einer mtable (etwa der Hesse-Matrix): die
