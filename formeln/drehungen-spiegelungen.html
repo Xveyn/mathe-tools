@@ -15,6 +15,68 @@
   <h1>Drehungen und Spiegelungen</h1>
   <p class="lede">Orthogonale und unitäre Matrizen und die Abbildungen, die sie beschreiben. Gesucht wird nur auf dieser Seite — was in einem anderen Thema steht, findet das Feld nicht.</p>
 
+  <article class="eintrag" id="orthogonal-und-unitaer" data-suche="adjungiert transponiert konjugiert">
+    <h3>Orthogonale und unitäre Matrizen <span class="quelle">Skript S. 82</span></h3>
+    <p class="bedingung">A regulär</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>A</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup>
+        <mo>=</mo>
+        <msup><mi>A</mi><mi>T</mi></msup>
+        <mspace width="1.4em"></mspace>
+        <mtext>(orthogonal, über ℝ)</mtext>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msup><mi>A</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup>
+        <mo>=</mo>
+        <msup><mover><mi>A</mi><mo>&#xAF;</mo></mover><mi>T</mi></msup>
+        <mspace width="1.4em"></mspace>
+        <mtext>(unitär, über ℂ)</mtext>
+      </mrow>
+    </math>
+    <p class="fall">A quer, transponiert, heißt adjungierte Matrix.</p>
+  </article>
+
+  <article class="eintrag" id="spalten-bilden-onb" data-suche="onb orthonormalbasis pruefung einheitsmatrix">
+    <h3>Prüfung: die Spalten bilden eine ONB <span class="quelle">Skript S. 82</span></h3>
+    <p class="bedingung">gilt in beide Richtungen</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>&#x22C5;</mo><msup><mi>A</mi><mi>T</mi></msup><mo>=</mo><mi>E</mi>
+        <mspace width="1em"></mspace><mtext>bzw.</mtext><mspace width="1em"></mspace>
+        <mi>A</mi><mo>&#x22C5;</mo><msup><mover><mi>A</mi><mo>&#xAF;</mo></mover><mi>T</mi></msup><mo>=</mo><mi>E</mi>
+      </mrow>
+    </math>
+    <p class="fall">Damit prüft man Orthogonalität, ohne die Inverse zu bestimmen. Gleichwertig: die Spaltenvektoren (und ebenso die Zeilenvektoren) bilden eine Orthonormalbasis.</p>
+  </article>
+
+  <article class="eintrag" id="verzerrungsfrei" data-suche="norm skalarprodukt winkel laengentreu">
+    <h3>Was orthogonale Abbildungen erhalten <span class="quelle">Skript S. 83</span></h3>
+    <p class="bedingung">A orthogonal oder unitär</p>
+    <math display="block">
+      <mrow>
+        <mo>(</mo><mi>A</mi><mi>v</mi><mo>)</mo><mo>&#x22C5;</mo><mo>(</mo><mi>A</mi><mi>w</mi><mo>)</mo>
+        <mo>=</mo><mi>v</mi><mo>&#x22C5;</mo><mi>w</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo lspace="0" rspace="0">&#x2016;</mo><mi>A</mi><mi>v</mi><mo lspace="0" rspace="0">&#x2016;</mo>
+        <mo>=</mo>
+        <mo lspace="0" rspace="0">&#x2016;</mo><mi>v</mi><mo lspace="0" rspace="0">&#x2016;</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>v</mi><mo>&#x22C5;</mo><mi>w</mi><mo>=</mo><mn>0</mn>
+        <mo>&#x27F9;</mo>
+        <mo>(</mo><mi>A</mi><mi>v</mi><mo>)</mo><mo>&#x22C5;</mo><mo>(</mo><mi>A</mi><mi>w</mi><mo>)</mo><mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+  </article>
+
   <article class="eintrag" id="drehung-in-der-ebene" data-suche="drehmatrix rotation winkel alpha">
     <h3>Drehung in der Ebene <span class="quelle">Skript S. 67, 83</span></h3>
     <p class="bedingung">Drehung um den Ursprung, gegen den Uhrzeigersinn, um den Winkel α</p>
@@ -37,6 +99,192 @@
         </mrow>
       </mrow>
     </math>
+  </article>
+
+  <article class="eintrag" id="spiegelung-in-der-ebene" data-suche="achsenspiegelung winkelhalbierende">
+    <h3>Spiegelungen in der Ebene <span class="quelle">Skript S. 83</span></h3>
+    <p class="bedingung">Spiegelung an einer Geraden durch den Ursprung, die gegenüber der x-Achse um α geneigt ist</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>S</mi><mi>x</mi></msub><mo>=</mo>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer">(</mo>
+          <mtable>
+            <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
+          </mtable>
+          <mo class="matrix-klammer">)</mo>
+        </mrow>
+        <mo>,</mo>
+        <msub><mi>S</mi><mi>y</mi></msub><mo>=</mo>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer">(</mo>
+          <mtable>
+            <mtr><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+          </mtable>
+          <mo class="matrix-klammer">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msub><mi>S</mi><mi>&#x3B1;</mi></msub><mo>=</mo>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer">(</mo>
+          <mtable>
+            <mtr>
+              <mtd><mi>cos</mi><mo>(</mo><mn>2</mn><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mi>sin</mi><mo>(</mo><mn>2</mn><mi>&#x3B1;</mi><mo>)</mo></mtd>
+            </mtr>
+            <mtr>
+              <mtd><mi>sin</mi><mo>(</mo><mn>2</mn><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mo>&#x2212;</mo><mi>cos</mi><mo>(</mo><mn>2</mn><mi>&#x3B1;</mi><mo>)</mo></mtd>
+            </mtr>
+          </mtable>
+          <mo class="matrix-klammer">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+    <p class="fall">Für α = 0 wird daraus <math><msub><mi>S</mi><mi>x</mi></msub></math>, für α = π/2 wird daraus <math><msub><mi>S</mi><mi>y</mi></msub></math>.</p>
+  </article>
+
+  <article class="eintrag" id="drehungen-im-raum" data-suche="raumdrehung z-achse drehspiegelung">
+    <h3>Drehungen und Spiegelungen im Raum <span class="quelle">Skript S. 84</span></h3>
+    <p class="bedingung">gegen den Uhrzeigersinn, um den Ursprung</p>
+    <p class="fall">Drehung in der x,y-Ebene, also um die z-Achse:</p>
+    <math display="block">
+      <mrow>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer-3z">(</mo>
+          <mtable>
+            <mtr>
+              <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mo>&#x2212;</mo><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mn>0</mn></mtd>
+            </mtr>
+            <mtr>
+              <mtd><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mn>0</mn></mtd>
+            </mtr>
+            <mtr>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mn>1</mn></mtd>
+            </mtr>
+          </mtable>
+          <mo class="matrix-klammer-3z">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+    <p class="fall">Spiegelung an der x,z-Ebene:</p>
+    <math display="block">
+      <mrow>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer-3z">(</mo>
+          <mtable>
+            <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+          </mtable>
+          <mo class="matrix-klammer-3z">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+    <p class="fall">Drehspiegelung:</p>
+    <math display="block">
+      <mrow>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer-3z">(</mo>
+          <mtable>
+            <mtr>
+              <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mo>&#x2212;</mo><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+            </mtr>
+            <mtr>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mo>&#x2212;</mo><mn>1</mn></mtd>
+              <mtd><mn>0</mn></mtd>
+            </mtr>
+            <mtr>
+              <mtd><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+            </mtr>
+          </mtable>
+          <mo class="matrix-klammer-3z">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </article>
+
+  <article class="eintrag" id="drehung-um-y-und-x-achse" data-suche="raumdrehung y-achse x-achse">
+    <h3>Drehung um die y- und die x-Achse <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">im Skript steht nur die z-Achse; Bemerkung 3.9.4 nennt diese Beispiele ausdrücklich einen Spezialfall</p>
+    <math display="block">
+      <mrow>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer-3z">(</mo>
+          <mtable>
+            <mtr>
+              <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+            </mtr>
+            <mtr>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mn>1</mn></mtd>
+              <mtd><mn>0</mn></mtd>
+            </mtr>
+            <mtr>
+              <mtd><mo>&#x2212;</mo><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+            </mtr>
+          </mtable>
+          <mo class="matrix-klammer-3z">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer-3z">(</mo>
+          <mtable>
+            <mtr>
+              <mtd><mn>1</mn></mtd>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mn>0</mn></mtd>
+            </mtr>
+            <mtr>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mo>&#x2212;</mo><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+            </mtr>
+            <mtr>
+              <mtd><mn>0</mn></mtd>
+              <mtd><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+            </mtr>
+          </mtable>
+          <mo class="matrix-klammer-3z">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+    <p class="fall">Aufgabe LA 35b verlangt die y-Achse, Aufgabe LA 60b die x-Achse.</p>
+  </article>
+
+  <article class="eintrag" id="determinante-plus-minus-eins" data-suche="determinante orthogonal umkehrung">
+    <h3>Determinante einer orthogonalen Matrix <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Folgerung aus A·Aᵀ = E; in Aufgabe LA 40j verlangt</p>
+    <math display="block">
+      <mrow>
+        <mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo><mo>&#xB1;</mo><mn>1</mn>
+      </mrow>
+    </math>
+    <p class="fall">Die Umkehrung gilt <strong>nicht</strong> — Determinante ±1 macht eine Matrix nicht orthogonal.</p>
   </article>
 
   <article class="eintrag" id="unitaere-beispiele" data-suche="dft fourier eulersche formel einheitskreis">
