@@ -46,6 +46,7 @@ ein Fehler, kein Kompromiss.
 
 ```
 index.html            Startseite: Abschnitt Werkzeuge, Abschnitt Karten
+favicon.svg           Seitensymbol, von jeder Seite relativ verlinkt
 shared/               gemeinsame Bausteine, alle am globalen Objekt MT
 tools/<name>/         ein Ordner je Werkzeug, mit index.html
 karten/index.html     Überblick über alle Kartenthemen
@@ -81,7 +82,9 @@ wiederholen. Sonst wirft es.
 ## Eine Karte schreiben
 
 **Ort und Name.** Karten liegen thematisch gebündelt in
-`karten/<thema>.html`. Dateinamen deutsch, klein, mit Bindestrich, ohne
+`karten/<thema>.html`. Ins `<head>` jeder neuen Datei gehört
+`<link rel="icon" href="../favicon.svg">`; fehlt er, fragt der Browser von
+sich aus `/favicon.ico` an und die Konsole trägt einen 404. Dateinamen deutsch, klein, mit Bindestrich, ohne
 Umlaute: `extrema-mit-nebenbedingung.html`. Jede Karte bekommt ein `id` in
 derselben Schreibweise und ist damit als
 `karten/gradient.html#richtungsableitung` verlinkbar.
@@ -248,7 +251,10 @@ Entscheidung, keine Lücke — siehe
 ## Ein Werkzeug ergänzen
 
 1. `tools/<name>/index.html` anlegen, `shared/theme.css` und
-   `shared/ui.css` einbinden, dazu die gebrauchten `shared/*.js`.
+   `shared/ui.css` einbinden, dazu die gebrauchten `shared/*.js`. Ins
+   `<head>` gehört auch `<link rel="icon" href="../../favicon.svg">` —
+   ohne ihn fragt der Browser von sich aus `/favicon.ico` an und die
+   Konsole trägt auf dieser einen Seite dauerhaft einen 404.
 2. Werkzeug-eigenes JavaScript nach `tools/<name>/<name>.js`.
 3. Eine **Kachel** im Abschnitt Werkzeuge der Startseite ergänzen —
    `.kachel`, nicht `.karte`; siehe die Namensregel weiter oben.

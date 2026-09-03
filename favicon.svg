@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Parabel">
+  <!-- Farben als Literale, und das ist hier kein Verstoss gegen die Regel aus
+       CLAUDE.md: eine Favicon-Datei wird als Bild geladen, nicht als Teil
+       einer Seite, und sieht deren Stylesheets nie. Die Werte sind die
+       Tokens abyss und gold aus shared/theme.css.
+       (Zwei Bindestriche hintereinander sind in einem XML-Kommentar
+       verboten; die Tokennamen stehen deshalb ohne ihr Praefix da.) -->
+  <rect width="64" height="64" rx="13" fill="#061821"/>
+  <path d="M11 50 Q32 2 53 50" fill="none" stroke="#F0B429" stroke-width="6" stroke-linecap="round"/>
+</svg>
