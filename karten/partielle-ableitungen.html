@@ -21,7 +21,7 @@
   <article class="karte" id="partielle-ableitung">
     <h3>Partielle Ableitung</h3>
 
-    <div class="voraussetzung"><math><mi>f</mi></math> ist in einer Umgebung von <math><mo>(</mo><msub><mi>x</mi><mn>0</mn></msub><mo>,</mo><msub><mi>y</mi><mn>0</mn></msub><mo>)</mo></math> definiert, und der Grenzwert existiert.</div>
+    <div class="voraussetzung"><math><mi>f</mi></math> ist in einer Umgebung von <math><mo>(</mo><msub><mi>x</mi><mn>0</mn></msub><mo>|</mo><msub><mi>y</mi><mn>0</mn></msub><mo>)</mo></math> definiert, und der Grenzwert existiert.</div>
 
     <div class="formel" data-verdeckbar>
       <math display="block">
@@ -58,7 +58,7 @@
 
       <p><math><msub><mi>f</mi><mi>y</mi></msub><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi>y</mi></math><small>(<math><mi>x</mi></math> ist eine Zahl)</small></p>
 
-      <p>An der Stelle <math><mo>(</mo><mn>2</mn><mo>,</mo><mn>1</mn><mo>)</mo></math>:</p>
+      <p>An der Stelle <math><mo>(</mo><mn>2</mn><mo>|</mo><mn>1</mn><mo>)</mo></math>:</p>
 
       <p><math><msub><mi>f</mi><mi>x</mi></msub><mo>(</mo><mn>2</mn><mo>,</mo><mn>1</mn><mo>)</mo><mo>=</mo><mn>2</mn><mo>&#x22C5;</mo><mn>2</mn><mo>&#x22C5;</mo><mn>1</mn><mo>=</mo><mn>4</mn></math></p>
 
@@ -95,13 +95,13 @@
           <line x1="32" y1="75.5" x2="36" y2="75.5" stroke="var(--axis)" stroke-width="1"/>
           <text x="29" y="117" text-anchor="end" font-size="10" fill="var(--dim)">3</text>
           <text x="29" y="79" text-anchor="end" font-size="10" fill="var(--dim)">7</text>
-          <!-- Hilfslinien zum Punkt (2, 7) -->
+          <!-- Hilfslinien zum Punkt (2 | 7) -->
           <line x1="36" y1="75.5" x2="152" y2="75.5" stroke="var(--axis)" stroke-width="1" stroke-dasharray="2 3"/>
           <line x1="152" y1="142" x2="152" y2="75.5" stroke="var(--axis)" stroke-width="1" stroke-dasharray="2 3"/>
           <!-- z = x^2 + 3 über x von 0 bis 3, Stützpunkte im Abstand 0,1 -->
           <polyline fill="none" stroke="var(--mint)" stroke-width="1.8" stroke-linejoin="round"
             points="36,113.5 41.8,113.4 47.6,113.1 53.4,112.6 59.2,112 65,111.1 70.8,110.1 76.6,108.8 82.4,107.4 88.2,105.8 94,104 99.8,102 105.6,99.8 111.4,97.4 117.2,94.9 123,92.1 128.8,89.2 134.6,86 140.4,82.7 146.2,79.2 152,75.5 157.8,71.6 163.6,67.5 169.4,63.2 175.2,58.8 181,54.1 186.8,49.3 192.6,44.2 198.4,39 204.2,33.6 210,28"/>
-          <!-- Tangente der Steigung 4 durch (2, 7) -->
+          <!-- Tangente der Steigung 4 durch (2 | 7) -->
           <line x1="82.4" y1="121.1" x2="210" y2="37.5" stroke="var(--gold)" stroke-width="1.4"/>
           <circle cx="152" cy="75.5" r="3" fill="var(--gold)"/>
           <text x="183" y="46" text-anchor="end" font-size="10" fill="var(--gold)">Steigung 4</text>
@@ -121,13 +121,13 @@
           <text x="210" y="156" text-anchor="middle" font-size="10" fill="var(--dim)">2</text>
           <line x1="32" y1="102.1" x2="36" y2="102.1" stroke="var(--axis)" stroke-width="1"/>
           <text x="29" y="105.6" text-anchor="end" font-size="10" fill="var(--dim)">7</text>
-          <!-- Hilfslinien zum Punkt (1, 7) -->
+          <!-- Hilfslinien zum Punkt (1 | 7) -->
           <line x1="36" y1="102.1" x2="123" y2="102.1" stroke="var(--axis)" stroke-width="1" stroke-dasharray="2 3"/>
           <line x1="123" y1="142" x2="123" y2="102.1" stroke="var(--axis)" stroke-width="1" stroke-dasharray="2 3"/>
           <!-- z = 4y + 3y^2 über y von 0 bis 2, Stützpunkte im Abstand 0,05 -->
           <polyline fill="none" stroke="var(--rose)" stroke-width="1.8" stroke-linejoin="round"
             points="36,142 40.4,140.8 44.7,139.5 49.1,138.2 53.4,136.8 57.8,135.2 62.1,133.6 66.5,131.9 70.8,130.1 75.2,128.3 79.5,126.3 83.9,124.3 88.2,122.2 92.6,120 96.9,117.7 101.3,115.3 105.6,112.8 110,110.3 114.3,107.6 118.7,104.9 123,102.1 127.4,99.2 131.7,96.2 136.1,93.2 140.4,90 144.8,86.8 149.1,83.5 153.5,80.1 157.8,76.6 162.2,73 166.5,69.3 170.9,65.6 175.2,61.7 179.6,57.8 183.9,53.8 188.3,49.7 192.6,45.6 197,41.3 201.3,36.9 205.7,32.5 210,28"/>
-          <!-- Tangente der Steigung 10 durch (1, 7) -->
+          <!-- Tangente der Steigung 10 durch (1 | 7) -->
           <line x1="66.5" y1="139.2" x2="188.3" y2="59.4" stroke="var(--gold)" stroke-width="1.4"/>
           <circle cx="123" cy="102.1" r="3" fill="var(--gold)"/>
           <text x="146" y="78" text-anchor="end" font-size="10" fill="var(--gold)">Steigung 10</text>
