@@ -69,7 +69,43 @@ var MT = MT || {};
 
   function betrag(d){ return Math.sqrt(d.gx * d.gx + d.gy * d.gy); }
 
-  function nahGenug(d){ return betrag(d) < 1e-10 * (1 + Math.abs(d.f)); }
+  /* Wann gilt ein Gradient als null? Nicht relativ zum FUNKTIONSWERT — das
+     war er bis hierher, und es ist der falsche Maßstab: eine große additive
+     Konstante ändert am Gradienten nichts, hob aber die Schwelle mit sich.
+     Bei x² + y² + 10⁸ stand sie bei 1e-2, und das Werkzeug nahm acht
+     Stellen an, verstreut um rund 3·10⁻³ um den Ursprung, statt des einen
+     Minimums; bei 10¹⁰ lagen sie bei ±0,4 und wurden teils als Maximum
+     eingeordnet.
+
+     Der richtige Maßstab ist die Auslöschung in der Differenz selbst. Die
+     Funktionswerte tragen einen relativen Fehler von rund eps; ihre
+     Differenz durch 2h teilt diesen Fehler durch h. Was am Gradienten
+     unterhalb von eps·|f|/h liegt, ist deshalb kein kleiner Wert, sondern
+     gar kein Wert — bei 10⁸ und h = 5·10⁻⁴ springt der berechnete Gradient
+     in Stufen von rund 1,5·10⁻⁵, dazwischen gibt es nichts.
+
+     Der Faktor 4 hält Abstand zu genau dieser Stufe: eine Schwelle unter
+     einer Stufenhöhe wäre nur zu treffen, wenn die Differenz exakt null
+     wird, und ein Lauf, der sie verfehlt, meldete „keine Stelle“ — die
+     schädlichste aller Antworten, siehe oben. Der Sockel 1e-10 gilt, wo die
+     Auslöschung nichts kostet, und ist die alte Schwelle für f = 0.
+
+     Die Grenze verschiebt sich damit, sie verschwindet nicht: |f| geht
+     weiterhin ein, nur eps-fach statt voll. Nachgemessen bei Bereich 4 mit
+     x² + y² + c: bis c = 3·10¹¹ bleibt es eine Stelle, bei 10¹² zerfällt sie
+     in acht — die Wand steht jetzt rund dreitausendmal weiter draußen als
+     die 10⁸ von vorher.
+
+     Ab etwa 10¹⁰ meldet die Stelle „unentschieden“ statt „Minimum“. Das ist
+     kein Rest des alten Fehlers, sondern dieselbe Auslöschung eine Ebene
+     tiefer: die zweiten Differenzen zählen 2h² = 5·10⁻⁷ gegen einen
+     Zahlenabstand von rund 2·10⁻⁶ bei 10¹⁰, die Hesse-Matrix ist damit
+     nicht mehr zu haben. „Unentschieden“ ist dort die richtige Auskunft. */
+  var EPS = 2.220446049250313e-16;
+
+  function nahGenug(d, h){
+    return betrag(d) < Math.max(1e-10, 4 * EPS * Math.abs(d.f) / h);
+  }
 
   /* Ein Lauf von einem Startpunkt aus. Liefert null, wenn er nicht
      konvergiert oder auf eine Polstelle trifft. Ob der Treffer noch im
@@ -82,7 +118,7 @@ var MT = MT || {};
     var norm = betrag(d);
 
     while (schritt < 60) {
-      if (nahGenug(d)) return { x: x, y: y, d: d };
+      if (nahGenug(d, h)) return { x: x, y: y, d: d };
 
       /* (H² + λI) · δ = −H · g, mit H symmetrisch, also HᵀH = H². */
       var a = d.fxx, b = d.fxy, c = d.fyy;
@@ -113,7 +149,7 @@ var MT = MT || {};
       }
       schritt++;
     }
-    return nahGenug(d) ? { x: x, y: y, d: d } : null;
+    return nahGenug(d, h) ? { x: x, y: y, d: d } : null;
   }
 
   /* Das Schulkriterium. Die Schwelle wird zuerst geprüft: eine

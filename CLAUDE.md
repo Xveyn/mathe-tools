@@ -378,25 +378,27 @@ hat sie hier schon gefunden.
   das kostete einmal einen vollen Vergleichslauf dieses Plans. Wer die
   Routine erneut laufen lässt, muss den Term auf demselben Weg setzen wie
   die Referenzaufnahme.
-- **Die Akzeptanzschwelle in `shared/extrema.js` ist relativ zum
-  Funktionswert, nicht zur Größenordnung des Gradienten.** `nahGenug` prüft
-  `|g| < 1e-10 · (1 + |f|)`; trägt die Funktion eine große additive
-  Konstante, wächst diese Schwelle mit, und Stellen werden akzeptiert, die
-  gar nicht stationär sind. Gemessen: `x^2 + y^2 + 100000000` (die Ziffern
-  ausgeschrieben) meldet acht Stellen, verstreut innerhalb rund `3·10⁻³` um
-  den Ursprung, statt des einen Minimums bei (0 | 0). Der Umschlag liegt bei
-  rund `10⁸`; bei `10⁶` rechnet der Baustein noch richtig.
+- **Die Akzeptanzschwelle in `shared/extrema.js` liegt bei der
+  Auslöschung, und die hängt weiterhin an `|f|`.** `nahGenug` prüft
+  `|g| < max(1e-10, 4·eps·|f|/h)`. Der zweite Term ist kein Rest des
+  früheren Fehlers, sondern seine Reparatur: unterhalb von `eps·|f|/h` ist
+  am berechneten Gradienten überhaupt kein Wert mehr, die Differenz springt
+  dort in Stufen. Eine Schwelle darunter wäre nur mit exakt null zu
+  treffen, und ein Lauf, der sie verfehlt, meldete „keine Stelle“.
 
-  Zwei Dinge gehören für den nächsten, der das anfasst, dazu: Die Eingabe
-  ist aus den Übungsaufgaben nicht erreichbar, deshalb steht sie hier
-  vermerkt statt behoben — die eigentliche Reparatur ist ein Kriterium
-  relativ zur eigenen Größenordnung des Gradienten, und sie gehört in die
-  Runde, die dieses Modul als Nächstes anfasst. Und: **`MT.expr` kennt keine
-  Exponentialschreibweise.** `e` ist die Euler'sche Zahl, `1e8` wird also als
-  `1 · e · 8 = 21,746` gelesen, nicht als 100 000 000 — eine Prüfung genau
-  dieser Grenze meldete einmal „bestanden", weil sie als `1e8` eingetippt war
-  und damit eine völlig andere Funktion maß. Wer große Werte testet, muss
-  die Ziffern ausschreiben.
+  Gemessen bei Bereich 4 an `x^2 + y^2 + c` (die Ziffern ausgeschrieben):
+  bis `c = 3·10¹¹` bleibt es die eine Stelle, bei `10¹²` zerfällt sie in
+  acht. Vor der Umstellung stand diese Wand bei `10⁸`. Ab etwa `10¹⁰`
+  meldet die Stelle „unentschieden“ statt „Minimum“ — dort verliert die
+  zweite Differenz die Hesse-Matrix, `2h² = 5·10⁻⁷` gegen einen
+  Zahlenabstand von `2·10⁻⁶`, und „unentschieden“ ist die richtige
+  Auskunft.
+
+  Wer große Werte prüft, muss die Ziffern ausschreiben: **`MT.expr` kennt
+  keine Exponentialschreibweise.** `e` ist die Euler'sche Zahl, `1e8` wird
+  also als `1 · e · 8 = 21,746` gelesen, nicht als 100 000 000 — eine
+  Prüfung genau dieser Grenze meldete einmal „bestanden“, weil sie als
+  `1e8` eingetippt war und damit eine völlig andere Funktion maß.
 
 ## Ton
 
