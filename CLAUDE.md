@@ -1,9 +1,9 @@
 # Arbeitsregeln für dieses Repo
 
 Kleine Browser-Seiten, die Begriffe aus der Analysis sichtbar machen.
-Zwei Gattungen: **Werkzeuge** unter `tools/` rechnen etwas vor, **Karten**
-unter `karten/` erklären etwas. Beide teilen sich die Bausteine in
-`shared/`.
+Drei Gattungen: **Werkzeuge** unter `tools/` rechnen etwas vor, **Karten**
+unter `karten/` erklären etwas, die **Formelsammlung** unter `formeln/`
+schlägt etwas nach. Alle drei teilen sich die Bausteine in `shared/`.
 
 ## Harte Regeln
 
@@ -31,9 +31,10 @@ ein Fehler, kein Kompromiss.
   dort stehen seit dem Fundament kurze, eingeführte Namen
   (`MT.expr.compile`, `MT.canvas.fit/linear/tickStep/colors`,
   `MT.plot2d.contour/segments/polyline`,
-  `MT.scene3d.camera/project/enableDrag`), und `MT.abfrage.start()` folgt
-  ihnen mit Absicht. Wer etwas Neues an `MT` hängt, bleibt bei dieser
-  Schreibweise, statt eine zweite Konvention danebenzustellen.
+  `MT.scene3d.camera/project/enableDrag`), und `MT.abfrage.start()` sowie
+  `MT.formeln.start()` folgen ihnen mit Absicht. Wer etwas Neues an `MT`
+  hängt, bleibt bei dieser Schreibweise, statt eine zweite Konvention
+  danebenzustellen.
 - **ES5-artiger Stil.** `var`, IIFE, `"use strict"`. Kein `let`, kein
   `const`, keine Pfeilfunktionen, keine Template-Literale.
 - **Farben und Grundformen kommen aus `shared/`.** Keine Farbliterale in
@@ -45,12 +46,16 @@ ein Fehler, kein Kompromiss.
 ## Aufbau
 
 ```
-index.html            Startseite: Abschnitt Werkzeuge, Abschnitt Karten
+index.html            Startseite: Abschnitt Werkzeuge, Abschnitt Karten,
+                       Abschnitt Formelsammlung
 favicon.svg           Seitensymbol, von jeder Seite relativ verlinkt
 shared/               gemeinsame Bausteine, alle am globalen Objekt MT
 tools/<name>/         ein Ordner je Werkzeug, mit index.html
 karten/index.html     Überblick über alle Kartenthemen
 karten/<thema>.html   eine Datei je Thema, mit mehreren Karten darin
+formeln/index.html    Überblick über alle Themen der Formelsammlung
+formeln/<thema>.html  eine Datei je Thema, mit mehreren Formeleinträgen
+                       darin
 docs/superpowers/     Design- und Planungsdokumente
 ```
 
@@ -58,9 +63,10 @@ docs/superpowers/     Design- und Planungsdokumente
 
 | Datei | Was drin ist |
 |---|---|
-| `shared/theme.css` | Farbtokens, Grundtypografie |
-| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`) und die Verweiszeilen (`.querlink`, `.seitenfuss`). Beides brauchen auch Startseite und Kartenübersicht, also Seiten, die keine Werkzeuge sind |
+| `shared/theme.css` | Farbtokens, Grundtypografie, dazu die Druckpalette (heller Blattfarben-Satz im `@media print`-Block, gilt für jede Seite) |
+| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
+| `shared/formeln.css` | Bausteine der Formelsammlung: der Eintrag `.eintrag`, Verzeichnis und Filterzeile, samt Druck-Stylesheet — lädt nie zusammen mit `karten.css` |
 | `shared/expr.js` | `MT.expr.compile(term, vars)` — Terme in Funktionen |
 | `shared/canvas.js` | `MT.canvas` — Zeichenflächen, Achsen, Farben |
 | `shared/plot2d.js` | `MT.plot2d` — Höhenlinien, Linienzüge |
@@ -68,6 +74,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | `shared/abfrage.js` | `MT.abfrage` — Verdecken und Aufdecken auf Karten |
 | `shared/extrema.js` | `MT.extrema` — stationäre Stellen suchen und einordnen |
 | `shared/dgl.js` | `MT.dgl.loese(a, b, glieder, anfang)` — lineare Differentialgleichungen zweiter Ordnung mit konstanten Koeffizienten, geschlossen gelöst |
+| `shared/formeln.js` | `MT.formeln.start()` — Verzeichnis und Filter einer Formelseite, aus dem Markup selbst gelesen |
 
 Jede `shared/*.js` beginnt mit `var MT = MT || {};` und hängt genau einen
 Teilbereich an. Damit ist ihre Ladereihenfolge untereinander egal — nur
@@ -121,7 +128,8 @@ derselben Schreibweise und ist damit als
 
 **`.karte` gehört den Karteikarten.** Die Katalogeinträge der Startseite
 heißen `.kachel`, die Zeichentafel eines Werkzeugs `.tafel`, ihr Raster
-`.ansichten`. Diese vier Namen nicht vermischen.
+`.ansichten`, ein Eintrag der Formelsammlung `.eintrag`. Diese fünf Namen
+nicht vermischen.
 
 **Merksatz und typischer Fehler sind Kür.** Sie kommen dazu, wo sie
 tragen. Ein Merksatz, der erfunden wird, um ein Feld zu füllen, ist
@@ -159,6 +167,53 @@ tragen.
 
 Eine neue **Karte** in einer schon eingetragenen Themendatei braucht das
 nicht — nur eine neue **Datei**.
+
+## Einen Formeleintrag schreiben
+
+**Ort und Name.** Wie Karten liegt die Formelsammlung thematisch gebündelt
+in `formeln/<thema>.html`, Dateiname deutsch, klein, mit Bindestrich, ohne
+Umlaute. Ins `<head>` gehört `<link rel="icon" href="../favicon.svg">`.
+
+**Gerüst.** Zwei Teile sind Pflicht, drei sind Kür:
+
+```html
+<article class="eintrag" id="drehung-in-der-ebene"
+         data-suche="drehmatrix rotation winkel alpha">
+  <h3>Drehung in der Ebene <span class="quelle">Skript S. 67, 83</span></h3>
+
+  <p class="bedingung">Drehung um den Ursprung, gegen den Uhrzeigersinn,
+    um den Winkel α</p>
+
+  <math display="block">…</math>
+
+  <a class="querlink" href="../tools/…/index.html">…</a>
+</article>
+```
+
+Pflicht sind die Überschrift `h3` mit ihrer Quellenangabe `.quelle` und
+mindestens eine Formel. Kür sind `.bedingung` (eine Zeile, unter welcher
+Voraussetzung die Formel gilt), `data-suche` (Suchbegriffe, die im Titel
+oder in `.bedingung` nicht vorkommen, aber jemand eintippen könnte — etwa
+Synonyme) und `.querlink` an ein Werkzeug oder eine Karte. Für eine
+zusätzliche Bemerkung unter einer Formel, etwa einen Sonderfall, gibt es
+`.fall`.
+
+**Eine Zeile Bedingung, kein Beispiel.** `.bedingung` sagt in einem Satz,
+wann die Formel gilt — sie rechnet nichts vor. Ein durchgerechnetes
+Beispiel gehört auf die Karte, nicht in die Formelsammlung; wer eines
+sucht, findet es über `.querlink`.
+
+**`karten.css` wird von keiner Formelseite geladen.** Eine Formelseite
+bindet `shared/theme.css`, `shared/ui.css` und `shared/formeln.css` ein,
+nicht `shared/karten.css`. `.formel` und `.beispiel` sind deshalb auf
+einer Formelseite tabu — sie gehören den Karten; der Baustein hier heißt
+`.eintrag`.
+
+**Eintragen — an einer Stelle.** Anders als bei einer Karte reicht das:
+eine `.kachel` in `formeln/index.html` (Pfad `<thema>.html`). Es gibt
+keine zweite Formelübersicht und keine eigene Formel-Kachel je Thema auf
+der Startseite — die Startseite verlinkt insgesamt nur auf
+`formeln/index.html`.
 
 ## Formeln
 
@@ -198,7 +253,10 @@ Umbruch, den Chromium umsetzt, und eine `mtable` bricht ohnehin nie. Ist
 eine Zeile breiter als die Karte, bekommt sie in `shared/karten.css` einen
 eigenen Scrollkasten — auf `math[display="block"]` und auf `.karte p`,
 nicht auf `.formel`/`.beispiel`, deren Abfrage-Rahmen ein Scrollkasten
-abschneiden würde. Auf dem Papier ist der Kasten wieder aufgehoben.
+abschneiden würde. Dieselbe Regel steht in `shared/formeln.css` für
+`.eintrag math[display="block"]` und `.eintrag p` — ein Eintrag hat keinen
+Abfrage-Rahmen, der Selektor ist dort deshalb einfacher. Auf dem Papier
+ist der Kasten wieder aufgehoben.
 
 Das ist eine Auffanglinie, kein Freibrief: eine Formel, die auf dem
 Telefon zur Hälfte hinter dem Rand steht, ist schlecht lesbar, auch wenn
@@ -265,8 +323,9 @@ Es gibt in diesem Repo **kein Test-Framework** — das ist Absicht, nicht
 Nachlässigkeit. Geprüft wird stattdessen am laufenden Bild:
 
 - Die Seite über `file://` öffnen. Konsole ohne Fehler.
-- Bei Karten: Sind die Formeln gesetzt oder steht da Quelltext? Zwei
-  Schritte, und ein dritter nur, wenn die Karte einen Bruch hat:
+- Bei Karten **und bei Formelseiten**: Sind die Formeln gesetzt oder steht
+  da Quelltext? Zwei Schritte, und ein dritter nur, wenn eine Formel einen
+  Bruch hat:
 
   1. **Kennt der Browser MathML?** `typeof window.MathMLElement` muss
      `'function'` sein.
@@ -309,8 +368,11 @@ Nachlässigkeit. Geprüft wird stattdessen am laufenden Bild:
   `gradient.html`, wo der erste Bruch `3/5` nur 20,4 px hoch ist. Der
   Quotient gegen den eigenen Zähler ist maßstabsfrei: über alle 16
   Brüche des Repos liegt er zwischen 1,89 und 2,63.
-- Abfragemodus an und aus. Mit abgeschaltetem JavaScript ist alles
-  sichtbar.
+- Abfragemodus an und aus (nur Karten — die Formelsammlung kennt keinen
+  Abfragemodus). Mit abgeschaltetem JavaScript ist bei beiden alles
+  sichtbar: bei Karten, weil der Abfragemodus selbst fehlt; bei
+  Formelseiten, weil ohne `shared/formeln.js` nur Verzeichnis und
+  Filterzeile fehlen, die Einträge im HTML aber vollständig stehen.
 - Druckvorschau: heller Grund, nichts verdeckt, kein Umbruch mitten in
   einer Karte.
 - Jeden neuen Link anklicken, über `file://` **und** über HTTP.
@@ -358,7 +420,7 @@ hat sie hier schon gefunden.
   ist ein Regler.
 
 - **Der Druck erreicht die vier Zeichentafeln nicht.** `@media print` in
-  `shared/karten.css` definiert die Farbtokens hell um, und Inline-SVG
+  `shared/theme.css` definiert die Farbtokens hell um, und Inline-SVG
   zieht mit. Ein `<canvas>` nicht: `shared/canvas.js` liest die Tokens
   einmal beim Zeichnen (`MT.canvas.colors()`) und brennt die Werte in die
   Bitmap. Die vier Ansichten des Flächenrechners kommen deshalb in ihren
@@ -366,39 +428,77 @@ hat sie hier schon gefunden.
   hatte das Werkzeug überhaupt kein Druck-Stylesheet. Wer es beheben will,
   müsste bei `beforeprint` neu zeichnen; das rührt an
   `shared/canvas.js`, also an einer Datei, die diese Runde nicht anfasst.
-- **Zwanzig Farbliterale bestehen fort, und die Regel oben gilt trotzdem.**
-  Sie ist eine Regel für neuen Code; der Bestand ist geprüft und so
-  gelassen. Wer eines davon „entdeckt", hat es hier schon gefunden:
+- **Sechsundzwanzig Farbliterale bestehen fort, und die Regel oben gilt
+  trotzdem.** Sie ist eine Regel für neuen Code; der Bestand ist geprüft
+  und so gelassen. Wer eines davon „entdeckt", hat es hier schon gefunden.
+  Gezählt wird **jedes Literal**, nicht nur jede Tokendefinition — die
+  frühere Zählung („Zwanzig") zählte an der Druckpalette nur die sechs
+  Tokennamen ihrer damaligen Fassung und übersah dadurch `#fff`/`#111` im
+  `body`-Block, `#bbb` an `.karte` und, seit dem Verschieben der
+  Druckregeln in Aufgabe 5, `#555` in `shared/ui.css` — vier Literale, die
+  keinem der drei Posten zugeordnet waren.
 
-  - **Die Druckpalette** im `@media print`-Block von `shared/karten.css`
-    (sechs Zeilen). Die einzige Stelle im Repo, an der Farbtokens außerhalb
-    von `theme.css` definiert werden. Sie steht dort, weil sie zum
-    Druck-Stylesheet der Karten gehört und mit ihm gelesen wird.
-  - **Acht in `shared/ui.css`**: die beiden Fehlerfarben `#E06C5A` und
-    `#E89383` an `.term.bad` und `.err`, dazu sechs `rgba()`-Werte für
-    Trennlinien, Reglerschienen und den Feldgrund. Sie sind Aufhellungen
-    und Abtönungen derselben Tokenfamilie; als Token hätte jede einen
-    eigenen Namen gebraucht, den nur eine einzige Regel benutzt.
+  - **Zehn in `shared/theme.css`**: der `@media print`-Block (sieben
+    Zeilen), die einzige Stelle im Repo, an der Farbtokens außerhalb der
+    eigentlichen Palette umdefiniert werden — `--ink`, `--dim`, `--edge`,
+    `--grid`, `--axis`, `--gold`, `--mint`, `--rose` als helle Gegenwerte,
+    dazu `#fff` und `#111` direkt an `body{background;color}`, ohne
+    Umweg über ein Token. Sie steht seit Aufgabe 0 hier, weil sie für
+    jede Seite gilt: Karten, Werkzeuge, die beiden Übersichten und die
+    Formelsammlung.
+  - **Neun in `shared/ui.css`**: die beiden Fehlerfarben `#E06C5A` und
+    `#E89383` an `.term.bad` und `.err`, sechs `rgba()`-Werte für
+    Trennlinien, Reglerschienen und den Feldgrund, dazu `#555` an
+    `a.querlink::after` im Druckblock — hierher gezogen, weil `.querlink`
+    seit Aufgabe 0 aus `karten.css` hierher gehört. Die Fehlerfarben und
+    `rgba()`-Werte sind Aufhellungen und Abtönungen derselben
+    Tokenfamilie; als Token hätte jede einen eigenen Namen gebraucht, den
+    nur eine einzige Regel benutzt.
+  - **Eine in `shared/karten.css`**: `#bbb` an `.karte{border-color:#bbb}`
+    im Druckblock. Ein Rest, der beim Verschieben der Palette nach
+    `theme.css` nicht mitgezogen wurde, weil er keine Tokendefinition ist,
+    sondern ein eigener Wert an genau dieser Regel.
   - **Sechs in `tools/flaechenrechner/flaechenrechner.js`**: die
     Flächenschattierung der 3D-Ansicht (dort wird die Farbe je Kachel aus
     Tiefe und Beleuchtung gerechnet, sie ist gar kein fester Wert), die
     Schnittebene, die Kachelkanten, die Höhenlinienschar und zwei
     Goldabstufungen. Ein `canvas` liest keine CSS-Variablen; `shared/canvas.js`
     reicht mit `MT.canvas.colors()` genau die Tokens durch, die es kennt.
+  - **Null in `shared/formeln.css`.** Die Formelsammlung bringt keine
+    einzige Ausnahme mit, geprüft mit
+    `grep -nE "#[0-9a-fA-F]{3,8}\b|rgba?\(" shared/formeln.css`.
 
-  Der Grund, warum das hier steht und nicht behoben ist: die Regel schützt
-  den **Druck** (siehe den Eintrag darüber), und keiner der fünfzehn Werte
-  erreicht das Papier anders, als er es ohnehin täte.
-- **Die Klammern der Hesse-Matrix sind von Hand bemessen, nicht
-  gestreckt.** Chromium und Edge rendern `<mtable>` nur über den
-  UA-Fallback `display: inline-table`, und in diesem Fallback greift die
-  Streck-Mechanik für `<mo>` nicht — `minsize`/`maxsize` bleiben innerhalb
-  von `article.karte` wirkungslos, die Klammern wachsen also nicht mit der
-  Matrix mit. Die Größe steht deshalb fest, `font-size:3.8em` in der
-  Klasse `.matrix-klammer` (`shared/karten.css`), abgestimmt auf eine
-  zweizeilige Matrix. Eine dritte Zeile oder eine geänderte Schriftgröße
-  der Umgebung verstimmt die Klammern lautlos gegen die Matrix — dann muss
-  neu vermessen werden.
+  Der Grund, warum das hier steht und nicht behoben ist: die Druckpalette
+  und die Ausnahme in `karten.css` schützen den **Druck** (siehe den
+  Eintrag darüber), und keiner der übrigen Werte erreicht das Papier
+  anders, als er es ohnehin täte.
+- **Die Matrixklammern sind von Hand bemessen, nicht gestreckt.** Chromium
+  und Edge rendern `<mtable>` nur über den UA-Fallback
+  `display: inline-table`, und in diesem Fallback greift die
+  Streck-Mechanik für `<mo>` nicht — `minsize`/`maxsize` bleiben
+  wirkungslos, eine Klammer wächst also nicht von selbst mit ihrer Matrix
+  mit. Die Klassen stehen seit der Formelsammlung in `shared/ui.css`
+  (vorher, für die Hesse-Matrix allein, in `shared/karten.css`), und es
+  sind vier Größen, nicht mehr eine:
+
+  - `.matrix-klammer` (3,8em) — zweizeilig, mit einem Buchstaben oder
+    Indizes wie α, an der Hesse-Matrix gemessen.
+  - `.matrix-klammer-3z` (4,6em) — dreizeilig, an den Drehmatrizen des
+    Raums gemessen: Verhältnis 1,07, Überstand 2,2 px.
+  - `.matrix-klammer-4z` (5,3em) — vierzeilig, an der DFT-Matrix gemessen:
+    Verhältnis 1,06, Überstand 2,3 px.
+  - `.matrix-klammer-flach` (2,4em) — zweizeilig, aber ohne Buchstaben
+    oder Indizes (reine Zahlenmatrizen wie `Sx`/`Sy`), an ihnen gemessen:
+    Verhältnis 1,04, Überstand 0,7 px.
+
+  **Nicht die Zeilenzahl allein bestimmt die passende Klammer, sondern die
+  Höhe der Zellen.** Eine Matrix mit α oder Indizes ist höher als eine
+  reine Zahlenmatrix mit derselben Zeilenzahl — deshalb braucht `Sx`/`Sy`
+  trotz ebenfalls zwei Zeilen die flachere `.matrix-klammer-flach` statt
+  `.matrix-klammer`: mit `.matrix-klammer` läge das Verhältnis bei 1,66,
+  deutlich zu groß. Eine geänderte Schriftgröße der Umgebung verstimmt
+  jede der vier Klammern lautlos gegen ihre Matrix — dann muss neu
+  vermessen werden.
 - **Prüfroutine P sagt nicht, wie der Term für ihre 21 Zustände gesetzt
   wird — das ist nicht egal.** Ein angeklickter Beispiel-Chip bleibt aktiv
   markiert (Goldrand); derselbe Term von Hand ins Feld getippt markiert

@@ -1,8 +1,9 @@
 # Mathe-Werkzeuge
 
 Kleine Browser-Seiten, die Begriffe aus der Analysis sichtbar machen.
-Entstanden neben der Vorlesung Mathematik 2. Zwei Gattungen: Werkzeuge
-rechnen etwas vor, Karten erklären etwas.
+Entstanden neben der Vorlesung Mathematik 2. Drei Gattungen: Werkzeuge
+rechnen etwas vor, Karten erklären etwas, die Formelsammlung schlägt
+etwas nach.
 
 **→ [xveyn.github.io/mathe-tools](https://xveyn.github.io/mathe-tools/)**
 
@@ -26,7 +27,34 @@ rechnen etwas vor, Karten erklären etwas.
 | [Lineare Differentialgleichungen zweiter Ordnung](karten/differentialgleichungen.html) | Charakteristisches Polynom und die drei Fälle seiner Nullstellen, der Ansatz vom Typ der rechten Seite und die Resonanz, die ihn um den Faktor x erweitert. |
 
 Alle fünf sind auch von der Startseite aus erreichbar, dazu über
-[karten/index.html](karten/index.html), das alle Themen im Überblick zeigt.
+[karten/index.html](karten/index.html), das alle Kartenthemen im Überblick
+zeigt.
+
+**Formelsammlung**
+
+| Thema | Worum es geht |
+|---|---|
+| [Grundlagen und Hauptsatz](formeln/integral-grundlagen.html) | Ober- und Untersumme, Hauptsatz, Grundintegrale-Tabelle, uneigentliche Integrale. |
+| [Verfahren und Partialbrüche](formeln/integral-verfahren.html) | Partielle Integration, Substitutionsregel, Partialbruchzerlegung, Polynomdivision. |
+| [Erster Ordnung](formeln/dgl-erster-ordnung.html) | Anfangswertproblem, trennbare Variablen, lineare DGL erster Ordnung, Ansatztabelle. |
+| [Zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) | Charakteristische Gleichung, die drei Fälle der Diskriminante, Ansatztabelle mit Resonanz, drei Schreibweisen nebeneinander. |
+| [Endliche Körper und Restklassen](formeln/endliche-koerper.html) | Gruppen- und Körperaxiome, Restklassen, GF(p), Inversentabellen. |
+| [Vektorräume, lineare Abbildungen, Rang](formeln/vektorraeume-rang.html) | UVR-Kriterium, Abbildungsmatrix, Kern und Bild, Rang, die Äquivalenzkette der Regularität. |
+| [Skalarprodukt und Orthogonalität](formeln/skalarprodukt.html) | Skalarprodukt, komplexes Skalarprodukt, Orthonormalbasis, Projektion, Vektorprodukt. |
+| [Determinante und Inverse](formeln/determinante-inverse.html) | Determinante von 2×2- und 3×3-Matrizen, Laplace-Entwicklung, Rechenregeln, Inverse. |
+| [Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) | Orthogonale und unitäre Matrizen, Drehmatrizen in Ebene und Raum, Spiegelungen, unitäre Beispiele. |
+| [Eigenwerte und Eigenvektoren](formeln/eigenwerte.html) | Eigenwerte und Eigenvektoren, charakteristisches Polynom, symmetrische und hermitesche Matrizen. |
+| [Basiswechsel und Zerlegungen](formeln/basiswechsel-zerlegungen.html) | Transformationsmatrix, Diagonalisierung, Spektralzerlegung, SVD und Pseudoinverse. |
+| [Homogene Koordinaten](formeln/homogene-koordinaten.html) | Einbettung in homogene Koordinaten, Verschiebungsmatrix, Drehung um einen Punkt, Skalierung mit Fixpunkt. |
+| [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
+| [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
+
+Vierzehn Themen, 144 Einträge insgesamt; bisher ist eines gefüllt
+([Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html), neun
+Einträge) und dient als Muster für die übrigen. Erreichbar ist die
+Sammlung von der Startseite aus, dazu über
+[formeln/index.html](formeln/index.html), das alle Formelthemen im
+Überblick zeigt.
 
 ## Wie es gebaut ist
 
@@ -38,8 +66,10 @@ wie über den Link oben.
 shared/     gemeinsame Bausteine, hängen am globalen Objekt MT
 tools/      ein Ordner je Werkzeug, jeder mit eigener index.html
 karten/     eine Datei je Thema, jede mit mehreren Karten darin
+formeln/    eine Datei je Thema, jede mit mehreren Formeleinträgen darin
 index.html  die Startseite
-CLAUDE.md   Arbeitsregeln und Bauplan für Werkzeuge und Karten
+CLAUDE.md   Arbeitsregeln und Bauplan für Werkzeuge, Karten und
+            Formeleinträge
 ```
 
 Die gemeinsamen Bausteine:
@@ -53,9 +83,11 @@ Die gemeinsamen Bausteine:
 | `shared/abfrage.js` | `MT.abfrage` — Verdecken und Aufdecken auf Karten |
 | `shared/extrema.js` | `MT.extrema` — stationäre Stellen suchen und einordnen |
 | `shared/dgl.js` | `MT.dgl.loese(a, b, glieder, anfang)` — lineare Differentialgleichungen zweiter Ordnung mit konstanten Koeffizienten, geschlossen gelöst |
-| `shared/theme.css` | Farbtokens und Grundtypografie |
-| `shared/ui.css` | Panels, Regler, Chips, Raster, dazu die Katalog-Kacheln und die Ansichtsregler-Gruppe `.blick` an einer Zeichentafel — die Startseite und Kartenübersicht teilen die Kacheln mit |
+| `shared/theme.css` | Farbtokens und Grundtypografie, dazu die Druckpalette (heller Blattfarben-Satz im `@media print`-Block, gilt für jede Seite) |
+| `shared/ui.css` | Panels, Regler, Chips, Raster, dazu die Katalog-Kacheln, die Ansichtsregler-Gruppe `.blick` an einer Zeichentafel, die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-klammer` und ihre drei Geschwister) — die Startseite, die Kartenübersicht und die Formelübersicht teilen sich diese Bausteine |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
+| `shared/formeln.css` | Bausteine der Formelsammlung: der Eintrag `.eintrag`, Verzeichnis und Filterzeile, samt Druck-Stylesheet — lädt nie zusammen mit `karten.css` |
+| `shared/formeln.js` | `MT.formeln.start()` — Verzeichnis und Filter einer Formelseite, aus dem Markup selbst gelesen |
 
 Eingebunden wird mit klassischen `<script src="…">`-Tags, absichtlich
 ohne `type="module"`: Browser blockieren Modul-Importe über `file://`,
