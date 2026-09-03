@@ -321,6 +321,13 @@ Jede Kartenseite trägt außerdem am Fuß eine `.seitenfuss`-Zeile zurück zum
 Überblick `karten/index.html`. Ohne sie ist eine Kartenseite eine
 Sackgasse: der einzige Weg hinaus führte ins Werkzeug.
 
+**Die beiden Übersichten verweisen aufeinander.** `karten/index.html` und
+`formeln/index.html` tragen je eine `.querlink`-Zeile über der Fußzeile, die
+zur anderen Übersicht führt — dieselbe Gattung, andere Richtung: die Karten
+erklären, die Sammlung schlägt nach. **Eintrag → Karte** kommt dazu, sobald
+ein Thema gefüllt ist und es zu seinen Einträgen wirklich eine Karte gibt;
+ein Link auf ein leeres Thema ist ein Versprechen ohne Deckung.
+
 **Kein vorbelegter Term.** Kein `?f=…`, kein URL-Zustand. Die Karte
 schreibt hin, welchen Term man eingeben soll. Das ist eine bewusste
 Entscheidung, keine Lücke — siehe
