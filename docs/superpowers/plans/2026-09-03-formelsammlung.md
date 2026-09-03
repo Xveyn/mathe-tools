@@ -714,6 +714,8 @@ Seite neu laden. Erwartet: über den Einträgen erst das Suchfeld, darunter das 
 
 Danach F7: beide Verzeichnislinks anklicken, die Seite muss zum Eintrag springen und dessen Rahmen golden werden (`:target`).
 
+**Der Filter liest `.fall` nicht** — nur Titel, `.bedingung` und `data-suche`. Das ist die Entscheidung der Spec, hat aber eine Folge fuer Eintraege mit mehreren Formeln: was nur in einer `.fall`-Zeile steht, findet man nur, wenn es zusaetzlich im `data-suche` steht. Beim Schreiben eines Eintrags daran denken.
+
 - [ ] **Schritt 4: Ohne JavaScript prüfen (F4)**
 
 Der einfachste verlässliche Weg: die beiden `<script>`-Zeilen in der Datei auskommentieren, Seite neu laden, messen, Kommentar wieder entfernen.
@@ -1151,7 +1153,7 @@ Der Push veröffentlicht auf ein öffentliches Remote und geht an den Nutzer, so
 
 **Typkonsistenz.** `MT.formeln.start()` wird in Aufgabe 2 definiert und in den Aufgaben 2 und 4 unter genau diesem Namen aufgerufen. Die Klassen `.eintrag`, `.quelle`, `.bedingung`, `.fall`, `.matrix`, `.klammer-2z/-3z/-4z`, `.filterzeile`, `.verzeichnis`, `.leer` entstehen in Aufgabe 1 und werden in 2, 3 und 4 unter denselben Namen benutzt. `.leer` hat zwei Verwendungen — die Leermeldung des Filters (Aufgabe 2, `hidden`) und die Auskunft einer ungefüllten Seite (Aufgabe 4, sichtbar); beide sehen gleich aus, das ist Absicht und in Aufgabe 4 vermerkt.
 
-**Abweichung von der Spec, benannt.** Die Spec nennt für die Klammern eine „eigene Klasse"; dieser Plan macht daraus drei — je Zeilenzahl eine —, weil eine Größe für 2, 3 und 4 Zeilen nicht reichen kann.
+**Abweichungen von der Spec, benannt.** Erstens: Die Spec nennt fuer die Klammern eine eigene Klasse; dieser Plan macht daraus drei — je Zeilenzahl eine —, weil eine Groesse fuer 2, 3 und 4 Zeilen nicht reichen kann, und sie stehen in `ui.css` statt in `formeln.css`, weil beide Gattungen sie brauchen. Zweitens: Die Spec verlangt ein Suchfeld mit Beschriftung; der Plan gibt ihm `placeholder` und `aria-label`, aber kein sichtbares `<label>` — die Zeile truege sonst mehr Text als Funktion. Drittens: `.eintrag .querlink` wird gestaltet, in dieser Runde aber nirgends benutzt, weil das Musterthema keine Karte hat; die Regel entsteht trotzdem, damit die naechste Runde sie vorfindet.
 
 **Nachtrag vom 2026-09-03, aus einer kritischen Durchsicht des Ist-Zustands.** Der Plan hatte fünf Annahmen, die nicht stimmten: die Werkzeugseiten laden `karten.css` sehr wohl (damit fiel die Begründung für eine zweite Druckpalette weg), `CLAUDE.md` braucht elf Änderungen statt vier und `README.md` sechs statt zwei, ein blankes `<h2>` ist im Repo nirgends gestaltet, und das `<em>` einer Kachel steht hinter dem `<p>`, nicht darin. Daraus ist Aufgabe 0 entstanden; die Aufgaben 1, 3, 4 und 5 sind entsprechend nachgezogen.
 
