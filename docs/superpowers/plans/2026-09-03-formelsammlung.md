@@ -52,6 +52,8 @@ Gelten für **jede** Aufgabe. Die Langfassung steht in `CLAUDE.md`.
 
 Der Prüfzyklus dieser Runde. Jede Aufgabe, die eine Seite anfasst, fährt die Punkte, die auf sie zutreffen, und **zitiert die Messwerte** im Commit oder im Bericht.
 
+**Die Befehlsblöcke laufen über Git Bash, nicht über PowerShell.** Sie verketten mit `&&`; die PowerShell 5.1 dieser Maschine kennt das nicht und bricht mit „Das Token `&&` ist in dieser Version kein gültiges Anweisungstrennzeichen" ab. Wer sie in PowerShell fahren will, trennt mit `;` und prüft mit `if ($?) { … }`.
+
 **Vorbereitung — einmal je Sitzung.** Playwright kann in dieser Umgebung `file://` nicht öffnen; es braucht einen Server:
 
 ```bash
@@ -163,22 +165,33 @@ Dazu die Messwerte, die sich nicht verschieben dürfen:
 
 ```js
 () => {
-  var m = document.querySelector('.matrix-rahmen');
-  var h2 = document.querySelector('h2.abschnitt');
   var s = getComputedStyle(document.body);
-  return {
-    ink: s.color, grund: s.backgroundColor,
-    klammer: m ? Math.round(m.firstElementChild.getBoundingClientRect().height * 10) / 10 : null,
-    matrix: m ? Math.round(m.querySelector('mtable').getBoundingClientRect().height * 10) / 10 : null,
-    h2: h2 ? getComputedStyle(h2).fontFamily + ' / ' + getComputedStyle(h2).fontSize +
-             ' / ' + getComputedStyle(h2).color + ' / ' + getComputedStyle(h2).marginTop : null
-  };
+  var blaetter = [].map.call(document.styleSheets, function (sh) {
+    try { return sh.href.split('/').pop() + ':' + sh.cssRules.length; }
+    catch (e) { return 'unlesbar'; }
+  });
+  var matrizen = [].map.call(document.querySelectorAll('.matrix-rahmen'), function (m) {
+    var k = m.firstElementChild.getBoundingClientRect().height;
+    var t = m.querySelector('mtable').getBoundingClientRect().height;
+    return { klammer: Math.round(k * 10) / 10, matrix: Math.round(t * 10) / 10,
+             verhaeltnis: Math.round(k / t * 100) / 100 };
+  });
+  var ueberschriften = [].map.call(document.querySelectorAll('h2.abschnitt'), function (h) {
+    var c = getComputedStyle(h);
+    return c.fontFamily.split(',')[0] + ' / ' + c.fontSize + ' / ' + c.color + ' / ' + c.marginTop;
+  });
+  return { ink: s.color, grund: s.backgroundColor, verlauf: s.backgroundImage.slice(0, 60),
+           blaetter: blaetter, matrizen: matrizen, ueberschriften: ueberschriften };
 }
 ```
 
+**Warum es so aussieht:** `grund` allein taugt nichts — `theme.css:20` setzt den Grund als `background:radial-gradient(…) fixed`, und die Kurzform stellt `background-color` auf `transparent`; am Bildschirm meldet `backgroundColor` deshalb immer `rgba(0,0,0,0)`. Deswegen steht `verlauf` daneben. `blaetter` zählt die Regeln je Stylesheet: bleibt beim Schnitt in `karten.css` eine Klammer unbalanciert, fällt der Rest der Datei stumm aus, und **alle** anderen Messwerte kämen trotzdem unverändert zurück, weil sie aus `theme.css` und `ui.css` stammen. Gemessen werden **alle** `.matrix-rahmen` und **alle** `h2.abschnitt` einer Seite, nicht nur die ersten — `index.html` hat zwei Abschnittsüberschriften.
+
+**Beides Mal in beiden Modi fahren**, am Bildschirm und unter `emulateMedia({media:'print'})`. Sonst hat die eine beabsichtigte Änderung — `index.html` und `karten/index.html` drucken jetzt hell — keinen Zahlenwert, sondern nur ein Bild.
+
 - [ ] **Schritt 2: Die Druckpalette nach `theme.css` verschieben**
 
-Aus dem `@media print`-Block von `shared/karten.css` den `:root{…}`-Block und die `body`-Zeile **entfernen** (heute `karten.css:180-186`) und in `shared/theme.css` ans Dateiende setzen:
+Aus dem `@media print`-Block von `shared/karten.css` den `:root{…}`-Block und die `body`-Zeile **entfernen** — **einschließlich der Kommentarzeile 179** („Tokens umdefinieren, damit auch die SVG-Farben hell werden"), sonst steht sie danach über `.karte{break-inside:avoid;…}` und beschreibt etwas, das dort nicht mehr passiert. Also `karten.css:179-186`. In `shared/theme.css` ans Dateiende:
 
 ```css
 /* ---- Druck ----
@@ -202,22 +215,32 @@ Aus dem `@media print`-Block von `shared/karten.css` den `:root{…}`-Block und 
 }
 ```
 
-Die übrigen Regeln des Druckblocks in `karten.css` bleiben, wo sie sind — sie betreffen `.karte`, `.abfrage-leiste`, `.aufdecken`, den Abfragemodus, `.formel`/`.beispiel` und `.bild`.
+Die übrigen Regeln des Druckblocks in `karten.css` bleiben, wo sie sind — sie betreffen `.karte`, `.abfrage-leiste`, `.aufdecken`, den Abfragemodus, `.formel`/`.beispiel` und `.bild`. Der Block bleibt damit gültig und nicht leer.
+
+**Der Dateikopf von `karten.css` (Zeilen 1-3) wird dadurch falsch:** „im Druck werden die Tokens umdefiniert" tut die Datei danach nicht mehr. Umschreiben auf: die Tokens kommen aus `theme.css`, hier stehen nur die Druckregeln der Karten.
 
 - [ ] **Schritt 3: Die Druckregeln für `.seitenfuss` und `.querlink` nach `ui.css` verschieben**
+
+**`ui.css:146-147` sagt heute, die Druckregel für `.seitenfuss` stehe in `karten.css`** — nach diesem Schritt steht sie zwanzig Zeilen tiefer in derselben Datei. Der Satz ist mit zu berichtigen.
 
 Beide Bausteine stehen in `ui.css:148-156`, ihre Druckregeln aber in `karten.css`: `.seitenfuss{ display:none !important; }` samt Kommentar und `a.querlink::after,.querlink a::after{ content:" (" attr(href) ")"; … }`. Zeilen und Kommentar nach `ui.css` verschieben, in einen eigenen `@media print`-Block am Dateiende. Danach gilt beides auch für die Formelseiten, ohne dass `formeln.css` es wiederholen muss.
 
 - [ ] **Schritt 4: Die Matrixklammern nach `ui.css` verschieben und ergänzen**
 
-`.matrix-rahmen` und `.matrix-klammer` samt ihrem Erklärkommentar aus `karten.css:100-106` nach `ui.css` verschieben und dort zwei Größen ergänzen. Die Werte für drei und vier Zeilen sind **Startwerte** und werden in Aufgabe 1 und 3 gemessen:
+`.matrix-rahmen` und `.matrix-klammer` aus `karten.css:100-106` nach `ui.css` verschieben und dort zwei Größen ergänzen.
+
+**Der Erklärkommentar wird dabei umgeschrieben, nicht übernommen.** Er sagt heute „Auf eine zweizeilige Matrix abgestimmt; eine dritte Zeile braucht eine neue Maßnahme" und „innerhalb von `article.karte`" — beides widerspricht den Geschwistern, die unmittelbar darunter entstehen. Der neue Kommentar hält fest: die Streck-Mechanik greift in Chromiums `inline-table`-Fallback nicht, deshalb ist je Zeilenzahl eine feste Größe nötig; die Werte sind gemessen; wer die Schriftgröße der Umgebung ändert, misst neu.
+
+Die Startwerte für drei und vier Zeilen sind **gemessen, nicht geraten** (Prüfung vom 2026-09-03, `.eintrag math{font-size:1.02rem}`, Zielverhältnis 1,07):
 
 ```css
 .matrix-rahmen{display:inline-flex;align-items:center}
 .matrix-klammer{font-size:3.8em}      /* zwei Zeilen, an der Hesse-Matrix gemessen */
-.matrix-klammer-3z{font-size:5.4em}   /* Startwert, in Aufgabe 3 zu messen */
-.matrix-klammer-4z{font-size:7em}     /* Startwert, in Aufgabe 1 zu messen */
+.matrix-klammer-3z{font-size:4.6em}   /* drei Zeilen, in Aufgabe 3 nachzumessen */
+.matrix-klammer-4z{font-size:5.3em}   /* vier Zeilen, in Aufgabe 1 nachzumessen */
 ```
+
+Zum Vergleich, was eine ungemessene Schätzung angerichtet hätte: mit `7em` stünde die Klammer der 4×4-Matrix 14,8 px über und unter ihr.
 
 `karten/extremwerte.html` wird **nicht** angefasst: es benutzt `.matrix-rahmen` und `.matrix-klammer` weiter, jetzt aus `ui.css`.
 
@@ -230,9 +253,10 @@ Den `<style>`-Block aus `index.html:10-15` entfernen und die Regel unverändert 
 Dieselben neun Seiten, dieselben Messwerte wie in Schritt 1.
 
 **Sollwerte:**
-- Am Bildschirm: `ink`, `grund`, `klammer`, `matrix` und `h2` sind **unverändert**. Jede Abweichung ist ein Fehler, kein Fortschritt.
-- Die Hesse-Matrix auf `karten/extremwerte.html`: `klammer` und `matrix` auf zehntel Pixel genau wie vorher.
-- Im Druck: die fünf Kartenseiten und beide Werkzeuge unverändert hell, Fußzeile weg, Querlinks mit URL. **`index.html` und `karten/index.html` sind jetzt ebenfalls hell** — vorher standen sie in `--ink` (`#D6E8EF`) auf Weiß. Das ist die eine beabsichtigte Änderung, und sie ist im Commit zu nennen.
+- Am Bildschirm alles **unverändert**: `ink`, `verlauf`, `matrizen`, `ueberschriften`. Jede Abweichung ist ein Fehler, kein Fortschritt.
+- Die Hesse-Matrix auf `karten/extremwerte.html`: `klammer` und `matrix` auf zehntel Pixel genau wie vorher (Vergleichswert der Prüfung vom 2026-09-03: Verhältnis 1,03).
+- `blaetter` meldet für jede Datei dieselbe Regelzahl wie vorher, bis auf die drei bewusst geänderten — dort passt die Differenz zur Zahl der verschobenen Regeln.
+- Im Druck: die fünf Kartenseiten und beide Werkzeuge unverändert, Fußzeile weg, Querlinks mit URL. **`index.html` und `karten/index.html` melden jetzt `ink: rgb(17, 17, 17)` und `grund: rgb(255, 255, 255)`** — vorher standen sie in `--ink` (`#D6E8EF`) auf Weiß. Das ist die eine beabsichtigte Änderung, und sie ist im Commit zu nennen.
 - Konsole auf allen neun Seiten ohne Fehler.
 
 - [ ] **Schritt 7: Commit**
@@ -300,6 +324,21 @@ Ziel: Die Gestalt steht, geprüft an den beiden Extremen — einer schmalen 2×2
 .eintrag math[display="block"]{margin:8px 0 0;text-align:center}
 .eintrag .querlink{margin:12px 0 0;padding-top:10px;font-size:.85rem}
 
+/* Ein Link mitten im Text eines Eintrags. Ohne eigene Regel faellt er auf die
+   Browservorgabe zurueck — blau und unterstrichen in einem Georgia-Kasten.
+   Dieselbe Ueberlegung wie bei .karte p a in karten.css. */
+.eintrag p a{color:var(--gold);text-decoration:none}
+.eintrag p a:hover{text-decoration:underline}
+.eintrag p a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+
+/* Etwas zum Eintippen, etwa ein Term fuer ein Werkzeug. karten.css hat sein
+   Gegenstueck an .karte code; hier steht es noch einmal, weil die Formelseiten
+   karten.css nicht laden. */
+.eintrag code{
+  font-size:.92em;color:var(--gold);background:var(--panel-b);
+  border:1px solid var(--edge);border-radius:2px;padding:1px 5px;
+}
+
 /* Eine Formel bricht nicht um. Ist sie breiter als die Spalte, scrollt sie in
    ihrer eigenen Zeile, statt die Seite aufzuschieben.
 
@@ -348,7 +387,10 @@ Ziel: Die Gestalt steht, geprüft an den beiden Extremen — einer schmalen 2×2
 
 @media print{
   .filterzeile{ display:none !important; }
-  /* Das Verzeichnis bleibt: auf Papier ist es das Inhaltsverzeichnis des Blattes. */
+  /* Das Verzeichnis bleibt: auf Papier ist es das Inhaltsverzeichnis des Blattes.
+     Aber einspaltig — die Spec sagt einspaltig, und Chromium haelt break-inside
+     in einem Mehrspaltenkasten ueber einen Seitenumbruch schlecht. */
+  .verzeichnis ul{ columns:1; }
   .eintrag{ break-inside:avoid; background:none; }
   /* Auf Papier gibt es kein Scrollen; ein Kasten schnitte lautlos ab. */
   .eintrag math[display="block"], .eintrag p{ overflow:visible; }
@@ -436,6 +478,8 @@ Ziel: Die Gestalt steht, geprüft an den beiden Extremen — einer schmalen 2×2
 
 Noch **kein** `<script>`-Tag — `shared/formeln.js` entsteht erst in Aufgabe 2.
 
+**Die Fußzeile zeigt bis Aufgabe 4 ins Leere.** `formeln/index.html` entsteht dort; bis dahin ist der einzige Ausgang dieser Seite ein 404. Das ist hingenommen und kein Fehler — nur nicht darüber stolpern.
+
 - [ ] **Schritt 3: Server starten und die Seite ansehen**
 
 ```bash
@@ -470,18 +514,20 @@ Die Werte `3.8em` und `7em` stehen seit Aufgabe 0 in `shared/ui.css`; `7em` ist 
 }
 ```
 
-**Sollwert:** `verhaeltnis` zwischen 1,00 und 1,15 — die Klammer ist so hoch wie die Matrix oder eine Spur höher. `obenUeber` und `untenUeber` liegen zwischen 0 und 4 px und unterscheiden sich um höchstens 2 px voneinander (die Klammer sitzt mittig). `.matrix-klammer-4z` in `shared/ui.css` so lange anpassen, bis das für die 4×4-Matrix gilt, und den gemessenen Endwert als Kommentar danebenschreiben. Für `.matrix-klammer` (2 Zeilen) ist die Messung eine **Kontrolle**: kommt sie nicht auf ein Verhältnis zwischen 1,00 und 1,15, ist in Aufgabe 0 etwas verrutscht. `.matrix-klammer-3z` wird in Aufgabe 3 gemessen.
+**Sollwert:** `verhaeltnis` zwischen 1,00 und 1,15 — die Klammer ist so hoch wie die Matrix oder eine Spur höher. `obenUeber` und `untenUeber` liegen zwischen 0 und 4 px und unterscheiden sich um höchstens 2 px voneinander (die Klammer sitzt mittig).
+
+**Das Band gilt je Matrix, nicht je Zeilenzahl** — und deshalb ist es für `.matrix-klammer` (2 Zeilen) hier **keine** Fehlermeldung, wenn es reißt. Der Wert `3.8em` ist an der Hesse-Matrix gemessen, deren Zellen `<msub>` tragen und damit 26,8 px hohe Zeilen haben; eine indexfreie `cos/sin`-Zelle ist nur 23,4 px hoch, dieselbe Klammer wird relativ dazu größer. Gemessen wurden am 2026-09-03: Hesse 1,05, Drehmatrix 1,20. **Beides ist in Ordnung, und `3.8em` wird nicht angefasst** — daran hängt `karten/extremwerte.html`. Wenn die Zahl für die Hesse-Matrix von 1,03 abweicht, ist in Aufgabe 0 etwas verrutscht; die Drehmatrix sagt darüber nichts. `.matrix-klammer-4z` in `shared/ui.css` so lange anpassen, bis das für die 4×4-Matrix gilt, und den gemessenen Endwert als Kommentar danebenschreiben. Für `.matrix-klammer` (2 Zeilen) ist die Messung eine **Kontrolle**: kommt sie nicht auf ein Verhältnis zwischen 1,00 und 1,15, ist in Aufgabe 0 etwas verrutscht. `.matrix-klammer-3z` wird in Aufgabe 3 gemessen.
 
 - [ ] **Schritt 5: Prüfroutine F, Punkte F1, F2, F5, F6**
 
-F1 erwartet `gesetzt: true` (ein `mfrac` ist auf der Seite — der Faktor ½ vor der DFT-Matrix). F2 erwartet `seitlich: 0` und `balken: []`; die 4×4-Matrix wird bei 390 px einen Scrollkasten bilden, das ist zulässig, er muss `erreichbar: true` melden. F5 im Druckmodus bei 794 px: heller Grund, Fußzeile weg, die Matrizen vollständig, kein Eintrag zerrissen. F6: Konsole ohne Fehler.
+F1 erwartet `gesetzt: true` (ein `mfrac` ist auf der Seite — der Faktor ½ vor der DFT-Matrix). F2 erwartet `seitlich: 0` und `balken: []`. **Ein Scrollkasten entsteht hier voraussichtlich noch nicht**: gemessen am 2026-09-03 ist die DFT-Zeile bei 390 px nur 239 px breit, der Kasten 309 px. Entsteht doch einer, muss er `erreichbar: true` melden. F5 im Druckmodus bei 794 px: heller Grund, Fußzeile weg, die Matrizen vollständig, kein Eintrag zerrissen. F6: Konsole ohne Fehler.
 
 **Die Messwerte aller vier Punkte im Commit zitieren.**
 
 - [ ] **Schritt 6: Commit**
 
 ```bash
-cd "<REPO>" && git add shared/formeln.css formeln/drehungen-spiegelungen.html && git commit -m "Baustein der Formelsammlung und die ersten zwei Eintraege" -m "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+cd "<REPO>" && git add shared/formeln.css shared/ui.css formeln/drehungen-spiegelungen.html && git commit -m "Baustein der Formelsammlung und die ersten zwei Eintraege" -m "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_01TgEoGocBa7YWZbfWT9TDLs"
 ```
 
@@ -522,15 +568,20 @@ var MT = MT || {};
     return el ? el.textContent.replace(/\s+/g, " ").trim() : "";
   }
 
-  /* Der Titel ohne die Quellenangabe, die in derselben Zeile steht. */
+  /* Der Titel ohne die Quellenangabe, die in derselben Zeile steht.
+
+     Gearbeitet wird auf einer Kopie, aus der .quelle entfernt wird — nicht mit
+     replace() auf dem Text. replace() mit einer Zeichenkette trifft nur das
+     erste Vorkommen; enthielte der Titel die Quellenangabe als Teilstueck,
+     schnitte es die falsche Stelle heraus und die Quelle bliebe im Verzeichnis
+     stehen. Ueber die Kopie ist der Fall bauartbedingt ausgeschlossen. */
   function titel(eintrag){
     var h = eintrag.querySelector("h3");
     if (!h) return "";
-    var quelle = h.querySelector(".quelle");
-    var ganz = text(h);
-    if (!quelle) return ganz;
-    var ohne = ganz.replace(text(quelle), "");
-    return ohne.replace(/\s+/g, " ").trim();
+    var kopie = h.cloneNode(true);
+    var quelle = kopie.querySelector(".quelle");
+    if (quelle) quelle.parentNode.removeChild(quelle);
+    return text(kopie);
   }
 
   function suchschluessel(eintrag){
@@ -563,6 +614,13 @@ var MT = MT || {};
     nav.setAttribute("aria-label", "Einträge dieser Seite");
     var liste = document.createElement("ul");
     for (i = 0; i < eintraege.length; i++) {
+      /* Ohne id waere der Sprunglink ein "#" und fuehrte an den Seitenanfang,
+         lautlos. Beim Fuellen der uebrigen Themen ist das der wahrscheinlichste
+         Fluechtigkeitsfehler, also wird er gemeldet. */
+      if (!eintraege[i].id) {
+        if (window.console) console.warn("Eintrag ohne id:", titel(eintraege[i]));
+        continue;
+      }
       var li = document.createElement("li");
       var a = document.createElement("a");
       a.href = "#" + eintraege[i].id;
@@ -634,7 +692,7 @@ Seite neu laden. Erwartet: über den Einträgen erst das Suchfeld, darunter das 
     return { wert: wert, eintraege: sichtbar, zeilen: sichtbarZeilen,
              leermeldung: leer && !leer.hidden ? leer.textContent : null };
   }
-  var aus = [tippe(''), tippe('dreh'), tippe('dft'), tippe('xyz'), tippe('')];
+  var aus = [tippe(''), tippe('drehmatrix'), tippe('dft'), tippe('xyz'), tippe('')];
   return { verzeichnistitel: [].map.call(zeilen, function (l) { return l.textContent; }),
            laeufe: aus };
 }
@@ -645,10 +703,12 @@ Seite neu laden. Erwartet: über den Einträgen erst das Suchfeld, darunter das 
 | Eingabe | `eintraege` | `zeilen` | `leermeldung` |
 |---|---|---|---|
 | leer | 2 | 2 | `null` |
-| `dreh` | 1 | 1 | `null` |
-| `dft` | 1 | 1 | `null` — Treffer nur über `data-suche` |
+| `drehmatrix` | 1 | 1 | `null` — Treffer nur über `data-suche` |
+| `dft` | 1 | 1 | `null` — ebenfalls nur über `data-suche` |
 | `xyz` | 0 | 0 | „Kein Eintrag passt zu „xyz"." |
 | leer | 2 | 2 | `null` |
+
+**Nicht `dreh` als Probe nehmen.** Das trifft beide Einträge: die Bedingungszeile des zweiten beginnt mit „Die Drehung der Ebene als komplexe 1×1-Matrix". Der Suchschlüssel umfasst Titel, Bedingung **und** `data-suche` — das ist so gewollt, macht `dreh` aber als Ein-Treffer-Probe untauglich.
 
 `verzeichnistitel` muss `["Drehung in der Ebene", "Unitäre Beispiele"]` sein. Steht dort die Skriptseite mit drin, ist `titel()` falsch.
 
@@ -672,7 +732,18 @@ Der einfachste verlässliche Weg: die beiden `<script>`-Zeilen in der Datei ausk
 
 - [ ] **Schritt 5: Druck prüfen (F5)**
 
-Im Druckmodus muss die Filterzeile verschwunden und das Verzeichnis vorhanden sein.
+Im Druckmodus, `emulateMedia({media:'print'})`:
+
+```js
+() => ({
+  filterzeile: getComputedStyle(document.querySelector('.filterzeile')).display,
+  verzeichnis: getComputedStyle(document.querySelector('.verzeichnis')).display,
+  spalten: getComputedStyle(document.querySelector('.verzeichnis ul')).columnCount,
+  eintragGrund: getComputedStyle(document.querySelector('.eintrag')).backgroundImage
+})
+```
+
+**Sollwert:** `filterzeile: "none"`, `verzeichnis` nicht `"none"`, `spalten: "1"`, `eintragGrund: "none"`.
 
 - [ ] **Schritt 6: Commit**
 
@@ -696,7 +767,7 @@ Ziel: `drehungen-spiegelungen.html` ist vollständig — neun Einträge, die Num
 
 - [ ] **Schritt 1: Die Skriptseiten als Bild lesen**
 
-**Nicht aus extrahiertem Text abschreiben** — die Extraktion verstümmelt Formeln. Zu lesen sind die Seiten **82, 83, 84 und 85** von SKRIPT, mit dem Read-Werkzeug und `pages: "82-85"`. Von dort stammen alle Matrizen dieser Aufgabe.
+**Nicht aus extrahiertem Text abschreiben** — die Extraktion verstümmelt Formeln. Zu lesen sind die Seiten **67 und 82 bis 85** von SKRIPT, mit dem Read-Werkzeug (`pages: "67"` und `pages: "82-85"`). Von dort stammen alle Matrizen dieser Aufgabe; Seite 67 trägt die Drehmatrix der Ebene, die in Aufgabe 1 schon geschrieben wurde und hier gegengelesen wird.
 
 - [ ] **Schritt 2: Die sieben Einträge schreiben**
 
@@ -714,7 +785,36 @@ Reihenfolge auf der Seite (die beiden vorhandenen an ihrer Stelle eingeordnet):
 | 8 | `determinante-plus-minus-eins` | Determinante einer orthogonalen Matrix | nicht im Skript |
 | 9 | `unitaere-beispiele` | Unitäre Beispiele *(steht bereits)* | Skript S. 84, 85 |
 
-Inhalt je Eintrag — Formeln nach dem Muster aus Aufgabe 1, Klammern über `.matrix-rahmen` und die passende `.matrix-klammer…`:
+**Drei MathML-Bausteine, die in Aufgabe 1 nicht vorkommen** und deshalb hier ausgeschrieben stehen — der Rest folgt dem Muster aus Aufgabe 1, Klammern über `.matrix-rahmen` und die passende `.matrix-klammer…`:
+
+```html
+<!-- adjungiert: A quer, transponiert -->
+<msup><mover><mi>A</mi><mo>&#xAF;</mo></mover><mi>T</mi></msup>
+
+<!-- Norm mit doppelten Strichen -->
+<mo lspace="0" rspace="0">&#x2016;</mo><mi>A</mi><mi>v</mi><mo lspace="0" rspace="0">&#x2016;</mo>
+
+<!-- Folgepfeil -->
+<mo>&#x27F9;</mo>
+```
+
+**Der Überstrich ist nachzumessen.** `&#xAF;` (Macron) über einem `<mover>` wird von Chromium nicht zwingend auf die Breite des `A` gestreckt — die Streck-Mechanik greift im `inline-table`-Fallback gerade nicht, siehe „Bekannte Grenzen" in `CLAUDE.md`. Prüfen:
+
+```js
+() => {
+  var o = document.querySelector('mover');
+  if (!o) return 'kein mover auf dieser Seite';
+  var strich = o.lastElementChild.getBoundingClientRect();
+  var zeichen = o.firstElementChild.getBoundingClientRect();
+  return { strich: Math.round(strich.width * 10) / 10,
+           zeichen: Math.round(zeichen.width * 10) / 10,
+           verhaeltnis: Math.round(strich.width / zeichen.width * 100) / 100 };
+}
+```
+
+Liegt `verhaeltnis` unter 0,8, deckt der Strich das `A` nicht und der Eintrag schreibt stattdessen „A quer, transponiert" als `.fall`-Zeile in Worten. **Das Ergebnis der Messung gehört in den Bericht.**
+
+Inhalt je Eintrag:
 
 1. **`orthogonal-und-unitaer`** — Bedingung: „A regulär". Zwei Formelzeilen: `A⁻¹ = Aᵀ` (orthogonal, über ℝ) und `A⁻¹ = A̅ᵀ` (unitär, über ℂ). Dazu eine `.fall`-Zeile „A̅ᵀ heißt adjungierte Matrix". Die Konjugation als `<mover><mi>A</mi><mo>&#xAF;</mo></mover>`, transponiert als `<msup>…<mi>T</mi></msup>`. `data-suche="adjungiert transponiert konjugiert"`.
 2. **`spalten-bilden-onb`** — Bedingung: „gilt in beide Richtungen". Formel `A·Aᵀ = E` beziehungsweise `A·A̅ᵀ = E`, dazu die `.fall`-Zeile: „Damit prüft man Orthogonalität, ohne die Inverse zu bestimmen." Zweiter Satz als Fließtext in `.fall`: „Gleichwertig: die Spaltenvektoren (und ebenso die Zeilenvektoren) bilden eine Orthonormalbasis." `data-suche="onb orthonormalbasis pruefung einheitsmatrix"`.
@@ -760,7 +860,7 @@ Sollwert: leere Liste. Tritt etwas über, wird der betreffende Eintrag geteilt �
 - [ ] **Schritt 5: Commit**
 
 ```bash
-cd "<REPO>" && git add formeln/drehungen-spiegelungen.html shared/formeln.css && git commit -m "Musterthema vollstaendig: acht Eintraege zu Drehungen und Spiegelungen" -m "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+cd "<REPO>" && git add formeln/drehungen-spiegelungen.html shared/ui.css && git commit -m "Musterthema vollstaendig: acht Eintraege zu Drehungen und Spiegelungen" -m "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_01TgEoGocBa7YWZbfWT9TDLs"
 ```
 
@@ -833,7 +933,7 @@ Die vierzehn Kacheln, gruppiert — die dreizehn noch leeren tragen die `<em>`-Z
 | Differentialgleichungen | `dgl-erster-ordnung.html` | Erster Ordnung | 5 |
 |  | `dgl-zweiter-ordnung.html` | Zweiter Ordnung | 9 |
 | Lineare Algebra | `endliche-koerper.html` | Endliche Körper und Restklassen | 7 |
-|  | `vektorraeume-rang.html` | Vektorräume, Abbildungen, Rang | 18 |
+|  | `vektorraeume-rang.html` | Vektorräume, lineare Abbildungen, Rang | 18 |
 |  | `skalarprodukt.html` | Skalarprodukt und Orthogonalität | 5 |
 |  | `determinante-inverse.html` | Determinante und Inverse | 8 |
 |  | `drehungen-spiegelungen.html` | Drehungen und Spiegelungen | 9 |
@@ -841,9 +941,11 @@ Die vierzehn Kacheln, gruppiert — die dreizehn noch leeren tragen die `<em>`-Z
 |  | `basiswechsel-zerlegungen.html` | Basiswechsel und Zerlegungen | 12 |
 |  | `homogene-koordinaten.html` | Homogene Koordinaten | 6 |
 | Funktionen mehrerer Variablen | `ableitungen-gradient.html` | Partielle Ableitungen und Gradient | 14 |
-|  | `extrema-fehler.html` | Extrema, Fehler, kleinste Quadrate | 18 |
+|  | `extrema-fehler.html` | Extrema, Fehlerfortpflanzung, kleinste Quadrate | 18 |
 
 `.kachel em` ist in `ui.css` bereits gestaltet.
+
+**Der Satz unter jedem Kacheltitel** entsteht aus der Nummernstrecke der Inhaltsaufnahme (Spalte „Einträge" der Tabelle in Aufgabe 4, Schritt 2): die Einträge dieser Strecke einmal überfliegen und die drei, vier tragenden Stichworte nennen.
 
 Am Fuß `<p class="seitenfuss"><a href="../index.html">← Zurück zur Startseite</a></p>` — derselbe Wortlaut wie in `karten/index.html:45`.
 
@@ -905,7 +1007,20 @@ Die `.lede`-Zeile jeder Datei nennt die Zahl der Einträge und ihre Nummern aus 
 
 - [ ] **Schritt 3: Alle vierzehn Wege gehen**
 
-Von `formeln/index.html` aus jede Kachel anklicken, auf jeder Seite die Fußzeile zurück. Auf jeder der dreizehn leeren Seiten: die `.leer`-Zeile steht da, **keine** Filterzeile, **kein** Verzeichnis, Konsole ohne Fehler (F6).
+Von `formeln/index.html` aus jede Kachel anklicken, auf jeder Seite die Fußzeile zurück. Auf jeder der dreizehn leeren Seiten gemessen statt angesehen:
+
+```js
+() => ({
+  titel: document.title,
+  eintraege: document.querySelectorAll('article.eintrag').length,
+  filterzeile: document.querySelectorAll('.filterzeile').length,
+  verzeichnis: document.querySelectorAll('.verzeichnis').length,
+  leer: document.querySelectorAll('.leer').length,
+  fuss: !!document.querySelector('.seitenfuss a')
+})
+```
+
+**Sollwert je Seite:** `{ eintraege: 0, filterzeile: 0, verzeichnis: 0, leer: 1, fuss: true }`, `titel` der Titel des Themas. Konsole ohne Fehler (F6).
 
 - [ ] **Schritt 4: Die Übersicht bei 390 px prüfen**
 
@@ -937,7 +1052,7 @@ Aufbau der Kachel wie die sieben bestehenden: `h3` als Titel, ein `<p>` mit eine
 
 - [ ] **Schritt 2: `CLAUDE.md`**
 
-Elf Stellen, alle geprüft. Die Zeilennummern sind der Stand vor dieser Runde und können sich durch die vorigen Schritte verschoben haben — nach der Stelle suchen, nicht blind zählen.
+Zwölf Stellen, alle geprüft. Die Zeilennummern sind der Stand vor dieser Runde und können sich durch die vorigen Schritte verschoben haben — nach der Stelle suchen, nicht blind zählen.
 
 | # | Stelle | Was zu tun ist |
 |---|---|---|
@@ -950,8 +1065,9 @@ Elf Stellen, alle geprüft. Die Zeilennummern sind der Stand vor dieser Runde un
 | 7 | nach `:161` | Neuer Abschnitt **„Einen Formeleintrag schreiben"** (siehe unten) |
 | 8 | `:196-201` | Die Scrollkasten-Regel gilt jetzt auch für `.eintrag math[display="block"]` und `.eintrag p` in `formeln.css` |
 | 9 | `:268` | „Bei Karten: Sind die Formeln gesetzt…" — der MathML-Test gilt für Formelseiten genauso; der Abfragemodus-Test (`:312`) nicht |
-| 10 | `:369-387` | Die Farbliteral-Zählung (siehe Schritt 4) |
-| 11 | `:392-401` | Der Eintrag zu den handbemessenen Matrixklammern: sie stehen jetzt in `ui.css`, es sind drei Größen, und die neuen zwei sind gemessen |
+| 10 | `:360-368` | Der Satz, `@media print` in `shared/karten.css` definiere die Farbtokens hell um — nach Aufgabe 0 ist es `theme.css` |
+| 11 | `:369-387` | Die Farbliteral-Zählung (siehe Schritt 4) |
+| 12 | `:392-401` | Der Eintrag zu den handbemessenen Matrixklammern: sie stehen jetzt in `ui.css`, es sind drei Größen, und die neuen zwei sind gemessen |
 
 Der neue Abschnitt **„Einen Formeleintrag schreiben"** enthält: das `article.eintrag`-Gerüst, die Pflichtteile (`h3` mit `.quelle`, Formel) und die Kür (`.bedingung`, `data-suche`, `.querlink`), die Regel „eine Zeile Bedingung, kein Beispiel — das gehört auf die Karte", dass `karten.css` auf Formelseiten **nicht** geladen wird, und dass eine neue Themendatei an **einer** Stelle einzutragen ist (`formeln/index.html`), nicht an zweien wie eine Karte.
 
@@ -966,7 +1082,7 @@ Sechs Stellen, ebenfalls geprüft:
 | 3 | `:28-29` | „Alle fünf sind auch von der Startseite aus erreichbar … `karten/index.html`, das alle Themen im Überblick zeigt" — mit `formeln/index.html` zweideutig |
 | 4 | `:37-43` | Der Verzeichnisbaum kennt `formeln/` nicht |
 | 5 | `:42` | „Arbeitsregeln und Bauplan für Werkzeuge und Karten" → und Formeleinträge |
-| 6 | `:47-58` | Die Bausteintabelle: zwei neue Zeilen |
+| 6 | `:47-58` | Die Bausteintabelle: zwei neue Zeilen für `formeln.css` und `formeln.js` — **und** die bestehenden Zeilen zu `ui.css` (Matrixklammern, `h2.abschnitt`) und `theme.css` (Druckpalette) nachziehen, die Aufgabe 0 geändert hat |
 
 **Die Datei erst lesen**, dann ergänzen — nicht aus diesem Plan schreiben.
 
@@ -981,6 +1097,22 @@ cd "<REPO>" && grep -nE "#[0-9a-fA-F]{3,8}\b|rgba?\(" shared/formeln.css
 ```
 
 Erwartet: keine Ausgabe.
+
+- [ ] **Schritt 4a: Die Änderungen der Schritte 1 bis 3 nachzählen**
+
+Achtzehn Textstellen von Hand zu ändern heißt, eine zu vergessen. Deshalb am Ende ein Durchlauf, der die alten Formulierungen sucht:
+
+```bash
+cd "<REPO>" && grep -nE "Zwei Gattungen|Werkzeuge und Karten|Diese vier Namen|Zwanzig Farbliterale" CLAUDE.md README.md
+```
+
+Erwartet: **kein Treffer**. Dazu die Gegenprobe, dass das Neue da ist:
+
+```bash
+cd "<REPO>" && grep -c "formeln" CLAUDE.md README.md index.html
+```
+
+Erwartet: in allen drei Dateien mindestens ein Treffer.
 
 - [ ] **Schritt 5: Datensuche**
 
