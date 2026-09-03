@@ -30,21 +30,19 @@
         <mrow><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><mi>&#x3BB;</mi><mo>+</mo><mi>b</mi><mo>=</mo><mn>0</mn></mrow>
       </math>
       <p>Ihre Diskriminante <math><mi>D</mi><mo>=</mo><msup><mi>a</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>4</mn><mi>b</mi></math> entscheidet über drei Fälle:</p>
+      <p><math><mi>D</mi><mo>&gt;</mo><mn>0</mn></math> &#x2014; zwei reelle Nullstellen, <strong>Kriechfall</strong>:</p>
       <math display="block">
-        <mtable>
-          <mtr>
-            <mtd><mi>D</mi><mo>&gt;</mo><mn>0</mn></mtd>
-            <mtd><mrow><mtext>zwei reelle Nullstellen &#x2014; Kriechfall:&#xA0;</mtext><mi>y</mi><mo>=</mo><msub><mi>C</mi><mn>1</mn></msub><msup><mi>e</mi><mrow><msub><mi>&#x3BB;</mi><mn>1</mn></msub><mi>x</mi></mrow></msup><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub><msup><mi>e</mi><mrow><msub><mi>&#x3BB;</mi><mn>2</mn></msub><mi>x</mi></mrow></msup></mrow></mtd>
-          </mtr>
-          <mtr>
-            <mtd><mi>D</mi><mo>=</mo><mn>0</mn></mtd>
-            <mtd><mrow><mtext>doppelte Nullstelle &#x2014; aperiodischer Grenzfall:&#xA0;</mtext><mi>y</mi><mo>=</mo><mo>(</mo><msub><mi>C</mi><mn>1</mn></msub><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub><mi>x</mi><mo>)</mo><msup><mi>e</mi><mrow><mi>&#x3BB;</mi><mi>x</mi></mrow></msup></mrow></mtd>
-          </mtr>
-          <mtr>
-            <mtd><mi>D</mi><mo>&lt;</mo><mn>0</mn></mtd>
-            <mtd><mrow><mtext>konjugiert komplexe Nullstellen &#x2014; Schwingfall:&#xA0;</mtext><mi>y</mi><mo>=</mo><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mfrac><mi>a</mi><mn>2</mn></mfrac><mi>x</mi></mrow></msup><mo>(</mo><msub><mi>C</mi><mn>1</mn></msub><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>)</mo></mrow></mtd>
-          </mtr>
-        </mtable>
+        <mrow><mi>y</mi><mo>=</mo><msub><mi>C</mi><mn>1</mn></msub><msup><mi>e</mi><mrow><msub><mi>&#x3BB;</mi><mn>1</mn></msub><mi>x</mi></mrow></msup><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub><msup><mi>e</mi><mrow><msub><mi>&#x3BB;</mi><mn>2</mn></msub><mi>x</mi></mrow></msup></mrow>
+      </math>
+
+      <p><math><mi>D</mi><mo>=</mo><mn>0</mn></math> &#x2014; doppelte Nullstelle, <strong>aperiodischer Grenzfall</strong>:</p>
+      <math display="block">
+        <mrow><mi>y</mi><mo>=</mo><mo>(</mo><msub><mi>C</mi><mn>1</mn></msub><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub><mi>x</mi><mo>)</mo><msup><mi>e</mi><mrow><mi>&#x3BB;</mi><mi>x</mi></mrow></msup></mrow>
+      </math>
+
+      <p><math><mi>D</mi><mo>&lt;</mo><mn>0</mn></math> &#x2014; konjugiert komplexe Nullstellen, <strong>Schwingfall</strong>:</p>
+      <math display="block">
+        <mrow><mi>y</mi><mo>=</mo><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mfrac><mi>a</mi><mn>2</mn></mfrac><mi>x</mi></mrow></msup><mo>(</mo><msub><mi>C</mi><mn>1</mn></msub><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><msub><mi>C</mi><mn>2</mn></msub><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>)</mo></mrow>
       </math>
       <p>Im dritten Fall ist <math><mi>&#x3C9;</mi><mo>=</mo><mfrac><msqrt><mo>&#x2212;</mo><mi>D</mi></msqrt><mn>2</mn></mfrac></math>, und der Realteil <math><mo>&#x2212;</mo><mfrac><mi>a</mi><mn>2</mn></mfrac></math> bestimmt, wie schnell die Schwingung abklingt.</p>
     </div>
@@ -118,27 +116,19 @@
 
     <div class="formel" data-verdeckbar>
       <p>Für die partikuläre Lösung <math><msub><mi>y</mi><mi>p</mi></msub></math> richtet sich der Ansatz nach der Bauart der rechten Seite <math><mi>s</mi><mo>(</mo><mi>x</mi><mo>)</mo></math>:</p>
+      <p><strong>Polynom vom Grad n</strong>, also <math><mi>s</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><msub><mi>P</mi><mi>n</mi></msub><mo>(</mo><mi>x</mi><mo>)</mo></math>:</p>
       <math display="block">
-        <mtable>
-          <mtr>
-            <mtd><msub><mi>P</mi><mi>n</mi></msub><mo>(</mo><mi>x</mi><mo>)</mo></mtd>
-            <mtd><mtext>Polynom vom Grad n</mtext></mtd>
-            <mtd><mo>&#x21D2;</mo></mtd>
-            <mtd><msup><mi>x</mi><mi>k</mi></msup><mo>(</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><msub><mi>A</mi><mn>1</mn></msub><mi>x</mi><mo>+</mo><mo>&#x22EF;</mo><mo>+</mo><msub><mi>A</mi><mi>n</mi></msub><msup><mi>x</mi><mi>n</mi></msup><mo>)</mo></mtd>
-          </mtr>
-          <mtr>
-            <mtd><mi>c</mi><mo>&#x22C5;</mo><msup><mi>e</mi><mrow><mi>&#x3BC;</mi><mi>x</mi></mrow></msup></mtd>
-            <mtd><mtext>Exponentialglied</mtext></mtd>
-            <mtd><mo>&#x21D2;</mo></mtd>
-            <mtd><msup><mi>x</mi><mi>k</mi></msup><mo>&#x22C5;</mo><mi>A</mi><mo>&#x22C5;</mo><msup><mi>e</mi><mrow><mi>&#x3BC;</mi><mi>x</mi></mrow></msup></mtd>
-          </mtr>
-          <mtr>
-            <mtd><mi>c</mi><mo>&#x22C5;</mo><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><mi>d</mi><mo>&#x22C5;</mo><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo></mtd>
-            <mtd><mtext>harmonisches Glied</mtext></mtd>
-            <mtd><mo>&#x21D2;</mo></mtd>
-            <mtd><msup><mi>x</mi><mi>k</mi></msup><mo>(</mo><mi>A</mi><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><mi>B</mi><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>)</mo></mtd>
-          </mtr>
-        </mtable>
+        <mrow><msub><mi>y</mi><mi>p</mi></msub><mo>=</mo><msup><mi>x</mi><mi>k</mi></msup><mo>(</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><msub><mi>A</mi><mn>1</mn></msub><mi>x</mi><mo>+</mo><mo>&#x22EF;</mo><mo>+</mo><msub><mi>A</mi><mi>n</mi></msub><msup><mi>x</mi><mi>n</mi></msup><mo>)</mo></mrow>
+      </math>
+
+      <p><strong>Exponentialglied</strong>, also <math><mi>s</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>c</mi><mo>&#x22C5;</mo><msup><mi>e</mi><mrow><mi>&#x3BC;</mi><mi>x</mi></mrow></msup></math>:</p>
+      <math display="block">
+        <mrow><msub><mi>y</mi><mi>p</mi></msub><mo>=</mo><msup><mi>x</mi><mi>k</mi></msup><mo>&#x22C5;</mo><mi>A</mi><mo>&#x22C5;</mo><msup><mi>e</mi><mrow><mi>&#x3BC;</mi><mi>x</mi></mrow></msup></mrow>
+      </math>
+
+      <p><strong>Harmonisches Glied</strong>, also <math><mi>s</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>c</mi><mo>&#x22C5;</mo><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><mi>d</mi><mo>&#x22C5;</mo><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo></math>:</p>
+      <math display="block">
+        <mrow><msub><mi>y</mi><mi>p</mi></msub><mo>=</mo><msup><mi>x</mi><mi>k</mi></msup><mo>(</mo><mi>A</mi><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><mi>B</mi><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>)</mo></mrow>
       </math>
       <p><math><mi>k</mi></math> ist meist 0 und wird erst durch Resonanz größer &#x2014; das ist der Gegenstand der nächsten Karte. Die unbekannten Koeffizienten <math><mi>A</mi></math> (und <math><mi>B</mi></math>) folgen aus einem Koeffizientenvergleich, nachdem der Ansatz in die Differentialgleichung eingesetzt wurde.</p>
     </div>
@@ -152,7 +142,11 @@
 
       <p>Eingesetzt und nach Potenzen von <math><mi>x</mi></math> geordnet:</p>
 
-      <p><math><mn>5</mn><msub><mi>A</mi><mn>2</mn></msub><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mo>(</mo><mn>8</mn><msub><mi>A</mi><mn>2</mn></msub><mo>+</mo><mn>5</mn><msub><mi>A</mi><mn>1</mn></msub><mo>)</mo><mi>x</mi><mo>+</mo><mo>(</mo><mn>2</mn><msub><mi>A</mi><mn>2</mn></msub><mo>+</mo><mn>4</mn><msub><mi>A</mi><mn>1</mn></msub><mo>+</mo><mn>5</mn><msub><mi>A</mi><mn>0</mn></msub><mo>)</mo><mo>=</mo><mn>5</mn><msup><mi>x</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>32</mn><mi>x</mi><mo>+</mo><mn>5</mn></math></p>
+      <p><math><mn>5</mn><msub><mi>A</mi><mn>2</mn></msub><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mo>(</mo><mn>8</mn><msub><mi>A</mi><mn>2</mn></msub><mo>+</mo><mn>5</mn><msub><mi>A</mi><mn>1</mn></msub><mo>)</mo><mi>x</mi></math></p>
+
+      <p><math><mspace width="1.6em"/><mo>+</mo><mo>(</mo><mn>2</mn><msub><mi>A</mi><mn>2</mn></msub><mo>+</mo><mn>4</mn><msub><mi>A</mi><mn>1</mn></msub><mo>+</mo><mn>5</mn><msub><mi>A</mi><mn>0</mn></msub><mo>)</mo></math></p>
+
+      <p><math><mspace width="1.6em"/><mo>=</mo><mn>5</mn><msup><mi>x</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>32</mn><mi>x</mi><mo>+</mo><mn>5</mn></math></p>
 
       <p>Koeffizientenvergleich, Grad für Grad:</p>
       <p><math><mn>5</mn><msub><mi>A</mi><mn>2</mn></msub><mo>=</mo><mn>5</mn></math> &#x27F9; <math><msub><mi>A</mi><mn>2</mn></msub><mo>=</mo><mn>1</mn></math></p>
@@ -178,8 +172,9 @@
 
     <div class="formel" data-verdeckbar>
       <math display="block">
-        <mrow><mi>k</mi><mo>=</mo><mtext>&#xA0;Vielfachheit von&#xA0;</mtext><mi>&#x3BC;</mi><mtext>&#xA0;als Nullstelle von&#xA0;</mtext><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><mi>&#x3BB;</mi><mo>+</mo><mi>b</mi></mrow>
+        <mrow><mi>k</mi><mo>=</mo><mtext>&#xA0;Vielfachheit von&#xA0;</mtext><mi>&#x3BC;</mi></mrow>
       </math>
+      <p>&#x2014; gezählt als Nullstelle des charakteristischen Polynoms <math><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><mi>&#x3BB;</mi><mo>+</mo><mi>b</mi></math>.</p>
       <p>Bei einem harmonischen Glied <math><mi>c</mi><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo><mo>+</mo><mi>d</mi><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo></math> heißt das: <math><mi>k</mi><mo>=</mo><mn>1</mn></math>, wenn <math><mo>&#xB1;</mo><mi>i</mi><mi>&#x3C9;</mi></math> Nullstellen sind &#x2014; also genau dann, wenn <math><mi>a</mi><mo>=</mo><mn>0</mn></math> und <math><mi>b</mi><mo>=</mo><msup><mi>&#x3C9;</mi><mn>2</mn></msup></math>. Der Ansatz aus der vorigen Karte bekommt den Faktor <math><msup><mi>x</mi><mi>k</mi></msup></math>.</p>
     </div>
 
