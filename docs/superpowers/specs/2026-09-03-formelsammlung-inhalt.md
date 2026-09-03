@@ -85,11 +85,13 @@ abgetippte Formel ist geraten, nicht abgeschrieben.
      Punkt-Notation: `ẏ + (1/τ)y = (1/τ)q(t)`
    Die Abkürzung `ω := √(ω₀² − 1/(4τ²))` steht **nur** in Aufgabe 5. Alle drei
    Schreibweisen müssen nebeneinander stehen, sonst erkennt man die eigene
-   Aufgabe nicht wieder. **Achtung:** Die bestehende Karte
+   Aufgabe nicht wieder. **Erledigt am 2026-09-03:** Die Karte
    `karten/differentialgleichungen.html` schreibt die Diskriminante als
-   `D = a² − 4b`; das ist dieselbe Aussage in anderer Normierung, aber nicht die
-   Schreibweise des Skripts. Die Sammlung folgt dem Skript, und die Abweichung
-   der Karte ist beim nächsten Anfassen anzugleichen.
+   `D = a² − 4b` — dieselbe Aussage in anderer Normierung. Sie wurde **nicht**
+   umgestellt, weil der Schwingungsrechner seine Eingabefelder `a` und `b`
+   nennt; stattdessen stehen jetzt beide Formen nebeneinander auf der Karte,
+   mit dem Hinweis, dass nur das Vorzeichen entscheidet. Die Sammlung folgt
+   dem Skript.
 
 ## Priorität
 
