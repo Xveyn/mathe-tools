@@ -71,6 +71,8 @@ im Hintergrund starten, am Ende der Sitzung stoppen. Die Seiten liegen dann unte
 
 danach 400 ms warten. Ohne diesen Schritt misst man den alten Stand — das hat am 2026-09-03 einen ganzen Prüflauf gekostet.
 
+**Und das Dokument selbst wird ebenfalls gecacht.** Ein zweites `page.goto()` auf **dieselbe** URL liefert in Chromium auch das HTML aus dem Speicher, nicht nur die Stylesheets — in Aufgabe 3 hat das eine falsche, unsymmetrische Klammermessung erzeugt, die erst nach einem Wechsel auf `?nocache=<Nummer>` in der Navigations-URL sauber wurde. Also: **bei jeder erneuten Navigation die URL variieren**, nicht nur die Stylesheet-Hrefs.
+
 | Nr | Prüfung | Verfahren | Sollwert |
 |---|---|---|---|
 | F1 | Formelsatz | siehe Code unten | `gesetzt: true` |
