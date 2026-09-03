@@ -143,8 +143,8 @@ input[type=range]:focus-visible{outline:2px solid currentColor;outline-offset:4p
    Karte, ein Ziel) und mal mehrere Anker als Kinder trägt. Sonst
    unterstriche ein Hover irgendwo auf der Zeile gleich die ganze Zeile.
 
-   Ausgeblendet wird `.seitenfuss` im Druck — die Regel dazu steht zwanzig
-   Zeilen tiefer in dieser Datei, bei den übrigen Druckentscheidungen. */
+   Ausgeblendet wird `.seitenfuss` im Druck — die Regel dazu steht weiter
+   unten in dieser Datei, bei den übrigen Druckentscheidungen. */
 .querlink,.seitenfuss{
   display:block;font-size:.9rem;border-top:1px solid var(--edge);
 }
