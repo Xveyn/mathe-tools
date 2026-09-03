@@ -172,12 +172,35 @@ MathML, direkt im HTML, ohne Bibliothek.
 gleichermaßen. So gibt der Flächenrechner sie aus, und er kann es nicht
 leicht anders. Eine Karte, die daneben eine zweite Schreibweise stellt,
 macht aus einer Kleinigkeit eine Frage; `karten/extremwerte.html` tat das
-eine Runde lang auf einer einzigen Seite. Sie ist jetzt durchgehend in der
-Strichform gesetzt. Die drei älteren Karten —
-`partielle-ableitungen.html`, `gradient.html`,
-`extrema-mit-nebenbedingung.html` — tragen noch die Kommaform; sie
-umzustellen ist eine eigene, noch offene Aufgabe und war nicht Teil der
-Extremwert-Runde.
+eine Runde lang auf einer einzigen Seite. Alle Karten sind inzwischen
+durchgehend in der Strichform gesetzt.
+
+**Das Komma bleibt, wo kein Punkt steht.** Ein Funktionsargument schreibt
+sich weiter `f(2, 1)`, ein Vektor `∇f = (2, 4)`, eine Richtung
+`v = (3/5, 4/5)`. Der Strich ist die Marke des Punktes in der Ebene, nicht
+ein Ersatz für jedes Komma zwischen zwei Klammern — wer ihn überall setzt,
+nimmt ihm genau die Unterscheidung, wegen der er da ist. Die
+aria-Beschreibungen der Bilder bleiben ebenfalls in der Sprechform
+(„im Punkt x gleich 1, y gleich 1“): dort wäre der Strich ein vorgelesenes
+Sonderzeichen.
+
+Zu bedenken beim Umstellen: die Strichform ist knapp drei Pixel breiter
+als die Kommaform. In `gradient.html` reichte das, um eine
+SVG-Beschriftung, die 3,02 px Abstand hatte, auf 0,06 px an die
+Achsenbeschriftung heranzuschieben. Eine umgestellte Beschriftung ist
+deshalb nachzumessen, siehe „Illustrationen“.
+
+**Eine zu breite Formel scrollt, sie bricht nicht.** MathML kennt keinen
+Umbruch, den Chromium umsetzt, und eine `mtable` bricht ohnehin nie. Ist
+eine Zeile breiter als die Karte, bekommt sie in `shared/karten.css` einen
+eigenen Scrollkasten — auf `math[display="block"]` und auf `.karte p`,
+nicht auf `.formel`/`.beispiel`, deren Abfrage-Rahmen ein Scrollkasten
+abschneiden würde. Auf dem Papier ist der Kasten wieder aufgehoben.
+
+Das ist eine Auffanglinie, kein Freibrief: eine Formel, die auf dem
+Telefon zur Hälfte hinter dem Rand steht, ist schlecht lesbar, auch wenn
+die Seite darum herum heil bleibt. Wer eine breite Zeile schreibt, prüft
+sie bei 390 px — oft lässt sie sich in zwei abgesetzte Formeln teilen.
 
 **Verboten:** Formeln als Bild. Formeln als Text mit Sonderzeichen
 (`∂f/∂x` hingeschrieben). Eine Formelbibliothek ins Repo legen.
