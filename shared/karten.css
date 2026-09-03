@@ -57,6 +57,30 @@
 .beispiel small{color:var(--dim);font-size:.82rem;margin-left:.7em}
 .beispiel p:last-of-type{margin-bottom:0}
 
+/* Eine Formel bricht nicht um — MathML kennt keinen Umbruch, den Chromium
+   umsetzt, und eine Matrix bricht ohnehin nie. Wo eine Formel breiter ist als
+   die Karte, schob sie deshalb die ganze Seite auf: bei 390 px Fensterbreite
+   scrollte jede Kartenseite seitlich, die DGL-Karte um 325 px, und der
+   Fliesstext daneben lief aus dem Bild. Jetzt scrollt die einzelne Zeile in
+   ihrem eigenen Kasten.
+
+   Der Kasten sitzt bewusst eine Ebene tiefer als .formel/.beispiel: die
+   tragen im Abfragemodus ein ::before mit inset:-1px, und ein Scrollkasten
+   schnitte diesen Ersatzrahmen ab.
+
+   Dass eine Zeile abgeschnitten ist, zeigt der Balken selbst: ein Kasten mit
+   Ueberhang legt sich 10,2 px dafuer zurecht, einer ohne nimmt keinen Platz.
+   Der Griff steht deshalb in var(--dim) und nicht in der viel blasseren
+   Rahmenfarbe — er ist der einzige Hinweis, dass rechts noch etwas steht.
+
+   Gemessen bei 390 px an der DGL-Karte, der breitesten des Repos: vier
+   Kaesten entstehen, alle fangen links buendig an (0 px verdeckt bei
+   scrollLeft 0) und lassen sich bis zum letzten Zeichen fahren. Die Seite
+   selbst scrollt danach nicht mehr. */
+.formel math[display="block"], .beispiel math[display="block"], .karte p{
+  overflow-x:auto; scrollbar-width:thin; scrollbar-color:var(--dim) transparent;
+}
+
 /* Handgesetzte Umklammerung einer mtable (etwa der Hesse-Matrix): die
    Streck-Mechanik von minsize/maxsize an <mo> greift innerhalb von
    article.karte nicht, siehe „Bekannte Grenzen" in CLAUDE.md. Auf eine
@@ -153,5 +177,16 @@ body.abfrage [data-verdeckbar].aufgedeckt::before{ content:none; }
   body.abfrage [data-verdeckbar]::before{ content:none; }
   a.querlink::after,.querlink a::after{ content:" (" attr(href) ")"; font-size:.85em; color:#555; }
   .formel, .beispiel{ background:none; }
+  /* Auf Papier gibt es kein Scrollen: ein Kasten, der auf dem Bildschirm
+     schiebt, schnitte hier lautlos ab. Lieber steht eine Formel ueber den
+     Rand der Karte hinaus. Im Druckmodus nachgemessen an der breitesten
+     Karte des Repos: bei 703 px Satzspiegel (A4, uebliche Raender) endet
+     die breiteste Formel 38 px vor dem Kartenrand, bei 665 px 21 px davor.
+     Erst bei 625 px — A4 mit zollbreiten Raendern — tritt eine Tabelle
+     17 px ueber den Rand der Karte, bleibt damit aber immer noch auf dem
+     Blatt. */
+  .formel math[display="block"], .beispiel math[display="block"], .karte p{
+    overflow:visible;
+  }
   .bild{ break-inside:avoid; }
 }
