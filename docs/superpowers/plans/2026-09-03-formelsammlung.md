@@ -2,7 +2,7 @@
 
 > **Für agentische Ausführung:** ERFORDERLICHE SUB-SKILL: `superpowers:subagent-driven-development` (empfohlen) oder `superpowers:executing-plans`, um diesen Plan Aufgabe für Aufgabe abzuarbeiten. Die Schritte nutzen Checkbox-Syntax (`- [ ]`).
 
-**Ziel:** Erst drei geteilte Dinge an ihren Platz holen (Aufgabe 0), dann die dritte Gattung des Repos aufsetzen — `formeln/` mit einer Übersicht aus 14 Kacheln, 14 Themendateien und zwei geteilten Bausteinen. Ein Thema wird vollständig gefüllt (`drehungen-spiegelungen.html`, acht Einträge) und dient als Muster für die dreizehn folgenden Runden.
+**Ziel:** Erst drei geteilte Dinge an ihren Platz holen (Aufgabe 0), dann die dritte Gattung des Repos aufsetzen — `formeln/` mit einer Übersicht aus 14 Kacheln, 14 Themendateien und zwei geteilten Bausteinen. Ein Thema wird vollständig gefüllt (`drehungen-spiegelungen.html`, neun Einträge) und dient als Muster für die dreizehn folgenden Runden.
 
 **Architektur:** Wie bisher reines HTML/CSS/JS ohne Build. Der Inhalt steht als MathML im HTML; `shared/formeln.js` erzeugt nur Verzeichnis und Filter und hängt als `MT.formeln` am globalen Objekt. `shared/formeln.css` ist von `karten.css` unabhängig und wird nie zusammen mit ihm geladen.
 
@@ -683,9 +683,9 @@ Claude-Session: https://claude.ai/code/session_01TgEoGocBa7YWZbfWT9TDLs"
 
 ---
 
-## Aufgabe 3: Die sechs übrigen Einträge des Musterthemas
+## Aufgabe 3: Die sieben übrigen Einträge des Musterthemas
 
-Ziel: `drehungen-spiegelungen.html` ist vollständig — acht Einträge, die Nummern 3.35 bis 3.42 der Inhaltsaufnahme.
+Ziel: `drehungen-spiegelungen.html` ist vollständig — neun Einträge, die Nummern 3.35 bis 3.42 der Inhaltsaufnahme einschließlich 3.40a.
 
 **Dateien:**
 - Ändern: `formeln/drehungen-spiegelungen.html`
@@ -698,7 +698,7 @@ Ziel: `drehungen-spiegelungen.html` ist vollständig — acht Einträge, die Num
 
 **Nicht aus extrahiertem Text abschreiben** — die Extraktion verstümmelt Formeln. Zu lesen sind die Seiten **82, 83, 84 und 85** von SKRIPT, mit dem Read-Werkzeug und `pages: "82-85"`. Von dort stammen alle Matrizen dieser Aufgabe.
 
-- [ ] **Schritt 2: Die sechs Einträge schreiben**
+- [ ] **Schritt 2: Die sieben Einträge schreiben**
 
 Reihenfolge auf der Seite (die beiden vorhandenen an ihrer Stelle eingeordnet):
 
@@ -710,19 +710,23 @@ Reihenfolge auf der Seite (die beiden vorhandenen an ihrer Stelle eingeordnet):
 | 4 | `drehung-in-der-ebene` | Drehung in der Ebene *(steht bereits)* | Skript S. 67, 83 |
 | 5 | `spiegelung-in-der-ebene` | Spiegelungen in der Ebene | Skript S. 83 |
 | 6 | `drehungen-im-raum` | Drehungen und Spiegelungen im Raum | Skript S. 84 |
-| 7 | `determinante-plus-minus-eins` | Determinante einer orthogonalen Matrix | nicht im Skript |
-| 8 | `unitaere-beispiele` | Unitäre Beispiele *(steht bereits)* | Skript S. 84, 85 |
+| 7 | `drehung-um-y-und-x-achse` | Drehung um die y- und die x-Achse | nicht im Skript |
+| 8 | `determinante-plus-minus-eins` | Determinante einer orthogonalen Matrix | nicht im Skript |
+| 9 | `unitaere-beispiele` | Unitäre Beispiele *(steht bereits)* | Skript S. 84, 85 |
 
-Inhalt je Eintrag — Formeln nach dem Muster aus Aufgabe 1, Klammern über `.matrix` und die passende `.klammer-Nz`:
+Inhalt je Eintrag — Formeln nach dem Muster aus Aufgabe 1, Klammern über `.matrix-rahmen` und die passende `.matrix-klammer…`:
 
 1. **`orthogonal-und-unitaer`** — Bedingung: „A regulär". Zwei Formelzeilen: `A⁻¹ = Aᵀ` (orthogonal, über ℝ) und `A⁻¹ = A̅ᵀ` (unitär, über ℂ). Dazu eine `.fall`-Zeile „A̅ᵀ heißt adjungierte Matrix". Die Konjugation als `<mover><mi>A</mi><mo>&#xAF;</mo></mover>`, transponiert als `<msup>…<mi>T</mi></msup>`. `data-suche="adjungiert transponiert konjugiert"`.
 2. **`spalten-bilden-onb`** — Bedingung: „gilt in beide Richtungen". Formel `A·Aᵀ = E` beziehungsweise `A·A̅ᵀ = E`, dazu die `.fall`-Zeile: „Damit prüft man Orthogonalität, ohne die Inverse zu bestimmen." Zweiter Satz als Fließtext in `.fall`: „Gleichwertig: die Spaltenvektoren (und ebenso die Zeilenvektoren) bilden eine Orthonormalbasis." `data-suche="onb orthonormalbasis pruefung einheitsmatrix"`.
 3. **`verzerrungsfrei`** — Bedingung: „A orthogonal oder unitär". Drei Formeln untereinander: `(Av)·(Aw) = v·w`, `‖Av‖ = ‖v‖`, und `v·w = 0 ⟹ (Av)·(Aw) = 0`. `data-suche="norm skalarprodukt winkel laengentreu"`.
 4. *(steht bereits)*
 5. **`spiegelung-in-der-ebene`** — Bedingung: „Spiegelung an einer Geraden durch den Ursprung, die gegenüber der x-Achse um α geneigt ist". Drei 2×2-Matrizen: `Sx = ((1,0),(0,−1))` an der x-Achse, `Sy = ((−1,0),(0,1))` an der y-Achse, `Sα = ((cos2α, sin2α),(sin2α, −cos2α))` allgemein. Dazu `.fall`: „Für α = 0 wird daraus Sx, für α = π/2 wird daraus Sy." `data-suche="achsenspiegelung winkelhalbierende"`.
-6. **`drehungen-im-raum`** — Bedingung: „Drehung um eine Koordinatenachse, gegen den Uhrzeigersinn". Vier 3×3-Matrizen mit je einer `.fall`-Zeile davor: Drehung um die z-Achse `((cos,−sin,0),(sin,cos,0),(0,0,1))` (Skript S. 84), Spiegelung an der x,z-Ebene `diag(1,−1,1)` (Skript S. 84), Drehspiegelung `((cos α,0,−sin α),(0,−1,0),(sin α,0,cos α))` (Skript S. 84) — und, ausdrücklich als **nicht im Skript** gekennzeichnet, die Drehung um die y-Achse `((cos α,0,sin α),(0,1,0),(−sin α,0,cos α))`, die Aufgabe LA 35b verlangt. `data-suche="raumdrehung achse drehspiegelung"`.
-7. **`determinante-plus-minus-eins`** — Quelle `nicht im Skript`, Bedingung: „Folgerung aus A·Aᵀ = E; in Aufgabe LA 40j verlangt". Formel: `det(A) = ±1` für reelle orthogonale A. `.fall`: „Die Umkehrung gilt **nicht** — Determinante ±1 macht eine Matrix nicht orthogonal." `data-suche="determinante orthogonal umkehrung"`.
-8. *(steht bereits)*
+6. **`drehungen-im-raum`** — Bedingung: „gegen den Uhrzeigersinn, um den Ursprung". **Genau die drei Matrizen, die auf Skriptseite 84 stehen**, je mit einer `.fall`-Zeile davor: Drehung in der x,y-Ebene, also um die z-Achse, `((cos α,−sin α,0),(sin α,cos α,0),(0,0,1))`; Spiegelung an der x,z-Ebene `diag(1,−1,1)`; Drehspiegelung `((cos α,0,−sin α),(0,−1,0),(sin α,0,cos α))`. `data-suche="raumdrehung z-achse drehspiegelung"`.
+7. **`drehung-um-y-und-x-achse`** — Quelle `nicht im Skript`, Bedingung: „im Skript steht nur die z-Achse; Bemerkung 3.9.4 nennt diese Beispiele ausdrücklich einen Spezialfall". Zwei 3×3-Matrizen: um die y-Achse `((cos α,0,sin α),(0,1,0),(−sin α,0,cos α))`, um die x-Achse `((1,0,0),(0,cos α,−sin α),(0,sin α,cos α))`. `.fall`: „Aufgabe LA 35b verlangt die y-Achse, Aufgabe LA 60b die x-Achse." `data-suche="raumdrehung y-achse x-achse"`.
+
+   **Vorzeichen selbst prüfen, nicht abschreiben:** Diese beiden Matrizen stehen in keiner Quelle des Repos. Die Probe ist billig — bei α = π/2 muss die y-Drehung `e₃` auf `e₁` werfen und `e₁` auf `−e₃`, die x-Drehung `e₂` auf `e₃`. Rechne sie einmal von Hand nach und halte das Ergebnis im Bericht fest.
+8. **`determinante-plus-minus-eins`** — Quelle `nicht im Skript`, Bedingung: „Folgerung aus A·Aᵀ = E; in Aufgabe LA 40j verlangt". Formel: `det(A) = ±1` für reelle orthogonale A. `.fall`: „Die Umkehrung gilt **nicht** — Determinante ±1 macht eine Matrix nicht orthogonal." `data-suche="determinante orthogonal umkehrung"`.
+9. *(steht bereits)*
 
 - [ ] **Schritt 3: `.matrix-klammer-3z` messen**
 
@@ -824,20 +828,20 @@ Die vierzehn Kacheln, gruppiert — die dreizehn noch leeren tragen die `<em>`-Z
 
 | Überschrift | Datei | Kacheltitel | Einträge |
 |---|---|---|---|
-| Integralrechnung | `integral-grundlagen.html` | Grundlagen und Hauptsatz | 13 |
-| | `integral-verfahren.html` | Verfahren und Partialbrüche | 8 |
-| Differentialgleichungen | `dgl-erster-ordnung.html` | Erster Ordnung | 4 |
-| | `dgl-zweiter-ordnung.html` | Zweiter Ordnung | 10 |
+| Integralrechnung | `integral-grundlagen.html` | Grundlagen und Hauptsatz | 14 |
+|  | `integral-verfahren.html` | Verfahren und Partialbrüche | 9 |
+| Differentialgleichungen | `dgl-erster-ordnung.html` | Erster Ordnung | 5 |
+|  | `dgl-zweiter-ordnung.html` | Zweiter Ordnung | 9 |
 | Lineare Algebra | `endliche-koerper.html` | Endliche Körper und Restklassen | 7 |
-| | `vektorraeume-rang.html` | Vektorräume, Abbildungen, Rang | 14 |
-| | `skalarprodukt.html` | Skalarprodukt und Orthogonalität | 5 |
-| | `determinante-inverse.html` | Determinante und Inverse | 9 |
-| | `drehungen-spiegelungen.html` | Drehungen und Spiegelungen | 8 |
-| | `eigenwerte.html` | Eigenwerte und Eigenvektoren | 10 |
-| | `basiswechsel-zerlegungen.html` | Basiswechsel und Zerlegungen | 11 |
-| | `homogene-koordinaten.html` | Homogene Koordinaten | 7 |
-| Funktionen mehrerer Variablen | `ableitungen-gradient.html` | Partielle Ableitungen und Gradient | 12 |
-| | `extrema-fehler.html` | Extrema, Fehler, kleinste Quadrate | 18 |
+|  | `vektorraeume-rang.html` | Vektorräume, Abbildungen, Rang | 18 |
+|  | `skalarprodukt.html` | Skalarprodukt und Orthogonalität | 5 |
+|  | `determinante-inverse.html` | Determinante und Inverse | 8 |
+|  | `drehungen-spiegelungen.html` | Drehungen und Spiegelungen | 9 |
+|  | `eigenwerte.html` | Eigenwerte und Eigenvektoren | 10 |
+|  | `basiswechsel-zerlegungen.html` | Basiswechsel und Zerlegungen | 12 |
+|  | `homogene-koordinaten.html` | Homogene Koordinaten | 6 |
+| Funktionen mehrerer Variablen | `ableitungen-gradient.html` | Partielle Ableitungen und Gradient | 14 |
+|  | `extrema-fehler.html` | Extrema, Fehler, kleinste Quadrate | 18 |
 
 `.kachel em` ist in `ui.css` bereits gestaltet.
 
@@ -885,19 +889,19 @@ Die `.lede`-Zeile jeder Datei nennt die Zahl der Einträge und ihre Nummern aus 
 
 | Datei | `.lede` |
 |---|---|
-| `integral-grundlagen.html` | Dreizehn Einträge nach der Inhaltsaufnahme, Nummern 1.1 bis 1.13. |
-| `integral-verfahren.html` | Acht Einträge, Nummern 1.14 bis 1.21. |
-| `dgl-erster-ordnung.html` | Vier Einträge, Nummern 2.1 bis 2.4. |
-| `dgl-zweiter-ordnung.html` | Zehn Einträge, Nummern 2.5 bis 2.13 und Z.7. |
-| `endliche-koerper.html` | Sieben Einträge, Nummern 3.1 bis 3.7. |
-| `vektorraeume-rang.html` | Vierzehn Einträge, Nummern 3.8 bis 3.21. |
-| `skalarprodukt.html` | Fünf Einträge, Nummern 3.22 bis 3.26. |
-| `determinante-inverse.html` | Neun Einträge, Nummern 3.27 bis 3.34 und Z.5. |
-| `eigenwerte.html` | Zehn Einträge, Nummern 3.43 bis 3.52. |
-| `basiswechsel-zerlegungen.html` | Elf Einträge, Nummern 3.53 bis 3.63. |
-| `homogene-koordinaten.html` | Sieben Einträge, Nummern 3.64 bis 3.69 und Z.6. |
-| `ableitungen-gradient.html` | Zwölf Einträge, Nummern 4.1 bis 4.12. |
-| `extrema-fehler.html` | Achtzehn Einträge, Nummern 4.13 bis 4.26 und Z.1 bis Z.4. |
+| `integral-grundlagen.html` | Vierzehn Einträge nach der Inhaltsaufnahme, Nummern 1.1 bis 1.13, 1.23. |
+| `integral-verfahren.html` | Neun Einträge nach der Inhaltsaufnahme, Nummern 1.14 bis 1.22. |
+| `dgl-erster-ordnung.html` | Fünf Einträge nach der Inhaltsaufnahme, Nummern 2.1 bis 2.4, 2.14. |
+| `dgl-zweiter-ordnung.html` | Neun Einträge nach der Inhaltsaufnahme, Nummern 2.5 bis 2.13. |
+| `endliche-koerper.html` | Sieben Einträge nach der Inhaltsaufnahme, Nummern 3.1 bis 3.7. |
+| `vektorraeume-rang.html` | Achtzehn Einträge nach der Inhaltsaufnahme, Nummern 3.8 bis 3.21d. |
+| `skalarprodukt.html` | Fünf Einträge nach der Inhaltsaufnahme, Nummern 3.22 bis 3.26. |
+| `determinante-inverse.html` | Acht Einträge nach der Inhaltsaufnahme, Nummern 3.27 bis 3.34. |
+| `eigenwerte.html` | Zehn Einträge nach der Inhaltsaufnahme, Nummern 3.43 bis 3.52. |
+| `basiswechsel-zerlegungen.html` | Zwölf Einträge nach der Inhaltsaufnahme, Nummern 3.53 bis 3.63. |
+| `homogene-koordinaten.html` | Sechs Einträge nach der Inhaltsaufnahme, Nummern 3.64 bis 3.69. |
+| `ableitungen-gradient.html` | Vierzehn Einträge nach der Inhaltsaufnahme, Nummern 4.1 bis 4.12. |
+| `extrema-fehler.html` | Achtzehn Einträge nach der Inhaltsaufnahme, Nummern 4.13 bis 4.26, Z.1 bis Z.4. |
 
 - [ ] **Schritt 3: Alle vierzehn Wege gehen**
 
@@ -1018,5 +1022,7 @@ Der Push veröffentlicht auf ein öffentliches Remote und geht an den Nutzer, so
 **Abweichung von der Spec, benannt.** Die Spec nennt für die Klammern eine „eigene Klasse"; dieser Plan macht daraus drei — je Zeilenzahl eine —, weil eine Größe für 2, 3 und 4 Zeilen nicht reichen kann.
 
 **Nachtrag vom 2026-09-03, aus einer kritischen Durchsicht des Ist-Zustands.** Der Plan hatte fünf Annahmen, die nicht stimmten: die Werkzeugseiten laden `karten.css` sehr wohl (damit fiel die Begründung für eine zweite Druckpalette weg), `CLAUDE.md` braucht elf Änderungen statt vier und `README.md` sechs statt zwei, ein blankes `<h2>` ist im Repo nirgends gestaltet, und das `<em>` einer Kachel steht hinter dem `<p>`, nicht darin. Daraus ist Aufgabe 0 entstanden; die Aufgaben 1, 3, 4 und 5 sind entsprechend nachgezogen.
+
+**Zweiter Nachtrag, aus der Prüfung der Inhaltsaufnahme gegen das Skript.** Die Aufnahme zählte drei Einträge doppelt und ließ elf aus; sie führt jetzt 144 statt 136. Vier sachliche Fehler betrafen ausgerechnet das Musterthema und die Nachbarn: die Drehungen um die y- und die x-Achse stehen **nicht** im Skript (nur die z-Achse), die Inversentabelle gibt es dort nur für GF(7), die Drehung um einen Punkt ist bloß ein Aufgabentipp, und die DGL-Aufgaben rechnen in drei Schreibweisen statt in zwei. Aufgabe 3 hat deshalb neun Einträge statt acht, und die Kachel- und lede-Tabellen der Aufgabe 4 sind neu gerechnet.
 
 **Bekannte Lücke.** Der Doppelklick über `file://` lässt sich in dieser Umgebung nicht automatisch prüfen (Playwright blockiert das Protokoll). Aufgabe 5, Schritt 5 prüft stattdessen die Gleichheit der Pfadtiefen und meldet den Doppelklick als offenen Punkt an den Nutzer.

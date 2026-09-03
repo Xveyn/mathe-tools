@@ -1,7 +1,7 @@
 # Formelsammlung — Design
 
 > **Stand 2026-09-03, freigegeben.** Diese Spec legt die **Bauform** fest. **Was**
-> hineinkommt, steht in `2026-09-03-formelsammlung-inhalt.md` (136 Einträge mit
+> hineinkommt, steht in `2026-09-03-formelsammlung-inhalt.md` (144 Einträge mit
 > Skriptseite, Aufgabennummern und Priorität); diese Spec setzt jene Aufnahme
 > voraus und wiederholt sie nicht.
 
@@ -57,26 +57,29 @@ Dateinamen deutsch, klein, mit Bindestrich, ohne Umlaute — wie bei den Karten.
 
 | # | Datei | Titel | Einträge aus der Aufnahme | Anzahl |
 |---|---|---|---|---|
-| 1 | `integral-grundlagen.html` | Integralrechnung — Grundlagen und Hauptsatz | 1.1–1.13 | 13 |
-| 2 | `integral-verfahren.html` | Integralrechnung — Verfahren und Partialbrüche | 1.14–1.21 | 8 |
-| 3 | `dgl-erster-ordnung.html` | Differentialgleichungen erster Ordnung | 2.1–2.4 | 4 |
-| 4 | `dgl-zweiter-ordnung.html` | Differentialgleichungen zweiter Ordnung | 2.5–2.13, Z.7 | 10 |
+| 1 | `integral-grundlagen.html` | Integralrechnung — Grundlagen und Hauptsatz | 1.1–1.13, 1.23 | 14 |
+| 2 | `integral-verfahren.html` | Integralrechnung — Verfahren und Partialbrüche | 1.14–1.22 | 9 |
+| 3 | `dgl-erster-ordnung.html` | Differentialgleichungen erster Ordnung | 2.1–2.4, 2.14 | 5 |
+| 4 | `dgl-zweiter-ordnung.html` | Differentialgleichungen zweiter Ordnung | 2.5–2.13 | 9 |
 | 5 | `endliche-koerper.html` | Endliche Körper und Restklassen | 3.1–3.7 | 7 |
-| 6 | `vektorraeume-rang.html` | Vektorräume, lineare Abbildungen, Rang | 3.8–3.21 | 14 |
+| 6 | `vektorraeume-rang.html` | Vektorräume, lineare Abbildungen, Rang | 3.8–3.21d | 18 |
 | 7 | `skalarprodukt.html` | Skalarprodukt und Orthogonalität | 3.22–3.26 | 5 |
-| 8 | `determinante-inverse.html` | Determinante und Inverse | 3.27–3.34, Z.5 | 9 |
-| 9 | `drehungen-spiegelungen.html` | Drehungen und Spiegelungen | 3.35–3.42 | 8 |
+| 8 | `determinante-inverse.html` | Determinante und Inverse | 3.27–3.34 | 8 |
+| 9 | `drehungen-spiegelungen.html` | Drehungen und Spiegelungen | 3.35–3.42 | 9 |
 | 10 | `eigenwerte.html` | Eigenwerte und Eigenvektoren | 3.43–3.52 | 10 |
-| 11 | `basiswechsel-zerlegungen.html` | Basiswechsel und Zerlegungen | 3.53–3.63 | 11 |
-| 12 | `homogene-koordinaten.html` | Homogene Koordinaten | 3.64–3.69, Z.6 | 7 |
-| 13 | `ableitungen-gradient.html` | Partielle Ableitungen und Gradient | 4.1–4.12 | 12 |
+| 11 | `basiswechsel-zerlegungen.html` | Basiswechsel und Zerlegungen | 3.53–3.63 | 12 |
+| 12 | `homogene-koordinaten.html` | Homogene Koordinaten | 3.64–3.69 | 6 |
+| 13 | `ableitungen-gradient.html` | Partielle Ableitungen und Gradient | 4.1–4.12 | 14 |
 | 14 | `extrema-fehler.html` | Extrema, Fehlerfortpflanzung, kleinste Quadrate | 4.13–4.26, Z.1–Z.4 | 18 |
 
-Summe 136 — die Aufnahme geht vollständig auf. Die sieben Einträge ohne
-Skriptkapitel stehen dort, wo man sie sucht: die kleinsten Quadrate bei den
-Extrema (sie sind eine Extremwertaufgabe), die Inverse über Gauß bei der
-Determinante, die Skalierung mit Fixpunkt bei den homogenen Koordinaten, die
-Physik-Schreibweise bei der DGL zweiter Ordnung.
+Summe 144 — die Aufnahme geht vollständig auf. Die vier Einträge zu den
+kleinsten Quadraten stehen bei den Extrema, weil sie eine Extremwertaufgabe
+sind; alles andere ohne Skriptkapitel ist in seinem Kapitel eingeordnet und dort
+gekennzeichnet.
+
+**Die Zahl 136 aus einer früheren Fassung war falsch.** Eine Prüfung der
+Aufnahme gegen das Skript am 2026-09-03 hat drei doppelt gezählte Einträge
+gefunden und elf fehlende ergänzt.
 
 ## Die Übersichtsseite `formeln/index.html`
 
@@ -347,8 +350,8 @@ Zusätzlich zu den Regeln aus `CLAUDE.md`:
 2. `formeln/index.html` mit allen 14 Kacheln.
 3. Alle 14 Themendateien als Gerüst: Kopf, `h1`, `.lede`, Seitenfuß,
    Skripteinbindung — **ohne** Einträge.
-4. **Ein Thema vollständig: `drehungen-spiegelungen.html`**, acht Einträge
-   (3.35–3.42). Begründung: laut Inhaltsaufnahme der meistgesuchte Block der
+4. **Ein Thema vollständig: `drehungen-spiegelungen.html`**, neun Einträge
+   (3.35 bis 3.42, einschließlich 3.40a). Begründung: laut Inhaltsaufnahme der meistgesuchte Block der
    linearen Algebra, er besteht fast nur aus Matrizen — also aus dem breitesten
    und heikelsten Satzfall — und er hat noch keine Karte, an der man sich
    entlanghangeln könnte. Trägt die Form dort, trägt sie überall.
