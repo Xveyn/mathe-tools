@@ -1,0 +1,111 @@
+/* Bausteine der Formelsammlung: Eintrag, Verzeichnis, Filterzeile, Druck.
+
+   Diese Datei wird NIE zusammen mit shared/karten.css geladen. Was beide
+   Gattungen brauchen, steht seit Aufgabe 0 eine Ebene tiefer und gilt hier von
+   selbst: die helle Druckpalette in theme.css, die Matrixklammern
+   (.matrix-rahmen, .matrix-klammer, .matrix-klammer-3z, .matrix-klammer-4z),
+   die Abschnittsueberschrift h2.abschnitt und die Druckregeln fuer .seitenfuss
+   und .querlink in ui.css.
+
+   Diese Datei enthaelt deshalb KEIN einziges Farbliteral — auch nicht im
+   Druckblock. Was dort hell werden muss, wird es ueber die Tokens.
+
+   Was hier steht und in karten.css sein Gegenstueck hat, ist die Spaltenbreite
+   von 46rem: auf Kartenseiten kommt sie von .karte, nicht von .wrap (das
+   1320 px breit ist). .querlink braucht sie nicht — fuer ihn steht sie schon
+   in ui.css. */
+
+/* ---- Teil 1: der Eintrag ---- */
+
+.eintrag{
+  background:var(--panel-b);
+  border:1px solid var(--edge);border-radius:3px;
+  padding:12px 16px 14px;margin:0 0 12px;max-width:46rem;
+}
+.eintrag:target{border-color:var(--gold)}
+.eintrag h3{
+  font-family:Georgia,"Iowan Old Style",serif;font-weight:400;
+  font-size:1.05rem;line-height:1.3;margin:0 0 6px;color:var(--ink);
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+}
+.quelle{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:.75rem;color:var(--dim);white-space:nowrap;
+}
+.bedingung{color:var(--dim);font-size:.85rem;margin:0 0 6px}
+.fall{color:var(--ink);font-size:.9rem;margin:12px 0 0}
+.eintrag math{font-family:Georgia,"Iowan Old Style",serif;font-size:1.02rem}
+.eintrag math[display="block"]{margin:8px 0 0;text-align:center}
+.eintrag .querlink{margin:12px 0 0;padding-top:10px;font-size:.85rem}
+
+/* Ein Link mitten im Text eines Eintrags. Ohne eigene Regel faellt er auf die
+   Browservorgabe zurueck — blau und unterstrichen in einem Georgia-Kasten.
+   Dieselbe Ueberlegung wie bei .karte p a in karten.css. */
+.eintrag p a{color:var(--gold);text-decoration:none}
+.eintrag p a:hover{text-decoration:underline}
+.eintrag p a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+
+/* Etwas zum Eintippen, etwa ein Term fuer ein Werkzeug. karten.css hat sein
+   Gegenstueck an .karte code; hier steht es noch einmal, weil die Formelseiten
+   karten.css nicht laden. */
+.eintrag code{
+  font-size:.92em;color:var(--gold);background:var(--panel-b);
+  border:1px solid var(--edge);border-radius:2px;padding:1px 5px;
+}
+
+/* Eine Formel bricht nicht um. Ist sie breiter als die Spalte, scrollt sie in
+   ihrer eigenen Zeile, statt die Seite aufzuschieben.
+
+   Beide Achsen ausdruecklich: steht nur overflow-x, macht CSS aus dem uebrigen
+   "visible" ein "auto", und Chromium meldet fuer eine Formelzeile mehr
+   Inhaltshoehe als der Kasten hoch ist — jede Zeile legte sich dann 10 px fuer
+   einen senkrechten Balken zurecht, den niemand braucht. Nachgewiesen am
+   2026-09-03 an den Karten. */
+.eintrag math[display="block"], .eintrag p{
+  overflow:auto hidden;scrollbar-width:thin;scrollbar-color:var(--dim) transparent;
+}
+
+/* ---- Teil 2: Filterzeile, Verzeichnis, Leermeldung ----
+   Alle drei erzeugt shared/formeln.js. Ohne Skript gibt es sie nicht, und die
+   Seite ist trotzdem vollstaendig: die Eintraege stehen im HTML. */
+
+/* Eng gefasst statt global, wie ui.css es bei .glied-felder haelt: nur diese
+   zwei Elemente werden ueber die hidden-Eigenschaft geschaltet. */
+.eintrag[hidden], .verzeichnis li[hidden]{display:none}
+
+.filterzeile{max-width:46rem;margin:0 0 14px}
+.filterzeile input{
+  width:100%;box-sizing:border-box;
+  background:var(--panel-b);border:1px solid var(--edge);border-radius:2px;
+  color:var(--ink);font-family:inherit;font-size:.95rem;padding:7px 11px;
+}
+.filterzeile input:focus{border-color:var(--gold);outline:none}
+.filterzeile input:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+
+.verzeichnis{max-width:46rem;margin:0 0 22px}
+.verzeichnis ul{list-style:none;margin:0;padding:0;columns:2;column-gap:24px}
+.verzeichnis li{margin:0 0 3px;break-inside:avoid}
+.verzeichnis a{color:var(--gold);text-decoration:none;font-size:.9rem}
+.verzeichnis a:hover{text-decoration:underline}
+.verzeichnis a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+
+.leer{max-width:46rem;color:var(--dim);font-size:.9rem;margin:0 0 12px}
+
+/* .seitenfuss kommt aus ui.css und hat dort keine Breite. Auf den Kartenseiten
+   gibt karten.css sie ihr; hier muss es diese Datei tun. */
+.seitenfuss{max-width:46rem}
+
+/* ---- Teil 3: der Druck ----
+   Die Palette steht in theme.css, die Regeln fuer .seitenfuss und .querlink in
+   ui.css. Hier steht nur, was der Formelsammlung eigen ist. */
+
+@media print{
+  .filterzeile{ display:none !important; }
+  /* Das Verzeichnis bleibt: auf Papier ist es das Inhaltsverzeichnis des Blattes.
+     Aber einspaltig — die Spec sagt einspaltig, und Chromium haelt break-inside
+     in einem Mehrspaltenkasten ueber einen Seitenumbruch schlecht. */
+  .verzeichnis ul{ columns:1; }
+  .eintrag{ break-inside:avoid; background:none; }
+  /* Auf Papier gibt es kein Scrollen; ein Kasten schnitte lautlos ab. */
+  .eintrag math[display="block"], .eintrag p{ overflow:visible; }
+}

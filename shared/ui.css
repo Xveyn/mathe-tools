@@ -229,7 +229,7 @@ h2.abschnitt{
 .matrix-rahmen{display:inline-flex;align-items:center}
 .matrix-klammer{font-size:3.8em}      /* zwei Zeilen, an der Hesse-Matrix gemessen */
 .matrix-klammer-3z{font-size:4.6em}   /* drei Zeilen, in Aufgabe 3 nachzumessen */
-.matrix-klammer-4z{font-size:5.3em}   /* vier Zeilen, in Aufgabe 1 nachzumessen */
+.matrix-klammer-4z{font-size:5.3em}   /* vier Zeilen, gemessen 2026-09-03 an der DFT-Matrix: Verhaeltnis 1,06, Ueberstand 2,3 px oben und unten */
 
 /* ---- Druck ----
    .seitenfuss gehört nicht aufs Blatt — die Seitennavigation selbst

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../favicon.svg">
+<title>Drehungen und Spiegelungen</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/formeln.css">
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Drehungen und Spiegelungen</h1>
+  <p class="lede">Orthogonale und unitäre Matrizen und die Abbildungen, die sie beschreiben. Gesucht wird nur auf dieser Seite — was in einem anderen Thema steht, findet das Feld nicht.</p>
+
+  <article class="eintrag" id="drehung-in-der-ebene" data-suche="drehmatrix rotation winkel alpha">
+    <h3>Drehung in der Ebene <span class="quelle">Skript S. 67, 83</span></h3>
+    <p class="bedingung">Drehung um den Ursprung, gegen den Uhrzeigersinn, um den Winkel α</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>D</mi><mi>&#x3B1;</mi></msub><mo>=</mo>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer">(</mo>
+          <mtable>
+            <mtr>
+              <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mo>&#x2212;</mo><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+            </mtr>
+            <mtr>
+              <mtd><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+            </mtr>
+          </mtable>
+          <mo class="matrix-klammer">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </article>
+
+  <article class="eintrag" id="unitaere-beispiele" data-suche="dft fourier eulersche formel einheitskreis">
+    <h3>Unitäre Beispiele <span class="quelle">Skript S. 84, 85</span></h3>
+    <p class="bedingung">Die Drehung der Ebene als komplexe 1×1-Matrix; die diskrete Fourier-Transformation in Dimension 4</p>
+    <math display="block">
+      <mrow>
+        <mo>(</mo><msup><mi>e</mi><mrow><mi>i</mi><mi>&#x3B1;</mi></mrow></msup><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>U</mi><mo>=</mo>
+        <mfrac><mn>1</mn><mn>2</mn></mfrac>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer-4z">(</mo>
+          <mtable>
+            <mtr><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            <mtr><mtd><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mi>i</mi></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mi>i</mi></mtd></mtr>
+            <mtr><mtd><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
+            <mtr><mtd><mn>1</mn></mtd><mtd><mi>i</mi></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mi>i</mi></mtd></mtr>
+          </mtable>
+          <mo class="matrix-klammer-4z">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </article>
+
+  <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
+
+</div>
+</body>
+</html>
