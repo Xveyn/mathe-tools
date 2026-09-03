@@ -82,7 +82,7 @@ Physik-Schreibweise bei der DGL zweiter Ordnung.
 
 Aufbau wie `karten/index.html`: `h1`, eine `.lede`-Zeile, dann die Kacheln. Neu
 ist die Gruppierung — 14 Kacheln ungeordnet nebeneinander wären eine Wand, also
-stehen sie unter vier `h2` nach den Skriptkapiteln:
+stehen sie unter vier `h2.abschnitt` nach den Skriptkapiteln (die Regel dazu kommt aus `ui.css`, siehe Vorbereitung):
 
 ```
 Integralrechnung          → Kacheln 1, 2
@@ -204,11 +204,53 @@ und ein von Hand gepflegtes Verzeichnis veraltet.
 
 Kein Zustand in der URL, kein `localStorage`, keine Tastenkürzel.
 
+## Vorbereitung: drei geteilte Dinge kommen nach `shared/`
+
+Eine kritische Durchsicht des Ist-Zustands am 2026-09-03 hat drei Stellen gefunden,
+an denen die Formelsammlung etwas verdoppeln müsste, das es schon gibt. Alle drei
+werden **vorher** an ihren richtigen Platz gehoben; erst danach entsteht die neue
+Gattung. Das ist kein Beiwerk, sondern die Voraussetzung dafür, dass die Sammlung
+ohne Doppelpflege auskommt.
+
+**1. Die Druckpalette gehört nach `theme.css`.** Der ursprüngliche Entwurf wollte
+die sechs Zeilen aus dem `@media print`-Block von `karten.css` in `formeln.css`
+wiederholen, mit der Begründung, die Werkzeugseiten dürften nichts abbekommen. Die
+Begründung ist falsch: **beide Werkzeugseiten laden `karten.css` bereits**
+(`tools/flaechenrechner/index.html:10`, `tools/schwingung/index.html:10`) und
+nutzen daraus keine einzige Klasse — der einzige Treffer, `.querlink`, steht in
+`ui.css`. Sie binden `karten.css` ausschließlich wegen des Druckblocks ein. Die
+Palette ist also längst gattungsübergreifend und gehört dorthin, wo alle Tokens
+stehen: in einen `@media print`-Block in `theme.css`. Das behebt nebenbei einen
+bestehenden Mangel — `index.html` und `karten/index.html` laden `karten.css`
+nicht und drucken heute hellblauen Text auf weißem Grund.
+
+Was gattungseigen ist, bleibt gattungseigen: `.karte`, `.abfrage-leiste` und der
+Abfragemodus in `karten.css`, `.eintrag` und `.filterzeile` in `formeln.css`. Die
+Druckregel für `.seitenfuss` wandert zu `.seitenfuss` selbst, also nach `ui.css`.
+
+**2. Die Matrixklammern gehören nach `ui.css`.** `karten.css` definiert heute
+`.matrix-rahmen` und `.matrix-klammer`; die Formelsammlung braucht dieselbe
+Mechanik für zwei-, drei- und vierzeilige Matrizen. Statt eine zweite
+Namensfamilie danebenzustellen, ziehen beide Klassen nach `ui.css` und bekommen
+dort zwei Geschwister: `.matrix-klammer-3z` und `.matrix-klammer-4z`.
+`karten/extremwerte.html` bleibt unverändert und benutzt weiter
+`.matrix-rahmen` und `.matrix-klammer`.
+
+**3. Die Abschnittsüberschrift gehört nach `ui.css`.** Die Startseite gestaltet
+`h2.abschnitt` in einem seitenlokalen `<style>`-Block (`index.html:10-15`). Die
+Formelübersicht braucht genau dieselbe Überschrift für ihre vier Kapitel. Ein
+blankes `<h2>` gibt es im Repo nirgends gestaltet — es fiele auf die
+Browservorgabe zurück und sähe in derselben Rolle anders aus als die Startseite.
+Also wandert die Regel nach `ui.css`, und die Startseite verliert ihren
+`<style>`-Block.
+
 ## `shared/formeln.css`
 
-Neue Klassen, alle bisher unbenutzt — geprüft gegen `ui.css` und `karten.css`:
-`.eintrag`, `.quelle`, `.bedingung`, `.fall`, `.verzeichnis`, `.filterzeile`,
-`.leer`. **`.formel` und `.beispiel` sind tabu**, die gehören den Karten.
+Neue Klassen, alle bisher unbenutzt — geprüft gegen `ui.css` und `karten.css`,
+null Treffer im ganzen Repo: `.eintrag`, `.quelle`, `.bedingung`, `.fall`,
+`.verzeichnis`, `.filterzeile`, `.leer`. **`.formel` und `.beispiel` sind tabu**,
+die gehören den Karten. Die Matrixklammern kommen aus `ui.css` (siehe
+Vorbereitung), nicht aus dieser Datei.
 
 Gestaltung: ein Eintrag ist eine Fläche wie eine Karte, nur flacher — Rahmen aus
 `--edge`, Grund aus `--panel-b`, weniger Polsterung. Titel in Georgia wie die
@@ -225,7 +267,9 @@ Spaltenbreite selbst setzen:
 - `.eintrag` bekommt `max-width:46rem` — dieselbe Spalte wie eine Karte, sonst
   laufen die Einträge über die volle Fensterbreite.
 - `.seitenfuss` und die `.filterzeile` bekommen sie ebenfalls, damit sie unter
-  der Spalte enden und nicht quer über die Seite laufen.
+  der Spalte enden und nicht quer über die Seite laufen. `.querlink` braucht sie
+  **nicht**: die 46 rem stehen für ihn schon in `ui.css:151` und gelten auf
+  Formelseiten von selbst.
 - Im Druck ist `.seitenfuss` auszublenden — auch diese Regel steht heute in
   `karten.css` und gilt nicht mit.
 
@@ -247,8 +291,8 @@ dort dokumentiert.
 
 `@media print` in `formeln.css`, nach dem Vorbild von `karten.css`:
 
-- Farbtokens hell umdefinieren, damit auch Inline-SVG mitzieht (falls je eines
-  dazukommt).
+- Die hellen Farbtokens kommen aus `theme.css` (siehe Vorbereitung) und gelten
+  hier von selbst; `formeln.css` definiert **keine** eigene Palette.
 - `.filterzeile` und `.seitenfuss` verschwinden.
 - **Das Verzeichnis bleibt** — auf Papier ist es das Inhaltsverzeichnis des
   Blattes.
@@ -296,6 +340,9 @@ Zusätzlich zu den Regeln aus `CLAUDE.md`:
 
 ## Diese Runde
 
+0. Die Vorbereitung: Druckpalette nach `theme.css`, Matrixklammern und
+   `h2.abschnitt` nach `ui.css` (siehe oben). Danach sieht jede bestehende
+   Seite am Bildschirm unveraendert aus und druckt richtig.
 1. `shared/formeln.css` und `shared/formeln.js`.
 2. `formeln/index.html` mit allen 14 Kacheln.
 3. Alle 14 Themendateien als Gerüst: Kopf, `h1`, `.lede`, Seitenfuß,
@@ -309,7 +356,7 @@ Zusätzlich zu den Regeln aus `CLAUDE.md`:
 
 Die Formeln dieses einen Themas werden **von den Skriptseiten abgelesen, nicht
 aus dem extrahierten Text abgetippt** — die Textextraktion verstümmelt Formeln.
-Betroffen sind die Seiten 67, 83 und 84.
+Betroffen sind die Seiten 67 sowie 82 bis 85.
 
 ## Bewusst nicht in dieser Runde
 
@@ -322,11 +369,10 @@ Betroffen sind die Seiten 67, 83 und 84.
 ## Bekannte Risiken
 
 - **Acht Matrizen auf einer Seite sind der Härtefall für den Satz.** Die
-  handbemessenen Klammern der Hesse-Matrix (`font-size:3.8em` in `karten.css`)
-  sind auf zwei Zeilen abgestimmt; die Drehmatrizen im Raum haben drei, die
-  homogenen Koordinaten vier. Hier ist mit neuen Klammermaßen zu rechnen, und
-  `formeln.css` braucht dafür eine eigene Klasse — `karten.css` wird nicht
-  angefasst.
+  handbemessene Klammer der Hesse-Matrix (`font-size:3.8em`) ist auf zwei Zeilen
+  abgestimmt; die Drehmatrizen im Raum haben drei, die homogenen Koordinaten
+  vier. Die zwei neuen Größen werden gemessen, nicht geschaetzt — Verhältnis von
+  Klammerhöhe zu Matrixhöhe zwischen 1,00 und 1,15.
 - **14 Gerüstdateien ohne Inhalt sind vierzehn Sackgassen.** Bis ein Thema
   gefüllt ist, muss seine Seite das sagen — eine Zeile „Dieses Thema ist noch
   nicht gefüllt", nicht eine leere Fläche. Die Kachel in der Übersicht sagt es
