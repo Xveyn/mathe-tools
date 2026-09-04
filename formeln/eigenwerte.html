@@ -13,10 +13,212 @@
 <div class="wrap">
 
   <h1>Eigenwerte und Eigenvektoren</h1>
-  <p class="lede">Zehn Einträge nach der Inhaltsaufnahme, Nummern 3.43 bis 3.52.</p>
+  <p class="lede">Die Richtungen, die eine Matrix nur streckt und nicht dreht &#x2014; wie man sie findet, was dabei schiefgeht und was symmetrische Matrizen daran besonders macht. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="eigenwert-und-eigenvektor" data-suche="eigenraum definition streckung nullvektor untervektorraum lgs">
+    <h3>Eigenwert, Eigenvektor, Eigenraum <span class="quelle">Skript S. 86</span></h3>
+    <p class="bedingung">A ist eine n × n Matrix über K; ein Vektor v &#x2260; O heißt Eigenvektor zum Eigenwert λ &#x2208; K</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mi>v</mi><mo>=</mo><mi>&#x3BB;</mi><mi>v</mi>
+      </mrow>
+    </math>
+    <p class="fall">Die Matrix streckt v also nur, statt seine Richtung zu ändern. Der Nullvektor ist ausdrücklich <em>kein</em> Eigenvektor &#x2014; sonst wäre jede Zahl ein Eigenwert.</p>
+    <p class="fall">Der <strong>Eigenraum</strong> zum Eigenwert λ ist die Menge aller Eigenvektoren zu λ, <strong>einschließlich des Nullvektors</strong>. Erst dadurch ist er ein Untervektorraum.</p>
+    <math display="block">
+      <mrow>
+        <mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo>
+        <mi>x</mi><mo>=</mo><mi>O</mi>
+      </mrow>
+    </math>
+    <p class="fall">Damit ist der Eigenraum die Lösungsmenge eines <strong>homogenen LGS</strong> und über das Gauß-Verfahren zu bestimmen.</p>
+  </article>
+
+  <article class="eintrag" id="charakteristisches-polynom" data-suche="p lambda det grad n konstanter koeffizient nullstellen">
+    <h3>Charakteristisches Polynom <span class="quelle">Skript S. 86, 87</span></h3>
+    <p class="bedingung">A ist quadratisch; λ ist genau dann Eigenwert, wenn p(λ) = 0 gilt</p>
+    <math display="block">
+      <mrow>
+        <mi>p</mi><mo>(</mo><mi>&#x3BB;</mi><mo>)</mo><mo>=</mo>
+        <mi>det</mi><mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Der Grund: <math><mrow><mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo><mi>v</mi><mo>=</mo><mi>O</mi></mrow></math> hat genau dann eine Lösung außer dem Nullvektor, wenn die Matrix singulär ist &#x2014; und das heißt Determinante null.</p>
+    <p class="fall">p hat den Grad n. Der konstante Koeffizient ist die Determinante von A:</p>
+    <math display="block">
+      <mrow>
+        <mi>p</mi><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo>
+        <mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo>
+      </mrow>
+    </math>
+  </article>
+
+  <article class="eintrag" id="das-verfahren" data-suche="rechenweg zwei schritte eigenraum bestimmen freie variable probe">
+    <h3>Das Verfahren in zwei Schritten <span class="quelle">Skript S. 87, 88</span></h3>
+    <p class="bedingung">Erst <em>alle</em> Eigenwerte, dann für <em>jeden</em> getrennt der Eigenraum &#x2014; die Reihenfolge ist zwingend</p>
+    <p class="fall">1. Das charakteristische Polynom nullsetzen und nach λ auflösen:</p>
+    <math display="block">
+      <mrow>
+        <mi>det</mi><mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo>
+        <mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <p class="fall">2. Für jeden gefundenen Eigenwert das homogene LGS lösen:</p>
+    <math display="block">
+      <mrow>
+        <mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo>
+        <mi>x</mi><mo>=</mo><mi>O</mi>
+      </mrow>
+    </math>
+    <p class="fall">Die Lösungsmenge ist der Eigenraum; man schreibt sie als lineare Hülle.</p>
+    <p class="fall"><strong>Die Probe:</strong> der Eigenraum muss zu jedem Eigenwert mindestens eindimensional sein, es muss also mindestens eine freie Variable geben. Löst nur der Nullvektor das System, ist bei der Bestimmung von λ ein Fehler passiert &#x2014; und λ war gar kein Eigenwert.</p>
+  </article>
+
+  <article class="eintrag" id="keine-umformungen" data-suche="warnung gauss zeilenumformung verboten rang kern bleibt vertauschen">
+    <h3>Keine Umformungen bei Eigenwerten <span class="quelle">Skript S. 89</span></h3>
+    <p class="bedingung">A&#x2032; entstehe aus A durch Gauß'sche Zeilen- oder Spaltenumformungen; für die Eigenwerte sind sie <strong>nicht</strong> zugelassen</p>
+    <math display="block">
+      <mrow>
+        <mi>rg</mi><mo>(</mo><msup><mi>A</mi><mo>&#x2032;</mo></msup><mo>)</mo><mo>=</mo>
+        <mi>rg</mi><mo>(</mo><mi>A</mi><mo>)</mo>
+        <mspace width="1.2em"></mspace>
+        <mi>ker</mi><mo>(</mo><msup><mi>A</mi><mo>&#x2032;</mo></msup><mo>)</mo><mo>=</mo>
+        <mi>ker</mi><mo>(</mo><mi>A</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>&#x3BB;</mi><mo>(</mo><msup><mi>A</mi><mo>&#x2032;</mo></msup><mo>)</mo>
+        <mo>&#x2260;</mo>
+        <mi>&#x3BB;</mi><mo>(</mo><mi>A</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Rang, Kern und Lösungsmenge überstehen jede Umformung. Eigenwerte und Eigenvektoren nicht &#x2014; die zweite Zeile gilt im Allgemeinen, nicht immer, aber man darf sich nicht darauf verlassen.</p>
+    <p class="fall">Ein Beispiel, das es sofort zeigt &#x2014; die Vertauschung der beiden Zeilen macht aus der linken Matrix die rechte:</p>
+    <math display="block">
+      <mrow>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer-flach">(</mo>
+          <mtable>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+          </mtable>
+          <mo class="matrix-klammer-flach">)</mo>
+        </mrow>
+        <mspace width="1em"></mspace><mo>&#x2192;</mo><mspace width="1em"></mspace>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer-flach">(</mo>
+          <mtable>
+            <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+          </mtable>
+          <mo class="matrix-klammer-flach">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+    <p class="fall">Links sind die Eigenwerte 1 und &#x2212;1, rechts nur die 1, und die doppelt. Rang und Kern stimmen bei beiden überein &#x2014; genau das ist die Falle.</p>
+    <p class="fall">Umformen darf man erst im <em>zweiten</em> Schritt, beim Lösen von (A &#x2212; λE)x = O. Dort ist λ bereits bekannt und es geht nur noch um eine Lösungsmenge.</p>
+  </article>
+
+  <article class="eintrag" id="dreiecksmatrix" data-suche="diagonaleintraege ablesen dreieck diagonalmatrix ohne rechnung">
+    <h3>Dreiecksmatrix: Eigenwerte ablesen <span class="quelle">Skript S. 89</span></h3>
+    <p class="bedingung">A ist eine obere oder untere Dreiecksmatrix mit den Diagonaleinträgen b<sub>1</sub>, …, b<sub>n</sub></p>
+    <math display="block">
+      <mrow>
+        <msub><mi>&#x3BB;</mi><mn>1</mn></msub><mo>=</mo><msub><mi>b</mi><mn>1</mn></msub><mo>,</mo>
+        <mspace width="0.6em"></mspace><mo>&#x2026;</mo><mo>,</mo><mspace width="0.6em"></mspace>
+        <msub><mi>&#x3BB;</mi><mi>n</mi></msub><mo>=</mo><msub><mi>b</mi><mi>n</mi></msub>
+      </mrow>
+    </math>
+    <p class="fall">Der Grund steht in den Rechenregeln der Determinante: <math><mrow><mi>det</mi><mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo><mo>=</mo><mo>(</mo><msub><mi>b</mi><mn>1</mn></msub><mo>&#x2212;</mo><mi>&#x3BB;</mi><mo>)</mo><mo>&#x22EF;</mo><mo>(</mo><msub><mi>b</mi><mi>n</mi></msub><mo>&#x2212;</mo><mi>&#x3BB;</mi><mo>)</mo></mrow></math>, und die Nullstellen liest man ab.</p>
+    <p class="fall">Für eine Diagonalmatrix gilt es erst recht. <strong>Achtung:</strong> das heißt <em>nicht</em>, dass man A erst auf Dreiecksform bringen dürfte &#x2014; siehe den Eintrag darüber.</p>
+  </article>
+
+  <article class="eintrag" id="vielfachheiten" data-suche="algebraisch geometrisch dimension eigenraum basis diagonalisierbar mehrfache nullstelle">
+    <h3>Algebraische und geometrische Vielfachheit <span class="quelle">Skript S. 89, 90</span></h3>
+    <p class="bedingung">λ ist Eigenwert von A; die Ungleichung gilt für jeden Eigenwert</p>
+    <math display="block">
+      <mrow>
+        <mtext>geometrisch</mtext>
+        <mspace width="0.6em"></mspace><mo>&#x2264;</mo><mspace width="0.6em"></mspace>
+        <mtext>algebraisch</mtext>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Algebraische</strong> Vielfachheit: wie oft λ als Nullstelle im charakteristischen Polynom auftritt. <strong>Geometrische</strong> Vielfachheit: die Dimension des Eigenraums zu λ.</p>
+    <p class="fall">Bei einer <em>einfachen</em> Nullstelle sind beide gleich 1. Bei einer mehrfachen kann die geometrische kleiner sein &#x2014; und dann gibt es <strong>keine Basis aus Eigenvektoren</strong>. Die Matrix ist in diesem Fall nicht diagonalisierbar.</p>
+  </article>
+
+  <article class="eintrag" id="symmetrische-matrix" data-suche="reell symmetrisch onb orthonormalbasis linearfaktoren senkrecht spektralsatz">
+    <h3>Reelle symmetrische Matrizen <span class="quelle">Skript S. 90, 91</span></h3>
+    <p class="bedingung">A ist reell und symmetrisch &#x2014; die wichtigste Voraussetzung dieses Kapitels</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>=</mo><msup><mi>A</mi><mi>T</mi></msup>
+      </mrow>
+    </math>
+    <p class="fall">Dann zerfällt das charakteristische Polynom über ℝ vollständig in Linearfaktoren: <strong>alle Eigenwerte sind reell</strong>, und mit Vielfachheit gezählt sind es genau n.</p>
+    <p class="fall">Mehr noch: es existiert eine <strong>Orthonormalbasis aus Eigenvektoren</strong>. Eigenvektoren zu verschiedenen Eigenwerten stehen also senkrecht aufeinander; normiert wird, indem man durch die Norm teilt.</p>
+    <p class="fall">Damit ist der Fall aus dem Eintrag darüber ausgeschlossen &#x2014; eine symmetrische Matrix hat immer genügend viele Eigenvektoren.</p>
+  </article>
+
+  <article class="eintrag" id="hermitesche-matrix" data-suche="komplex adjungiert konjugiert reelle eigenwerte unitaer gegenstueck">
+    <h3>Hermitesche Matrizen <span class="quelle">Skript S. 91</span></h3>
+    <p class="bedingung">A ist komplex; hermitesch heißt: gleich der eigenen adjungierten Matrix</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>=</mo>
+        <msup><mover><mi>A</mi><mo>&#xAF;</mo></mover><mi>T</mi></msup>
+      </mrow>
+    </math>
+    <p class="fall">Das ist das komplexe Gegenstück zum vorigen Eintrag, und es gilt dasselbe: die Eigenwerte einer hermiteschen Matrix sind <strong>reell</strong>, obwohl die Matrix komplex ist, und es gibt eine Orthonormalbasis aus Eigenvektoren.</p>
+    <p class="fall">Über ℂ zerfällt ohnehin jedes Polynom in Linearfaktoren; das Bemerkenswerte ist allein, dass die Nullstellen reell ausfallen.</p>
+  </article>
+
+  <article class="eintrag" id="eigenwert-null" data-suche="singulaer regulaer kern aequivalenzkette determinante null">
+    <h3>Der Eigenwert 0 <span class="quelle">Skript S. 86</span></h3>
+    <p class="bedingung">A ist quadratisch</p>
+    <math display="block">
+      <mrow>
+        <mn>0</mn><mspace width="0.4em"></mspace><mtext>Eigenwert von A</mtext>
+        <mspace width="0.8em"></mspace><mo>&#x27FA;</mo><mspace width="0.8em"></mspace>
+        <mi>A</mi><mspace width="0.4em"></mspace><mtext>singulär</mtext>
+      </mrow>
+    </math>
+    <p class="fall">Ist 0 ein Eigenwert, so ist der Eigenraum zu 0 genau der <strong>Kern</strong> von A. Ist 0 kein Eigenwert, ist A regulär.</p>
+    <p class="fall">Damit hängt sich auch dieser Satz an die Äquivalenzkette an: det(A) &#x2260; 0, rg(A) = n, ker(f) = {O} und „0 ist kein Eigenwert" sind vier Wege, dasselbe zu sagen.</p>
+  </article>
+
+  <article class="eintrag" id="kleine-saetze" data-suche="vielfaches inverse orthogonal betrag eins existenz drei mal drei ohne reellen">
+    <h3>Kleine Sätze über Eigenwerte <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Fünf Aussagen aus Aufgabe LA 46; im Skript nicht ausgeschrieben, in der Aufgabe zu begründen</p>
+    <math display="block">
+      <mrow>
+        <mi>&#x3BB;</mi><mspace width="0.3em"></mspace><mtext>von A</mtext>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <mi>c</mi><mi>&#x3BB;</mi><mspace width="0.3em"></mspace><mtext>von cA</mtext>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>&#x3BB;</mi><mspace width="0.3em"></mspace><mtext>von A regulär</mtext>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <msup><mi>&#x3BB;</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup>
+        <mspace width="0.3em"></mspace><mtext>von</mtext><mspace width="0.3em"></mspace>
+        <msup><mi>A</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mspace width="0.3em"></mspace><mtext>orthogonal oder unitär</mtext>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <mo stretchy="false" lspace="0" rspace="0">|</mo><mi>&#x3BB;</mi><mo stretchy="false" lspace="0" rspace="0">|</mo>
+        <mo>=</mo><mn>1</mn>
+      </mrow>
+    </math>
+    <p class="fall">Die dritte Zeile folgt daraus, dass orthogonale Abbildungen die Norm erhalten: aus <math><mrow><mi>A</mi><mi>v</mi><mo>=</mo><mi>&#x3BB;</mi><mi>v</mi></mrow></math> und <math><mrow><mo lspace="0" rspace="0">&#x2016;</mo><mi>A</mi><mi>v</mi><mo lspace="0" rspace="0">&#x2016;</mo><mo>=</mo><mo lspace="0" rspace="0">&#x2016;</mo><mi>v</mi><mo lspace="0" rspace="0">&#x2016;</mo></mrow></math> bleibt nichts anderes übrig.</p>
+    <p class="fall">Dazu zwei Existenzaussagen: eine <strong>reelle 3 × 3 Matrix</strong> hat stets mindestens einen reellen Eigenwert, weil ein Polynom dritten Grades mindestens eine reelle Nullstelle hat. Eine <strong>komplexe</strong> Matrix hat stets mindestens einen Eigenwert, weil über ℂ jedes Polynom zerfällt.</p>
+    <p class="fall">Eine reelle 2 × 2 Matrix kann dagegen <em>ohne</em> reellen Eigenwert sein &#x2014; jede Drehmatrix mit einem Winkel ungleich 0 und π ist ein Beispiel.</p>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 
