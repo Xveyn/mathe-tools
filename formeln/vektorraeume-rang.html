@@ -13,10 +13,423 @@
 <div class="wrap">
 
   <h1>Vektorräume, lineare Abbildungen, Rang</h1>
-  <p class="lede">Achtzehn Einträge nach der Inhaltsaufnahme, Nummern 3.8 bis 3.21d.</p>
+  <p class="lede">Der Kern der linearen Algebra: was ein Untervektorraum ist, wie eine lineare Abbildung zu ihrer Matrix kommt, und was Kern, Bild und Rang darüber sagen. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="vektorraum" data-suche="vektorraumaxiome skalare multiplikation nullvektor distributivgesetz">
+    <h3>Vektorraum über einem Körper K <span class="quelle">Skript S. 61</span></h3>
+    <p class="bedingung">Menge V mit einer Addition V × V &#x2192; V und einer skalaren Multiplikation K × V &#x2192; V</p>
+    <math display="block">
+      <mrow>
+        <mi>&#x3BB;</mi><mo>&#x22C5;</mo><mo>(</mo><mi>v</mi><mo>+</mo><mi>w</mi><mo>)</mo>
+        <mo>=</mo>
+        <mi>&#x3BB;</mi><mo>&#x22C5;</mo><mi>v</mi><mo>+</mo><mi>&#x3BB;</mi><mo>&#x22C5;</mo><mi>w</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo>(</mo><mi>&#x3BB;</mi><mo>+</mo><mi>&#x3BC;</mi><mo>)</mo><mo>&#x22C5;</mo><mi>v</mi>
+        <mo>=</mo>
+        <mi>&#x3BB;</mi><mo>&#x22C5;</mo><mi>v</mi><mo>+</mo><mi>&#x3BC;</mi><mo>&#x22C5;</mo><mi>v</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>&#x3BB;</mi><mo>&#x22C5;</mo><mo>(</mo><mi>&#x3BC;</mi><mo>&#x22C5;</mo><mi>v</mi><mo>)</mo>
+        <mo>=</mo>
+        <mo>(</mo><mi>&#x3BB;</mi><mi>&#x3BC;</mi><mo>)</mo><mo>&#x22C5;</mo><mi>v</mi>
+        <mspace width="1.6em"></mspace>
+        <mn>1</mn><mo>&#x22C5;</mo><mi>v</mi><mo>=</mo><mi>v</mi>
+      </mrow>
+    </math>
+    <p class="fall">Dazu ist (V, +) eine abelsche Gruppe: mit Nullvektor O und zu jedem v einem Gegenvektor &#x2212;v. Beispiele sind <math><msup><mi>K</mi><mi>n</mi></msup></math> über jedem Körper K &#x2014; also auch <math><msup><mrow><mi>GF</mi><mo>(</mo><mn>2</mn><mo>)</mo></mrow><mn>8</mn></msup></math>, ein Byte.</p>
+  </article>
+
+  <article class="eintrag" id="untervektorraum" data-suche="uvr kriterium abgeschlossen teilmenge ursprung nullvektor">
+    <h3>Untervektorraum &#x2014; das Kriterium <span class="quelle">Skript S. 62</span></h3>
+    <p class="bedingung">U ist eine nichtleere Teilmenge eines K-Vektorraums V; beide Zeilen müssen gelten</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>u</mi><mn>1</mn></msub><mo>,</mo>
+        <msub><mi>u</mi><mn>2</mn></msub><mo>&#x2208;</mo><mi>U</mi>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <msub><mi>u</mi><mn>1</mn></msub><mo>+</mo><msub><mi>u</mi><mn>2</mn></msub><mo>&#x2208;</mo><mi>U</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>&#x3BB;</mi><mo>&#x2208;</mo><mi>K</mi><mo>,</mo>
+        <mi>u</mi><mo>&#x2208;</mo><mi>U</mi>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <mi>&#x3BB;</mi><mo>&#x22C5;</mo><mi>u</mi><mo>&#x2208;</mo><mi>U</mi>
+      </mrow>
+    </math>
+    <p class="fall">Beide Zeilen zusammen heißen: U ist gegen Addition und gegen skalare Vielfache <strong>abgeschlossen</strong>.</p>
+    <p class="fall">Der Nullvektor liegt damit zwingend in U &#x2014; nimm λ = 0 in der zweiten Zeile. Das ist die schnellste Probe: eine Gerade oder Ebene, die nicht durch den Ursprung geht, scheidet sofort aus.</p>
+  </article>
+
+  <article class="eintrag" id="lineare-huelle" data-suche="erzeugendensystem aufspannen span linearkombination huelle">
+    <h3>Lineare Hülle und Erzeugendensystem <span class="quelle">Skript S. 63</span></h3>
+    <p class="bedingung">v<sub>1</sub>, …, v<sub>n</sub> sind Vektoren eines K-Vektorraums V</p>
+    <math display="block">
+      <mrow>
+        <mi>U</mi><mo>=</mo><mo>{</mo>
+        <msub><mi>&#x3BB;</mi><mn>1</mn></msub><msub><mi>v</mi><mn>1</mn></msub>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>&#x3BB;</mi><mi>n</mi></msub><msub><mi>v</mi><mi>n</mi></msub>
+        <mspace width="0.3em"></mspace><mo stretchy="false">|</mo><mspace width="0.3em"></mspace>
+        <msub><mi>&#x3BB;</mi><mi>i</mi></msub><mo>&#x2208;</mo><mi>K</mi>
+        <mo>}</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>U</mi><mo>=</mo>
+        <mo>&lt;</mo>
+        <msub><mi>v</mi><mn>1</mn></msub><mo>,</mo>
+        <msub><mi>v</mi><mn>2</mn></msub><mo>,</mo>
+        <mo>&#x2026;</mo><mo>,</mo>
+        <msub><mi>v</mi><mi>n</mi></msub>
+        <mo>&gt;</mo>
+      </mrow>
+    </math>
+    <p class="fall">U ist stets ein UVR von V. Man sagt: die Vektoren <strong>erzeugen</strong> U oder <strong>spannen</strong> U auf; die spitzen Klammern sind die Schreibweise des Skripts.</p>
+  </article>
+
+  <article class="eintrag" id="lineare-abbildung" data-suche="linearitaet homomorphismus affin erkennen xor">
+    <h3>Lineare Abbildung <span class="quelle">Skript S. 64</span></h3>
+    <p class="bedingung">f : V &#x2192; W zwischen K-Vektorräumen; beides muss gelten</p>
+    <math display="block">
+      <mrow>
+        <mi>f</mi><mo>(</mo><msub><mi>v</mi><mn>1</mn></msub><mo>+</mo><msub><mi>v</mi><mn>2</mn></msub><mo>)</mo>
+        <mo>=</mo>
+        <mi>f</mi><mo>(</mo><msub><mi>v</mi><mn>1</mn></msub><mo>)</mo>
+        <mo>+</mo>
+        <mi>f</mi><mo>(</mo><msub><mi>v</mi><mn>2</mn></msub><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>f</mi><mo>(</mo><mi>&#x3BB;</mi><mo>&#x22C5;</mo><mi>v</mi><mo>)</mo>
+        <mo>=</mo>
+        <mi>&#x3BB;</mi><mo>&#x22C5;</mo><mi>f</mi><mo>(</mo><mi>v</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Woran man sie erkennt: jede Komponente des Ergebnisvektors ist eine reine Linearkombination der Eingangsvariablen &#x2014; keine Produkte, keine Quadrate, kein Sinus und vor allem <strong>keine Konstante</strong>. f(x₁, x₂) = (1 + x₁, x₁ &#x2212; 3x₂) ist nicht linear, sondern affin.</p>
+    <p class="fall">Über GF(2) heißt dasselbe: eine boolesche Funktion ist genau dann linear, wenn sie eine reine XOR-Summe der Variablen ist.</p>
+  </article>
+
+  <article class="eintrag" id="abbildungsmatrix" data-suche="einheitsvektoren spalten darstellungsmatrix aufstellen">
+    <h3>Abbildungsmatrix <span class="quelle">Skript S. 66</span></h3>
+    <p class="bedingung">f : K<sup>n</sup> &#x2192; K<sup>m</sup> linear; dazu gehört genau eine m × n Matrix A</p>
+    <math display="block">
+      <mrow>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>A</mi><mo>&#x22C5;</mo><mi>x</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>&#x22C5;</mo><msub><mi>e</mi><mi>i</mi></msub>
+        <mo>=</mo>
+        <mi>f</mi><mo>(</mo><msub><mi>e</mi><mi>i</mi></msub><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die zweite Zeile ist die Bauanleitung: <math><mrow><mi>A</mi><mo>&#x22C5;</mo><msub><mi>e</mi><mi>i</mi></msub></mrow></math> ist die i-te Spalte von A. Man rechnet also f(e₁), f(e₂), …, f(e<sub>n</sub>) aus und schreibt die Ergebnisse als Spalten nebeneinander.</p>
+    <p class="fall">Die Zuordnung geht in beide Richtungen: jede m × n Matrix beschreibt eine lineare Abbildung, und jede lineare Abbildung hat genau eine solche Matrix.</p>
+  </article>
+
+  <article class="eintrag" id="matrix-mal-vektor" data-suche="linearkombination spaltenvektoren gewichte produkt">
+    <h3>A · x als Linearkombination der Spalten <span class="quelle">Skript S. 63</span></h3>
+    <p class="bedingung">v<sub>1</sub>, …, v<sub>n</sub> sind die Spaltenvektoren von A, x hat die Komponenten x<sub>1</sub>, …, x<sub>n</sub></p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>&#x22C5;</mo><mi>x</mi><mo>=</mo>
+        <msub><mi>x</mi><mn>1</mn></msub><msub><mi>v</mi><mn>1</mn></msub>
+        <mo>+</mo>
+        <msub><mi>x</mi><mn>2</mn></msub><msub><mi>v</mi><mn>2</mn></msub>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>x</mi><mi>n</mi></msub><msub><mi>v</mi><mi>n</mi></msub>
+      </mrow>
+    </math>
+    <p class="fall">Die Koordinaten von x sind die Gewichte der Spalten. Daraus folgt unmittelbar, dass das Bild von f die lineare Hülle der Spaltenvektoren ist.</p>
+  </article>
+
+  <article class="eintrag" id="kern-und-bild" data-suche="ker im kern bild wertebereich loesungsmenge lgs">
+    <h3>Kern und Bild <span class="quelle">Skript S. 64, 67</span></h3>
+    <p class="bedingung">f : V &#x2192; W linear, mit Abbildungsmatrix A</p>
+    <math display="block">
+      <mrow>
+        <mi>ker</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo>
+        <mo>{</mo><mi>v</mi><mo>&#x2208;</mo><mi>V</mi>
+        <mspace width="0.3em"></mspace><mo stretchy="false">|</mo><mspace width="0.3em"></mspace>
+        <mi>f</mi><mo>(</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>O</mi><mo>}</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo>
+        <mo>{</mo><mi>w</mi><mo>&#x2208;</mo><mi>W</mi>
+        <mspace width="0.3em"></mspace><mo stretchy="false">|</mo><mspace width="0.3em"></mspace>
+        <mo>&#x2203;</mo><mi>v</mi><mo>:</mo>
+        <mi>f</mi><mo>(</mo><mi>v</mi><mo>)</mo><mo>=</mo><mi>w</mi><mo>}</mo>
+      </mrow>
+    </math>
+    <p class="fall">Beide sind Untervektorräume &#x2014; ker(f) von V, im(f) von W.</p>
+    <p class="fall">Mit der Matrix gerechnet: <strong>ker(f) ist die Lösungsmenge des LGS A · x = O</strong>, und <strong>im(f) ist die lineare Hülle der Spaltenvektoren von A</strong>. Das sind die beiden Rechenwege, die die Aufgaben verlangen.</p>
+  </article>
+
+  <article class="eintrag" id="injektiv-surjektiv-bijektiv" data-suche="isomorphismus umkehrbar eineindeutig isomorph">
+    <h3>Injektiv, surjektiv, bijektiv <span class="quelle">Skript S. 65</span></h3>
+    <p class="bedingung">f : V &#x2192; W linear</p>
+    <math display="block">
+      <mrow>
+        <mi>ker</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mo>{</mo><mi>O</mi><mo>}</mo>
+        <mspace width="1em"></mspace><mo>&#x27FA;</mo><mspace width="1em"></mspace>
+        <mi>f</mi><mspace width="0.4em"></mspace><mtext>injektiv</mtext>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mi>W</mi>
+        <mspace width="1em"></mspace><mo>&#x27FA;</mo><mspace width="1em"></mspace>
+        <mi>f</mi><mspace width="0.4em"></mspace><mtext>surjektiv</mtext>
+      </mrow>
+    </math>
+    <p class="fall">Gilt beides, ist f bijektiv. Man nennt f dann einen <strong>Isomorphismus</strong> und schreibt V &#x2245; W.</p>
+  </article>
+
+  <article class="eintrag" id="komposition" data-suche="hintereinanderausfuehrung verkettung matrixprodukt reihenfolge">
+    <h3>Komposition ist das Matrixprodukt <span class="quelle">Skript S. 70</span></h3>
+    <p class="bedingung">f mit m × n Matrix A, g mit n × k Matrix B; dann hat f ∘ g die m × k Matrix A · B</p>
+    <math display="block">
+      <mrow>
+        <mo>(</mo><mi>f</mi><mo>&#x2218;</mo><mi>g</mi><mo>)</mo><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>=</mo>
+        <mi>A</mi><mo>&#x22C5;</mo><mo>(</mo><mi>B</mi><mo>&#x22C5;</mo><mi>x</mi><mo>)</mo>
+        <mo>=</mo>
+        <mo>(</mo><mi>A</mi><mo>&#x22C5;</mo><mi>B</mi><mo>)</mo><mo>&#x22C5;</mo><mi>x</mi>
+      </mrow>
+    </math>
+    <p class="fall">Die Reihenfolge zählt: ausgeführt wird erst g, dann f &#x2014; im Produkt steht A trotzdem links. Die inneren Maße müssen zusammenpassen, (m × n) · (n × k) ergibt m × k.</p>
+  </article>
+
+  <article class="eintrag" id="lineare-unabhaengigkeit" data-suche="unabhaengig abhaengig triviale loesung nichttrivial">
+    <h3>Lineare Unabhängigkeit <span class="quelle">Skript S. 70, 71</span></h3>
+    <p class="bedingung">v<sub>1</sub>, …, v<sub>n</sub> heißen unabhängig, wenn die Gleichung nur die triviale Lösung hat</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>x</mi><mn>1</mn></msub><msub><mi>v</mi><mn>1</mn></msub>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>x</mi><mi>n</mi></msub><msub><mi>v</mi><mi>n</mi></msub>
+        <mo>=</mo><mi>O</mi>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <mtext>alle</mtext><mspace width="0.4em"></mspace>
+        <msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <p class="fall">Als Matrix gerechnet: die Vektoren in die Spalten einer m × n Matrix A schreiben. Unabhängig heißt dann, dass A · x = O nur der Nullvektor löst; gibt es einen Lösungsvektor ungleich null, sind sie abhängig.</p>
+    <math display="block">
+      <mrow>
+        <mi>n</mi><mo>&gt;</mo><mi>m</mi>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mo>&#x2026;</mo><mo>,</mo>
+        <msub><mi>v</mi><mi>n</mi></msub><mo>&#x2208;</mo><msup><mi>K</mi><mi>m</mi></msup>
+        <mspace width="0.4em"></mspace><mtext>abhängig</mtext>
+      </mrow>
+    </math>
+    <p class="fall">Mehr Vektoren als Komponenten geht nie: im K² sind höchstens zwei, im K³ höchstens drei Vektoren unabhängig. Das spart die Rechnung.</p>
+  </article>
+
+  <article class="eintrag" id="basis-und-dimension" data-suche="standardbasis einheitsvektoren dim erzeugendensystem">
+    <h3>Basis und Dimension <span class="quelle">Skript S. 71, 72</span></h3>
+    <p class="bedingung">B = {v<sub>1</sub>, …, v<sub>n</sub>} ist Basis von V, wenn die Vektoren unabhängig sind <em>und</em> V erzeugen</p>
+    <math display="block">
+      <mrow>
+        <mo>&lt;</mo>
+        <msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mo>&#x2026;</mo><mo>,</mo>
+        <msub><mi>v</mi><mi>n</mi></msub>
+        <mo>&gt;</mo>
+        <mo>=</mo><mi>V</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>dim</mi><mo>(</mo><mi>V</mi><mo>)</mo><mo>=</mo><mi>n</mi>
+        <mspace width="1.6em"></mspace>
+        <mi>dim</mi><mo>(</mo><msup><mi>K</mi><mi>n</mi></msup><mo>)</mo><mo>=</mo><mi>n</mi>
+      </mrow>
+    </math>
+    <p class="fall">Jede Basis desselben Raums hat gleich viele Vektoren &#x2014; diese Zahl ist die Dimension.</p>
+    <p class="fall">Umgekehrt gilt: n linear unabhängige Vektoren des <math><msup><mi>K</mi><mi>n</mi></msup></math> sind automatisch eine Basis. Das Erzeugen muss man dann nicht mehr prüfen.</p>
+  </article>
+
+  <article class="eintrag" id="rang" data-suche="zeilenrang spaltenrang rg zeilenstufenform umformungen">
+    <h3>Rang einer Matrix <span class="quelle">Skript S. 72, 73</span></h3>
+    <p class="bedingung">A ist eine m × n Matrix, f die zugehörige lineare Abbildung; alle drei Zahlen sind gleich</p>
+    <math display="block">
+      <mrow>
+        <mtext>Zeilenrang</mtext><mo>=</mo><mtext>Spaltenrang</mtext><mo>=</mo>
+        <mi>rg</mi><mo>(</mo><mi>A</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>rg</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo>
+        <mi>dim</mi><mspace width="0.2em"></mspace><mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Zeilenrang ist die größte Zahl linear unabhängiger Zeilen, Spaltenrang dieselbe Zahl für die Spalten.</p>
+    <p class="fall">Gauß'sche Zeilen- und Spaltenumformungen ändern den Rang <strong>nicht</strong>. Deshalb bringt man A in Zeilenstufenform und zählt die Zeilen, die nicht Null sind.</p>
+  </article>
+
+  <article class="eintrag" id="regulaer-und-singulaer" data-suche="regulaer singulaer invertierbar quadratisch dreiecksform">
+    <h3>Regulär und singulär <span class="quelle">Skript S. 73</span></h3>
+    <p class="bedingung">A ist quadratisch, also n × n</p>
+    <math display="block">
+      <mrow>
+        <mi>rg</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo><mi>n</mi>
+        <mspace width="1em"></mspace><mo>&#x27FA;</mo><mspace width="1em"></mspace>
+        <mi>A</mi><mspace width="0.4em"></mspace><mtext>regulär</mtext>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>rg</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>&lt;</mo><mi>n</mi>
+        <mspace width="1em"></mspace><mo>&#x27FA;</mo><mspace width="1em"></mspace>
+        <mi>A</mi><mspace width="0.4em"></mspace><mtext>singulär</mtext>
+      </mrow>
+    </math>
+    <p class="fall">Die regulären Matrizen sind genau die invertierbaren. Sie lassen sich durch Zeilenumformungen auf Dreiecksform bringen, in der alle Diagonaleinträge ungleich null sind.</p>
+  </article>
+
+  <article class="eintrag" id="aequivalenzkette" data-suche="aequivalent gleichwertig bijektiv invertierbar regulaer sieben aussagen">
+    <h3>Die Äquivalenzkette <span class="quelle">Skript S. 74</span></h3>
+    <p class="bedingung">f : K<sup>n</sup> &#x2192; K<sup>n</sup> linear mit quadratischer Abbildungsmatrix A</p>
+    <math display="block">
+      <mrow>
+        <mi>f</mi><mspace width="0.4em"></mspace><mtext>bijektiv</mtext>
+        <mspace width="0.8em"></mspace><mo>&#x27FA;</mo><mspace width="0.8em"></mspace>
+        <msup><mi>A</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup>
+        <mspace width="0.4em"></mspace><mtext>existiert</mtext>
+        <mspace width="0.8em"></mspace><mo>&#x27FA;</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>rg</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo><mi>n</mi>
+        <mspace width="0.8em"></mspace><mo>&#x27FA;</mo><mspace width="0.8em"></mspace>
+        <mi>ker</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mo>{</mo><mi>O</mi><mo>}</mo>
+        <mspace width="0.8em"></mspace><mo>&#x27FA;</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><msup><mi>K</mi><mi>n</mi></msup>
+      </mrow>
+    </math>
+    <p class="fall">Gleichwertig ist außerdem: die Spaltenvektoren von A sind linear unabhängig &#x2014; und ebenso die Zeilenvektoren. Sieben Aussagen, die miteinander stehen und fallen.</p>
+    <p class="fall">In der Aufgabe prüft man die, die am wenigsten Arbeit macht &#x2014; meist rg(A) = n über das Gauß-Verfahren.</p>
+  </article>
+
+  <article class="eintrag" id="gauss-verfahren" data-suche="gauss zeilenstufenform trapezform freie variable zeilenumformung elimination">
+    <h3>Zeilenstufenform und das Gauß-Verfahren <span class="quelle">Skript S. 73, 74</span></h3>
+    <p class="bedingung">Zeilenumformungen ändern weder den Rang noch die Lösungsmenge des Systems</p>
+    <math display="block">
+      <mrow class="matrix-rahmen">
+        <mo class="matrix-klammer-4z-tief">(</mo>
+        <mtable>
+          <mtr>
+            <mtd><msub><mi>b</mi><mn>1</mn></msub></mtd><mtd><mo>&#x2217;</mo></mtd><mtd><mo>&#x2217;</mo></mtd><mtd><mo>&#x2217;</mo></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mn>0</mn></mtd><mtd><msub><mi>b</mi><mn>2</mn></msub></mtd><mtd><mo>&#x2217;</mo></mtd><mtd><mo>&#x2217;</mo></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><msub><mi>b</mi><mn>3</mn></msub></mtd><mtd><mo>&#x2217;</mo></mtd>
+          </mtr>
+          <mtr>
+            <mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd>
+          </mtr>
+        </mtable>
+        <mo class="matrix-klammer-4z-tief">)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die Stufeneinträge b₁, …, b<sub>k</sub> sind alle ungleich null, darunter stehen nur Nullzeilen. Dann ist rg(A) = k &#x2014; oben ist k = 3.</p>
+    <p class="fall">Erlaubt sind drei Umformungen: eine Zeile mit einem Faktor ungleich null multiplizieren, ein Vielfaches einer Zeile zu einer anderen addieren, zwei Zeilen vertauschen.</p>
+    <p class="fall">Für A · x = O gehört jede Spalte <em>ohne</em> Stufe zu einer <strong>freien Variablen</strong>. Man setzt sie als Parameter, löst von unten nach oben auf und schreibt die Lösungsmenge als lineare Hülle &#x2014; so entstehen im Skript sowohl der Kern (S. 68) als auch der Eigenraum (S. 87).</p>
+  </article>
+
+  <article class="eintrag" id="matrizenprodukt-und-transponierte" data-suche="produkt transponiert zeilenschreibweise masse rechenregel nicht kommutativ">
+    <h3>Matrizenprodukt und Zeilenschreibweise <span class="quelle">Skript S. 63, 66</span></h3>
+    <p class="bedingung">A ist m × n, B ist n × k; das Produkt A · B ist m × k</p>
+    <math display="block">
+      <mrow>
+        <msub><mrow><mo>(</mo><mi>A</mi><mo>&#x22C5;</mo><mi>B</mi><mo>)</mo></mrow><mrow><mi>i</mi><mi>j</mi></mrow></msub>
+        <mo>=</mo>
+        <munderover>
+          <mo>&#x2211;</mo>
+          <mrow><mi>l</mi><mo>=</mo><mn>1</mn></mrow>
+          <mi>n</mi>
+        </munderover>
+        <msub><mi>a</mi><mrow><mi>i</mi><mi>l</mi></mrow></msub>
+        <mo>&#x22C5;</mo>
+        <msub><mi>b</mi><mrow><mi>l</mi><mi>j</mi></mrow></msub>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>f</mi><mo>(</mo><msup><mi>x</mi><mi>T</mi></msup><mo>)</mo>
+        <mo>=</mo>
+        <msup><mi>x</mi><mi>T</mi></msup><mo>&#x22C5;</mo><msup><mi>A</mi><mi>T</mi></msup>
+      </mrow>
+    </math>
+    <p class="fall">Die zweite Zeile ist dieselbe Abbildung in Zeilenschreibweise: schreibt man x als Zeile statt als Spalte, wandert die Matrix nach rechts und wird transponiert.</p>
+    <p class="fall">Die inneren Maße müssen übereinstimmen, sonst ist das Produkt nicht erklärt. A · B und B · A sind im Allgemeinen verschieden.</p>
+  </article>
+
+  <article class="eintrag" id="dimensionsformel" data-suche="rangsatz kern bild dimension freie variablen defekt">
+    <h3>Dimensionsformel <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">f : K<sup>n</sup> &#x2192; K<sup>m</sup> linear; in Aufgabe LA 23 verlangt, im Skript nicht geführt</p>
+    <math display="block">
+      <mrow>
+        <mi>dim</mi><mspace width="0.2em"></mspace><mi>ker</mi><mo>(</mo><mi>f</mi><mo>)</mo>
+        <mo>+</mo>
+        <mi>dim</mi><mspace width="0.2em"></mspace><mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo>
+        <mo>=</mo><mi>n</mi>
+      </mrow>
+    </math>
+    <p class="fall">n ist die Dimension des <em>Definitionsbereichs</em>, nicht die des Zielbereichs &#x2014; das ist die Stelle, an der man sich vertut.</p>
+    <p class="fall">Mit dim im(f) = rg(A) folgt daraus dim ker(f) = n &#x2212; rg(A): genau die Zahl der freien Variablen beim Gauß-Verfahren.</p>
+  </article>
+
+  <article class="eintrag" id="komplexe-multiplikation-als-matrix" data-suche="komplexe zahl drehstreckung reelle 2x2 matrix ebene imaginaer">
+    <h3>Multiplikation mit a + b i als Abbildung der Ebene <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">ℂ als reeller Vektorraum ℝ² gelesen, z = x + i y als Spalte (x, y); in Aufgabe LA 15 verlangt</p>
+    <math display="block">
+      <mrow>
+        <mo>(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mi>i</mi><mo>)</mo>
+        <mo>(</mo><mi>x</mi><mo>+</mo><mi>i</mi><mi>y</mi><mo>)</mo>
+        <mo>=</mo>
+        <mo>(</mo><mi>a</mi><mi>x</mi><mo>&#x2212;</mo><mi>b</mi><mi>y</mi><mo>)</mo>
+        <mo>+</mo>
+        <mi>i</mi><mo>(</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>a</mi><mi>y</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msub><mi>A</mi><mi>w</mi></msub><mo>=</mo>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer-2z-ober">(</mo>
+          <mtable>
+            <mtr><mtd><mi>a</mi></mtd><mtd><mo>&#x2212;</mo><mi>b</mi></mtd></mtr>
+            <mtr><mtd><mi>b</mi></mtd><mtd><mi>a</mi></mtd></mtr>
+          </mtable>
+          <mo class="matrix-klammer-2z-ober">)</mo>
+        </mrow>
+      </mrow>
+    </math>
+    <p class="fall">Die Spalten sind die Bilder der Einheitsvektoren: 1 &#x21A6; a + b i und i &#x21A6; &#x2212;b + a i.</p>
+    <p class="fall">Die Abbildung ist eine <strong>Drehstreckung</strong>: sie streckt um |w| und dreht um den Winkel von w. Für w = i wird daraus die Vierteldrehung.</p>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 

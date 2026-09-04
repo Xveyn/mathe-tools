@@ -64,7 +64,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | Datei | Was drin ist |
 |---|---|
 | `shared/theme.css` | Farbtokens, Grundtypografie, dazu die Druckpalette (heller Blattfarben-Satz im `@media print`-Block, gilt für jede Seite) |
-| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-rahmen`, `.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
+| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-rahmen`, `.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`, `.matrix-klammer-2z-ober`, `.matrix-klammer-4z-tief`). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
 | `shared/formeln.css` | Bausteine der Formelsammlung: der Eintrag `.eintrag`, Verzeichnis und Filterzeile, samt Druck-Stylesheet — lädt nie zusammen mit `karten.css` |
 | `shared/expr.js` | `MT.expr.compile(term, vars)` — Terme in Funktionen |
@@ -523,7 +523,7 @@ hat sie hier schon gefunden.
   wirkungslos, eine Klammer wächst also nicht von selbst mit ihrer Matrix
   mit. Die Klassen stehen seit der Formelsammlung in `shared/ui.css`
   (vorher, für die Hesse-Matrix allein, in `shared/karten.css`), und es
-  sind vier Größen, nicht mehr eine:
+  sind sechs Größen, nicht mehr eine:
 
   - `.matrix-klammer` (3,8em) — zweizeilig, an der Hesse-Matrix gemessen
     (ihre Zellen tragen Brüche und sind deshalb hoch): Verhältnis 1,03.
@@ -534,10 +534,24 @@ hat sie hier schon gefunden.
   - `.matrix-klammer-flach` (2,4em) — zweizeilig, ohne Brüche und ohne
     Winkelbuchstaben (reine Zahlenmatrizen wie `Sx`/`Sy`), an ihnen
     gemessen: Verhältnis 1,04, Überstand 0,7 px.
+  - `.matrix-klammer-2z-ober` (2,9em) — zweizeilig mit Buchstaben, die
+    eine Oberlänge haben, aber keine Unterlänge (`a`, `b`). Georgias
+    Ziffern 0 und 1 bleiben auf x-Höhe, das `b` steigt darüber: dieselbe
+    2×2-Matrix ist so 39,7 px hoch statt 33,7 px. Am 2026-09-04 an
+    `(a, −b; b, a)` gemessen: Verhältnis 1,08, Überstand 1,7 px.
+  - `.matrix-klammer-4z-tief` (6,4em) — vierzeilig mit tiefergestellten
+    Indizes (`b₁`, `b₂`, `b₃`), die jede Zeile höher machen als bei der
+    DFT-Matrix: 90,1 px statt 73,4 px. Am 2026-09-04 an der
+    Zeilenstufenform gemessen: Verhältnis 1,05, Überstand 2,4 px.
 
   **Nicht die Zeilenzahl allein bestimmt die passende Klammer, sondern die
-  Höhe der Zelle — und die vier Größen decken die häufigen Fälle, nicht
-  jede Zellenhöhe.** Eine Zelle mit einem Bruch ist höher als eine mit
+  Höhe der Zelle — und die sechs Größen decken die häufigen Fälle, nicht
+  jede Zellenhöhe.** Die beiden Größen vom 2026-09-04 sind genau daran
+  entstanden: dieselbe Zeilenzahl, andere Zellen, und die vorhandene
+  Klasse stand **zu kurz** — die Matrix ragte oben und unten aus ihrer
+  Klammer heraus (0,87 bzw. 0,88). Eine neue Matrix wird deshalb
+  nachgemessen, bevor sie als fertig gilt; die Klasse nach Zeilenzahl zu
+  raten reicht nicht. Eine Zelle mit einem Bruch ist höher als eine mit
   `cos(α)`, und eine mit `cos(α)` ist höher als eine mit einer bloßen
   Zahl; die Anwesenheit eines Buchstabens allein entscheidet nichts.
   `.matrix-klammer` ist an der bruchtragenden Hesse-Matrix gemessen; an
