@@ -215,6 +215,10 @@ keine zweite Formelübersicht und keine eigene Formel-Kachel je Thema auf
 der Startseite — die Startseite verlinkt insgesamt nur auf
 `formeln/index.html`.
 
+**Seit dem 2026-09-04 ist die Formelsammlung vollständig** — alle vierzehn
+Themen sind gefüllt, 144 Einträge. Der folgende Abschnitt beschreibt, wie das
+lief, und gilt unverändert, falls je ein neues Thema dazukommt.
+
 **Ein Gerüst zur gefüllten Seite machen.** Ein noch leeres Thema ist eine
 `formeln/<thema>.html` mit `.lede`, einer `p.leer` dahinter
 („Dieses Thema ist noch nicht gefüllt …") und sonst nichts. Beim Füllen:

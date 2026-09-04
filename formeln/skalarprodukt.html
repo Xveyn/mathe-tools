@@ -13,10 +13,138 @@
 <div class="wrap">
 
   <h1>Skalarprodukt und Orthogonalität</h1>
-  <p class="lede">Fünf Einträge nach der Inhaltsaufnahme, Nummern 3.22 bis 3.26.</p>
+  <p class="lede">Womit man Längen und Winkel misst &#x2014; reell und komplex &#x2014; und was eine Orthonormalbasis ausmacht. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="skalarprodukt-reell" data-suche="euklidisch norm laenge senkrecht standardskalarprodukt punktprodukt">
+    <h3>Skalarprodukt im ℝ<sup>n</sup> <span class="quelle">Skript S. 75</span></h3>
+    <p class="bedingung">v hat die Komponenten x<sub>1</sub>, …, x<sub>n</sub>, w die Komponenten y<sub>1</sub>, …, y<sub>n</sub>; beide reell</p>
+    <math display="block">
+      <mrow>
+        <mi>v</mi><mo>&#x22C5;</mo><mi>w</mi><mo>=</mo>
+        <msub><mi>x</mi><mn>1</mn></msub><msub><mi>y</mi><mn>1</mn></msub>
+        <mo>+</mo>
+        <msub><mi>x</mi><mn>2</mn></msub><msub><mi>y</mi><mn>2</mn></msub>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>x</mi><mi>n</mi></msub><msub><mi>y</mi><mi>n</mi></msub>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo lspace="0" rspace="0">&#x2016;</mo><mi>v</mi><mo lspace="0" rspace="0">&#x2016;</mo>
+        <mo>=</mo>
+        <msqrt><mrow><mi>v</mi><mo>&#x22C5;</mo><mi>v</mi></mrow></msqrt>
+        <mspace width="1.6em"></mspace>
+        <mi>v</mi><mo>&#x22C5;</mo><mi>v</mi><mo>=</mo>
+        <msup><mrow><mo lspace="0" rspace="0">&#x2016;</mo><mi>v</mi><mo lspace="0" rspace="0">&#x2016;</mo></mrow><mn>2</mn></msup>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>v</mi><mo>&#x22C5;</mo><mi>w</mi><mo>=</mo><mn>0</mn>
+        <mspace width="0.8em"></mspace><mo>&#x27FA;</mo><mspace width="0.8em"></mspace>
+        <mi>v</mi><mo>,</mo><mi>w</mi>
+        <mspace width="0.4em"></mspace><mtext>orthogonal</mtext>
+      </mrow>
+    </math>
+    <p class="fall">Das Ergebnis ist eine <strong>Zahl</strong>, kein Vektor &#x2014; daher der Name. Mit ihm sind Länge und Winkel erklärt; der ℝ<sup>n</sup> mit diesem Skalarprodukt heißt <em>euklidischer Vektorraum</em>.</p>
+  </article>
+
+  <article class="eintrag" id="skalarprodukt-komplex" data-suche="unitaer konjugiert zweite komponente quer reell nichtnegativ">
+    <h3>Komplexes Skalarprodukt <span class="quelle">Skript S. 75, 76</span></h3>
+    <p class="bedingung">v, w &#x2208; ℂ<sup>n</sup>; die Komponenten der <em>zweiten</em> Stelle werden konjugiert</p>
+    <math display="block">
+      <mrow>
+        <mi>v</mi><mo>&#x22C5;</mo><mi>w</mi><mo>=</mo>
+        <msub><mi>x</mi><mn>1</mn></msub><mover><msub><mi>y</mi><mn>1</mn></msub><mo>&#xAF;</mo></mover>
+        <mo>+</mo>
+        <msub><mi>x</mi><mn>2</mn></msub><mover><msub><mi>y</mi><mn>2</mn></msub><mo>&#xAF;</mo></mover>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>x</mi><mi>n</mi></msub><mover><msub><mi>y</mi><mi>n</mi></msub><mo>&#xAF;</mo></mover>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Die Konjugation in der zweiten Komponente ist der ganze Unterschied</strong> &#x2014; und sie hat einen Grund: nur so ist v · v eine reelle Zahl größer oder gleich null, auch bei komplexen Koordinaten. Sonst gäbe es keine Norm.</p>
+    <math display="block">
+      <mrow>
+        <mo lspace="0" rspace="0">&#x2016;</mo><mi>v</mi><mo lspace="0" rspace="0">&#x2016;</mo>
+        <mo>=</mo>
+        <msqrt><mrow><mi>v</mi><mo>&#x22C5;</mo><mi>v</mi></mrow></msqrt>
+      </mrow>
+    </math>
+    <p class="fall">Norm und Orthogonalität sind wie im Reellen erklärt: orthogonal heißt weiterhin v · w = 0. Der ℂ<sup>n</sup> mit diesem Skalarprodukt heißt <strong>unitärer Vektorraum</strong>.</p>
+  </article>
+
+  <article class="eintrag" id="orthonormalbasis" data-suche="onb normieren paarweise senkrecht laenge eins standardbasis gedreht">
+    <h3>Orthonormalbasis <span class="quelle">Skript S. 76, 77</span></h3>
+    <p class="bedingung">{v<sub>1</sub>, …, v<sub>n</sub>} ist eine Basis eines euklidischen oder unitären Vektorraums; beide Bedingungen müssen gelten</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>v</mi><mi>i</mi></msub><mo>&#x22C5;</mo><msub><mi>v</mi><mi>j</mi></msub>
+        <mo>=</mo><mn>0</mn>
+        <mspace width="0.8em"></mspace><mtext>für</mtext><mspace width="0.4em"></mspace>
+        <mi>i</mi><mo>&#x2260;</mo><mi>j</mi>
+        <mspace width="1.4em"></mspace>
+        <msub><mi>v</mi><mi>i</mi></msub><mo>&#x22C5;</mo><msub><mi>v</mi><mi>i</mi></msub>
+        <mo>=</mo><mn>1</mn>
+      </mrow>
+    </math>
+    <p class="fall">Beides zusammen heißt: die Vektoren stehen <strong>paarweise senkrecht</strong> aufeinander <em>und</em> haben die <strong>Länge 1</strong>.</p>
+    <p class="fall">Eine schon orthogonale Basis wird durch Normieren zur ONB &#x2014; jeder Vektor wird durch seine Norm geteilt:</p>
+    <math display="block">
+      <mrow>
+        <mfrac><mn>1</mn><mrow><mo lspace="0" rspace="0">&#x2016;</mo><msub><mi>v</mi><mn>1</mn></msub><mo lspace="0" rspace="0">&#x2016;</mo></mrow></mfrac>
+        <msub><mi>v</mi><mn>1</mn></msub>
+        <mo>,</mo><mspace width="0.6em"></mspace><mo>&#x2026;</mo><mo>,</mo><mspace width="0.6em"></mspace>
+        <mfrac><mn>1</mn><mrow><mo lspace="0" rspace="0">&#x2016;</mo><msub><mi>v</mi><mi>n</mi></msub><mo lspace="0" rspace="0">&#x2016;</mo></mrow></mfrac>
+        <msub><mi>v</mi><mi>n</mi></msub>
+      </mrow>
+    </math>
+    <p class="fall">Die Standardeinheitsvektoren bilden die einfachste ONB, aber es gibt viele weitere. Anschaulich: eine ONB des ℝ<sup>n</sup> ist gegenüber der Standardbasis nur <em>gedreht und/oder gespiegelt</em>.</p>
+  </article>
+
+  <article class="eintrag" id="orthogonale-projektion" data-suche="projizieren auf einen vektor auf eine ebene anteil komponente lot">
+    <h3>Orthogonale Projektion <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Aus Mathematik 1; in Aufgabe LA 38 verlangt. Projektion von v auf die Richtung w, mit w &#x2260; O</p>
+    <math display="block">
+      <mrow>
+        <mi>p</mi><mo>=</mo>
+        <mfrac>
+          <mrow><mi>v</mi><mo>&#x22C5;</mo><mi>w</mi></mrow>
+          <mrow><mi>w</mi><mo>&#x22C5;</mo><mi>w</mi></mrow>
+        </mfrac>
+        <mo>&#x22C5;</mo><mi>w</mi>
+      </mrow>
+    </math>
+    <p class="fall">Ist w bereits normiert, steht im Nenner eine 1 und es bleibt <math><mrow><mi>p</mi><mo>=</mo><mo>(</mo><mi>v</mi><mo>&#x22C5;</mo><mi>w</mi><mo>)</mo><mo>&#x22C5;</mo><mi>w</mi></mrow></math>.</p>
+    <p class="fall">Auf eine <strong>Ebene</strong> projiziert man, indem man auf zwei orthonormale Richtungsvektoren der Ebene einzeln projiziert und die beiden Anteile addiert. Voraussetzung ist, dass die Richtungsvektoren orthonormal sind.</p>
+  </article>
+
+  <article class="eintrag" id="vektorprodukt" data-suche="kreuzprodukt dritter vektor senkrecht onb ergaenzen r3 normal">
+    <h3>Vektorprodukt <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Nur im ℝ³; aus Mathematik 1, in den Aufgaben LA 27b und 53b als Weg zum dritten Vektor gebraucht</p>
+    <math display="block">
+      <mrow>
+        <mi>v</mi><mo>&#xD7;</mo><mi>w</mi><mo>=</mo><mo>(</mo>
+        <msub><mi>v</mi><mn>2</mn></msub><msub><mi>w</mi><mn>3</mn></msub>
+        <mo>&#x2212;</mo>
+        <msub><mi>v</mi><mn>3</mn></msub><msub><mi>w</mi><mn>2</mn></msub>
+        <mo>,</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msub><mi>v</mi><mn>3</mn></msub><msub><mi>w</mi><mn>1</mn></msub>
+        <mo>&#x2212;</mo>
+        <msub><mi>v</mi><mn>1</mn></msub><msub><mi>w</mi><mn>3</mn></msub>
+        <mo>,</mo><mspace width="0.6em"></mspace>
+        <msub><mi>v</mi><mn>1</mn></msub><msub><mi>w</mi><mn>2</mn></msub>
+        <mo>&#x2212;</mo>
+        <msub><mi>v</mi><mn>2</mn></msub><msub><mi>w</mi><mn>1</mn></msub>
+        <mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Das Ergebnis steht senkrecht auf v <strong>und</strong> auf w. Genau dafür wird es hier gebraucht: als dritter Vektor, um eine ONB des ℝ³ zu vervollständigen.</p>
+    <p class="fall">Danach ist noch zu <strong>normieren</strong> &#x2014; das Vektorprodukt liefert im Allgemeinen keinen Einheitsvektor, auch wenn v und w welche sind.</p>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 

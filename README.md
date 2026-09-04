@@ -49,23 +49,11 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-Vierzehn Themen, 144 Einträge insgesamt; bisher sind **zwölf** gefüllt, das
-sind 133 Einträge. Vollständig sind damit drei der vier Kapitel: die
-**Integralrechnung** ([Grundlagen](formeln/integral-grundlagen.html),
-[Verfahren](formeln/integral-verfahren.html)), die
-**Differentialgleichungen** ([erster Ordnung](formeln/dgl-erster-ordnung.html),
-[zweiter Ordnung](formeln/dgl-zweiter-ordnung.html)) und die **Funktionen
-mehrerer Variablen**
-([Ableitungen und Gradient](formeln/ableitungen-gradient.html),
-[Extrema und Fehlerfortpflanzung](formeln/extrema-fehler.html)). Aus der
-linearen Algebra stehen
-[Endliche Körper](formeln/endliche-koerper.html),
-[Vektorräume und Rang](formeln/vektorraeume-rang.html),
-[Determinante und Inverse](formeln/determinante-inverse.html) und
-[Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) und
-[Eigenwerte und Eigenvektoren](formeln/eigenwerte.html) und
-[Basiswechsel und Zerlegungen](formeln/basiswechsel-zerlegungen.html); offen
-sind dort noch Skalarprodukt und homogene Koordinaten.
+**Vierzehn Themen, 144 Einträge — vollständig.** Alle vier Kapitel des
+Stoffes sind abgedeckt: Integralrechnung (23 Einträge),
+Differentialgleichungen (14), lineare Algebra (75) und Funktionen mehrerer
+Variablen (32). Zwölf Einträge stehen neben dem Skript und sagen das in ihrer
+Quellenangabe — sie stammen aus den Übungsblättern.
 Erreichbar ist die
 Sammlung von der Startseite aus, dazu über
 [formeln/index.html](formeln/index.html), das alle Formelthemen im

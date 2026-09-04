@@ -13,10 +13,121 @@
 <div class="wrap">
 
   <h1>Homogene Koordinaten</h1>
-  <p class="lede">Sechs Einträge nach der Inhaltsaufnahme, Nummern 3.64 bis 3.69.</p>
+  <p class="lede">Der Trick, mit dem auch Verschiebungen zu Matrizen werden &#x2014; und damit jede affine Abbildung, auch die Drehung um einen beliebigen Punkt. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="einbettung" data-suche="eckige klammern letzte koordinate eins affin einbetten warum">
+    <h3>Einbettung in homogene Koordinaten <span class="quelle">Skript S. 103, 104</span></h3>
+    <p class="bedingung">Der K<sup>n</sup> wird in den K<sup>n+1</sup> eingebettet, indem die letzte Koordinate auf 1 gesetzt wird; homogene Koordinaten schreibt man in <em>eckigen</em> Klammern</p>
+    <math display="block">
+      <mrow>
+        <mo>(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><mo>&#x2026;</mo><mo>,</mo><msub><mi>x</mi><mi>n</mi></msub><mo>)</mo>
+        <mspace width="0.8em"></mspace><mo>&#x21A6;</mo><mspace width="0.8em"></mspace>
+        <mo>[</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><mo>&#x2026;</mo><mo>,</mo><msub><mi>x</mi><mi>n</mi></msub><mo>,</mo><mn>1</mn><mo>]</mo>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Wozu das gut ist:</strong> eine Verschiebung ist <em>keine</em> lineare Abbildung, denn sie lässt den Nullpunkt nicht fest. Mit der zusätzlichen Koordinate lässt sich auch sie als Matrix schreiben &#x2014; und damit jede affine Abbildung.</p>
+    <p class="fall">Zugelassen sind genau die Matrizen, deren <strong>letzte Zeile (0 … 0 1)</strong> ist. Nur so ist die letzte Koordinate auch nach der Abbildung wieder 1, das Ergebnis also wieder in homogenen Koordinaten.</p>
+  </article>
+
+  <article class="eintrag" id="verschiebungsmatrix" data-suche="translation letzte spalte verschieben ebene raum 3x3 4x4">
+    <h3>Verschiebungsmatrix <span class="quelle">Skript S. 103, 105</span></h3>
+    <p class="bedingung">Verschiebung um (t<sub>x</sub>, t<sub>y</sub>) in der Ebene beziehungsweise um (t<sub>x</sub>, t<sub>y</sub>, t<sub>z</sub>) im Raum</p>
+    <math display="block">
+      <mrow class="matrix-rahmen">
+        <mo class="matrix-klammer-3z">(</mo>
+        <mtable>
+          <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><msub><mi>t</mi><mi>x</mi></msub></mtd></mtr>
+          <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><msub><mi>t</mi><mi>y</mi></msub></mtd></mtr>
+          <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+        </mtable>
+        <mo class="matrix-klammer-3z">)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow class="matrix-rahmen">
+        <mo class="matrix-klammer-4z-tief">(</mo>
+        <mtable>
+          <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><msub><mi>t</mi><mi>x</mi></msub></mtd></mtr>
+          <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><msub><mi>t</mi><mi>y</mi></msub></mtd></mtr>
+          <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><msub><mi>t</mi><mi>z</mi></msub></mtd></mtr>
+          <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+        </mtable>
+        <mo class="matrix-klammer-4z-tief">)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Links oben steht die Einheitsmatrix, <strong>die Verschiebung steht in der letzten Spalte</strong>, und die letzte Zeile hat die vorgeschriebene Form.</p>
+    <p class="fall">Die Gegenrichtung, also die Verschiebung um &#x2212;(t<sub>x</sub>, t<sub>y</sub>), bekommt man durch Vorzeichenwechsel in der letzten Spalte. Das ist zugleich die Inverse.</p>
+  </article>
+
+  <article class="eintrag" id="lineare-abbildung-mit-nullrand" data-suche="nullrand einbetten drehmatrix spiegelung 2x2 links oben">
+    <h3>Lineare Abbildung mit Nullrand <span class="quelle">Skript S. 104</span></h3>
+    <p class="bedingung">Eine gewöhnliche lineare Abbildung des ℝ² &#x2014; Drehung, Spiegelung, Skalierung &#x2014; wird zur 3 × 3 Matrix</p>
+    <math display="block">
+      <mrow class="matrix-rahmen">
+        <mo class="matrix-klammer-3z">(</mo>
+        <mtable>
+          <mtr>
+            <mtd><msub><mi>a</mi><mn>11</mn></msub></mtd>
+            <mtd><msub><mi>a</mi><mn>12</mn></msub></mtd>
+            <mtd><mn>0</mn></mtd>
+          </mtr>
+          <mtr>
+            <mtd><msub><mi>a</mi><mn>21</mn></msub></mtd>
+            <mtd><msub><mi>a</mi><mn>22</mn></msub></mtd>
+            <mtd><mn>0</mn></mtd>
+          </mtr>
+          <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+        </mtable>
+        <mo class="matrix-klammer-3z">)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die alte 2 × 2 Matrix steht links oben, der Rest ist null bis auf die 1 unten rechts. Im Raum entsprechend als 4 × 4 mit der 3 × 3 Matrix links oben.</p>
+    <p class="fall">Die letzte <em>Spalte</em> ist hier null &#x2014; genau darin unterscheidet sich eine lineare Abbildung von einer Verschiebung.</p>
+  </article>
+
+  <article class="eintrag" id="drehung-um-einen-punkt" data-suche="verschieben drehen zurueckverschieben reihenfolge produkt drei matrizen fixpunkt">
+    <h3>Drehung um einen Punkt <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Im Skript nur am Beispiel vorgerechnet; in den Aufgaben LA 58c, 59c und 60b als Verfahren verlangt. P ist der Drehpunkt, D die Drehung um den Ursprung</p>
+    <math display="block">
+      <mrow>
+        <mi>M</mi><mo>=</mo>
+        <mi>T</mi><mo>(</mo><mo>+</mo><mi>P</mi><mo>)</mo>
+        <mo>&#x22C5;</mo><mi>D</mi><mo>&#x22C5;</mo>
+        <mi>T</mi><mo>(</mo><mo>&#x2212;</mo><mi>P</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Zu lesen von rechts nach links</strong>, in dieser Reihenfolge: erst um &#x2212;P verschieben, sodass der Drehpunkt im Ursprung liegt; dann um den Ursprung drehen; dann um +P zurückverschieben.</p>
+    <p class="fall">Ausgerechnet wird das Produkt der drei Matrizen. Das Ergebnis ist wieder eine Matrix mit der letzten Zeile (0 0 1) &#x2014; das ist zugleich die Probe.</p>
+    <p class="fall">Die Reihenfolge im Produkt ist die umgekehrte der Ausführung. Wer sie vertauscht, dreht um den Ursprung und verschiebt dann &#x2014; ein anderes Ergebnis.</p>
+  </article>
+
+  <article class="eintrag" id="skalierung-mit-fixpunkt" data-suche="strecken stauchen bezugspunkt dreieck faktor sx sy muster">
+    <h3>Skalierung mit Fixpunkt <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Dasselbe Muster wie bei der Drehung; in Aufgabe LA 59b verlangt. P ist der Fixpunkt, S die Skalierung um den Ursprung</p>
+    <math display="block">
+      <mrow>
+        <mi>M</mi><mo>=</mo>
+        <mi>T</mi><mo>(</mo><mo>+</mo><mi>P</mi><mo>)</mo>
+        <mo>&#x22C5;</mo><mi>S</mi><mo>&#x22C5;</mo>
+        <mi>T</mi><mo>(</mo><mo>&#x2212;</mo><mi>P</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">S ist die Skalierungsmatrix um den Ursprung, in der Ebene also diag(s<sub>x</sub>, s<sub>y</sub>, 1) &#x2014; die beiden Faktoren auf der Diagonale, die 1 unten rechts.</p>
+    <p class="fall"><strong>Das Muster gilt für jede Abbildung mit Fixpunkt:</strong> verschieben, abbilden, zurückverschieben. Nur die mittlere Matrix wechselt &#x2014; Drehung, Skalierung, Spiegelung an einer Geraden durch P.</p>
+  </article>
+
+  <article class="eintrag" id="roboter-deutung" data-suche="robotik computergrafik orientierung position greifarm weltkoordinaten verkettung">
+    <h3>Deutung in der Robotik <span class="quelle">Skript S. 106</span></h3>
+    <p class="bedingung">Eine 4 × 4 Transformationsmatrix in homogenen Koordinaten beschreibt ein ganzes Koordinatensystem im Raum</p>
+    <math display="block">
+      <mrow>
+        <mi>T</mi><mo>&#x22C5;</mo><mi>A</mi>
+      </mrow>
+    </math>
+    <p class="fall">Die <strong>ersten drei Spalten</strong> enthalten die neuen Basisvektoren, also die <em>Orientierung</em> des Roboters beziehungsweise seines Greifarms. Die <strong>vierte Spalte</strong> liefert seine <em>Position</em> in homogenen Koordinaten.</p>
+    <p class="fall">Durch Bewegungen &#x2014; Translationen und Drehungen &#x2014; ändert sich sein Koordinatensystem. Das Produkt der zugehörigen Matrizen beschreibt das neue System im ursprünglichen Weltkoordinatensystem; genau das leistet die Zeile oben.</p>
+    <p class="fall">Bei der Verkettung mehrerer Bewegungen ist das Ergebnis nicht mehr leicht vorherzusehen &#x2014; man rechnet es aus. Zum Prüfungsstoff gehört dieser Eintrag nur am Rand: keine Übungsaufgabe verlangt ihn.</p>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 
