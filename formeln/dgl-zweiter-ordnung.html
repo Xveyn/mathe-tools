@@ -13,10 +13,315 @@
 <div class="wrap">
 
   <h1>Differentialgleichungen zweiter Ordnung</h1>
-  <p class="lede">Neun Einträge nach der Inhaltsaufnahme, Nummern 2.5 bis 2.13.</p>
+  <p class="lede">Charakteristische Gleichung, die drei Fälle der Diskriminante, die Ansatztabelle samt Resonanz und das Vier-Schritt-Verfahren. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="lineare-dgl-zweiter-ordnung" data-suche="awp anfangsbedingungen homogen inhomogen stoerfunktion konstante koeffizienten">
+    <h3>Lineare DGL zweiter Ordnung mit konstanten Koeffizienten <span class="quelle">Skript S. 47</span></h3>
+    <p class="bedingung">α, β &#x2208; ℝ, γ(x) die Störfunktion; γ = 0 heißt <em>homogen</em></p>
+    <math display="block">
+      <mrow>
+        <msup><mi>y</mi><mo>&#x2033;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>+</mo>
+        <mi>&#x3B1;</mi><msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>+</mo>
+        <mi>&#x3B2;</mi><mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>=</mo>
+        <mi>&#x3B3;</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><msub><mi>x</mi><mn>0</mn></msub><mo>)</mo><mo>=</mo><msub><mi>y</mi><mn>0</mn></msub>
+        <mo>,</mo><mspace width="1em"></mspace>
+        <msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>(</mo><msub><mi>x</mi><mn>0</mn></msub><mo>)</mo><mo>=</mo><msub><mi>v</mi><mn>0</mn></msub>
+      </mrow>
+    </math>
+    <p class="fall">Beim AWP zweiter Ordnung braucht man <strong>zwei</strong> Anfangsbedingungen &#x2014; den Funktionswert und die Steigung. Sie legen die beiden Konstanten C<sub>1</sub> und C<sub>2</sub> fest, und die Lösung ist damit eindeutig.</p>
+    <a class="querlink" href="../tools/schwingung/index.html">Selbst durchfahren &#x2192; Schwingungsrechner</a>
+  </article>
+
+  <article class="eintrag" id="charakteristische-gleichung" data-suche="lambda diskriminante pq formel exponentialansatz nullstellen">
+    <h3>Charakteristische Gleichung und Diskriminante <span class="quelle">Skript S. 47</span></h3>
+    <p class="bedingung">Der Ansatz <math><msup><mi>e</mi><mrow><mi>&#x3BB;</mi><mi>x</mi></mrow></msup></math> in die homogene Gleichung eingesetzt</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>&#x3BB;</mi><mn>2</mn></msup>
+        <mo>+</mo><mi>&#x3B1;</mi><mi>&#x3BB;</mi>
+        <mo>+</mo><mi>&#x3B2;</mi>
+        <mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>D</mi><mo>=</mo>
+        <msup><mrow><mo>(</mo><mfrac><mi>&#x3B1;</mi><mn>2</mn></mfrac><mo>)</mo></mrow><mn>2</mn></msup>
+        <mo>&#x2212;</mo><mi>&#x3B2;</mi>
+      </mrow>
+    </math>
+    <p class="fall">Die Diskriminante D entscheidet, welcher der drei Fälle vorliegt. Sie steht hier in der p,q-Form; mit der Mitternachtsformel gerechnet wäre es <math><mrow><msup><mi>&#x3B1;</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>4</mn><mi>&#x3B2;</mi></mrow></math>, was stets dasselbe Vorzeichen hat &#x2014; und nur das Vorzeichen zählt.</p>
+    <a class="querlink" href="../karten/differentialgleichungen.html#charakteristisches-polynom">Durchgerechnet auf der Karte &#x2192;</a>
+  </article>
+
+  <article class="eintrag" id="drei-faelle" data-suche="fallunterscheidung reell komplex doppelte nullstelle gedaempft schwingung">
+    <h3>Die drei Fälle der homogenen Lösung <span class="quelle">Skript S. 48</span></h3>
+    <p class="bedingung">C<sub>1</sub>, C<sub>2</sub> &#x2208; ℝ; welche Form gilt, hängt allein vom Vorzeichen von D ab</p>
+    <p class="fall"><strong>D &gt; 0</strong> &#x2014; zwei reelle Nullstellen λ<sub>1</sub>, λ<sub>2</sub>:</p>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <msub><mi>C</mi><mn>1</mn></msub><msup><mi>e</mi><mrow><msub><mi>&#x3BB;</mi><mn>1</mn></msub><mi>x</mi></mrow></msup>
+        <mo>+</mo>
+        <msub><mi>C</mi><mn>2</mn></msub><msup><mi>e</mi><mrow><msub><mi>&#x3BB;</mi><mn>2</mn></msub><mi>x</mi></mrow></msup>
+      </mrow>
+    </math>
+    <p class="fall"><strong>D &lt; 0</strong> &#x2014; zwei komplexe Nullstellen λ = a + b i:</p>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <msub><mi>C</mi><mn>1</mn></msub><msup><mi>e</mi><mrow><mi>a</mi><mi>x</mi></mrow></msup>
+        <mi>cos</mi><mo>(</mo><mi>b</mi><mi>x</mi><mo>)</mo>
+        <mo>+</mo>
+        <msub><mi>C</mi><mn>2</mn></msub><msup><mi>e</mi><mrow><mi>a</mi><mi>x</mi></mrow></msup>
+        <mi>sin</mi><mo>(</mo><mi>b</mi><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall"><strong>D = 0</strong> &#x2014; eine doppelte Nullstelle <math><mrow><mi>&#x3BB;</mi><mo>=</mo><mo>&#x2212;</mo><mfrac><mi>&#x3B1;</mi><mn>2</mn></mfrac></mrow></math>:</p>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <msub><mi>C</mi><mn>1</mn></msub><msup><mi>e</mi><mrow><mi>&#x3BB;</mi><mi>x</mi></mrow></msup>
+        <mo>+</mo>
+        <msub><mi>C</mi><mn>2</mn></msub><mi>x</mi><msup><mi>e</mi><mrow><mi>&#x3BB;</mi><mi>x</mi></mrow></msup>
+      </mrow>
+    </math>
+    <p class="fall">Der zweite Fall kommt aus <math><mrow><msup><mi>e</mi><mrow><mi>&#x3BB;</mi><mi>x</mi></mrow></msup><mo>=</mo><msup><mi>e</mi><mrow><mi>a</mi><mi>x</mi></mrow></msup><mi>cos</mi><mo>(</mo><mi>b</mi><mi>x</mi><mo>)</mo><mo>+</mo><mi>i</mi><msup><mi>e</mi><mrow><mi>a</mi><mi>x</mi></mrow></msup><mi>sin</mi><mo>(</mo><mi>b</mi><mi>x</mi><mo>)</mo></mrow></math>: Real- und Imaginärteil sind die beiden reellen Lösungen. Die zweite komplexe Nullstelle ist die Konjugierte und liefert nichts Neues.</p>
+    <a class="querlink" href="../karten/differentialgleichungen.html#charakteristisches-polynom">Durchgerechnet auf der Karte &#x2192;</a>
+  </article>
+
+  <article class="eintrag" id="harmonischer-oszillator" data-suche="schwingung ungedaempft kreisfrequenz omega feder pendel">
+    <h3>Harmonischer Oszillator <span class="quelle">Skript S. 49</span></h3>
+    <p class="bedingung">Die homogene Gleichung ohne Dämpfungsglied; D &lt; 0 mit λ = ± i ω</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>y</mi><mo>&#x2033;</mo></msup>
+        <mo>+</mo>
+        <msup><mi>&#x3C9;</mi><mn>2</mn></msup><mi>y</mi>
+        <mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <msub><mi>C</mi><mn>1</mn></msub><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo>
+        <mo>+</mo>
+        <msub><mi>C</mi><mn>2</mn></msub><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Mit den Anfangsbedingungen y(0) = y<sub>0</sub> und y&#x2032;(0) = v<sub>0</sub>:</p>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <msub><mi>y</mi><mn>0</mn></msub><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo>
+        <mo>+</mo>
+        <mfrac><msub><mi>v</mi><mn>0</mn></msub><mi>&#x3C9;</mi></mfrac>
+        <mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Hier lassen sich die Konstanten direkt ablesen: <math><mrow><msub><mi>C</mi><mn>1</mn></msub><mo>=</mo><msub><mi>y</mi><mn>0</mn></msub></mrow></math> und <math><mrow><msub><mi>C</mi><mn>2</mn></msub><mo>=</mo><mfrac><msub><mi>v</mi><mn>0</mn></msub><mi>&#x3C9;</mi></mfrac></mrow></math>, weil cos(0) = 1 und sin(0) = 0.</p>
+    <a class="querlink" href="../tools/schwingung/index.html">Selbst durchfahren &#x2192; Schwingungsrechner</a>
+  </article>
+
+  <article class="eintrag" id="ansatztabelle-zweiter-ordnung" data-suche="ansatz stoerfunktion resonanz polynom exponential cosinus sinus tabelle">
+    <h3>Ansatztabelle zweiter Ordnung <span class="quelle">Skript S. 50</span></h3>
+    <p class="bedingung">Ansatz für eine spezielle Lösung von y&#x2033; + αy&#x2032; + βy = γ(x); λ<sub>1</sub>, λ<sub>2</sub> sind die Nullstellen der charakteristischen Gleichung</p>
+
+    <p class="fall"><strong>Störfunktion ein Polynom</strong> vom Grad m &#x2014; drei Fälle. Zuerst β &#x2260; 0:</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>A</mi><mn>0</mn></msub><mo>+</mo>
+        <msub><mi>A</mi><mn>1</mn></msub><mi>x</mi><mo>+</mo>
+        <mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>A</mi><mi>m</mi></msub><msup><mi>x</mi><mi>m</mi></msup>
+      </mrow>
+    </math>
+    <p class="fall">β = 0 und α &#x2260; 0:</p>
+    <math display="block">
+      <mrow>
+        <mi>x</mi><mo>(</mo>
+        <msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>A</mi><mi>m</mi></msub><msup><mi>x</mi><mi>m</mi></msup><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">α = β = 0:</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>x</mi><mn>2</mn></msup><mo>(</mo>
+        <msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>A</mi><mi>m</mi></msub><msup><mi>x</mi><mi>m</mi></msup><mo>)</mo>
+      </mrow>
+    </math>
+
+    <p class="fall"><strong>Störfunktion Polynom mal <math><msup><mi>e</mi><mrow><mi>u</mi><mi>x</mi></mrow></msup></math></strong> &#x2014; wieder drei Fälle. Zuerst u &#x2260; λ<sub>1</sub>, λ<sub>2</sub>:</p>
+    <math display="block">
+      <mrow>
+        <mo>(</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>A</mi><mi>m</mi></msub><msup><mi>x</mi><mi>m</mi></msup><mo>)</mo>
+        <msup><mi>e</mi><mrow><mi>u</mi><mi>x</mi></mrow></msup>
+      </mrow>
+    </math>
+    <p class="fall">u = λ<sub>1</sub> oder u = λ<sub>2</sub>, aber λ<sub>1</sub> &#x2260; λ<sub>2</sub>:</p>
+    <math display="block">
+      <mrow>
+        <mi>x</mi><mo>(</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>A</mi><mi>m</mi></msub><msup><mi>x</mi><mi>m</mi></msup><mo>)</mo>
+        <msup><mi>e</mi><mrow><mi>u</mi><mi>x</mi></mrow></msup>
+      </mrow>
+    </math>
+    <p class="fall">u = λ<sub>1</sub> = λ<sub>2</sub>:</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>x</mi><mn>2</mn></msup><mo>(</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>A</mi><mi>m</mi></msub><msup><mi>x</mi><mi>m</mi></msup><mo>)</mo>
+        <msup><mi>e</mi><mrow><mi>u</mi><mi>x</mi></mrow></msup>
+      </mrow>
+    </math>
+
+    <p class="fall"><strong>Störfunktion a·cos(ωx) + b·sin(ωx)</strong> &#x2014; zwei Fälle. Zuerst i ω &#x2260; λ<sub>1</sub>, λ<sub>2</sub>:</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo>
+        <mo>+</mo>
+        <mi>B</mi><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">i ω = λ<sub>1</sub> oder i ω = λ<sub>2</sub>:</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mi>x</mi><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo>
+        <mo>+</mo>
+        <mi>B</mi><mi>x</mi><mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+
+    <p class="fall">Das Muster ist in allen drei Blöcken dasselbe: <strong>liegt die rechte Seite selbst schon im Lösungsraum der homogenen Gleichung, wird der Ansatz mit x multipliziert</strong> &#x2014; bei doppelter Übereinstimmung mit x². Das ist die <strong>Resonanz</strong>.</p>
+    <a class="querlink" href="../karten/differentialgleichungen.html#resonanz">Wann mit x zu multiplizieren ist &#x2192; Karte</a>
+  </article>
+
+  <article class="eintrag" id="vier-schritt-verfahren" data-suche="vorgehen reihenfolge homogen speziell allgemein anfangsbedingung zuletzt">
+    <h3>Das Vier-Schritt-Verfahren <span class="quelle">Skript S. 53</span></h3>
+    <p class="bedingung">Gilt gleichermaßen für DGL erster und zweiter Ordnung mit konstanten Koeffizienten</p>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <msub><mi>y</mi><mrow><mi>hom</mi></mrow></msub><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>+</mo>
+        <msub><mi>y</mi><mrow><mi>spez</mi></mrow></msub><mo>(</mo><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">1. Das <strong>homogene</strong> System lösen &#x2014; über die charakteristische Gleichung und die drei Fälle.</p>
+    <p class="fall">2. Eine <strong>spezielle</strong> Lösung bestimmen: Ansatz nach der Tabelle wählen, in die inhomogene DGL einsetzen, die Parameter des Ansatzes bestimmen.</p>
+    <p class="fall">3. Die <strong>allgemeine</strong> Lösung aufschreiben: homogene plus spezielle Lösung.</p>
+    <p class="fall">4. Das <strong>AWP</strong> lösen: die Anfangsbedingungen einsetzen und die Konstanten bestimmen.</p>
+    <p class="fall"><strong>Die Anfangsbedingungen kommen zuletzt</strong>, in die Summe aus Schritt 3. Wer sie schon in die homogene Lösung einsetzt, bekommt falsche Konstanten &#x2014; das ist der häufigste Fehler in diesem Kapitel.</p>
+  </article>
+
+  <article class="eintrag" id="superposition" data-suche="summe stoerglieder einzeln addieren mehrere summanden">
+    <h3>Superposition mehrerer Störglieder <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Die Störfunktion ist eine Summe; in den Aufgaben DGL 10 und 11 verlangt, im Skript nicht ausgeschrieben</p>
+    <math display="block">
+      <mrow>
+        <mi>&#x3B3;</mi><mo>=</mo>
+        <msub><mi>&#x3B3;</mi><mn>1</mn></msub><mo>+</mo><msub><mi>&#x3B3;</mi><mn>2</mn></msub>
+        <mspace width="1em"></mspace><mo>&#x27F9;</mo><mspace width="1em"></mspace>
+        <msub><mi>y</mi><mrow><mi>spez</mi></mrow></msub><mo>=</mo>
+        <msub><mi>y</mi><mn>1</mn></msub><mo>+</mo><msub><mi>y</mi><mn>2</mn></msub>
+      </mrow>
+    </math>
+    <p class="fall">Für jeden Summanden einen eigenen Ansatz rechnen und die speziellen Lösungen addieren. Ein gemeinsamer Ansatz für die ganze Summe führt in der Regel nicht zum Ziel.</p>
+    <p class="fall">Die <strong>Resonanzprüfung ist für jeden Summanden einzeln</strong> zu machen: der eine kann in Resonanz stehen, der andere nicht.</p>
+  </article>
+
+  <article class="eintrag" id="drei-schreibweisen" data-suche="notation leibniz punkt newton zeit tau omega null kennkreisfrequenz physik">
+    <h3>Die drei Schreibweisen <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Dieselbe Gleichung in drei Notationen &#x2014; das Skript nutzt nur die erste, die Übungsblätter alle drei</p>
+    <p class="fall">Strichschreibweise, wie im Skript:</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>y</mi><mo>&#x2033;</mo></msup>
+        <mo>+</mo><mi>&#x3B1;</mi><msup><mi>y</mi><mo>&#x2032;</mo></msup>
+        <mo>+</mo><mi>&#x3B2;</mi><mi>y</mi>
+        <mo>=</mo><mi>&#x3B3;</mi>
+      </mrow>
+    </math>
+    <p class="fall">Leibniz-Schreibweise, in den Aufgaben DGL 5 bis 7:</p>
+    <math display="block">
+      <mrow>
+        <mfrac><mrow><msup><mi>d</mi><mn>2</mn></msup><mi>y</mi></mrow><mrow><mi>d</mi><msup><mi>t</mi><mn>2</mn></msup></mrow></mfrac>
+        <mo>+</mo><mi>&#x3B1;</mi>
+        <mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac>
+        <mo>+</mo><mi>&#x3B2;</mi><mi>y</mi>
+        <mo>=</mo><mi>&#x3B3;</mi>
+      </mrow>
+    </math>
+    <p class="fall">Punktschreibweise, in den Aufgaben DGL 9 und 12:</p>
+    <math display="block">
+      <mrow>
+        <mover><mi>y</mi><mo>&#xA8;</mo></mover>
+        <mo>+</mo><mi>&#x3B1;</mi><mover><mi>y</mi><mo>&#x2D9;</mo></mover>
+        <mo>+</mo><mi>&#x3B2;</mi><mi>y</mi>
+        <mo>=</mo><mi>&#x3B3;</mi>
+      </mrow>
+    </math>
+    <p class="fall">Der Punkt steht für die Ableitung nach der <strong>Zeit</strong>. Wo die Aufgaben physikalisch rechnen, heißt die Variable t statt x &#x2014; an der Mathematik ändert das nichts.</p>
+    <p class="fall">Dazu drei Größen, die im Skript nicht vorkommen: die Kennkreisfrequenz ω<sub>0</sub>, die Zeitkonstante τ und die gedämpfte Kreisfrequenz (Aufgabe DGL 5):</p>
+    <math display="block">
+      <mrow>
+        <mi>&#x3C9;</mi><mo>=</mo>
+        <msqrt>
+          <mrow>
+            <msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup>
+            <mo>&#x2212;</mo>
+            <mfrac><mn>1</mn><mrow><mn>4</mn><msup><mi>&#x3C4;</mi><mn>2</mn></msup></mrow></mfrac>
+          </mrow>
+        </msqrt>
+      </mrow>
+    </math>
+  </article>
+
+  <article class="eintrag" id="serien-schwingkreis" data-suche="rlc kondensator spule widerstand strom ladung normalform elektrotechnik">
+    <h3>Serien-Schwingkreis <span class="quelle">Skript S. 46, 47</span></h3>
+    <p class="bedingung">Kondensator C, Widerstand R und Spule L in Reihe; Q(t) ist die Ladung, I(t) = Q&#x2032;(t) der gesuchte Strom</p>
+    <math display="block">
+      <mrow>
+        <mi>U</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo>
+        <mfrac><mn>1</mn><mi>C</mi></mfrac><mi>Q</mi><mo>(</mo><mi>t</mi><mo>)</mo>
+        <mo>+</mo><mi>R</mi><msup><mi>Q</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo>
+        <mo>+</mo><mi>L</mi><msup><mi>Q</mi><mo>&#x2033;</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Einmal nach t abgeleitet, mit I = Q&#x2032;:</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>U</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo>
+        <mi>L</mi><msup><mi>I</mi><mo>&#x2033;</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo>
+        <mo>+</mo><mi>R</mi><msup><mi>I</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo>
+        <mo>+</mo><mfrac><mn>1</mn><mi>C</mi></mfrac><mi>I</mi><mo>(</mo><mi>t</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Bei konstanter Spannung ist U&#x2032; = 0, und geteilt durch L entsteht die Normalform &#x2014; sie steht nur in Aufgabe DGL 3, nicht im Skript:</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>I</mi><mo>&#x2033;</mo></msup>
+        <mo>+</mo>
+        <mfrac><mi>R</mi><mi>L</mi></mfrac><msup><mi>I</mi><mo>&#x2032;</mo></msup>
+        <mo>+</mo>
+        <mfrac><mi>I</mi><mrow><mi>L</mi><mi>C</mi></mrow></mfrac>
+        <mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <p class="fall">Der Vergleich mit y&#x2033; + αy&#x2032; + βy = γ gibt <math><mrow><mi>&#x3B1;</mi><mo>=</mo><mfrac><mi>R</mi><mi>L</mi></mfrac></mrow></math> und <math><mrow><mi>&#x3B2;</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mi>L</mi><mi>C</mi></mrow></mfrac></mrow></math>. Damit steht die Diskriminante fest, und der Kreis ist je nach Vorzeichen von D schwingend, aperiodisch oder im Grenzfall.</p>
+    <a class="querlink" href="../tools/schwingung/index.html">Selbst durchfahren &#x2192; Schwingungsrechner</a>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 

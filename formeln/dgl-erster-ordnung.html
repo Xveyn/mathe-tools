@@ -13,10 +13,159 @@
 <div class="wrap">
 
   <h1>Differentialgleichungen erster Ordnung</h1>
-  <p class="lede">Fünf Einträge nach der Inhaltsaufnahme, Nummern 2.1 bis 2.4, 2.14.</p>
+  <p class="lede">Anfangswertproblem, trennbare Variablen und die lineare Gleichung mit konstantem Koeffizienten &#x2014; dazu die Ansatztabelle für die spezielle Lösung. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="explizite-dgl-und-awp" data-suche="awp anfangswertproblem richtungsfeld loesung explizit gewoehnlich">
+    <h3>Explizite DGL erster Ordnung und AWP <span class="quelle">Skript S. 41</span></h3>
+    <p class="bedingung">f(x, y) ist eine Funktion zweier Veränderlicher; gesucht ist eine differenzierbare Funktion y(x)</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>=</mo>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><msub><mi>x</mi><mn>0</mn></msub><mo>)</mo>
+        <mo>=</mo><msub><mi>y</mi><mn>0</mn></msub>
+      </mrow>
+    </math>
+    <p class="fall">Eine Lösung ist eine Funktion y(x), die die Gleichung für alle zulässigen x erfüllt. Kommt die zweite Zeile dazu, heißt die Aufgabe <strong>Anfangswertproblem (AWP)</strong> &#x2014; und die Lösung ist dann eindeutig.</p>
+    <p class="fall">Geometrisch gibt f(x, y) in jedem Punkt die Steigung vor: das <strong>Richtungsfeld</strong>. Die Anfangsbedingung legt fest, welche der Kurven gemeint ist.</p>
+  </article>
+
+  <article class="eintrag" id="trennbare-variablen" data-suche="separation trennen integrieren dy dx aufloesen konstante">
+    <h3>Trennbare Variablen <span class="quelle">Skript S. 42</span></h3>
+    <p class="bedingung">Die rechte Seite lässt sich als Produkt schreiben, y&#x2032; = f(x)·g(y)</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>=</mo>
+        <mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac>
+        <mo>=</mo>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mi>g</mi><mo>(</mo><mi>y</mi><mo>)</mo>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>g</mi><mo>(</mo><mi>y</mi><mo>)</mo></mrow></mfrac>
+        <mo>=</mo>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mfrac><mn>1</mn><mrow><mi>g</mi><mo>(</mo><mi>y</mi><mo>)</mo></mrow></mfrac>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>y</mi>
+        <mo>=</mo>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+      </mrow>
+    </math>
+    <p class="fall">Der Weg in vier Schritten: y&#x2032; als dy/dx schreiben, nach Variablen trennen, beide Seiten integrieren, nach y auflösen. Die Integrationskonstante bestimmt man zuletzt aus der Anfangsbedingung.</p>
+    <p class="fall">Nach der Trennung darf links nur noch y stehen und rechts nur noch x. Geht das nicht, ist die Gleichung nicht von diesem Typ.</p>
+  </article>
+
+  <article class="eintrag" id="lineare-dgl-erster-ordnung" data-suche="homogen inhomogen konstante koeffizienten stoerfunktion exponentialansatz">
+    <h3>Lineare DGL erster Ordnung mit konstantem Koeffizienten <span class="quelle">Skript S. 44, 45</span></h3>
+    <p class="bedingung">α &#x2208; ℝ konstant, β(x) die Störfunktion; β = 0 heißt <em>homogen</em></p>
+    <math display="block">
+      <mrow>
+        <msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>=</mo>
+        <mi>&#x3B1;</mi><mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>+</mo><mi>&#x3B2;</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Homogene Lösung, mit C &#x2208; ℝ:</p>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <mi>C</mi><msup><mi>e</mi><mrow><mi>&#x3B1;</mi><mi>x</mi></mrow></msup>
+      </mrow>
+    </math>
+    <p class="fall">Homogenes AWP mit <math><mrow><mi>y</mi><mo>(</mo><msub><mi>x</mi><mn>0</mn></msub><mo>)</mo><mo>=</mo><msub><mi>y</mi><mn>0</mn></msub></mrow></math>:</p>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <msub><mi>y</mi><mn>0</mn></msub>
+        <msup><mi>e</mi><mrow><mi>&#x3B1;</mi><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><msub><mi>x</mi><mn>0</mn></msub><mo>)</mo></mrow></msup>
+      </mrow>
+    </math>
+    <p class="fall">Die Lösung der <strong>inhomogenen</strong> Gleichung ist die Summe aus der homogenen Lösung <math><mrow><mi>C</mi><msup><mi>e</mi><mrow><mi>&#x3B1;</mi><mi>x</mi></mrow></msup></mrow></math> und <em>einer</em> speziellen Lösung. Die spezielle Lösung findet man über einen Ansatz vom Typ der Störfunktion &#x2014; siehe den nächsten Eintrag.</p>
+  </article>
+
+  <article class="eintrag" id="ansatztabelle-erster-ordnung" data-suche="ansatz stoerfunktion polynom exponential resonanz koeffizienten einsetzen">
+    <h3>Ansatztabelle erster Ordnung <span class="quelle">Skript S. 45</span></h3>
+    <p class="bedingung">Ansatz für eine spezielle Lösung von y&#x2032; = αy + β(x); die Koeffizienten bestimmt man durch Einsetzen in die DGL</p>
+    <p class="fall">Störfunktion ein <strong>Polynom</strong> vom Grad m:</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>A</mi><mn>0</mn></msub><mo>+</mo>
+        <msub><mi>A</mi><mn>1</mn></msub><mi>x</mi><mo>+</mo>
+        <mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>A</mi><mi>m</mi></msub><msup><mi>x</mi><mi>m</mi></msup>
+      </mrow>
+    </math>
+    <p class="fall">Polynom mal <math><msup><mi>e</mi><mrow><mi>u</mi><mi>x</mi></mrow></msup></math>, mit u &#x2260; α:</p>
+    <math display="block">
+      <mrow>
+        <mo>(</mo>
+        <msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>A</mi><mi>m</mi></msub><msup><mi>x</mi><mi>m</mi></msup>
+        <mo>)</mo>
+        <msup><mi>e</mi><mrow><mi>u</mi><mi>x</mi></mrow></msup>
+      </mrow>
+    </math>
+    <p class="fall">Dasselbe mit u = α &#x2014; <strong>Resonanz</strong>, der Ansatz wird mit x multipliziert:</p>
+    <math display="block">
+      <mrow>
+        <mi>x</mi><mo>(</mo>
+        <msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>A</mi><mi>m</mi></msub><msup><mi>x</mi><mi>m</mi></msup>
+        <mo>)</mo>
+        <msup><mi>e</mi><mrow><mi>u</mi><mi>x</mi></mrow></msup>
+      </mrow>
+    </math>
+    <p class="fall">Polynom mal cos(ωx) <em>oder</em> mal sin(ωx) &#x2014; in beiden Fällen derselbe Ansatz:</p>
+    <math display="block">
+      <mrow>
+        <mo>(</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mo>&#x2026;</mo><mo>)</mo>
+        <mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo>
+        <mo>+</mo>
+        <mo>(</mo><msub><mi>B</mi><mn>0</mn></msub><mo>+</mo><mo>&#x2026;</mo><mo>)</mo>
+        <mi>sin</mi><mo>(</mo><mi>&#x3C9;</mi><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Der letzte Ansatz enthält <strong>immer beide</strong> Winkelfunktionen, auch wenn die Störfunktion nur eine davon hat.</p>
+    <a class="querlink" href="../karten/differentialgleichungen.html#ansatz">Durchgerechnet auf der Karte &#x2192;</a>
+  </article>
+
+  <article class="eintrag" id="rc-kreis" data-suche="kondensator aufladen zeitkonstante schaltkreis spannung elektrotechnik">
+    <h3>RC-Kreis: Aufladen eines Kondensators <span class="quelle">Skript S. 43, 44</span></h3>
+    <p class="bedingung">U<sub>0</sub>, R und C konstant; gesucht ist die Spannung U<sub>C</sub>(t) am Kondensator</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mi>U</mi><mi>C</mi><mo>&#x2032;</mo></msubsup><mo>(</mo><mi>t</mi><mo>)</mo>
+        <mo>=</mo>
+        <mo>&#x2212;</mo>
+        <mfrac><mn>1</mn><mrow><mi>R</mi><mi>C</mi></mrow></mfrac>
+        <msub><mi>U</mi><mi>C</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo>
+        <mo>+</mo>
+        <mfrac><msub><mi>U</mi><mn>0</mn></msub><mrow><mi>R</mi><mi>C</mi></mrow></mfrac>
+      </mrow>
+    </math>
+    <p class="fall">Mit der Anfangsbedingung <math><mrow><msub><mi>U</mi><mi>C</mi></msub><mo>(</mo><mn>0</mn><mo>)</mo><mo>=</mo><mn>0</mn></mrow></math>, der entladene Kondensator:</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>U</mi><mi>C</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo>
+        <mo>=</mo>
+        <msub><mi>U</mi><mn>0</mn></msub>
+        <mo>(</mo><mn>1</mn><mo>&#x2212;</mo>
+        <msup><mi>e</mi><mrow><mo>&#x2212;</mo><mfrac><mi>t</mi><mrow><mi>R</mi><mi>C</mi></mrow></mfrac></mrow></msup>
+        <mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Das ist eine lineare DGL erster Ordnung mit konstanten Koeffizienten: <math><mrow><mi>&#x3B1;</mi><mo>=</mo><mo>&#x2212;</mo><mfrac><mn>1</mn><mrow><mi>R</mi><mi>C</mi></mrow></mfrac></mrow></math> und eine konstante Störfunktion. Das Produkt RC ist die <strong>Zeitkonstante</strong>.</p>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 

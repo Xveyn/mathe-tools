@@ -49,16 +49,19 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-Vierzehn Themen, 144 Einträge insgesamt; bisher sind sechs gefüllt —
-[Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) mit neun
-Einträgen, das als Muster für die übrigen dient,
-[Endliche Körper und Restklassen](formeln/endliche-koerper.html) mit sieben,
-[Vektorräume, lineare Abbildungen, Rang](formeln/vektorraeume-rang.html) mit
-achtzehn, [Determinante und Inverse](formeln/determinante-inverse.html) mit
-acht, [Integral: Grundlagen und Hauptsatz](formeln/integral-grundlagen.html)
-mit vierzehn und
-[Integral: Verfahren und Partialbrüche](formeln/integral-verfahren.html) mit
-neun. Damit ist die Integralrechnung vollständig. Erreichbar ist die
+Vierzehn Themen, 144 Einträge insgesamt; bisher sind **acht** gefüllt, das
+sind 79 Einträge. Vollständig sind damit die **Integralrechnung**
+([Grundlagen](formeln/integral-grundlagen.html) mit vierzehn,
+[Verfahren](formeln/integral-verfahren.html) mit neun) und die
+**Differentialgleichungen**
+([erster Ordnung](formeln/dgl-erster-ordnung.html) mit fünf,
+[zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) mit neun). Aus der
+linearen Algebra stehen
+[Endliche Körper](formeln/endliche-koerper.html) (sieben),
+[Vektorräume und Rang](formeln/vektorraeume-rang.html) (achtzehn),
+[Determinante und Inverse](formeln/determinante-inverse.html) (acht) und
+[Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) (neun,
+das Muster für die übrigen). Erreichbar ist die
 Sammlung von der Startseite aus, dazu über
 [formeln/index.html](formeln/index.html), das alle Formelthemen im
 Überblick zeigt.

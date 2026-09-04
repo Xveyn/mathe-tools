@@ -345,6 +345,16 @@ erklären, die Sammlung schlägt nach. **Eintrag → Karte** kommt dazu, sobald
 ein Thema gefüllt ist und es zu seinen Einträgen wirklich eine Karte gibt;
 ein Link auf ein leeres Thema ist ein Versprechen ohne Deckung.
 
+**Seit dem 2026-09-04 gibt es diese Richtung wirklich**, und zwar auf den
+beiden DGL-Seiten der Formelsammlung: sieben `.querlink`-Zeilen führen von
+einem Eintrag auf `karten/differentialgleichungen.html` (samt Sprungmarke
+`#charakteristisches-polynom`, `#ansatz`, `#resonanz`) und auf
+`tools/schwingung/index.html`. Das ist das Muster für die übrigen Themen.
+Zwei Regeln dazu: die Sprungmarke muss auf der Zielkarte wirklich
+existieren — sonst landet man lautlos am Seitenanfang —, und der Linktext
+sagt, was einen dort erwartet („Durchgerechnet auf der Karte", „Selbst
+durchfahren"), nicht bloß den Dateinamen.
+
 **Kein vorbelegter Term.** Kein `?f=…`, kein URL-Zustand. Die Karte
 schreibt hin, welchen Term man eingeben soll. Das ist eine bewusste
 Entscheidung, keine Lücke — siehe
