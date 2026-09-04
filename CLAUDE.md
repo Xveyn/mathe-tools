@@ -224,16 +224,17 @@ der Startseite — die Startseite verlinkt insgesamt nur auf
    ergänzen, den die Spec in der `.lede` **jeder** Themenseite verlangt:
    „Gesucht wird nur auf dieser Seite — was in einem anderen Thema steht,
    findet das Feld nicht." (Wortlaut aus `drehungen-spiegelungen.html`,
-   der bisher einzigen gefüllten Seite.)
+   der Seite, die das Muster gesetzt hat.)
 3. An der Kachel des Themas in `formeln/index.html` das
    `<em>noch nicht gefüllt</em>` entfernen und durch eine `<em>`-Zeile mit
    Stichworten ersetzen, wie es Startseite und Kartenübersicht halten
    (etwa „Stationäre Stellen — Hesse-Kriterium").
 4. **Drei handgepflegte Zähler nachziehen**, sonst stehen sie nach dieser
    Runde falsch: die `<em>`-Zeile der Formelsammlung-Kachel auf der
-   Startseite („von vierzehn Themen ist bisher eines gefüllt"), die
+   Startseite („von vierzehn Themen sind bisher … gefüllt"), die
    Kachel in `formeln/index.html` selbst und die Zeile in `README.md`
-   („bisher ist eines gefüllt").
+   („bisher sind … gefüllt", mit der Aufzählung der gefüllten Themen
+   dahinter). Alle drei zählen von Hand; keiner davon wird gerechnet.
 
 ## Formeln
 
@@ -549,6 +550,20 @@ hat sie hier schon gefunden.
   bei 1,346. Beide Fälle sind bekannt und so gelassen, nicht übersehen.
   Eine geänderte Schriftgröße der Umgebung verstimmt jede der vier
   Klammern lautlos gegen ihre Matrix — dann muss neu vermessen werden.
+- **Ein Überstrich streckt sich nicht — er passt nur über ein einzelnes
+  Zeichen.** Dieselbe Ursache wie bei den Matrixklammern, an anderer
+  Stelle: der Strich in `<mover>` wächst nicht mit seiner Grundlage mit,
+  weil die Seiten Georgia setzen und Georgia keine OpenType-MATH-Tabelle
+  hat, aus der Chromium eine gestreckte Fassung des Zeichens bauen könnte.
+  `stretchy="true"` bleibt wirkungslos. Gemessen am 2026-09-04 in
+  `endliche-koerper.html`: der Strich ist konstant **7,4 px** breit — über
+  `x` (9,0 px), `0` (10,0 px), `1` (7,0 px) und `2` (9,1 px) sitzt er
+  richtig, über `n − 1` (33,6 px) deckt er 22 % der Breite und steht
+  sichtbar falsch. **Wer eine Restklasse eines zusammengesetzten Ausdrucks
+  schreiben will, formt die Formel um**, statt am Zeichen zu drehen: aus
+  `Z_n = {0̄, 1̄, 2̄, …, n−1‾}` (Skript S. 56) wurde
+  `Z_n = {x̄ | x = 0, 1, 2, …, n − 1}` — derselbe Inhalt, jeder Strich über
+  genau einem Zeichen.
 - **Prüfroutine P sagt nicht, wie der Term für ihre 21 Zustände gesetzt
   wird — das ist nicht egal.** Ein angeklickter Beispiel-Chip bleibt aktiv
   markiert (Goldrand); derselbe Term von Hand ins Feld getippt markiert

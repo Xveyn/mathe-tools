@@ -49,10 +49,11 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-Vierzehn Themen, 144 Einträge insgesamt; bisher ist eines gefüllt
-([Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html), neun
-Einträge) und dient als Muster für die übrigen. Erreichbar ist die
-Sammlung von der Startseite aus, dazu über
+Vierzehn Themen, 144 Einträge insgesamt; bisher sind zwei gefüllt —
+[Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) mit neun
+Einträgen, das als Muster für die übrigen dient, und
+[Endliche Körper und Restklassen](formeln/endliche-koerper.html) mit
+sieben. Erreichbar ist die Sammlung von der Startseite aus, dazu über
 [formeln/index.html](formeln/index.html), das alle Formelthemen im
 Überblick zeigt.
 

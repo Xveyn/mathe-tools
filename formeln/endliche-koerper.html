@@ -13,10 +13,199 @@
 <div class="wrap">
 
   <h1>Endliche Körper und Restklassen</h1>
-  <p class="lede">Sieben Einträge nach der Inhaltsaufnahme, Nummern 3.1 bis 3.7.</p>
+  <p class="lede">Restklassen, Galoiskörper und die Inversentabellen &#x2014; darüber rechnet ein großer Teil der Aufgaben zur linearen Algebra. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="abelsche-gruppe" data-suche="gruppe gruppenaxiome verknuepfung assoziativ kommutativ neutrales inverses element">
+    <h3>Abelsche Gruppe <span class="quelle">Skript S. 55</span></h3>
+    <p class="bedingung">Menge G mit einer Verknüpfung &#x2217; : G × G &#x2192; G, für alle a, b, c, g &#x2208; G</p>
+    <math display="block">
+      <mrow>
+        <mi>a</mi><mo>&#x2217;</mo><mo>(</mo><mi>b</mi><mo>&#x2217;</mo><mi>c</mi><mo>)</mo>
+        <mo>=</mo>
+        <mo>(</mo><mi>a</mi><mo>&#x2217;</mo><mi>b</mi><mo>)</mo><mo>&#x2217;</mo><mi>c</mi>
+        <mspace width="1.6em"></mspace>
+        <mi>a</mi><mo>&#x2217;</mo><mi>b</mi><mo>=</mo><mi>b</mi><mo>&#x2217;</mo><mi>a</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>e</mi><mo>&#x2217;</mo><mi>g</mi><mo>=</mo><mi>g</mi><mo>&#x2217;</mo><mi>e</mi><mo>=</mo><mi>g</mi>
+        <mspace width="1.6em"></mspace>
+        <mi>a</mi><mo>&#x2217;</mo><mi>x</mi><mo>=</mo><mi>x</mi><mo>&#x2217;</mo><mi>a</mi><mo>=</mo><mi>e</mi>
+      </mrow>
+    </math>
+    <p class="fall">Oben Assoziativität und Kommutativität, unten das neutrale Element e und zu jedem a ein inverses Element x. Ohne das Kommutativgesetz heißt G nur Gruppe, nicht abelsch.</p>
+  </article>
+
+  <article class="eintrag" id="koerper-und-ring" data-suche="koerper ring axiome distributivgesetz nullelement einselement">
+    <h3>Körper und Ring <span class="quelle">Skript S. 57, 58</span></h3>
+    <p class="bedingung">Menge K mit zwei Verknüpfungen; (K, +) und (K &#x2216; {0}, &#x22C5;) sind abelsche Gruppen</p>
+    <math display="block">
+      <mrow>
+        <mi>a</mi><mo>+</mo><mn>0</mn><mo>=</mo><mi>a</mi>
+        <mspace width="1.6em"></mspace>
+        <mi>a</mi><mo>+</mo><mo>(</mo><mo>&#x2212;</mo><mi>a</mi><mo>)</mo><mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>a</mi><mo>&#x22C5;</mo><mn>1</mn><mo>=</mo><mi>a</mi>
+        <mspace width="1.6em"></mspace>
+        <mi>a</mi><mo>&#x22C5;</mo><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>=</mo><mn>1</mn>
+        <mspace width="0.6em"></mspace>
+        <mo>(</mo><mi>a</mi><mo>&#x2260;</mo><mn>0</mn><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>a</mi><mo>&#x22C5;</mo><mo>(</mo><mi>b</mi><mo>+</mo><mi>c</mi><mo>)</mo>
+        <mo>=</mo>
+        <mi>a</mi><mo>&#x22C5;</mo><mi>b</mi><mo>+</mo><mi>a</mi><mo>&#x22C5;</mo><mi>c</mi>
+      </mrow>
+    </math>
+    <p class="fall">Fehlt allein die Invertierbarkeit <math><mrow><mi>a</mi><mo>&#x22C5;</mo><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>=</mo><mn>1</mn></mrow></math>, ist K ein <strong>Ring</strong> und kein Körper. So sind die ganzen Zahlen ein Ring &#x2014; und die Restklassen modulo einer zusammengesetzten Zahl ebenfalls.</p>
+  </article>
+
+  <article class="eintrag" id="restklassen" data-suche="kongruent modulo restklasse standardrepraesentant repraesentant teilbarkeit">
+    <h3>Restklassen modulo n <span class="quelle">Skript S. 56</span></h3>
+    <p class="bedingung">n &#x2208; &#x2115;, x, y &#x2208; &#x2124;; kongruent heißt: n teilt die Differenz</p>
+    <math display="block">
+      <mrow>
+        <mi>x</mi><mo>&#x2261;</mo><mi>y</mi><mspace width="0.3em"></mspace><mtext>mod</mtext><mspace width="0.3em"></mspace><mi>n</mi>
+        <mspace width="1em"></mspace><mo>&#x27FA;</mo><mspace width="1em"></mspace>
+        <mi>n</mi><mo>&#x2223;</mo><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>y</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mover><mi>x</mi><mo>&#xAF;</mo></mover><mo>=</mo>
+        <mo>{</mo>
+        <mo>&#x2026;</mo><mo>,</mo>
+        <mi>x</mi><mo>&#x2212;</mo><mi>n</mi><mo>,</mo>
+        <mi>x</mi><mo>,</mo>
+        <mi>x</mi><mo>+</mo><mi>n</mi><mo>,</mo>
+        <mo>&#x2026;</mo>
+        <mo>}</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msub><mi>&#x2124;</mi><mi>n</mi></msub><mo>=</mo>
+        <mo>{</mo>
+        <mover><mi>x</mi><mo>&#xAF;</mo></mover>
+        <mo stretchy="false">|</mo>
+        <mi>x</mi><mo>=</mo>
+        <mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo>
+        <mo>&#x2026;</mo><mo>,</mo>
+        <mi>n</mi><mo>&#x2212;</mo><mn>1</mn>
+        <mo>}</mo>
+      </mrow>
+    </math>
+    <p class="fall">0, 1, 2, …, n &#x2212; 1 sind die <strong>Standardrepräsentanten</strong>: jede Restklasse enthält genau einen davon. Gerechnet wird mit einem beliebigen Vertreter; man darf jederzeit auf den kleinsten zurückgehen, bevor man weiterrechnet.</p>
+    <p class="fall">Mit der Addition ist <math><msub><mi>&#x2124;</mi><mi>n</mi></msub></math> für jedes n eine abelsche Gruppe mit n Elementen.</p>
+  </article>
+
+  <article class="eintrag" id="galoiskoerper" data-suche="galoiskoerper galois field primzahl gf(p) zp endlicher koerper ring">
+    <h3>Galoiskörper GF(p) <span class="quelle">Skript S. 59</span></h3>
+    <p class="bedingung">Die Restklassen modulo n bilden genau dann einen Körper, wenn n eine Primzahl ist</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>&#x2124;</mi><mi>n</mi></msub><mspace width="0.4em"></mspace><mtext>Körper</mtext>
+        <mspace width="1em"></mspace><mo>&#x27FA;</mo><mspace width="1em"></mspace>
+        <mi>n</mi><mspace width="0.4em"></mspace><mtext>prim</mtext>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>GF</mi><mo>(</mo><mi>p</mi><mo>)</mo><mo>=</mo>
+        <mo>(</mo><msub><mi>&#x2124;</mi><mi>p</mi></msub><mo>,</mo><mo>+</mo><mo>,</mo><mo>&#x22C5;</mo><mo>)</mo>
+        <mspace width="1.4em"></mspace>
+        <mtext>mit p Elementen</mtext>
+      </mrow>
+    </math>
+    <p class="fall">Für eine Primzahl p sind 1, 2, …, p &#x2212; 1 sämtlich teilerfremd zu p; jedes Element außer der Null ist deshalb invertierbar. Für zusammengesetztes n bleibt <math><msub><mi>&#x2124;</mi><mi>n</mi></msub></math> ein Ring &#x2014; modulo 6 etwa hat die 2 kein Inverses.</p>
+  </article>
+
+  <article class="eintrag" id="rechnen-in-gf2" data-suche="gf(2) bit bits xor and verknuepfungstafel additionstafel multiplikationstafel byte">
+    <h3>Rechnen in GF(2) <span class="quelle">Skript S. 59, 60</span></h3>
+    <p class="bedingung">GF(2) hat die zwei Elemente 0 und 1; die Addition ist das XOR, die Multiplikation das AND</p>
+    <p class="fall">Links der erste Operand, oben der zweite:</p>
+    <math display="block">
+      <mrow>
+        <mtable>
+          <mtr><mtd><mo>+</mo></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+          <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+          <mtr><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+        </mtable>
+        <mspace width="3em"></mspace>
+        <mtable>
+          <mtr><mtd><mo>&#x22C5;</mo></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+          <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+          <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+        </mtable>
+      </mrow>
+    </math>
+    <p class="fall">Aus 1 + 1 = 0 folgt &#x2212;1 = 1: über GF(2) sind Addition und Subtraktion dieselbe Rechnung. Beim Gauß-Verfahren über GF(2) gibt es deshalb kein Vorzeichen zu führen.</p>
+  </article>
+
+  <article class="eintrag" id="inverse-modulo" data-suche="teilerfremd ggt euklidischer algorithmus inversentabelle inverses element gf(3) gf(5) gf(7) gf(11) division">
+    <h3>Invertierbar heißt teilerfremd <span class="quelle">Skript S. 59, 60</span></h3>
+    <p class="bedingung">m ist modulo n genau dann invertierbar, wenn m und n teilerfremd sind</p>
+    <math display="block">
+      <mrow>
+        <mi>ggT</mi><mo>(</mo><mi>m</mi><mo>,</mo><mi>n</mi><mo>)</mo><mo>=</mo><mn>1</mn>
+        <mspace width="1em"></mspace><mo>&#x27FA;</mo><mspace width="1em"></mspace>
+        <mi>m</mi><mo>&#x22C5;</mo><mi>x</mi><mo>&#x2261;</mo><mn>1</mn>
+        <mspace width="0.3em"></mspace><mtext>mod</mtext><mspace width="0.3em"></mspace><mi>n</mi>
+      </mrow>
+    </math>
+    <p class="fall">GF(3):</p>
+    <math display="block">
+      <mtable>
+        <mtr><mtd><mi>a</mi></mtd><mtd><mn>1</mn></mtd><mtd><mn>2</mn></mtd></mtr>
+        <mtr><mtd><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup></mtd><mtd><mn>1</mn></mtd><mtd><mn>2</mn></mtd></mtr>
+      </mtable>
+    </math>
+    <p class="fall">GF(5):</p>
+    <math display="block">
+      <mtable>
+        <mtr><mtd><mi>a</mi></mtd><mtd><mn>1</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>3</mn></mtd><mtd><mn>4</mn></mtd></mtr>
+        <mtr><mtd><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup></mtd><mtd><mn>1</mn></mtd><mtd><mn>3</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>4</mn></mtd></mtr>
+      </mtable>
+    </math>
+    <p class="fall">GF(7) &#x2014; die einzige Tabelle, die das Skript selbst führt:</p>
+    <math display="block">
+      <mtable>
+        <mtr><mtd><mi>a</mi></mtd><mtd><mn>1</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>3</mn></mtd><mtd><mn>4</mn></mtd><mtd><mn>5</mn></mtd><mtd><mn>6</mn></mtd></mtr>
+        <mtr><mtd><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup></mtd><mtd><mn>1</mn></mtd><mtd><mn>4</mn></mtd><mtd><mn>5</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>3</mn></mtd><mtd><mn>6</mn></mtd></mtr>
+      </mtable>
+    </math>
+    <p class="fall">GF(11):</p>
+    <math display="block">
+      <mtable>
+        <mtr><mtd><mi>a</mi></mtd><mtd><mn>1</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>3</mn></mtd><mtd><mn>4</mn></mtd><mtd><mn>5</mn></mtd><mtd><mn>6</mn></mtd><mtd><mn>7</mn></mtd><mtd><mn>8</mn></mtd><mtd><mn>9</mn></mtd><mtd><mn>10</mn></mtd></mtr>
+        <mtr><mtd><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup></mtd><mtd><mn>1</mn></mtd><mtd><mn>6</mn></mtd><mtd><mn>4</mn></mtd><mtd><mn>3</mn></mtd><mtd><mn>9</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>8</mn></mtd><mtd><mn>7</mn></mtd><mtd><mn>5</mn></mtd><mtd><mn>10</mn></mtd></mtr>
+      </mtable>
+    </math>
+    <p class="fall">Das Skript führt allein die Tabelle zu GF(7) (S. 60) und zu GF(5) ein einzelnes Beispiel (S. 59); die drei übrigen sind hier gerechnet. Probe: das Produkt aus einer Zahl und ihrem Inversen lässt bei Division durch p den Rest 1.</p>
+    <p class="fall">In jedem GF(p) ist die 1 zu sich selbst invers und ebenso p &#x2212; 1, denn <math><mrow><mo>(</mo><mi>p</mi><mo>&#x2212;</mo><mn>1</mn><msup><mo>)</mo><mn>2</mn></msup><mo>=</mo><msup><mi>p</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>2</mn><mi>p</mi><mo>+</mo><mn>1</mn><mo>&#x2261;</mo><mn>1</mn></mrow></math>. Das sind die beiden Ränder jeder Tabelle oben.</p>
+  </article>
+
+  <article class="eintrag" id="brueche-sind-keine-repraesentanten" data-suche="bruch division warnung rationale zahl repraesentant fehler">
+    <h3>Brüche sind keine Repräsentanten <span class="quelle">Skript S. 60</span></h3>
+    <p class="bedingung">Warnung des Skripts zur Division in den Restklassen</p>
+    <math display="block">
+      <mrow>
+        <mfrac><mn>1</mn><mn>2</mn></mfrac>
+        <mo>&#x2209;</mo>
+        <msub><mi>&#x2124;</mi><mn>5</mn></msub>
+        <mspace width="1.6em"></mspace>
+        <msup><mn>2</mn><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>&#x2261;</mo><mn>3</mn>
+        <mspace width="0.3em"></mspace><mtext>mod</mtext><mspace width="0.3em"></mspace><mn>5</mn>
+      </mrow>
+    </math>
+    <p class="fall">Rationale Zahlen sind keine ganzen Zahlen und damit keine Repräsentanten von Restklassen. Statt durch a zu teilen, multipliziert man mit <math><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup></math> aus der Tabelle oben.</p>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 
