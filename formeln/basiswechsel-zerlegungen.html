@@ -13,10 +13,236 @@
 <div class="wrap">
 
   <h1>Basiswechsel und Zerlegungen</h1>
-  <p class="lede">Zwölf Einträge nach der Inhaltsaufnahme, Nummern 3.53 bis 3.63.</p>
+  <p class="lede">Dieselbe Abbildung, in einer anderen Basis geschrieben &#x2014; und was daraus folgt: Diagonalisierung, Spektralzerlegung, Singulärwertzerlegung und die Pseudoinverse. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="koordinaten-bezueglich-basis" data-suche="koordinatenvektor kartesisch standardbasis darstellung koeffizienten">
+    <h3>Koordinaten bezüglich einer Basis <span class="quelle">Skript S. 92</span></h3>
+    <p class="bedingung">B = {b<sub>1</sub>, …, b<sub>n</sub>} ist eine Basis von V; die Koordinaten sind die Koeffizienten der Darstellung</p>
+    <math display="block">
+      <mrow>
+        <mi>v</mi><mo>=</mo>
+        <msub><mi>c</mi><mn>1</mn></msub><msub><mi>b</mi><mn>1</mn></msub>
+        <mo>+</mo>
+        <msub><mi>c</mi><mn>2</mn></msub><msub><mi>b</mi><mn>2</mn></msub>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>c</mi><mi>n</mi></msub><msub><mi>b</mi><mi>n</mi></msub>
+      </mrow>
+    </math>
+    <p class="fall">(c<sub>1</sub>, …, c<sub>n</sub>) heißt <strong>Koordinatenvektor</strong> von v bezüglich B. Bezüglich der Standardbasis heißen die Koordinaten <em>kartesisch</em> &#x2014; das sind die Zahlen, die man gewöhnlich hinschreibt.</p>
+    <p class="fall">Derselbe Vektor hat je nach Basis verschiedene Koordinaten. <strong>Welche Basis gemeint ist, muss deshalb immer dabeistehen.</strong></p>
+  </article>
+
+  <article class="eintrag" id="transformationsmatrix" data-suche="T basiswechsel richtung spalten neue alte koordinaten umrechnen">
+    <h3>Transformationsmatrix <span class="quelle">Skript S. 93</span></h3>
+    <p class="bedingung">T ist die Transformationsmatrix von B<sub>1</sub> nach B<sub>2</sub>: in ihren Spalten stehen die Basisvektoren von B<sub>2</sub>, in Koordinaten bezüglich B<sub>1</sub></p>
+    <math display="block">
+      <mrow>
+        <mi>T</mi><mo>&#x22C5;</mo>
+        <msub><mi>v</mi><msub><mi>B</mi><mn>2</mn></msub></msub>
+        <mo>=</mo>
+        <msub><mi>v</mi><msub><mi>B</mi><mn>1</mn></msub></msub>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>&#x22C5;</mo>
+        <msub><mi>w</mi><msub><mi>B</mi><mn>1</mn></msub></msub>
+        <mo>=</mo>
+        <msub><mi>w</mi><msub><mi>B</mi><mn>2</mn></msub></msub>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Welche Richtung welche ist, ist hier die eigentliche Schwierigkeit.</strong> In den Spalten von T stehen die Vektoren der <em>neuen</em> Basis B<sub>2</sub> &#x2014; deshalb rechnet T von B<sub>2</sub>-Koordinaten <em>nach</em> B<sub>1</sub>-Koordinaten, also scheinbar rückwärts.</p>
+    <p class="fall">Merkregel: <strong>T macht aus den neuen Koordinaten die alten, T<sup>&#x2212;1</sup> aus den alten die neuen.</strong></p>
+  </article>
+
+  <article class="eintrag" id="abbildungsmatrix-nach-basiswechsel" data-suche="konjugation aehnlich T hoch minus eins A T neue basis">
+    <h3>Abbildungsmatrix nach dem Basiswechsel <span class="quelle">Skript S. 94</span></h3>
+    <p class="bedingung">A ist die Abbildungsmatrix von f bezüglich B<sub>1</sub>, T die Transformationsmatrix von B<sub>1</sub> nach B<sub>2</sub></p>
+    <math display="block">
+      <mrow>
+        <msub><mi>A</mi><msub><mi>B</mi><mn>2</mn></msub></msub>
+        <mo>=</mo>
+        <msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup>
+        <mi>A</mi><mi>T</mi>
+      </mrow>
+    </math>
+    <p class="fall">Von rechts nach links gelesen ergibt sich der Sinn: T bringt den Vektor auf B<sub>1</sub>-Koordinaten, A bildet dort ab, T<sup>&#x2212;1</sup> bringt das Ergebnis auf B<sub>2</sub>-Koordinaten zurück.</p>
+    <p class="fall">Zwei quadratische Matrizen heißen <strong>ähnlich</strong>, wenn es ein invertierbares T mit dieser Beziehung gibt. Ähnliche Matrizen beschreiben <em>dieselbe</em> lineare Abbildung, nur bezüglich verschiedener Basen.</p>
+  </article>
+
+  <article class="eintrag" id="aehnliche-matrizen" data-suche="invariant determinante charakteristisches polynom eigenwerte gleich basisunabhaengig">
+    <h3>Was beim Basiswechsel gleich bleibt <span class="quelle">Skript S. 94</span></h3>
+    <p class="bedingung">A und B sind ähnlich, es gibt also ein invertierbares T mit B = T<sup>&#x2212;1</sup>AT</p>
+    <math display="block">
+      <mrow>
+        <mi>det</mi><mo>(</mo><mi>B</mi><mo>)</mo><mo>=</mo>
+        <mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo>
+        <mspace width="1.6em"></mspace>
+        <msub><mi>p</mi><mi>B</mi></msub><mo>=</mo><msub><mi>p</mi><mi>A</mi></msub>
+      </mrow>
+    </math>
+    <p class="fall">Determinante und charakteristisches Polynom sind gleich, und damit auch die <strong>Eigenwerte</strong>. Sie gehören der Abbildung, nicht der Basis.</p>
+    <p class="fall">Die Eigen<em>vektoren</em> ändern sich dagegen sehr wohl &#x2014; sie stehen dann in den neuen Koordinaten da. Es sind dieselben Vektoren, anders geschrieben.</p>
+  </article>
+
+  <article class="eintrag" id="diagonalisierung" data-suche="diagonalmatrix eigenvektoren in die spalten reihenfolge diagonalisierbar">
+    <h3>Diagonalisierung <span class="quelle">Skript S. 93, 95</span></h3>
+    <p class="bedingung">A besitzt eine Basis aus Eigenvektoren v<sub>1</sub>, …, v<sub>n</sub>; in den Spalten von T stehen genau diese</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mi>A</mi><mi>T</mi>
+        <mo>=</mo>
+        <mi>diag</mi><mo>(</mo>
+        <msub><mi>&#x3BB;</mi><mn>1</mn></msub><mo>,</mo>
+        <msub><mi>&#x3BB;</mi><mn>2</mn></msub><mo>,</mo>
+        <mo>&#x2026;</mo><mo>,</mo>
+        <msub><mi>&#x3BB;</mi><mi>n</mi></msub>
+        <mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Rechts steht die Diagonalmatrix mit den Eigenwerten auf der Diagonale und Nullen sonst. <strong>Die Reihenfolge zählt:</strong> die i-te Spalte von T muss der Eigenvektor zum i-ten Diagonaleintrag sein.</p>
+    <p class="fall">A heißt dann <strong>diagonalisierbar</strong>, also ähnlich zu einer Diagonalmatrix. Fehlt eine Basis aus Eigenvektoren &#x2014; ist also bei einem Eigenwert die geometrische Vielfachheit kleiner als die algebraische &#x2014;, so ist A nicht diagonalisierbar.</p>
+  </article>
+
+  <article class="eintrag" id="orthogonal-diagonalisierbar" data-suche="symmetrisch orthogonale transformationsmatrix transponiert statt invertieren onb">
+    <h3>Symmetrisch heißt orthogonal diagonalisierbar <span class="quelle">Skript S. 97</span></h3>
+    <p class="bedingung">A ist reell und symmetrisch; als Spalten von T nimmt man eine <em>Orthonormalbasis</em> aus Eigenvektoren</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>=</mo><msup><mi>T</mi><mi>T</mi></msup>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msup><mi>T</mi><mi>T</mi></msup><mi>A</mi><mi>T</mi>
+        <mo>=</mo>
+        <mi>diag</mi><mo>(</mo>
+        <msub><mi>&#x3BB;</mi><mn>1</mn></msub><mo>,</mo>
+        <mo>&#x2026;</mo><mo>,</mo>
+        <msub><mi>&#x3BB;</mi><mi>n</mi></msub>
+        <mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">T ist dann eine <strong>orthogonale</strong> Matrix, und statt zu invertieren transponiert man nur &#x2014; das spart die ganze Rechnung für T<sup>&#x2212;1</sup>.</p>
+    <p class="fall">Eine reelle symmetrische Matrix ist damit <em>immer</em> diagonalisierbar; der Fall aus dem vorigen Eintrag kann bei ihr nicht eintreten.</p>
+  </article>
+
+  <article class="eintrag" id="abbildungsmatrix-zurueckrechnen" data-suche="rueckwaerts standardbasis spiegelung an einer ebene T S T transponiert">
+    <h3>Abbildungsmatrix aus einer ONB zurückrechnen <span class="quelle">Skript S. 96, 97</span></h3>
+    <p class="bedingung">S ist die einfache Abbildungsmatrix bezüglich einer ONB B, T die Transformation von der Einheitsbasis nach B; gesucht ist die Matrix bezüglich der <em>Standardbasis</em></p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>=</mo>
+        <mi>T</mi><mi>S</mi><msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup>
+        <mo>=</mo>
+        <mi>T</mi><mi>S</mi><msup><mi>T</mi><mi>T</mi></msup>
+      </mrow>
+    </math>
+    <p class="fall">Das ist der Basiswechsel <strong>in der anderen Richtung</strong>: hier wird von der neuen Basis in die Standardbasis zurücktransformiert. Deshalb steht T links und T<sup>&#x2212;1</sup> rechts &#x2014; genau umgekehrt zum Eintrag oben.</p>
+    <p class="fall">So bekommt man die Matrix einer Spiegelung an einer <em>beliebigen</em> Ebene: man wählt eine ONB, deren dritter Vektor senkrecht auf der Ebene steht. Bezüglich dieser Basis ist die Spiegelung schlicht diag(1, 1, &#x2212;1); das Zurückrechnen liefert die gesuchte Matrix.</p>
+    <p class="fall">In Aufgabe LA 53d ist genau dieser Weg gefragt.</p>
+  </article>
+
+  <article class="eintrag" id="spektralzerlegung" data-suche="rang 1 summanden weglassen datenkompression spaltenvektor mal zeilenvektor">
+    <h3>Spektralzerlegung <span class="quelle">Skript S. 97, 98</span></h3>
+    <p class="bedingung">A ist reell und symmetrisch; v<sub>1</sub>, …, v<sub>n</sub> sind die Spalten von T, also eine ONB aus Eigenvektoren</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>=</mo>
+        <msub><mi>&#x3BB;</mi><mn>1</mn></msub><mo>&#x22C5;</mo>
+        <msub><mi>v</mi><mn>1</mn></msub><msubsup><mi>v</mi><mn>1</mn><mi>T</mi></msubsup>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>&#x3BB;</mi><mi>n</mi></msub><mo>&#x22C5;</mo>
+        <msub><mi>v</mi><mi>n</mi></msub><msubsup><mi>v</mi><mi>n</mi><mi>T</mi></msubsup>
+      </mrow>
+    </math>
+    <p class="fall">Jeder Summand ist <em>Spaltenvektor mal Zeilenvektor</em> und damit selbst eine n × n Matrix &#x2014; und zwar vom <strong>Rang 1</strong>. A zerfällt so in eine Summe möglichst einfacher Matrizen.</p>
+    <p class="fall">Summanden mit einem Eigenwert nahe null darf man weglassen; der Fehler bleibt klein. Darauf beruhen Datenkompression und Datenanalyse.</p>
+  </article>
+
+  <article class="eintrag" id="svd" data-suche="singulaerwertzerlegung usv singulaerwerte links rechts nicht quadratisch rang">
+    <h3>Singulärwertzerlegung (SVD) <span class="quelle">Skript S. 99</span></h3>
+    <p class="bedingung">A ist eine <em>beliebige</em> reelle m × n Matrix vom Rang r; U ist orthogonal m × m, V orthogonal n × n, S in Diagonalform m × n</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>=</mo><mi>U</mi><mi>S</mi><msup><mi>V</mi><mi>T</mi></msup>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msub><mi>&#x3C3;</mi><mn>1</mn></msub><mo>&#x2265;</mo>
+        <msub><mi>&#x3C3;</mi><mn>2</mn></msub><mo>&#x2265;</mo>
+        <mo>&#x2026;</mo><mo>&#x2265;</mo>
+        <msub><mi>&#x3C3;</mi><mi>r</mi></msub><mo>&gt;</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>=</mo>
+        <msub><mi>&#x3C3;</mi><mn>1</mn></msub>
+        <msub><mi>u</mi><mn>1</mn></msub><msubsup><mi>v</mi><mn>1</mn><mi>T</mi></msubsup>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <msub><mi>&#x3C3;</mi><mi>r</mi></msub>
+        <msub><mi>u</mi><mi>r</mi></msub><msubsup><mi>v</mi><mi>r</mi><mi>T</mi></msubsup>
+      </mrow>
+    </math>
+    <p class="fall">Anders als die Diagonalisierung setzt die SVD <strong>nichts</strong> voraus: sie existiert für jede reelle Matrix, auch für nichtquadratische und für solche ohne Basis aus Eigenvektoren.</p>
+    <p class="fall">Die σ<sub>i</sub> heißen <strong>Singulärwerte</strong>, die Spalten von U und V Links- beziehungsweise Rechts-Singulärvektoren. Die Zahl r der Singulärwerte ungleich null ist der <strong>Rang</strong> von A.</p>
+    <p class="fall">Die dritte Zeile ist das Gegenstück zur Spektralzerlegung: wieder eine Summe von Rang-1-Matrizen, wieder darf man hinten abschneiden.</p>
+  </article>
+
+  <article class="eintrag" id="pseudoinverse" data-suche="moore penrose a plus linksinvers rechtsinvers ueberbestimmt ausgleichsrechnung">
+    <h3>Pseudoinverse <span class="quelle">Skript S. 100, 101</span></h3>
+    <p class="bedingung">A = U S V<sup>T</sup> ist die SVD; S<sup>+</sup> ist die n × m Matrix mit den Diagonaleinträgen σ<sub>1</sub><sup>&#x2212;1</sup>, …, σ<sub>r</sub><sup>&#x2212;1</sup> und sonst nur Nullen</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>A</mi><mo>+</mo></msup><mo>=</mo>
+        <mi>V</mi><msup><mi>S</mi><mo>+</mo></msup><msup><mi>U</mi><mi>T</mi></msup>
+      </mrow>
+    </math>
+    <p class="fall">Je nach Rang ist sie eine halbe Inverse: bei r = m sind die <em>Zeilen</em> von A unabhängig und A<sup>+</sup> ist <strong>rechtsinvers</strong>, es gilt A·A<sup>+</sup> = E<sub>m</sub>. Bei r = n sind die <em>Spalten</em> unabhängig und A<sup>+</sup> ist <strong>linksinvers</strong>, es gilt A<sup>+</sup>·A = E<sub>n</sub>. Bei r = m = n ist A<sup>+</sup> = A<sup>&#x2212;1</sup>.</p>
+    <math display="block">
+      <mrow>
+        <mi>x</mi><mo>=</mo><msup><mi>A</mi><mo>+</mo></msup><mi>b</mi>
+      </mrow>
+    </math>
+    <p class="fall">Damit „löst" man über- oder unterbestimmte Systeme A x = b, die im gewöhnlichen Sinn gar keine Lösung haben: der so bestimmte Vektor hat den minimalen Fehler ‖Ax &#x2212; b‖ beziehungsweise die minimale Norm ‖x‖. Das ist die <strong>lineare Ausgleichsrechnung</strong>.</p>
+  </article>
+
+  <article class="eintrag" id="residuenvektor" data-suche="fehlervektor norm guete abweichung minimal loesbar">
+    <h3>Residuenvektor <span class="quelle">Skript S. 101</span></h3>
+    <p class="bedingung">x ist die über die Pseudoinverse bestimmte Lösung von A x = b</p>
+    <math display="block">
+      <mrow>
+        <mi>r</mi><mo>=</mo><mi>A</mi><mi>x</mi><mo>&#x2212;</mo><mi>b</mi>
+        <mspace width="1.6em"></mspace>
+        <mo lspace="0" rspace="0">&#x2016;</mo><mi>r</mi><mo lspace="0" rspace="0">&#x2016;</mo>
+      </mrow>
+    </math>
+    <p class="fall">Der Residuenvektor ist der <strong>Fehlervektor</strong>; seine Norm misst, wie gut die Näherungslösung ist. Genau diese Norm macht die Pseudoinverse so klein wie möglich.</p>
+    <p class="fall">Ist das System lösbar, ist r der Nullvektor und die Norm null. Ein von null verschiedener Wert sagt, dass es keine exakte Lösung gibt.</p>
+  </article>
+
+  <article class="eintrag" id="hauptkomponenten" data-suche="pca datenanalyse kovarianzmatrix streuung varianz zentriert datenreduktion">
+    <h3>Hauptkomponenten <span class="quelle">Skript S. 99, 100, 102</span></h3>
+    <p class="bedingung">A ist eine <em>zentrierte</em> Datenmatrix &#x2014; der Mittelwert jeder Spalte ist null; die Zeilen sind die Datenvektoren</p>
+    <math display="block">
+      <mrow>
+        <mfrac><mn>1</mn><mrow><mi>m</mi><mo>&#x2212;</mo><mn>1</mn></mrow></mfrac>
+        <msup><mi>A</mi><mi>T</mi></msup><mi>A</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mi>V</mi><mo>=</mo>
+        <msup><mrow><mo>(</mo><msup><mi>V</mi><mi>T</mi></msup><msup><mi>A</mi><mi>T</mi></msup><mo>)</mo></mrow><mi>T</mi></msup>
+      </mrow>
+    </math>
+    <p class="fall">Die erste Zeile ist die <strong>empirische Kovarianzmatrix</strong>. Die Spalten von V aus der SVD sind ihre Eigenvektoren und heißen <strong>Hauptkomponenten</strong> &#x2014; die orthogonalen Richtungen der Hauptstreuung.</p>
+    <p class="fall">Die erste Hauptkomponente zeigt in die Richtung <em>maximaler</em> Streuung. Ist der erste Singulärwert deutlich größer als die übrigen, steckt die wesentliche Information dort; darauf beruht die Datenreduktion.</p>
+    <p class="fall">Die zweite Zeile enthält die Koordinaten der Datenvektoren bezüglich der Hauptkomponenten &#x2014; ein Basiswechsel wie am Anfang dieser Seite, nur auf die Zeilen von A angewandt.</p>
+    <p class="fall">Zum Prüfungsstoff gehört das nur am Rand: keine Übungsaufgabe verlangt es.</p>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 

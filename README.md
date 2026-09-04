@@ -49,8 +49,8 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-Vierzehn Themen, 144 Einträge insgesamt; bisher sind **elf** gefüllt, das
-sind 121 Einträge. Vollständig sind damit drei der vier Kapitel: die
+Vierzehn Themen, 144 Einträge insgesamt; bisher sind **zwölf** gefüllt, das
+sind 133 Einträge. Vollständig sind damit drei der vier Kapitel: die
 **Integralrechnung** ([Grundlagen](formeln/integral-grundlagen.html),
 [Verfahren](formeln/integral-verfahren.html)), die
 **Differentialgleichungen** ([erster Ordnung](formeln/dgl-erster-ordnung.html),
@@ -63,8 +63,9 @@ linearen Algebra stehen
 [Vektorräume und Rang](formeln/vektorraeume-rang.html),
 [Determinante und Inverse](formeln/determinante-inverse.html) und
 [Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) und
-[Eigenwerte und Eigenvektoren](formeln/eigenwerte.html); offen sind dort noch
-Skalarprodukt, Basiswechsel und homogene Koordinaten.
+[Eigenwerte und Eigenvektoren](formeln/eigenwerte.html) und
+[Basiswechsel und Zerlegungen](formeln/basiswechsel-zerlegungen.html); offen
+sind dort noch Skalarprodukt und homogene Koordinaten.
 Erreichbar ist die
 Sammlung von der Startseite aus, dazu über
 [formeln/index.html](formeln/index.html), das alle Formelthemen im
