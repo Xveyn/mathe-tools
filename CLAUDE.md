@@ -301,6 +301,13 @@ Anzeigegröße. Anders als bei den Matrixklammern hängt die richtige Größe hi
 **nicht** vom Inhalt ab — ein abgesetztes Integralzeichen ist immer gleich
 groß. Eine Klasse genügt deshalb für immer, und sie ist nie nachzumessen.
 
+**`displaystyle="true"` gehört an eine Aufzählungstabelle, nicht an eine
+Matrix.** Bei einer Matrix ist die Klammer daneben an der Höhe *ohne*
+`displaystyle` gemessen; schaltet man es ein, wachsen die Zellen und die
+Klammer steht zu kurz. Bei einer Tabelle ohne Klammern — der
+Grundintegrale-Tabelle etwa — gibt es nichts, was zu kurz stehen könnte,
+und die Brüche brauchen die volle Größe.
+
 **Eine `<mtable>` schaltet `displaystyle` ab.** In MathML ist der
 Vorgabewert an `mtable` `false`, auch innerhalb eines
 `<math display="block">`. Brüche in den Zellen schrumpfen dadurch auf
@@ -560,8 +567,12 @@ hat sie hier schon gefunden.
   (vorher, für die Hesse-Matrix allein, in `shared/karten.css`), und es
   sind sieben Größen, nicht mehr eine:
 
-  - `.matrix-klammer` (3,8em) — zweizeilig, an der Hesse-Matrix gemessen
-    (ihre Zellen tragen Brüche und sind deshalb hoch): Verhältnis 1,03.
+  - `.matrix-klammer` (3,8em) — zweizeilig mit Indexzellen, an der
+    Hesse-Matrix von `karten/extremwerte.html` gemessen (`f_xx`, `f_xy`):
+    Verhältnis 1,03. **Nicht an Brüchen** — das behauptete der frühere
+    Eintrag hier, am 2026-09-04 nachgemessen und richtiggestellt. Trägt eine
+    Zelle einen Bruch, ist die Tabelle 1,6-mal so hoch und diese Klammer
+    steht bei 0,63.
   - `.matrix-klammer-3z` (4,6em) — dreizeilig, an den Drehmatrizen des
     Raums gemessen: Verhältnis 1,07, Überstand 2,2 px.
   - `.matrix-klammer-4z` (5,3em) — vierzeilig, an der DFT-Matrix gemessen:

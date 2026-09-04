@@ -49,20 +49,22 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-Vierzehn Themen, 144 Einträge insgesamt; bisher sind **neun** gefüllt, das
-sind 93 Einträge. Vollständig sind damit zwei Kapitel: die
-**Integralrechnung** ([Grundlagen](formeln/integral-grundlagen.html) mit
-vierzehn, [Verfahren](formeln/integral-verfahren.html) mit neun) und die
-**Differentialgleichungen** ([erster Ordnung](formeln/dgl-erster-ordnung.html)
-mit fünf, [zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) mit neun). Aus
-der linearen Algebra stehen
-[Endliche Körper](formeln/endliche-koerper.html) (sieben),
-[Vektorräume und Rang](formeln/vektorraeume-rang.html) (achtzehn),
-[Determinante und Inverse](formeln/determinante-inverse.html) (acht) und
-[Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) (neun, das
-Muster für die übrigen); aus Kapitel 4 steht
-[Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) mit
-vierzehn. Erreichbar ist die
+Vierzehn Themen, 144 Einträge insgesamt; bisher sind **zehn** gefüllt, das
+sind 111 Einträge. Vollständig sind damit drei der vier Kapitel: die
+**Integralrechnung** ([Grundlagen](formeln/integral-grundlagen.html),
+[Verfahren](formeln/integral-verfahren.html)), die
+**Differentialgleichungen** ([erster Ordnung](formeln/dgl-erster-ordnung.html),
+[zweiter Ordnung](formeln/dgl-zweiter-ordnung.html)) und die **Funktionen
+mehrerer Variablen**
+([Ableitungen und Gradient](formeln/ableitungen-gradient.html),
+[Extrema und Fehlerfortpflanzung](formeln/extrema-fehler.html)). Aus der
+linearen Algebra stehen
+[Endliche Körper](formeln/endliche-koerper.html),
+[Vektorräume und Rang](formeln/vektorraeume-rang.html),
+[Determinante und Inverse](formeln/determinante-inverse.html) und
+[Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html); offen sind
+dort noch Skalarprodukt, Eigenwerte, Basiswechsel und homogene Koordinaten.
+Erreichbar ist die
 Sammlung von der Startseite aus, dazu über
 [formeln/index.html](formeln/index.html), das alle Formelthemen im
 Überblick zeigt.
