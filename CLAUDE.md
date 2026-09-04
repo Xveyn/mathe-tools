@@ -64,7 +64,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | Datei | Was drin ist |
 |---|---|
 | `shared/theme.css` | Farbtokens, Grundtypografie, dazu die Druckpalette (heller Blattfarben-Satz im `@media print`-Block, gilt für jede Seite) |
-| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-rahmen`, `.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`, `.matrix-klammer-2z-ober`, `.matrix-klammer-4z-tief`, `.matrix-strich-2z-index`), dazu `.operator-gross` für Integral-, Summen- und Produktzeichen (siehe „Formeln"). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
+| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-rahmen`, `.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`, `.matrix-klammer-2z-ober`, `.matrix-klammer-4z-tief`, `.matrix-strich-2z-index`), dazu `.klammer-hoch` für eine Klammer um eine hohe Zeile und `.operator-gross` für Integral-, Summen- und Produktzeichen (beide siehe „Formeln"). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
 | `shared/formeln.css` | Bausteine der Formelsammlung: der Eintrag `.eintrag`, Verzeichnis und Filterzeile, samt Druck-Stylesheet — lädt nie zusammen mit `karten.css` |
 | `shared/expr.js` | `MT.expr.compile(term, vars)` — Terme in Funktionen |
@@ -283,6 +283,15 @@ Das ist eine Auffanglinie, kein Freibrief: eine Formel, die auf dem
 Telefon zur Hälfte hinter dem Rand steht, ist schlecht lesbar, auch wenn
 die Seite darum herum heil bleibt. Wer eine breite Zeile schreibt, prüft
 sie bei 390 px — oft lässt sie sich in zwei abgesetzte Formeln teilen.
+
+**Eine Klammer um eine hohe Zeile bekommt `.klammer-hoch`.** Dasselbe
+Problem wie bei den Matrixklammern, aber ohne `<mtable>`: eine runde Klammer
+um einen Bruch — etwa im Gradienten `(∂f/∂x₁, …, ∂f/∂xₙ)` — bleibt auf
+Textgröße und ist 15 px hoch, während der Bruch 32 bis 38 px misst. Die
+`.matrix-klammer`-Klassen sind dafür **nicht** zu nehmen: sie sind an
+`mtable`-Höhen gemessen und heißen so. `.klammer-hoch` (2,7em) ist an beiden
+Bruchhöhen gemessen, die auf `ableitungen-gradient.html` vorkommen; sie steht
+an keiner zu kurz.
 
 **Ein grosses Operatorzeichen bekommt `.operator-gross`.** Georgia hat das
 Integral-, Summen- und Produktzeichen, setzt sie aber auf Textgröße — ein

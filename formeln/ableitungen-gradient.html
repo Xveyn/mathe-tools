@@ -13,10 +13,341 @@
 <div class="wrap">
 
   <h1>Partielle Ableitungen und Gradient</h1>
-  <p class="lede">Vierzehn Einträge nach der Inhaltsaufnahme, Nummern 4.1 bis 4.12.</p>
+  <p class="lede">Funktionen mehrerer Variablen: wie man sie zeichnet, wann sie stetig sind, und was Ableiten hier heißt &#x2014; bis hin zu Rotation und Divergenz. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="skalarfeld-und-vektorfeld" data-suche="reellwertig vektorwertig komponentenfunktion skalarfunktion">
+    <h3>Skalarfeld und Vektorfeld <span class="quelle">Skript S. 107</span></h3>
+    <p class="bedingung">Die Zahl der Komponenten im <em>Zielbereich</em> unterscheidet die beiden</p>
+    <math display="block">
+      <mrow>
+        <mi>f</mi><mo>:</mo>
+        <msub><mi>D</mi><mi>f</mi></msub><mo>&#x2192;</mo><mi>ℝ</mi>
+        <mspace width="1.6em"></mspace>
+        <mi>z</mi><mo>=</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>f</mi><mo>:</mo>
+        <msub><mi>D</mi><mi>f</mi></msub><mo>&#x2192;</mo><msup><mi>ℝ</mi><mi>m</mi></msup>
+        <mspace width="1.2em"></mspace>
+        <mi>f</mi><mo>=</mo><mo>(</mo>
+        <msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><mo>&#x2026;</mo><mo>,</mo>
+        <msub><mi>f</mi><mi>m</mi></msub><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Reellwertige Funktionen heißen <strong>Skalarfelder</strong> oder Skalarfunktionen, vektorwertige <strong>Vektorfelder</strong>. Die Komponenten <math><msub><mi>f</mi><mi>i</mi></msub></math> eines Vektorfeldes sind selbst wieder Skalarfelder.</p>
+    <p class="fall">Anschaulich: ein Skalarfeld ordnet jedem Punkt eine Zahl zu, ein Vektorfeld heftet jedem Punkt einen Vektor an.</p>
+  </article>
+
+  <article class="eintrag" id="hoehenlinien-und-schnittkurven" data-suche="contour plot niveaulinie schnitt ebene zeichnen graph">
+    <h3>Höhenlinien und Schnittkurven <span class="quelle">Skript S. 107, 108</span></h3>
+    <p class="bedingung">f(x, y) ist ein Skalarfeld; zwei Wege, es in der Ebene darzustellen</p>
+    <math display="block">
+      <mrow>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo><mo>=</mo><mi>c</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>z</mi><mo>=</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>c</mi><mo>)</mo>
+        <mspace width="1.6em"></mspace>
+        <mi>z</mi><mo>=</mo><mi>f</mi><mo>(</mo><mi>c</mi><mo>,</mo><mi>y</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die <strong>Höhenlinie</strong> zur Höhe c ist die Menge aller Punkte, in denen f den Wert c annimmt. Im Contour-Plot werden die z-Werte durch solche Linien oder durch Farben dargestellt.</p>
+    <p class="fall">Die <strong>Schnittkurven</strong> entstehen, indem man eine Variable festhält: z = f(x, c) ist der Schnitt mit der Ebene y = c, z = f(c, y) der mit x = c. Zwei Scharen, eine je Richtung.</p>
+    <a class="querlink" href="../tools/flaechenrechner/index.html">Selbst durchfahren &#x2192; Flächenrechner</a>
+  </article>
+
+  <article class="eintrag" id="definitionsbereich" data-suche="maximaler definitionsbereich nenner wurzel logarithmus ausschliessen">
+    <h3>Maximaler Definitionsbereich <span class="quelle">Skript S. 107</span></h3>
+    <p class="bedingung">Die Menge aller Stellen, an denen der Term erklärt ist</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>D</mi><mi>f</mi></msub><mo>=</mo>
+        <mo>{</mo><mi>x</mi><mo>&#x2208;</mo><msup><mi>ℝ</mi><mi>n</mi></msup>
+        <mspace width="0.3em"></mspace><mo stretchy="false" lspace="0" rspace="0">|</mo><mspace width="0.3em"></mspace>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.4em"></mspace><mtext>erklärt</mtext><mo>}</mo>
+      </mrow>
+    </math>
+    <p class="fall">Auszuschließen sind dieselben drei Dinge wie im Eindimensionalen: Nullstellen im Nenner, negative Radikanden unter einer geraden Wurzel, nichtpositive Argumente im Logarithmus.</p>
+    <p class="fall">Das Ergebnis ist eine <strong>Teilmenge der Ebene</strong> beziehungsweise des Raums &#x2014; also ein Gebiet, keine Zahl und kein Intervall.</p>
+  </article>
+
+  <article class="eintrag" id="norm-und-umgebung" data-suche="epsilon kugel innerer punkt randpunkt offen abgeschlossen betrag">
+    <h3>Norm, ε-Umgebung, innere und Randpunkte <span class="quelle">Skript S. 109, 110</span></h3>
+    <p class="bedingung">Die Norm übernimmt im ℝ<sup>n</sup> die Rolle, die im Eindimensionalen der Betrag hat</p>
+    <math display="block">
+      <mrow>
+        <mo lspace="0" rspace="0">&#x2016;</mo><mi>x</mi><mo lspace="0" rspace="0">&#x2016;</mo>
+        <mo>=</mo>
+        <msqrt>
+          <mrow>
+            <msubsup><mi>x</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo>
+            <msubsup><mi>x</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo>
+            <mo>&#x2026;</mo><mo>+</mo>
+            <msubsup><mi>x</mi><mi>n</mi><mn>2</mn></msubsup>
+          </mrow>
+        </msqrt>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo>{</mo><mi>x</mi><mo>&#x2208;</mo><msup><mi>ℝ</mi><mi>n</mi></msup>
+        <mspace width="0.3em"></mspace><mo stretchy="false" lspace="0" rspace="0">|</mo><mspace width="0.3em"></mspace>
+        <mo lspace="0" rspace="0">&#x2016;</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo lspace="0" rspace="0">&#x2016;</mo>
+        <mo>&lt;</mo><mi>&#x3B5;</mi><mo>}</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die zweite Zeile ist die <strong>ε-Umgebung</strong> um a, in der Ebene eine Kreisscheibe, im Raum eine Kugel.</p>
+    <p class="fall">Damit vier Begriffe: <strong>innerer Punkt</strong> von D &#x2014; es gibt eine ε-Umgebung, die ganz in D liegt. <strong>Offen</strong> &#x2014; jeder Punkt von D ist innerer Punkt. <strong>Randpunkt</strong> &#x2014; jede ε-Umgebung enthält einen Punkt aus D <em>und</em> einen, der nicht dazugehört. <strong>Abgeschlossen</strong> &#x2014; D enthält alle seine Randpunkte.</p>
+  </article>
+
+  <article class="eintrag" id="grenzwert-und-stetigkeit" data-suche="limes folge komponentenweise konvergenz stetig">
+    <h3>Grenzwert und Stetigkeit <span class="quelle">Skript S. 110, 111, 112</span></h3>
+    <p class="bedingung">Der Grenzwert muss für <em>jede</em> Folge, die gegen a läuft, derselbe sein</p>
+    <math display="block">
+      <mrow>
+        <munder><mi>lim</mi><mrow><mi>x</mi><mo>&#x2192;</mo><mi>a</mi></mrow></munder>
+        <mspace width="0.3em"></mspace>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>g</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <munder><mi>lim</mi><mrow><mi>x</mi><mo>&#x2192;</mo><mi>a</mi></mrow></munder>
+        <mspace width="0.3em"></mspace>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die zweite Zeile ist die <strong>Stetigkeit</strong> bei a: der Grenzwert existiert und stimmt mit dem Funktionswert überein.</p>
+    <p class="fall">Bei einer vektorwertigen Folge wird der Grenzwert <strong>komponentenweise</strong> bestimmt &#x2014; jede Komponente für sich.</p>
+  </article>
+
+  <article class="eintrag" id="unstetigkeit-nachweisen" data-suche="zwei folgen gegenbeispiel verschiedene grenzwerte nachweis unstetig">
+    <h3>Unstetigkeit nachweisen <span class="quelle">Skript S. 112, 113</span></h3>
+    <p class="bedingung">Zwei Folgen, die beide gegen a laufen, aber verschiedene Grenzwerte der Funktionswerte liefern</p>
+    <math display="block">
+      <mrow>
+        <munder><mi>lim</mi><mrow><mi>k</mi><mo>&#x2192;</mo><mo>&#x221E;</mo></mrow></munder>
+        <mi>f</mi><mo>(</mo><msub><mi>a</mi><mi>k</mi></msub><mo>)</mo>
+        <mo>&#x2260;</mo>
+        <munder><mi>lim</mi><mrow><mi>k</mi><mo>&#x2192;</mo><mo>&#x221E;</mo></mrow></munder>
+        <mi>f</mi><mo>(</mo><msub><mi>b</mi><mi>k</mi></msub><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Das ist der Standardweg, und er ist unsymmetrisch: <strong>eine</strong> Folge genügt nie, um Stetigkeit zu zeigen &#x2014; aber <strong>zwei</strong> mit verschiedenen Grenzwerten genügen immer, um Unstetigkeit zu zeigen.</p>
+    <p class="fall">Das Standardbeispiel des Skripts ist <math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mi>x</mi><mi>y</mi></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></mfrac></mrow></math> im Punkt (0 | 0): längs der Geraden y = x kommt <math><mfrac><mn>1</mn><mn>2</mn></mfrac></math> heraus, längs y = &#x2212;x dagegen <math><mrow><mo>&#x2212;</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></math>. Die Funktion ist dort für <strong>jede</strong> Wahl von f(0 | 0) unstetig.</p>
+  </article>
+
+  <article class="eintrag" id="partielle-ableitung" data-suche="richtungsableitung konstant halten differenzenquotient einheitsvektor">
+    <h3>Partielle Ableitung <span class="quelle">Skript S. 113, 114</span></h3>
+    <p class="bedingung">a ist innerer Punkt von D<sub>f</sub>, e<sub>i</sub> der i-te Einheitsvektor</p>
+    <math display="block">
+      <mrow>
+        <mfrac><mrow><mo>&#x2202;</mo><mi>f</mi></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mi>i</mi></msub></mrow></mfrac>
+        <mo>(</mo><mi>a</mi><mo>)</mo><mo>=</mo>
+        <munder><mi>lim</mi><mrow><mi>h</mi><mo>&#x2192;</mo><mn>0</mn></mrow></munder>
+        <mfrac>
+          <mrow><mi>f</mi><mo>(</mo><mi>a</mi><mo>+</mo><mi>h</mi><msub><mi>e</mi><mi>i</mi></msub><mo>)</mo><mo>&#x2212;</mo><mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo></mrow>
+          <mi>h</mi>
+        </mfrac>
+      </mrow>
+    </math>
+    <p class="fall">Praktisch rechnet man nicht mit dem Grenzwert: <strong>alle Variablen bis auf x<sub>i</sub> als konstant ansehen und wie im eindimensionalen Fall nach x<sub>i</sub> ableiten.</strong></p>
+    <p class="fall">Partielle Ableitungen heißen auch <em>Richtungsableitungen</em>; sie geben die Steigung in einer Koordinatenrichtung an.</p>
+    <p class="fall"><strong>Partiell differenzierbar heißt nicht stetig.</strong> Das Beispiel aus dem Eintrag oben hat im Ursprung beide partiellen Ableitungen gleich null und ist dort trotzdem unstetig &#x2014; im Eindimensionalen wäre das unmöglich.</p>
+    <a class="querlink" href="../karten/partielle-ableitungen.html#partielle-ableitung">Durchgerechnet auf der Karte &#x2192;</a>
+  </article>
+
+  <article class="eintrag" id="gradient" data-suche="nabla grad vektorfeld steilster anstieg abstieg richtung">
+    <h3>Gradient <span class="quelle">Skript S. 114, 115</span></h3>
+    <p class="bedingung">f bei a partiell differenzierbar; der Gradient sammelt alle partiellen Ableitungen in einem Vektor</p>
+    <math display="block">
+      <mrow>
+        <mi>grad</mi><mspace width="0.2em"></mspace><mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo>
+        <mo>=</mo>
+        <mo class="klammer-hoch">(</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><mi>f</mi></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mn>1</mn></msub></mrow></mfrac>
+        <mo>(</mo><mi>a</mi><mo>)</mo><mo>,</mo>
+        <mo>&#x2026;</mo><mo>,</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><mi>f</mi></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></mfrac>
+        <mo>(</mo><mi>a</mi><mo>)</mo>
+        <mo class="klammer-hoch">)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo>&#x2207;</mo><mi>f</mi>
+        <mspace width="0.6em"></mspace><mo>=</mo><mspace width="0.6em"></mspace>
+        <mi>grad</mi><mspace width="0.2em"></mspace><mi>f</mi>
+      </mrow>
+    </math>
+    <p class="fall">Der Gradient zeigt in die Richtung des <strong>maximalen Zuwachses</strong> von f, der Gegenvektor &#x2212;grad f in die Richtung des maximalen Abstiegs.</p>
+    <p class="fall">Heftet man jedem Punkt seinen Gradientenvektor an, entsteht ein Vektorfeld &#x2014; aus einem Skalarfeld wird so ein Vektorfeld.</p>
+    <a class="querlink" href="../karten/gradient.html#gradient">Durchgerechnet auf der Karte &#x2192;</a>
+  </article>
+
+  <article class="eintrag" id="naeherung-mit-dem-gradienten" data-suche="delta z aenderung kleine stoerung skalarprodukt fehlerfortpflanzung">
+    <h3>Näherung für kleine Änderungen <span class="quelle">Skript S. 114, 115</span></h3>
+    <p class="bedingung">Δx = (Δx<sub>1</sub>, …, Δx<sub>n</sub>) ist eine <em>kleine</em> Änderung der Eingangswerte</p>
+    <math display="block">
+      <mrow>
+        <mi>&#x394;</mi><mi>z</mi><mo>&#x2248;</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><mi>f</mi></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mn>1</mn></msub></mrow></mfrac>
+        <mo>(</mo><mi>a</mi><mo>)</mo><mi>&#x394;</mi><msub><mi>x</mi><mn>1</mn></msub>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><mi>f</mi></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></mfrac>
+        <mo>(</mo><mi>a</mi><mo>)</mo><mi>&#x394;</mi><msub><mi>x</mi><mi>n</mi></msub>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>&#x394;</mi><mi>z</mi><mo>&#x2248;</mo>
+        <mi>grad</mi><mspace width="0.2em"></mspace><mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo>
+        <mo>&#x22C5;</mo><mi>&#x394;</mi><mi>x</mi>
+      </mrow>
+    </math>
+    <p class="fall">Beide Zeilen sagen dasselbe; die zweite ist die erste als Skalarprodukt geschrieben.</p>
+    <p class="fall">Ändert sich nur eine Variable, bleibt <math><mrow><mi>&#x394;</mi><mi>z</mi><mo>&#x2248;</mo><mfrac><mrow><mo>&#x2202;</mo><mi>f</mi></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mi>i</mi></msub></mrow></mfrac><mo>(</mo><mi>a</mi><mo>)</mo><mi>&#x394;</mi><msub><mi>x</mi><mi>i</mi></msub></mrow></math>. Das ist die Grundlage der Fehlerfortpflanzung.</p>
+  </article>
+
+  <article class="eintrag" id="gradientenabstieg" data-suche="schrittweite lernrate deep learning verlustfunktion minimieren iteration">
+    <h3>Gradientenabstieg <span class="quelle">Skript S. 115, 116</span></h3>
+    <p class="bedingung">f ist eine zu minimierende Verlustfunktion, γ &gt; 0 die hinreichend klein gewählte Schrittweite</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>a</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub>
+        <mo>=</mo>
+        <msub><mi>a</mi><mi>k</mi></msub><mo>&#x2212;</mo>
+        <mi>&#x3B3;</mi><mo>&#x22C5;</mo>
+        <mi>grad</mi><mspace width="0.2em"></mspace><mi>f</mi><mo>(</mo><msub><mi>a</mi><mi>k</mi></msub><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Man geht Schritt für Schritt in Richtung des steilsten Abstiegs. Bei hinreichend kleinem γ gilt <math><mrow><mi>f</mi><mo>(</mo><msub><mi>a</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>)</mo><mo>&#x2264;</mo><mi>f</mi><mo>(</mo><msub><mi>a</mi><mi>k</mi></msub><mo>)</mo></mrow></math>; das wiederholt man, bis der Wert klein genug ist.</p>
+    <p class="fall">Wird beim Deep Learning eingesetzt: die Variablen sind dort die Gewichte eines neuronalen Netzes und f die Kostenfunktion.</p>
+  </article>
+
+  <article class="eintrag" id="linearisierung-tangentialebene" data-suche="tangentialebene hyperebene lineare approximation naeherung punkt a">
+    <h3>Linearisierung und Tangentialebene <span class="quelle">Skript S. 116, 117</span></h3>
+    <p class="bedingung">f partiell differenzierbar mit <em>stetigen</em> partiellen Ableitungen; a ein innerer Punkt</p>
+    <math display="block">
+      <mrow>
+        <mi>z</mi><mo>=</mo>
+        <mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo><mo>+</mo>
+        <mi>grad</mi><mspace width="0.2em"></mspace><mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo>
+        <mo>&#x22C5;</mo>
+        <mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">In Koordinaten ausgeschrieben:</p>
+    <math display="block">
+      <mrow>
+        <mi>z</mi><mo>=</mo><mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo><mo>+</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><mi>f</mi></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mn>1</mn></msub></mrow></mfrac>
+        <mo>(</mo><mi>a</mi><mo>)</mo>
+        <mo>(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>&#x2212;</mo><msub><mi>a</mi><mn>1</mn></msub><mo>)</mo>
+        <mo>+</mo><mo>&#x2026;</mo>
+      </mrow>
+    </math>
+    <p class="fall">Dieselbe Gleichung beschreibt die <strong>Tangentialebene</strong> (bei zwei Variablen) beziehungsweise die Tangentialhyperebene an f im Punkt a.</p>
+    <p class="fall">Sie ist das mehrdimensionale Gegenstück zur Tangentengleichung <math><mrow><mi>y</mi><mo>=</mo><mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo><mo>+</mo><msup><mi>f</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>a</mi><mo>)</mo><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo></mrow></math> aus Mathematik 1 &#x2014; die Ableitung ist durch den Gradienten ersetzt, das Produkt durch ein Skalarprodukt.</p>
+  </article>
+
+  <article class="eintrag" id="jacobi-matrix" data-suche="vektorfeld linearisieren gradienten in die zeilen affine abbildung">
+    <h3>Jacobi-Matrix <span class="quelle">Skript S. 117, 118</span></h3>
+    <p class="bedingung">f = (f<sub>1</sub>, …, f<sub>m</sub>) ist ein Vektorfeld; die Gradienten der Komponenten stehen in den <em>Zeilen</em> einer m × n Matrix</p>
+    <math display="block">
+      <mrow>
+        <msub><mrow><mo>(</mo><msub><mi>J</mi><mi>f</mi></msub><mo>(</mo><mi>a</mi><mo>)</mo><mo>)</mo></mrow><mrow><mi>i</mi><mi>j</mi></mrow></msub>
+        <mo>=</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><msub><mi>f</mi><mi>i</mi></msub></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mi>j</mi></msub></mrow></mfrac>
+        <mo>(</mo><mi>a</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>z</mi><mo>=</mo>
+        <mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo><mo>+</mo>
+        <msub><mi>J</mi><mi>f</mi></msub><mo>(</mo><mi>a</mi><mo>)</mo>
+        <mo>&#x22C5;</mo>
+        <mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die i-te Zeile von <math><msub><mi>J</mi><mi>f</mi></msub></math> ist <math><mrow><mi>grad</mi><mspace width="0.2em"></mspace><msub><mi>f</mi><mi>i</mi></msub></mrow></math>. Für m = 1 ist die Jacobi-Matrix also der Gradient als Zeile geschrieben.</p>
+    <p class="fall">Die zweite Zeile ist die Linearisierung eines <em>Vektorfeldes</em> &#x2014; eine affine Abbildung aus linearem Anteil und konstanter Verschiebung.</p>
+    <p class="fall">Für eine lineare Abbildung f(x) = Ax ist <math><mrow><msub><mi>J</mi><mi>f</mi></msub><mo>=</mo><mi>A</mi></mrow></math>, und zwar unabhängig vom Punkt; für die affine f(x) = Ax + b ebenso.</p>
+  </article>
+
+  <article class="eintrag" id="rotation-und-divergenz" data-suche="rot div wirbeldichte quelldichte vektoranalysis nabla kreuz">
+    <h3>Rotation und Divergenz <span class="quelle">Skript S. 119</span></h3>
+    <p class="bedingung">rot nur für ein Vektorfeld f = (f<sub>1</sub>, f<sub>2</sub>, f<sub>3</sub>) auf dem ℝ³; div für jedes Vektorfeld auf dem ℝ<sup>n</sup></p>
+    <math display="block">
+      <mrow>
+        <mi>rot</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mo class="klammer-hoch">(</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><msub><mi>f</mi><mn>3</mn></msub></mrow><mrow><mo>&#x2202;</mo><mi>y</mi></mrow></mfrac>
+        <mo>&#x2212;</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><msub><mi>f</mi><mn>2</mn></msub></mrow><mrow><mo>&#x2202;</mo><mi>z</mi></mrow></mfrac>
+        <mo>,</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><msub><mi>f</mi><mn>1</mn></msub></mrow><mrow><mo>&#x2202;</mo><mi>z</mi></mrow></mfrac>
+        <mo>&#x2212;</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><msub><mi>f</mi><mn>3</mn></msub></mrow><mrow><mo>&#x2202;</mo><mi>x</mi></mrow></mfrac>
+        <mo>,</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mfrac><mrow><mo>&#x2202;</mo><msub><mi>f</mi><mn>2</mn></msub></mrow><mrow><mo>&#x2202;</mo><mi>x</mi></mrow></mfrac>
+        <mo>&#x2212;</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><msub><mi>f</mi><mn>1</mn></msub></mrow><mrow><mo>&#x2202;</mo><mi>y</mi></mrow></mfrac>
+        <mo class="klammer-hoch">)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>div</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><msub><mi>f</mi><mn>1</mn></msub></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mn>1</mn></msub></mrow></mfrac>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <mfrac><mrow><mo>&#x2202;</mo><msub><mi>f</mi><mi>n</mi></msub></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mi>n</mi></msub></mrow></mfrac>
+      </mrow>
+    </math>
+    <p class="fall">Die <strong>Rotation</strong> gibt die Wirbeldichte an und ist selbst ein Vektorfeld. Die <strong>Divergenz</strong> gibt die Quelldichte an und ist ein Skalarfeld &#x2014; eine Zahl je Punkt.</p>
+    <p class="fall">Zwei Fälle zum Merken: das Wirbelfeld f(x, y, z) = (&#x2212;y, x, 0) hat rot(f) = (0, 0, 2) und div(f) = 0, ist also quellenfrei. Das Zentralfeld g(x, y, z) = (x, y, z) hat rot(g) = (0, 0, 0) und div(g) = 3, ist also wirbelfrei mit konstanter Quellstärke.</p>
+  </article>
+
+  <article class="eintrag" id="hoehere-ableitungen" data-suche="zweite ableitung schwarz vertauschen reihenfolge gemischt schreibweise">
+    <h3>Höhere partielle Ableitungen <span class="quelle">Skript S. 120, 121</span></h3>
+    <p class="bedingung">Sind die partiellen Ableitungen wieder partiell differenzierbar, entstehen die höheren Ableitungen</p>
+    <math display="block">
+      <mrow>
+        <mfrac><mo>&#x2202;</mo><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mi>j</mi></msub></mrow></mfrac>
+        <mfrac><mrow><mo>&#x2202;</mo><mi>f</mi></mrow><mrow><mo>&#x2202;</mo><msub><mi>x</mi><mi>i</mi></msub></mrow></mfrac>
+        <mo>=</mo>
+        <mfrac>
+          <mrow><msup><mo>&#x2202;</mo><mn>2</mn></msup><mi>f</mi></mrow>
+          <mrow><mo>&#x2202;</mo><msub><mi>x</mi><mi>j</mi></msub><mo>&#x2202;</mo><msub><mi>x</mi><mi>i</mi></msub></mrow>
+        </mfrac>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mfrac>
+          <mrow><msup><mo>&#x2202;</mo><mi>k</mi></msup><mi>f</mi></mrow>
+          <msubsup><mrow><mo>&#x2202;</mo><mi>x</mi></mrow><mi>i</mi><mi>k</mi></msubsup>
+        </mfrac>
+        <mo>=</mo>
+        <mfrac>
+          <mrow><msup><mo>&#x2202;</mo><mi>k</mi></msup><mi>f</mi></mrow>
+          <msup><mrow><mo>(</mo><mo>&#x2202;</mo><msub><mi>x</mi><mi>i</mi></msub><mo>)</mo></mrow><mi>k</mi></msup>
+        </mfrac>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Satz von Schwarz:</strong> sind alle partiellen Ableitungen bis zur Ordnung k stetig, darf bei einer gemischten k-fachen Ableitung die <strong>Reihenfolge vertauscht</strong> werden.</p>
+    <p class="fall">Dann gilt also <math><mrow><mfrac><mrow><msup><mo>&#x2202;</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>&#x2202;</mo><mi>x</mi><mo>&#x2202;</mo><mi>y</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><msup><mo>&#x2202;</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>&#x2202;</mo><mi>y</mi><mo>&#x2202;</mo><mi>x</mi></mrow></mfrac></mrow></math>. Das spart bei der Hesse-Matrix die Hälfte der Rechnung, denn sie ist damit symmetrisch.</p>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 

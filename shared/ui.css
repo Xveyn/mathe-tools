@@ -226,6 +226,21 @@ h2.abschnitt{
    nicht geschaetzt: eine geschaetzte 7em-Klammer stuende bei der
    4x4-Matrix 14,8 px ueber und unter ihr. Wer die Schriftgroesse der
    Umgebung aendert, misst neu. */
+/* Eine runde Klammer (oder ein Betragsstrich) um eine EINZEILIGE, aber hohe
+   Formel — einen Bruch, eine Wurzel. Dieselbe Ursache wie bei den
+   Matrixklammern, aber ohne mtable: Georgia hat keine OpenType-MATH-Tabelle,
+   also waechst das Zeichen nicht mit. Auf Textgroesse ist eine Klammer 15 px
+   hoch und steht neben einer 32,5-px-Bruchzeile wie hingefallen (Verhaeltnis
+   0,46). Die .matrix-klammer-Klassen sind hier NICHT zu nehmen: sie sind an
+   mtable-Hoehen gemessen und heissen so.
+   Gemessen 2026-09-04 in ableitungen-gradient.html an zwei verschieden hohen
+   Bruchzeilen: der Gradient hat Bruecke ohne Index im Zaehler (32,5 px),
+   rot(f) hat sie mit Index (37,5 px). 2,4em waere fuer die hoehere schon zu
+   KURZ gewesen (0,93). Bei 2,7em steht keine zu kurz: 1,21 an der niedrigen,
+   1,05 an der hohen Zeile. Zu lang ist harmlos, zu kurz nicht. Wer einen
+   Doppelbruch einklammert, misst neu. */
+.klammer-hoch{font-size:2.7em}
+
 /* Ein grosses Operatorzeichen in einer abgesetzten Formel: Integral, Summe,
    Produkt. Georgia hat die Zeichen, setzt sie aber auf Textgroesse — ein
    Integralzeichen ist so nur 15 px hoch gegen eine 21-px-Zeile und wirkt neben

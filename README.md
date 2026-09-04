@@ -49,19 +49,20 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-Vierzehn Themen, 144 Einträge insgesamt; bisher sind **acht** gefüllt, das
-sind 79 Einträge. Vollständig sind damit die **Integralrechnung**
-([Grundlagen](formeln/integral-grundlagen.html) mit vierzehn,
-[Verfahren](formeln/integral-verfahren.html) mit neun) und die
-**Differentialgleichungen**
-([erster Ordnung](formeln/dgl-erster-ordnung.html) mit fünf,
-[zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) mit neun). Aus der
-linearen Algebra stehen
+Vierzehn Themen, 144 Einträge insgesamt; bisher sind **neun** gefüllt, das
+sind 93 Einträge. Vollständig sind damit zwei Kapitel: die
+**Integralrechnung** ([Grundlagen](formeln/integral-grundlagen.html) mit
+vierzehn, [Verfahren](formeln/integral-verfahren.html) mit neun) und die
+**Differentialgleichungen** ([erster Ordnung](formeln/dgl-erster-ordnung.html)
+mit fünf, [zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) mit neun). Aus
+der linearen Algebra stehen
 [Endliche Körper](formeln/endliche-koerper.html) (sieben),
 [Vektorräume und Rang](formeln/vektorraeume-rang.html) (achtzehn),
 [Determinante und Inverse](formeln/determinante-inverse.html) (acht) und
-[Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) (neun,
-das Muster für die übrigen). Erreichbar ist die
+[Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) (neun, das
+Muster für die übrigen); aus Kapitel 4 steht
+[Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) mit
+vierzehn. Erreichbar ist die
 Sammlung von der Startseite aus, dazu über
 [formeln/index.html](formeln/index.html), das alle Formelthemen im
 Überblick zeigt.
@@ -94,7 +95,7 @@ Die gemeinsamen Bausteine:
 | `shared/extrema.js` | `MT.extrema` — stationäre Stellen suchen und einordnen |
 | `shared/dgl.js` | `MT.dgl.loese(a, b, glieder, anfang)` — lineare Differentialgleichungen zweiter Ordnung mit konstanten Koeffizienten, geschlossen gelöst |
 | `shared/theme.css` | Farbtokens und Grundtypografie, dazu die Druckpalette (heller Blattfarben-Satz im `@media print`-Block, gilt für jede Seite) |
-| `shared/ui.css` | Panels, Regler, Chips, Raster, dazu die Katalog-Kacheln, die Ansichtsregler-Gruppe `.blick` an einer Zeichentafel, die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-klammer` und ihre drei Geschwister) — die Startseite, die Kartenübersicht und die Formelübersicht teilen sich diese Bausteine |
+| `shared/ui.css` | Panels, Regler, Chips, Raster, dazu die Katalog-Kacheln, die Ansichtsregler-Gruppe `.blick` an einer Zeichentafel, die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Klammern und Zeichen des Formelsatzes (`.matrix-klammer` und ihre sechs Geschwister, `.klammer-hoch`, `.operator-gross`) — die Startseite, die Kartenübersicht und die Formelübersicht teilen sich diese Bausteine |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
 | `shared/formeln.css` | Bausteine der Formelsammlung: der Eintrag `.eintrag`, Verzeichnis und Filterzeile, samt Druck-Stylesheet — lädt nie zusammen mit `karten.css` |
 | `shared/formeln.js` | `MT.formeln.start()` — Verzeichnis und Filter einer Formelseite, aus dem Markup selbst gelesen |
