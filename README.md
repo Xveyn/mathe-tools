@@ -49,14 +49,17 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-Vierzehn Themen, 144 Einträge insgesamt; bisher sind fünf gefüllt —
+Vierzehn Themen, 144 Einträge insgesamt; bisher sind sechs gefüllt —
 [Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) mit neun
 Einträgen, das als Muster für die übrigen dient,
 [Endliche Körper und Restklassen](formeln/endliche-koerper.html) mit sieben,
 [Vektorräume, lineare Abbildungen, Rang](formeln/vektorraeume-rang.html) mit
 achtzehn, [Determinante und Inverse](formeln/determinante-inverse.html) mit
-acht und [Integral: Grundlagen und Hauptsatz](formeln/integral-grundlagen.html)
-mit vierzehn. Erreichbar ist die Sammlung von der Startseite aus, dazu über
+acht, [Integral: Grundlagen und Hauptsatz](formeln/integral-grundlagen.html)
+mit vierzehn und
+[Integral: Verfahren und Partialbrüche](formeln/integral-verfahren.html) mit
+neun. Damit ist die Integralrechnung vollständig. Erreichbar ist die
+Sammlung von der Startseite aus, dazu über
 [formeln/index.html](formeln/index.html), das alle Formelthemen im
 Überblick zeigt.
 

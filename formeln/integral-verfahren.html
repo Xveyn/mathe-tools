@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="../favicon.svg">
-<title>Integralrechnung — Verfahren und Partialbrüche</title>
+<title>Integral: Verfahren und Partialbrüche</title>
 <link rel="stylesheet" href="../shared/theme.css">
 <link rel="stylesheet" href="../shared/ui.css">
 <link rel="stylesheet" href="../shared/formeln.css">
@@ -12,11 +12,307 @@
 <body>
 <div class="wrap">
 
-  <h1>Integralrechnung — Verfahren und Partialbrüche</h1>
-  <p class="lede">Neun Einträge nach der Inhaltsaufnahme, Nummern 1.14 bis 1.22.</p>
+  <h1>Integral: Verfahren und Partialbrüche</h1>
+  <p class="lede">Die drei Wege zu einer Stammfunktion, die das Skript führt: partielle Integration, Substitution und die Zerlegung gebrochen rationaler Funktionen. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="partielle-integration" data-suche="produktregel umkehrung faktoren waehlen ln x">
+    <h3>Partielle Integration <span class="quelle">Skript S. 28</span></h3>
+    <p class="bedingung">f und g stetig differenzierbar auf [a, b]</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <msup><mi>g</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi><mo>=</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msubsup>
+          <mrow><mo>[</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>]</mo></mrow>
+          <mi>a</mi><mi>b</mi>
+        </msubsup>
+        <mo>&#x2212;</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <msup><mi>f</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+      </mrow>
+    </math>
+    <p class="fall">Unbestimmt, ohne Grenzen:</p>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mi>f</mi><msup><mi>g</mi><mo>&#x2032;</mo></msup>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mi>f</mi><mi>g</mi><mo>&#x2212;</mo>
+        <mo class="operator-gross">&#x222B;</mo>
+        <msup><mi>f</mi><mo>&#x2032;</mo></msup><mi>g</mi>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+      </mrow>
+    </math>
+    <p class="fall">Das Gegenstück zur Produktregel. Sie liefert <strong>kein Ergebnis, sondern ein anderes Integral</strong> &#x2014; die Wahl von f und g&#x2032; entscheidet, ob es leichter wird.</p>
+    <p class="fall">Faustregel für die Wahl: f ist der Faktor, der beim Ableiten einfacher wird (ein Polynom, ein Logarithmus), g&#x2032; der, den man leicht integrieren kann (Exponentialfunktion, Sinus, Kosinus).</p>
+    <p class="fall">Für <math><mrow><mo class="operator-gross">&#x222B;</mo><mi>ln</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mrow></math> setzt man f = ln(x) und g&#x2032; = 1 &#x2014; der zweite Faktor wird künstlich ergänzt.</p>
+  </article>
+
+  <article class="eintrag" id="zweimal-partiell-und-aufloesen" data-suche="trick ringschluss ausgangsintegral unbekannte umstellen">
+    <h3>Zweimal partiell und nach dem Integral auflösen <span class="quelle">Skript S. 29, 30</span></h3>
+    <p class="bedingung">Wenn nach der partiellen Integration wieder das Ausgangsintegral dasteht</p>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo><msup><mi>sin</mi><mn>2</mn></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi><mo>=</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo>&#x2212;</mo><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo><mi>cos</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>+</mo><mi>x</mi><mo>&#x2212;</mo>
+        <mo class="operator-gross">&#x222B;</mo><msup><mi>sin</mi><mn>2</mn></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mn>2</mn><mo class="operator-gross">&#x222B;</mo><msup><mi>sin</mi><mn>2</mn></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mo>&#x2212;</mo><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo><mi>cos</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>+</mo><mi>x</mi>
+      </mrow>
+    </math>
+    <p class="fall">Das Ausgangsintegral taucht rechts wieder auf. Man behandelt es wie eine Unbekannte, bringt es nach links und teilt durch den Vorfaktor.</p>
+    <p class="fall">Das Verfahren trägt bei <math><msup><mi>sin</mi><mn>2</mn></msup></math> und <math><msup><mi>cos</mi><mn>2</mn></msup></math> und ebenso bei Produkten wie <math><mrow><msup><mi>e</mi><mi>x</mi></msup><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>, wo man zweimal partiell integrieren muss, bevor sich der Ring schließt.</p>
+  </article>
+
+  <article class="eintrag" id="sin2-und-cos2" data-suche="quadrat sinus kosinus fertiges ergebnis halbwinkel">
+    <h3>Die Integrale von sin² und cos² <span class="quelle">Skript S. 30</span></h3>
+    <p class="bedingung">Fertige Ergebnisse, jeweils bis auf eine Konstante C</p>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo><msup><mi>sin</mi><mn>2</mn></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mfrac><mn>1</mn><mn>2</mn></mfrac>
+        <mo>(</mo><mo>&#x2212;</mo><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo><mi>cos</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo><msup><mi>cos</mi><mn>2</mn></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mfrac><mn>1</mn><mn>2</mn></mfrac>
+        <mo>(</mo><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo><mi>cos</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die Summe der beiden ist x + C &#x2014; genau das, was <math><mrow><msup><mi>sin</mi><mn>2</mn></msup><mo>+</mo><msup><mi>cos</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn></mrow></math> verlangt. Das ist zugleich die Probe.</p>
+    <p class="fall">Daraus folgt unmittelbar <math><mrow><msubsup><mo class="operator-gross">&#x222B;</mo><mn>0</mn><mi>&#x3C0;</mi></msubsup><msup><mi>sin</mi><mn>2</mn></msup><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi><mo>=</mo><mfrac><mi>&#x3C0;</mi><mn>2</mn></mfrac></mrow></math>.</p>
+  </article>
+
+  <article class="eintrag" id="substitutionsregel" data-suche="kettenregel neue variable grenzen mitsubstituieren ruecksubstitution">
+    <h3>Substitutionsregel <span class="quelle">Skript S. 30, 31, 32</span></h3>
+    <p class="bedingung">f stetig, g stetig differenzierbar und bijektiv; x = g(t), also dx = g&#x2032;(t) dt</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo>
+          <mrow><msup><mi>g</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>(</mo><mi>a</mi><mo>)</mo></mrow>
+          <mrow><msup><mi>g</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>(</mo><mi>b</mi><mo>)</mo></mrow>
+        </msubsup>
+        <mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>)</mo>
+        <msup><mi>g</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>t</mi>
+      </mrow>
+    </math>
+    <p class="fall">Unbestimmt, ohne Grenzen:</p>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>)</mo>
+        <msup><mi>g</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>t</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>t</mi>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Beim bestimmten Integral die Grenzen mitsubstituieren.</strong> Nach der Substitution darf nur noch die neue Variable vorkommen &#x2014; im Integranden, im Differential <em>und</em> in den Grenzen. Ein gemischtes Integral mit zwei Variablen ist nicht zulässig.</p>
+    <p class="fall"><strong>Beim unbestimmten Integral am Ende zurücksubstituieren.</strong> Sonst steht das Ergebnis in der falschen Variablen.</p>
+    <p class="fall">Die umgekehrte Richtung, die in den Aufgaben häufiger vorkommt: ein Term z = h(x) wird ersetzt, dz = h&#x2032;(x) dx. Steht h&#x2032;(x) schon im Integranden, hebt es sich weg:</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <mi>f</mi><mo>(</mo><mi>h</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo>
+        <msup><mi>h</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo>
+          <mrow><mi>h</mi><mo>(</mo><mi>a</mi><mo>)</mo></mrow>
+          <mrow><mi>h</mi><mo>(</mo><mi>b</mi><mo>)</mo></mrow>
+        </msubsup>
+        <mi>f</mi><mo>(</mo><mi>z</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>z</mi>
+      </mrow>
+    </math>
+  </article>
+
+  <article class="eintrag" id="vier-standardformen" data-suche="lineare substitution muster erkennen ohne rechnung cotangens">
+    <h3>Die vier Standardformen <span class="quelle">Skript S. 35</span></h3>
+    <p class="bedingung">Vier Muster, die man ohne Rechnung erkennt; F ist eine Stammfunktion von f, jeweils bis auf C</p>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mi>f</mi><mo>(</mo><mi>a</mi><mi>x</mi><mo>+</mo><mi>b</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mfrac><mn>1</mn><mi>a</mi></mfrac>
+        <mi>F</mi><mo>(</mo><mi>a</mi><mi>x</mi><mo>+</mo><mi>b</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <msup><mi>f</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mfrac><mn>1</mn><mn>2</mn></mfrac>
+        <msup><mi>f</mi><mn>2</mn></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mfrac>
+          <mrow><msup><mi>f</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow>
+          <mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow>
+        </mfrac>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mi>ln</mi><mo stretchy="false" lspace="0" rspace="0">|</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo stretchy="false" lspace="0" rspace="0">|</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mi>f</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo>
+        <msup><mi>g</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mi>F</mi><mo>(</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die dritte Form verlangt f(x) &#x2260; 0. Aus ihr folgt das Grundintegral <math><mrow><mo class="operator-gross">&#x222B;</mo><mi>cot</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi><mo>=</mo><mi>ln</mi><mo stretchy="false" lspace="0" rspace="0">|</mo><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo stretchy="false" lspace="0" rspace="0">|</mo></mrow></math>.</p>
+    <p class="fall">Wer eines dieser Muster erkennt, braucht die Substitution nicht durchzurechnen &#x2014; das Ergebnis steht schon da. Die erste Form ist die <em>lineare Substitution</em> z = ax + b.</p>
+  </article>
+
+  <article class="eintrag" id="partialbruchzerlegung" data-suche="pbz zerlegung fuenf typen ansatz linearfaktor nennerpolynom summanden">
+    <h3>Partialbruchzerlegung: die fünf Typen <span class="quelle">Skript S. 37</span></h3>
+    <p class="bedingung">f = p/q ist <em>echt</em> gebrochen rational, also grad(p) &lt; grad(q); a, b, α<sub>i</sub>, β<sub>i</sub> reell und b &gt; 0</p>
+    <math display="block">
+      <mtable displaystyle="true">
+        <mtr>
+          <mtd><mtext>a)</mtext></mtd>
+          <mtd><mfrac><mn>1</mn><mrow><mi>x</mi><mo>&#x2212;</mo><mi>a</mi></mrow></mfrac></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>b)</mtext></mtd>
+          <mtd><mfrac><mn>1</mn><msup><mrow><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo></mrow><mi>n</mi></msup></mfrac></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>c)</mtext></mtd>
+          <mtd><mfrac><mn>1</mn><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>b</mi></mrow></mfrac></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>d)</mtext></mtd>
+          <mtd><mfrac><mrow><mi>x</mi><mo>&#x2212;</mo><mi>a</mi></mrow><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>b</mi></mrow></mfrac></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mtext>e)</mtext></mtd>
+          <mtd><mfrac>
+            <mrow><msub><mi>&#x3B1;</mi><mi>n</mi></msub><mi>x</mi><mo>+</mo><msub><mi>&#x3B2;</mi><mi>n</mi></msub></mrow>
+            <msup><mrow><mo>(</mo><msup><mrow><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>b</mi><mo>)</mo></mrow><mi>n</mi></msup>
+          </mfrac></mtd>
+        </mtr>
+      </mtable>
+    </math>
+    <p class="fall">Welcher Typ auftritt, sagt das <strong>Nennerpolynom</strong>: ein Linearfaktor (x &#x2212; a) führt auf Typ a; steht er in n-ter Potenz, kommen die Typen b bis zur n-ten Potenz dazu; ein quadratisches Polynom <em>ohne</em> reelle Nullstellen führt auf c und/oder d; steht dieses in n-ter Potenz, auf e.</p>
+    <p class="fall"><strong>Die Anzahl der Summanden ist gleich dem Grad des Nennerpolynoms.</strong> Das ist die Probe, ob der Ansatz vollständig ist.</p>
+    <p class="fall">Über den komplexen Zahlen wird es einfacher: dort zerfällt jedes Polynom in Linearfaktoren, es treten nur die Typen a und b auf.</p>
+  </article>
+
+  <article class="eintrag" id="grundintegrale-der-partialbrueche" data-suche="vier grundintegrale arctan logarithmus nenner potenz">
+    <h3>Die vier Grundintegrale der Partialbrüche <span class="quelle">Skript S. 35, 36</span></h3>
+    <p class="bedingung">Die Integrale, auf die die Zerlegung führt; b &gt; 0, jeweils bis auf C</p>
+    <math display="block">
+      <mtable displaystyle="true">
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><mfrac><mn>1</mn><mrow><mi>x</mi><mo>&#x2212;</mo><mi>a</mi></mrow></mfrac><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mi>ln</mi><mo stretchy="false" lspace="0" rspace="0">|</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo stretchy="false" lspace="0" rspace="0">|</mo></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><mfrac><mn>1</mn><msup><mrow><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo></mrow><mi>n</mi></msup></mfrac><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mfrac><mn>1</mn><mrow><mo>&#x2212;</mo><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac>
+               <mfrac><mn>1</mn><msup><mrow><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo></mrow><mrow><mi>n</mi><mo>&#x2212;</mo><mn>1</mn></mrow></msup></mfrac></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><mfrac><mn>1</mn><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>b</mi></mrow></mfrac><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mfrac><mn>1</mn><msqrt><mi>b</mi></msqrt></mfrac>
+               <mi>arctan</mi><mo>(</mo><mfrac><mrow><mi>x</mi><mo>&#x2212;</mo><mi>a</mi></mrow><msqrt><mi>b</mi></msqrt></mfrac><mo>)</mo></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><mfrac><mrow><mi>x</mi><mo>&#x2212;</mo><mi>a</mi></mrow><mrow><msup><mrow><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>b</mi></mrow></mfrac><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mfrac><mn>1</mn><mn>2</mn></mfrac>
+               <mi>ln</mi><mo>(</mo><msup><mrow><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>b</mi><mo>)</mo></mtd>
+        </mtr>
+      </mtable>
+    </math>
+    <p class="fall">Die zweite Zeile gilt für n &gt; 1. Die dritte ist die Grundform mit arctan, auf die man durch Ausklammern von b kommt; die vierte ist ein Fall von <math><mrow><mo class="operator-gross">&#x222B;</mo><mfrac><msup><mi>f</mi><mo>&#x2032;</mo></msup><mi>f</mi></mfrac></mrow></math> und braucht deshalb keinen Betrag &#x2014; der Nenner ist stets positiv.</p>
+  </article>
+
+  <article class="eintrag" id="koeffizientenbestimmung" data-suche="einsetzen koeffizientenvergleich hauptnenner unbekannte A B bestimmen">
+    <h3>Koeffizienten bestimmen <span class="quelle">Skript S. 38</span></h3>
+    <p class="bedingung">Nach dem Ansatz mit dem Hauptnenner multiplizieren; die entstehende Gleichung der Zählerpolynome gilt für <em>alle</em> x</p>
+    <math display="block">
+      <mrow>
+        <mi>p</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <mi>A</mi><mo>&#x22C5;</mo><msub><mi>q</mi><mn>1</mn></msub><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>+</mo>
+        <mi>B</mi><mo>&#x22C5;</mo><msub><mi>q</mi><mn>2</mn></msub><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>+</mo><mo>&#x2026;</mo>
+      </mrow>
+    </math>
+    <p class="fall">Zwei Wege, beide erlaubt und oft kombiniert:</p>
+    <p class="fall"><strong>Geeignete x-Werte einsetzen</strong> &#x2014; am besten die Nullstellen des Nenners, denn dort fallen die meisten Summanden weg und ein Koeffizient steht sofort da.</p>
+    <p class="fall"><strong>Koeffizientenvergleich</strong> &#x2014; die Faktoren vor <math><msup><mi>x</mi><mn>0</mn></msup></math>, <math><msup><mi>x</mi><mn>1</mn></msup></math>, <math><msup><mi>x</mi><mn>2</mn></msup></math>, … müssen links und rechts übereinstimmen.</p>
+    <p class="fall">Bleibt nach den Nullstellen noch ein Unbekannter übrig, setzt man irgendeinen weiteren Wert ein, etwa x = 1.</p>
+  </article>
+
+  <article class="eintrag" id="polynomdivision-zuerst" data-suche="unecht gebrochen grad zaehler nenner dividieren rest">
+    <h3>Polynomdivision zuerst <span class="quelle">Skript S. 35, 37</span></h3>
+    <p class="bedingung">Die Partialbruchzerlegung setzt grad(p) &lt; grad(q) voraus &#x2014; ist der Zähler nicht kleineren Grades, wird zuerst dividiert</p>
+    <math display="block">
+      <mrow>
+        <mfrac><mrow><mi>p</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mrow><mi>q</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mfrac>
+        <mo>=</mo>
+        <mi>s</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo>
+        <mfrac><mrow><mi>r</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mrow><mi>q</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mfrac>
+        <mspace width="1.2em"></mspace>
+        <mi>grad</mi><mo>(</mo><mi>r</mi><mo>)</mo><mo>&lt;</mo><mi>grad</mi><mo>(</mo><mi>q</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Das Polynom s(x) integriert man einzeln &#x2014; das sind Grundintegrale. Nur der echt gebrochene Rest r/q geht in die Zerlegung.</p>
+    <p class="fall">Ohne diesen Schritt geht der Ansatz nicht auf: die Zahl der Summanden stimmt dann nicht mit dem Grad des Nennerpolynoms überein.</p>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 
