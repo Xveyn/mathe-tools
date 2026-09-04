@@ -64,7 +64,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | Datei | Was drin ist |
 |---|---|
 | `shared/theme.css` | Farbtokens, Grundtypografie, dazu die Druckpalette (heller Blattfarben-Satz im `@media print`-Block, gilt für jede Seite) |
-| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-rahmen`, `.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`, `.matrix-klammer-2z-ober`, `.matrix-klammer-4z-tief`, `.matrix-strich-2z-index`). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
+| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-rahmen`, `.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`, `.matrix-klammer-2z-ober`, `.matrix-klammer-4z-tief`, `.matrix-strich-2z-index`), dazu `.operator-gross` für Integral-, Summen- und Produktzeichen (siehe „Formeln"). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
 | `shared/formeln.css` | Bausteine der Formelsammlung: der Eintrag `.eintrag`, Verzeichnis und Filterzeile, samt Druck-Stylesheet — lädt nie zusammen mit `karten.css` |
 | `shared/expr.js` | `MT.expr.compile(term, vars)` — Terme in Funktionen |
@@ -283,6 +283,22 @@ Das ist eine Auffanglinie, kein Freibrief: eine Formel, die auf dem
 Telefon zur Hälfte hinter dem Rand steht, ist schlecht lesbar, auch wenn
 die Seite darum herum heil bleibt. Wer eine breite Zeile schreibt, prüft
 sie bei 390 px — oft lässt sie sich in zwei abgesetzte Formeln teilen.
+
+**Ein grosses Operatorzeichen bekommt `.operator-gross`.** Georgia hat das
+Integral-, Summen- und Produktzeichen, setzt sie aber auf Textgröße — ein
+`∫` ist so nur 15 px hoch gegen eine 21-px-Zeile und wirkt neben `f(x) dx`
+gedrückt. Die Klasse in `shared/ui.css` (1,9em, also 30 px) hebt es auf
+Anzeigegröße. Anders als bei den Matrixklammern hängt die richtige Größe hier
+**nicht** vom Inhalt ab — ein abgesetztes Integralzeichen ist immer gleich
+groß. Eine Klasse genügt deshalb für immer, und sie ist nie nachzumessen.
+
+**Eine `<mtable>` schaltet `displaystyle` ab.** In MathML ist der
+Vorgabewert an `mtable` `false`, auch innerhalb eines
+`<math display="block">`. Brüche in den Zellen schrumpfen dadurch auf
+Skriptgröße und werden unleserlich; die Tabelle der Grundintegrale sah
+zunächst genau so aus. Abhilfe: `<mtable displaystyle="true">`. Bei einer
+reinen Zahlen- oder Buchstabenmatrix fällt es nicht auf — sobald eine Zelle
+einen Bruch, eine Wurzel oder ein Integral trägt, schon.
 
 **Verboten:** Formeln als Bild. Formeln als Text mit Sonderzeichen
 (`∂f/∂x` hingeschrieben). Eine Formelbibliothek ins Repo legen.

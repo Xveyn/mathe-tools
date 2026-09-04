@@ -226,6 +226,17 @@ h2.abschnitt{
    nicht geschaetzt: eine geschaetzte 7em-Klammer stuende bei der
    4x4-Matrix 14,8 px ueber und unter ihr. Wer die Schriftgroesse der
    Umgebung aendert, misst neu. */
+/* Ein grosses Operatorzeichen in einer abgesetzten Formel: Integral, Summe,
+   Produkt. Georgia hat die Zeichen, setzt sie aber auf Textgroesse — ein
+   Integralzeichen ist so nur 15 px hoch gegen eine 21-px-Zeile und wirkt neben
+   f(x) dx gedrueckt. Anders als bei den Matrixklammern haengt die richtige
+   Groesse hier NICHT vom Inhalt ab: ein abgesetztes Integralzeichen ist immer
+   gleich gross. Eine Klasse genuegt also fuer immer, und sie ist nie
+   nachzumessen. Am 2026-09-04 gegen 1,6em / 1,9em / 2,2em / 2,6em abgewogen:
+   1,6em bleibt zu klein, ab 2,2em druecken Zeichen und Grenzen die Zeile
+   auseinander. 1,9em ergibt 30 px. */
+.operator-gross{font-size:1.9em}
+
 .matrix-rahmen{display:inline-flex;align-items:center}
 .matrix-klammer{font-size:3.8em}      /* zwei Zeilen, an der Hesse-Matrix gemessen */
 .matrix-klammer-3z{font-size:4.6em}   /* drei Zeilen, gemessen 2026-09-03 in Aufgabe 3 an den Drehmatrizen des Raums (Zeilen mit cos/sin und dem Buchstaben α): Verhaeltnis 1,07, Ueberstand 2,2 px oben und unten. Die reine Zahlenmatrix diag(1,-1,1) hat ohne den absteigenden Buchstaben α eine kuerzere Zeilenhoehe und liegt bei 1,35 (8,7 px) — derselbe Klammer-Kompromiss wie bei .matrix-klammer, siehe „Bekannte Grenzen" in CLAUDE.md. */

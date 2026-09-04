@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="../favicon.svg">
-<title>Integralrechnung — Grundlagen und Hauptsatz</title>
+<title>Integral: Grundlagen und Hauptsatz</title>
 <link rel="stylesheet" href="../shared/theme.css">
 <link rel="stylesheet" href="../shared/ui.css">
 <link rel="stylesheet" href="../shared/formeln.css">
@@ -12,11 +12,352 @@
 <body>
 <div class="wrap">
 
-  <h1>Integralrechnung — Grundlagen und Hauptsatz</h1>
-  <p class="lede">Vierzehn Einträge nach der Inhaltsaufnahme, Nummern 1.1 bis 1.13, 1.23.</p>
+  <h1>Integral: Grundlagen und Hauptsatz</h1>
+  <p class="lede">Was das Integral ist, wie man es abschätzt, und der Satz, der es rechenbar macht &#x2014; dazu die Grundintegrale und die beiden Arten uneigentlicher Integrale. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <p class="leer">Dieses Thema ist noch nicht gefüllt. Was hineingehört, steht in der
-    Inhaltsaufnahme unter docs/superpowers/specs/.</p>
+  <article class="eintrag" id="ober-und-untersumme" data-suche="riemann zerlegung infimum supremum abschaetzung integrierbar">
+    <h3>Ober- und Untersumme <span class="quelle">Skript S. 8, 13</span></h3>
+    <p class="bedingung">f beschränkt auf [a, b], Z eine Zerlegung a = x<sub>0</sub> &lt; x<sub>1</sub> &lt; … &lt; x<sub>n</sub> = b; m<sub>i</sub> und M<sub>i</sub> sind Infimum und Supremum auf dem i-ten Teilintervall</p>
+    <math display="block">
+      <mrow>
+        <mi>U</mi><mo>(</mo><mi>Z</mi><mo>)</mo><mo>=</mo>
+        <munderover><mo class="operator-gross">&#x2211;</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover>
+        <msub><mi>m</mi><mi>i</mi></msub>
+        <mo>(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>&#x2212;</mo><msub><mi>x</mi><mrow><mi>i</mi><mo>&#x2212;</mo><mn>1</mn></mrow></msub><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>O</mi><mo>(</mo><mi>Z</mi><mo>)</mo><mo>=</mo>
+        <munderover><mo class="operator-gross">&#x2211;</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover>
+        <msub><mi>M</mi><mi>i</mi></msub>
+        <mo>(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>&#x2212;</mo><msub><mi>x</mi><mrow><mi>i</mi><mo>&#x2212;</mo><mn>1</mn></mrow></msub><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>U</mi><mo>(</mo><mi>Z</mi><mo>)</mo><mo>&#x2264;</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>&#x2264;</mo><mi>O</mi><mo>(</mo><mi>Z</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Je feiner die Zerlegung, desto enger die beiden Schranken. Streben Unter- und Obersumme gegen denselben Wert, ist f Riemann-integrierbar und dieser Wert ist das Integral.</p>
+  </article>
+
+  <article class="eintrag" id="sehnentrapezformel" data-suche="trapezregel numerisch naeherung stuetzstellen">
+    <h3>Summierte Sehnentrapezformel <span class="quelle">Skript S. 13, 15</span></h3>
+    <p class="bedingung">[a, b] in n Teilintervalle gleicher Breite zerlegt; numerische Näherung, kein exakter Wert</p>
+    <math display="block">
+      <mrow>
+        <mfrac><mrow><mi>b</mi><mo>&#x2212;</mo><mi>a</mi></mrow><mi>n</mi></mfrac>
+        <mo>(</mo>
+        <mfrac><mn>1</mn><mn>2</mn></mfrac><mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo>
+        <mo>+</mo><mi>f</mi><mo>(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>)</mo>
+        <mo>+</mo><mo>&#x2026;</mo><mo>+</mo>
+        <mfrac><mn>1</mn><mn>2</mn></mfrac><mi>f</mi><mo>(</mo><mi>b</mi><mo>)</mo>
+        <mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die beiden Randwerte zählen halb, die inneren voll. Die Trapezregel nähert deutlich besser als Ober- und Untersumme: für <math><mrow><msubsup><mo class="operator-gross">&#x222B;</mo><mn>0</mn><mn>2</mn></msubsup><msup><mi>e</mi><mrow><mo>&#x2212;</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msup></mrow></math> liegt sie mit n = 2 schon bei 0,877 gegen den wahren Wert 0,882.</p>
+  </article>
+
+  <article class="eintrag" id="additivitaet" data-suche="abschnittsweise vertauschte grenzen konvention teilintervall">
+    <h3>Additivität und vertauschte Grenzen <span class="quelle">Skript S. 15, 16</span></h3>
+    <p class="bedingung">a &lt; b &lt; c; f auf [a, c] integrierbar</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>c</mi></msubsup><mi>f</mi>
+        <mo>=</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi>
+        <mo>+</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>b</mi><mi>c</mi></msubsup><mi>f</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>b</mi><mi>a</mi></msubsup><mi>f</mi>
+        <mo>=</mo><mo>&#x2212;</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi>
+        <mspace width="1.6em"></mspace>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>a</mi></msubsup><mi>f</mi>
+        <mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <p class="fall">Abschnittsweise rechnen ist die Grundlage jeder Flächenaufgabe mit Vorzeichenwechsel und jeder abschnittsweise definierten Funktion.</p>
+  </article>
+
+  <article class="eintrag" id="linearitaet" data-suche="summenregel faktorregel konstante herausziehen">
+    <h3>Linearität <span class="quelle">Skript S. 16</span></h3>
+    <p class="bedingung">f und g integrierbar auf [a, b], c eine Konstante</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <mo>(</mo><mi>f</mi><mo>+</mo><mi>g</mi><mo>)</mo>
+        <mo>=</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi>
+        <mo>+</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>g</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <mi>c</mi><mi>f</mi>
+        <mo>=</mo><mi>c</mi>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi>
+      </mrow>
+    </math>
+    <p class="fall">Summen und konstante Faktoren dürfen innerhalb oder außerhalb des Integrals gebildet werden. Ein <strong>Produkt</strong> zweier Funktionen lässt sich so <strong>nicht</strong> zerlegen &#x2014; dafür gibt es die partielle Integration.</p>
+  </article>
+
+  <article class="eintrag" id="monotonie" data-suche="abschaetzung groesser kleiner ungleichung">
+    <h3>Monotonie des Integrals <span class="quelle">Skript S. 17</span></h3>
+    <p class="bedingung">f(x) &#x2264; g(x) für alle x &#x2208; [a, b], beide integrierbar</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi>
+        <mo>&#x2264;</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>g</mi>
+      </mrow>
+    </math>
+    <p class="fall">Damit lässt sich ein Integral nach oben und unten abschätzen, ohne es auszurechnen.</p>
+  </article>
+
+  <article class="eintrag" id="mittelwertsatz" data-suche="mittelwert rechteck xi zwischenwertsatz">
+    <h3>Mittelwertsatz der Integralrechnung <span class="quelle">Skript S. 17</span></h3>
+    <p class="bedingung">f stetig auf [a, b]; dann existiert ein ξ &#x2208; [a, b]</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mi>f</mi><mo>(</mo><mi>&#x3BE;</mi><mo>)</mo>
+        <mo>(</mo><mi>b</mi><mo>&#x2212;</mo><mi>a</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Das Integral ist die Fläche eines Rechtecks der Breite b &#x2212; a und der Höhe f(ξ). Über und unter dem Mittelwert liegende Anteile heben sich auf.</p>
+  </article>
+
+  <article class="eintrag" id="flaeche" data-suche="betrag nullstellen abschnittsweise flaecheninhalt zwischen zwei kurven">
+    <h3>Fläche zwischen Kurven <span class="quelle">Skript S. 19</span></h3>
+    <p class="bedingung">Gesucht ist die Fläche, nicht der Integralwert &#x2014; deshalb der Betrag</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>=</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <mo stretchy="false" lspace="0" rspace="0">|</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo stretchy="false" lspace="0" rspace="0">|</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>=</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <mo stretchy="false" lspace="0" rspace="0">|</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>&#x2212;</mo><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo stretchy="false" lspace="0" rspace="0">|</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+      </mrow>
+    </math>
+    <p class="fall">Das Rezept in drei Schritten: die <strong>Nullstellen</strong> von f beziehungsweise f &#x2212; g im Intervall bestimmen, dann <strong>abschnittsweise</strong> zwischen a, den Nullstellen und b integrieren, und den <strong>Betrag zuletzt</strong> auf die einzelnen Ergebnisse anwenden.</p>
+    <p class="fall">Wer den Betrag vergisst, bekommt den Integralwert: bei einem Vorzeichenwechsel heben sich Anteile gegenseitig auf und die Fläche kommt zu klein heraus. Bleibt das Vorzeichen im ganzen Intervall gleich, darf der Betrag entfallen.</p>
+  </article>
+
+  <article class="eintrag" id="hauptsatz" data-suche="stammfunktion eckige klammer einsetzen grenzen hdi">
+    <h3>Hauptsatz der Differential- und Integralrechnung <span class="quelle">Skript S. 23, 24</span></h3>
+    <p class="bedingung">f stetig auf [a, b], F eine Stammfunktion von f, also F&#x2032; = f</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mi>F</mi><mo>(</mo><mi>b</mi><mo>)</mo><mo>&#x2212;</mo><mi>F</mi><mo>(</mo><mi>a</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msubsup>
+          <mrow><mo>[</mo><mi>F</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>]</mo></mrow>
+          <mi>a</mi><mi>b</mi>
+        </msubsup>
+        <mo>:=</mo>
+        <mi>F</mi><mo>(</mo><mi>b</mi><mo>)</mo><mo>&#x2212;</mo><mi>F</mi><mo>(</mo><mi>a</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die eckige Klammer ist nur eine Schreibweise für dieselbe Differenz; ein senkrechter Strich rechts vom Term bedeutet dasselbe.</p>
+    <p class="fall">Damit ist jedes bestimmte Integral eine Einsetzaufgabe &#x2014; sobald man eine Stammfunktion hat. Für das Finden der Stammfunktion gibt es, anders als beim Ableiten, kein allgemeines Schema.</p>
+  </article>
+
+  <article class="eintrag" id="grundintegrale" data-suche="tabelle stammfunktionen arctan logarithmus wurzel cotangens grundintegral">
+    <h3>Grundintegrale <span class="quelle">Skript S. 24, 35</span></h3>
+    <p class="bedingung">Jede Zeile gilt bis auf eine additive Konstante C; die Probe ist stets das Ableiten der rechten Seite</p>
+    <math display="block">
+      <mtable displaystyle="true">
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><msup><mi>x</mi><mi>s</mi></msup><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mfrac><mn>1</mn><mrow><mi>s</mi><mo>+</mo><mn>1</mn></mrow></mfrac><msup><mi>x</mi><mrow><mi>s</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><mfrac><mn>1</mn><mi>x</mi></mfrac><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mi>ln</mi><mo stretchy="false" lspace="0" rspace="0">|</mo><mi>x</mi><mo stretchy="false" lspace="0" rspace="0">|</mo></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><msup><mi>e</mi><mrow><mi>&#x3B1;</mi><mi>x</mi></mrow></msup><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mfrac><mn>1</mn><mi>&#x3B1;</mi></mfrac><msup><mi>e</mi><mrow><mi>&#x3B1;</mi><mi>x</mi></mrow></msup></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mo>&#x2212;</mo><mi>cos</mi><mo>(</mo><mi>x</mi><mo>)</mo></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><mi>cos</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></mfrac><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mi>arctan</mi><mo>(</mo><mi>x</mi><mo>)</mo></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><mfrac><mn>1</mn><msqrt><mi>x</mi></msqrt></mfrac><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mn>2</mn><msqrt><mi>x</mi></msqrt></mtd>
+        </mtr>
+        <mtr>
+          <mtd><mo class="operator-gross">&#x222B;</mo><mi>cot</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mtd>
+          <mtd><mo>=</mo></mtd>
+          <mtd><mi>ln</mi><mo stretchy="false" lspace="0" rspace="0">|</mo><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo stretchy="false" lspace="0" rspace="0">|</mo></mtd>
+        </mtr>
+      </mtable>
+    </math>
+    <p class="fall">Zwei Nebenbedingungen: in der ersten Zeile <math><mrow><mi>s</mi><mo>&#x2260;</mo><mo>&#x2212;</mo><mn>1</mn></mrow></math> &#x2014; für s = &#x2212;1 gilt die zweite Zeile &#x2014; und in der dritten <math><mrow><mi>&#x3B1;</mi><mo>&#x2260;</mo><mn>0</mn></mrow></math>.</p>
+    <p class="fall">Die vorletzte Zeile ist die erste mit <math><mrow><mi>s</mi><mo>=</mo><mo>&#x2212;</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></math>, die letzte entsteht aus der Regel für <math><mrow><mo class="operator-gross">&#x222B;</mo><mfrac><mrow><msup><mi>f</mi><mo>&#x2032;</mo></msup></mrow><mi>f</mi></mfrac></mrow></math>.</p>
+  </article>
+
+  <article class="eintrag" id="unbestimmtes-integral" data-suche="stammfunktion konstante integrationskonstante menge">
+    <h3>Unbestimmtes Integral <span class="quelle">Skript S. 25</span></h3>
+    <p class="bedingung">F ist irgendeine Stammfunktion von f, C &#x2208; ℝ beliebig</p>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo><mi>F</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mi>C</mi>
+      </mrow>
+    </math>
+    <p class="fall">Das unbestimmte Integral ist die <strong>Menge aller</strong> Stammfunktionen. Zwei Stammfunktionen derselben Funktion unterscheiden sich nur um eine Konstante.</p>
+    <p class="fall">Beim bestimmten Integral fällt C in der Differenz F(b) &#x2212; F(a) weg &#x2014; deshalb steht es dort nicht. Beim unbestimmten Integral gehört es zur Antwort.</p>
+  </article>
+
+  <article class="eintrag" id="uneigentlich-unendliche-grenze" data-suche="unendlich grenzwert konvergent divergent uneigentlich">
+    <h3>Uneigentliches Integral: unendliche Grenze <span class="quelle">Skript S. 26</span></h3>
+    <p class="bedingung">f über jedem Intervall [a, x] integrierbar; das Integral ist über den Grenzwert erklärt</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mo>&#x221E;</mo></msubsup>
+        <mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <munder><mi>lim</mi><mrow><mi>x</mi><mo>&#x2192;</mo><mo>&#x221E;</mo></mrow></munder>
+        <mspace width="0.3em"></mspace>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>x</mi></msubsup>
+        <mi>f</mi><mo>(</mo><mi>t</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>t</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mrow><mo>&#x2212;</mo><mo>&#x221E;</mo></mrow><mo>&#x221E;</mo></msubsup><mi>f</mi>
+        <mo>=</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mrow><mo>&#x2212;</mo><mo>&#x221E;</mo></mrow><mi>a</mi></msubsup><mi>f</mi>
+        <mo>+</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mo>&#x221E;</mo></msubsup><mi>f</mi>
+      </mrow>
+    </math>
+    <p class="fall">Existiert der Grenzwert als reelle Zahl, heißt das Integral <strong>konvergent</strong>, sonst <strong>divergent</strong>. In der zweiten Zeile müssen <strong>beide</strong> Summanden konvergieren; a darf beliebig gewählt werden.</p>
+    <p class="fall">Der Maßstab zum Merken: <math><mrow><msubsup><mo class="operator-gross">&#x222B;</mo><mn>1</mn><mo>&#x221E;</mo></msubsup><mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac></mrow></math> konvergiert gegen 1, <math><mrow><msubsup><mo class="operator-gross">&#x222B;</mo><mn>1</mn><mo>&#x221E;</mo></msubsup><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow></math> divergiert.</p>
+  </article>
+
+  <article class="eintrag" id="uneigentlich-polstelle" data-suche="polstelle definitionsluecke unbeschraenkt drei faelle einseitiger grenzwert">
+    <h3>Uneigentliches Integral: Polstelle im Intervall <span class="quelle">Skript S. 27</span></h3>
+    <p class="bedingung">f auf [a, b] &#x2216; {x<sub>0</sub>} definiert und auf jedem abgeschlossenen Teilintervall integrierbar; drei Fälle nach der Lage von x<sub>0</sub></p>
+    <p class="fall">Die Polstelle liegt am linken Rand, <math><mrow><msub><mi>x</mi><mn>0</mn></msub><mo>=</mo><mi>a</mi></mrow></math>:</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi>
+        <mo>=</mo>
+        <munder><mi>lim</mi><mrow><mi>x</mi><mo>&#x2192;</mo><mi>a</mi><mo>+</mo></mrow></munder>
+        <mspace width="0.3em"></mspace>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>x</mi><mi>b</mi></msubsup>
+        <mi>f</mi><mo>(</mo><mi>t</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>t</mi>
+      </mrow>
+    </math>
+    <p class="fall">Am rechten Rand, <math><mrow><msub><mi>x</mi><mn>0</mn></msub><mo>=</mo><mi>b</mi></mrow></math>:</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi>
+        <mo>=</mo>
+        <munder><mi>lim</mi><mrow><mi>x</mi><mo>&#x2192;</mo><mi>b</mi><mo>&#x2212;</mo></mrow></munder>
+        <mspace width="0.3em"></mspace>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>x</mi></msubsup>
+        <mi>f</mi><mo>(</mo><mi>t</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>t</mi>
+      </mrow>
+    </math>
+    <p class="fall">Im Inneren, <math><mrow><msub><mi>x</mi><mn>0</mn></msub><mo>&#x2208;</mo><mo>]</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>[</mo></mrow></math> &#x2014; hier wird geteilt:</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi>
+        <mo>=</mo>
+        <munder><mi>lim</mi><mrow><mi>x</mi><mo>&#x2192;</mo><msub><mi>x</mi><mn>0</mn></msub><mo>&#x2212;</mo></mrow></munder>
+        <mspace width="0.3em"></mspace>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>x</mi></msubsup><mi>f</mi>
+        <mo>+</mo>
+        <munder><mi>lim</mi><mrow><mi>x</mi><mo>&#x2192;</mo><msub><mi>x</mi><mn>0</mn></msub><mo>+</mo></mrow></munder>
+        <mspace width="0.3em"></mspace>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>x</mi><mi>b</mi></msubsup><mi>f</mi>
+      </mrow>
+    </math>
+    <p class="fall">Im dritten Fall müssen <strong>beide</strong> Grenzwerte existieren. Fehlt einer, ist das ganze Integral divergent.</p>
+  </article>
+
+  <article class="eintrag" id="nicht-ueber-polstellen" data-suche="warnung fehler stammfunktion blind einsetzen gebrochen rational">
+    <h3>Nicht über Polstellen hinweg integrieren <span class="quelle">Skript S. 27, 39</span></h3>
+    <p class="bedingung">Warnung; gilt für jede Definitionslücke im Integrationsintervall</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mrow><mo>&#x2212;</mo><mn>1</mn></mrow><mn>1</mn></msubsup>
+        <mfrac><mn>1</mn><msup><mi>x</mi><mn>2</mn></msup></mfrac>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mspace width="1.2em"></mspace>
+        <mtext>divergiert</mtext>
+      </mrow>
+    </math>
+    <p class="fall">Setzt man die Stammfunktion <math><mrow><mo>&#x2212;</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></mrow></math> blind in den Grenzen ein, kommt &#x2212;2 heraus &#x2014; ein negativer Wert für eine Funktion, die überall positiv ist. Das ist das Warnzeichen.</p>
+    <p class="fall">Ebenso bei gebrochen rationalen Funktionen: <math><mrow><msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mo>(</mo><mfrac><mn>5</mn><mrow><mi>x</mi><mo>+</mo><mn>1</mn></mrow></mfrac><mo>+</mo><mfrac><mn>2</mn><mrow><mi>x</mi><mo>&#x2212;</mo><mn>2</mn></mrow></mfrac><mo>)</mo></mrow></math> existiert nur, wenn a und b gemeinsam in einem der Intervalle ]&#x2212;∞, &#x2212;1[, ]&#x2212;1, 2[ oder ]2, ∞[ liegen.</p>
+  </article>
+
+  <article class="eintrag" id="integrierbare-funktionen" data-suche="stetig monoton hinreichend treppenfunktion welche funktionen">
+    <h3>Welche Funktionen integrierbar sind <span class="quelle">Skript S. 17</span></h3>
+    <p class="bedingung">Hinreichende Bedingungen, keine notwendigen; a &lt; b</p>
+    <math display="block">
+      <mrow>
+        <mi>f</mi><mspace width="0.4em"></mspace><mtext>stetig</mtext>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <mi>f</mi><mspace width="0.4em"></mspace><mtext>integrierbar</mtext>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>f</mi><mspace width="0.4em"></mspace><mtext>monoton</mtext>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <mi>f</mi><mspace width="0.4em"></mspace><mtext>integrierbar</mtext>
+      </mrow>
+    </math>
+    <p class="fall">Damit sind fast alle bekannten Funktionen auf einem Intervall [a, b] integrierbar: Polynome, rationale Funktionen, trigonometrische, Exponential- und Logarithmusfunktionen.</p>
+    <p class="fall">Über Definitionslücken hinweg gilt das <strong>nicht</strong> &#x2014; dort greift der Eintrag oben.</p>
+  </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>
 
