@@ -287,7 +287,7 @@
     <p class="fall">Die Reihenfolge zählt: ausgeführt wird erst g, dann f &#x2014; im Produkt steht A trotzdem links. Die inneren Maße müssen zusammenpassen, (m × n) · (n × k) ergibt m × k.</p>
   </article>
 
-  <article class="eintrag" id="lineare-unabhaengigkeit" data-suche="unabhaengig abhaengig triviale loesung nichttrivial">
+  <article class="eintrag" id="lineare-unabhaengigkeit" data-suche="unabhaengig abhaengig triviale loesung nichttrivial zwei vektoren vielfaches parallel proportional">
     <h3>Lineare Unabhängigkeit <span class="quelle">Skript S. 70, 71</span></h3>
     <p class="bedingung">v<sub>1</sub>, …, v<sub>n</sub> heißen unabhängig, wenn die Gleichung nur die triviale Lösung hat</p>
     <math display="block">
@@ -312,6 +312,7 @@
       </mrow>
     </math>
     <p class="fall">Mehr Vektoren als Komponenten geht nie: im K² sind höchstens zwei, im K³ höchstens drei Vektoren unabhängig. Das spart die Rechnung.</p>
+    <p class="fall">Bei <strong>genau zwei</strong> Vektoren braucht es kein Gauß: sie sind genau dann abhängig, wenn einer ein Vielfaches des anderen ist. Man liest den Faktor an einer Komponente ab und prüft ihn an den übrigen — <math><mrow><mi>&#x3BB;</mi><mo>=</mo><msub><mi>w</mi><mi>i</mi></msub><mo>/</mo><msub><mi>v</mi><mi>i</mi></msub></mrow></math> für ein <math><mrow><msub><mi>v</mi><mi>i</mi></msub><mo>&#x2260;</mo><mn>0</mn></mrow></math>. Über &#x2102; ist der Faktor oft komplex, etwa j.</p>
   </article>
 
   <article class="eintrag" id="basis-und-dimension" data-suche="standardbasis einheitsvektoren dim erzeugendensystem">
@@ -354,6 +355,28 @@
     </math>
     <p class="fall">Zeilenrang ist die größte Zahl linear unabhängiger Zeilen, Spaltenrang dieselbe Zahl für die Spalten.</p>
     <p class="fall">Gauß'sche Zeilen- und Spaltenumformungen ändern den Rang <strong>nicht</strong>. Deshalb bringt man A in Zeilenstufenform und zählt die Zeilen, die nicht Null sind.</p>
+  </article>
+
+  <article class="eintrag" id="rang-haengt-vom-koerper-ab" data-suche="koerper wechseln modulo reduzieren ganzzahlige determinante teilt regulaer ueber R aber singulaer ueber GF(2) unterschied">
+    <h3>Der Rang h&#xE4;ngt vom K&#xF6;rper ab <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">A hat ganzzahlige Eintr&#xE4;ge und wird einmal &#xFC;ber &#x211A; und einmal &#xFC;ber GF(p) gelesen, p prim; in Aufgabe LA 24b verlangt, im Skript nicht gef&#xFC;hrt</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mspace width="0.4em"></mspace><mtext>regul&#xE4;r &#xFC;ber GF(p)</mtext>
+        <mspace width="0.9em"></mspace><mo>&#x27FA;</mo><mspace width="0.9em"></mspace>
+        <mi>p</mi><mo>&#x2224;</mo><mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msub><mi>rg</mi><mrow><mi>GF</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></msub><mo>(</mo><mi>A</mi><mo>)</mo>
+        <mo>&#x2264;</mo>
+        <msub><mi>rg</mi><mi>&#x211A;</mi></msub><mo>(</mo><mi>A</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die ganzzahlige Determinante entscheidet: eine Matrix mit <math><mrow><mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>=</mo><mo>&#x2212;</mo><mn>2</mn></mrow></math> ist &#xFC;ber &#x211D; regul&#xE4;r, &#xFC;ber GF(2) aber singul&#xE4;r &#x2014; dort ist <math><mrow><mo>&#x2212;</mo><mn>2</mn><mo>&#x2261;</mo><mn>0</mn></mrow></math>. Der Rang kann beim K&#xF6;rperwechsel also <em>fallen</em>, nie steigen.</p>
+    <p class="fall">Der Grund: eine Abh&#xE4;ngigkeit der Zeilen, die &#xFC;ber &#x211A; nicht besteht, kann modulo p entstehen. &#xDC;ber GF(2) etwa gen&#xFC;gt es, dass die Summe einiger Zeilen lauter <em>gerade</em> Eintr&#xE4;ge hat.</p>
+    <p class="fall">Praktisch hei&#xDF;t das: <strong>jede Rangrechnung geh&#xF6;rt zu genau einem K&#xF6;rper.</strong> Wird dieselbe Matrix &#xFC;ber &#x211D; und &#xFC;ber GF(2) gefragt, sind es zwei Rechnungen &#x2014; und beim Gau&#xDF; &#xFC;ber GF(p) ist jeder Zwischenwert sofort zu reduzieren.</p>
   </article>
 
   <article class="eintrag" id="regulaer-und-singulaer" data-suche="regulaer singulaer invertierbar quadratisch dreiecksform">
