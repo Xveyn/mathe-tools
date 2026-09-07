@@ -102,7 +102,7 @@
     <p class="fall"><strong>Paarweise orthogonale Vektoren ungleich O sind automatisch linear unabhängig</strong> — deshalb ist eine ONB überhaupt eine Basis, und deshalb erübrigt sich bei orthogonalen Vektoren die Unabhängigkeitsrechnung. Nachweis in einer Zeile: multipliziert man <math><mrow><msub><mi>&#x3BB;</mi><mn>1</mn></msub><msub><mi>v</mi><mn>1</mn></msub><mo>+</mo><mo>&#x2026;</mo><mo>+</mo><msub><mi>&#x3BB;</mi><mi>n</mi></msub><msub><mi>v</mi><mi>n</mi></msub><mo>=</mo><mi>O</mi></mrow></math> skalar mit <math><msub><mi>v</mi><mi>i</mi></msub></math>, so fallen alle anderen Summanden weg und es bleibt <math><mrow><msub><mi>&#x3BB;</mi><mi>i</mi></msub><mo>&#x22C5;</mo><msup><mrow><mo stretchy="false">|</mo><msub><mi>v</mi><mi>i</mi></msub><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mo>=</mo><mn>0</mn></mrow></math>, also <math><mrow><msub><mi>&#x3BB;</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn></mrow></math>.</p>
   </article>
 
-  <article class="eintrag" id="orthogonale-projektion" data-suche="projizieren auf einen vektor auf eine ebene anteil komponente lot">
+  <article class="eintrag" id="orthogonale-projektion" data-suche="projektionsmatrix spur idempotent ebene projizieren projizieren auf einen vektor auf eine ebene anteil komponente lot">
     <h3>Orthogonale Projektion <span class="quelle">nicht im Skript</span></h3>
     <p class="bedingung">Aus Mathematik 1; in Aufgabe LA 38 verlangt. Projektion von v auf die Richtung w, mit w &#x2260; O</p>
     <math display="block">
@@ -116,7 +116,19 @@
       </mrow>
     </math>
     <p class="fall">Ist w bereits normiert, steht im Nenner eine 1 und es bleibt <math><mrow><mi>p</mi><mo>=</mo><mo>(</mo><mi>v</mi><mo>&#x22C5;</mo><mi>w</mi><mo>)</mo><mo>&#x22C5;</mo><mi>w</mi></mrow></math>.</p>
-    <p class="fall">Auf eine <strong>Ebene</strong> projiziert man, indem man auf zwei orthonormale Richtungsvektoren der Ebene einzeln projiziert und die beiden Anteile addiert. Voraussetzung ist, dass die Richtungsvektoren orthonormal sind.</p>
+    <p class="fall">Auf eine <strong>Ebene</strong> projiziert man, indem man auf zwei Richtungsvektoren der Ebene einzeln projiziert und die beiden Anteile addiert. Daf&#xFC;r gen&#xFC;gt, dass die beiden Richtungsvektoren <strong>orthogonal</strong> sind &#x2014; normiert m&#xFC;ssen sie nicht sein, das erledigt der Nenner der Formel oben. Sind sie <em>nicht</em> orthogonal, ist erst eine Orthogonalisierung n&#xF6;tig.</p>
+    <p class="fall">Als <strong>Matrix</strong> geschrieben ist die Projektion auf <math><mrow><mo>&lt;</mo><msub><mi>u</mi><mn>1</mn></msub><mo>,</mo><mo>&#x2026;</mo><mo>,</mo><msub><mi>u</mi><mi>k</mi></msub><mo>&gt;</mo></mrow></math> mit paarweise orthogonalen <math><msub><mi>u</mi><mi>i</mi></msub></math> die Summe</p>
+    <math display="block">
+      <mrow>
+        <mi>P</mi><mo>=</mo>
+        <munderover><mo>&#x2211;</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover>
+        <mfrac>
+          <mrow><msub><mi>u</mi><mi>i</mi></msub><mo>&#x22C5;</mo><msubsup><mi>u</mi><mi>i</mi><mi>T</mi></msubsup></mrow>
+          <mrow><msubsup><mi>u</mi><mi>i</mi><mi>T</mi></msubsup><mo>&#x22C5;</mo><msub><mi>u</mi><mi>i</mi></msub></mrow>
+        </mfrac>
+      </mrow>
+    </math>
+    <p class="fall">P ist symmetrisch, es gilt <math><mrow><msup><mi>P</mi><mn>2</mn></msup><mo>=</mo><mi>P</mi></mrow></math> (zweimal projizieren ändert nichts mehr), und die <strong>Spur von P ist die Dimension</strong> des Bildraums &#x2014; eine schnelle Probe.</p>
   </article>
 
   <article class="eintrag" id="vektorprodukt" data-suche="kreuzprodukt dritter vektor senkrecht onb ergaenzen r3 normal">
@@ -144,7 +156,8 @@
       </mrow>
     </math>
     <p class="fall">Das Ergebnis steht senkrecht auf v <strong>und</strong> auf w. Genau dafür wird es hier gebraucht: als dritter Vektor, um eine ONB des ℝ³ zu vervollständigen.</p>
-    <p class="fall">Danach ist noch zu <strong>normieren</strong> &#x2014; das Vektorprodukt liefert im Allgemeinen keinen Einheitsvektor, auch wenn v und w welche sind.</p>
+    <p class="fall">Danach ist im Allgemeinen noch zu <strong>normieren</strong> &#x2014; das Vektorprodukt zweier Einheitsvektoren hat die Länge <math><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>&#x3B1;</mi></mrow></math> und damit meist nicht 1.</p>
+    <p class="fall">Eine Ausnahme, und genau der Fall beim Ergänzen einer ONB: sind v und w bereits <strong>orthonormal</strong>, so ist <math><mrow><mi>&#x3B1;</mi><mo>=</mo><mn>90</mn><mo>&#xB0;</mo></mrow></math> und <math><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>&#x3B1;</mi><mo>=</mo><mn>1</mn></mrow></math> &#x2014; das Vektorprodukt ist dann schon ein Einheitsvektor und braucht keine Normierung mehr.</p>
   </article>
 
   <p class="seitenfuss"><a href="index.html">&#x2190; Alle Themen im Überblick</a></p>

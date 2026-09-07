@@ -306,6 +306,35 @@
     <p class="fall">Aufgabe LA 35b verlangt die y-Achse, Aufgabe LA 60b die x-Achse.</p>
   </article>
 
+  <article class="eintrag" id="verkettung-orthogonaler-abbildungen" data-suche="produkt hintereinander verketten komposition bleibt orthogonal drehspiegelung determinante multipliziert unitaer">
+    <h3>Verkettung orthogonaler Abbildungen <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">A und B sind orthogonale (bzw. unit&#xE4;re) n &#xD7; n Matrizen; in den Aufgaben LA 34, LA 35d und LA 35e verlangt, im Skript nicht gef&#xFC;hrt</p>
+    <math display="block">
+      <mrow>
+        <msup><mrow><mo>(</mo><mi>A</mi><mo>&#x22C5;</mo><mi>B</mi><mo>)</mo></mrow><mi>T</mi></msup>
+        <mo>&#x22C5;</mo>
+        <mo>(</mo><mi>A</mi><mo>&#x22C5;</mo><mi>B</mi><mo>)</mo>
+        <mo>=</mo>
+        <msup><mi>B</mi><mi>T</mi></msup><mo>&#x22C5;</mo>
+        <mo>(</mo><msup><mi>A</mi><mi>T</mi></msup><mo>&#x22C5;</mo><mi>A</mi><mo>)</mo>
+        <mo>&#x22C5;</mo><mi>B</mi>
+        <mo>=</mo><mi>E</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>det</mi><mo>(</mo><mi>A</mi><mo>&#x22C5;</mo><mi>B</mi><mo>)</mo>
+        <mo>=</mo>
+        <mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>&#x22C5;</mo>
+        <mi>det</mi><mo>(</mo><mi>B</mi><mo>)</mo>
+        <mo>=</mo><mo>&#xB1;</mo><mn>1</mn>
+      </mrow>
+    </math>
+    <p class="fall">Die erste Zeile ist der ganze Beweis &#x2014; sie braucht nur <math><mrow><msup><mrow><mo>(</mo><mi>A</mi><mi>B</mi><mo>)</mo></mrow><mi>T</mi></msup><mo>=</mo><msup><mi>B</mi><mi>T</mi></msup><msup><mi>A</mi><mi>T</mi></msup></mrow></math>. <strong>Das Produkt orthogonaler Matrizen ist wieder orthogonal</strong>, also auch jede Verkettung von Drehungen und Spiegelungen. Man muss die zusammengesetzte Matrix nie selbst auf Orthogonalit&#xE4;t pr&#xFC;fen.</p>
+    <p class="fall">Welche Art dabei herauskommt, sagt die Determinante: <strong>Drehung &#x2218; Drehung</strong> hat det = +1 und ist wieder eine Drehung; <strong>Drehung &#x2218; Spiegelung</strong> hat det = &#x2212;1 &#x2014; in der Ebene wieder eine Spiegelung, im Raum eine <em>Drehspiegelung</em>; <strong>Spiegelung &#x2218; Spiegelung</strong> hat det = +1 und ist eine Drehung.</p>
+    <p class="fall">Praktische Folge f&#xFC;r die Ebene: kommt bei einer Verkettung eine <em>symmetrische</em> Matrix mit det = &#x2212;1 heraus, ist es eine Spiegelung &#x2014; und damit selbstinvers.</p>
+  </article>
+
   <article class="eintrag" id="determinante-plus-minus-eins" data-suche="determinante orthogonal umkehrung">
     <h3>Determinante einer orthogonalen Matrix <span class="quelle">nicht im Skript</span></h3>
     <p class="bedingung">Folgerung aus A·Aᵀ = E; in Aufgabe LA 40j verlangt</p>
