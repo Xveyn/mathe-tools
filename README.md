@@ -38,10 +38,10 @@ zeigt.
 | [Integralrechnung — Verfahren und Partialbrüche](formeln/integral-verfahren.html) | Partielle Integration, Substitutionsregel, Partialbruchzerlegung, Polynomdivision. |
 | [Differentialgleichungen erster Ordnung](formeln/dgl-erster-ordnung.html) | Anfangswertproblem, trennbare Variablen, lineare DGL erster Ordnung, Ansatztabelle. |
 | [Differentialgleichungen zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) | Charakteristische Gleichung, die drei Fälle der Diskriminante, Ansatztabelle mit Resonanz, drei Schreibweisen nebeneinander. |
-| [Endliche Körper und Restklassen](formeln/endliche-koerper.html) | Gruppen- und Körperaxiome, Restklassen, GF(p), Inversentabellen. |
-| [Vektorräume, lineare Abbildungen, Rang](formeln/vektorraeume-rang.html) | UVR-Kriterium, Abbildungsmatrix, Kern und Bild, Rang, die Äquivalenzkette der Regularität. |
+| [Endliche Körper und Restklassen](formeln/endliche-koerper.html) | Gruppen- und Körperaxiome, Untergruppenkriterium, Verknüpfungstafeln, Einheitswurzeln, Restklassen, GF(p), Inversentabellen. |
+| [Vektorräume, lineare Abbildungen, Rang](formeln/vektorraeume-rang.html) | UVR-Kriterium, Elementzahl über GF(p), Abbildungsmatrix, Kern und Bild, Rang, die Äquivalenzkette der Regularität. |
 | [Skalarprodukt und Orthogonalität](formeln/skalarprodukt.html) | Skalarprodukt, komplexes Skalarprodukt, Orthonormalbasis, Projektion, Vektorprodukt. |
-| [Determinante und Inverse](formeln/determinante-inverse.html) | Determinante von 2×2- und 3×3-Matrizen, Laplace-Entwicklung, Rechenregeln, Inverse. |
+| [Determinante und Inverse](formeln/determinante-inverse.html) | Determinante von 2×2- und 3×3-Matrizen, Laplace-Entwicklung, Rechenregeln, Inverse, die Gruppe der regulären Matrizen. |
 | [Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) | Orthogonale und unitäre Matrizen, Drehmatrizen in Ebene und Raum, Spiegelungen, unitäre Beispiele. |
 | [Eigenwerte und Eigenvektoren](formeln/eigenwerte.html) | Eigenwerte und Eigenvektoren, charakteristisches Polynom, symmetrische und hermitesche Matrizen. |
 | [Basiswechsel und Zerlegungen](formeln/basiswechsel-zerlegungen.html) | Transformationsmatrix, Diagonalisierung, Spektralzerlegung, SVD und Pseudoinverse. |
@@ -49,9 +49,9 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-**Vierzehn Themen, 144 Einträge — vollständig.** Alle vier Kapitel des
+**Vierzehn Themen, 149 Einträge — vollständig.** Alle vier Kapitel des
 Stoffes sind abgedeckt: Integralrechnung (23 Einträge),
-Differentialgleichungen (14), lineare Algebra (75) und Funktionen mehrerer
+Differentialgleichungen (14), lineare Algebra (80) und Funktionen mehrerer
 Variablen (32). Zwölf Einträge stehen neben dem Skript und sagen das in ihrer
 Quellenangabe — sie stammen aus den Übungsblättern.
 Erreichbar ist die

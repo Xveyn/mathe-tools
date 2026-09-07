@@ -13,7 +13,7 @@
 <div class="wrap">
 
   <h1>Endliche Körper und Restklassen</h1>
-  <p class="lede">Restklassen, Galoiskörper und die Inversentabellen &#x2014; darüber rechnet ein großer Teil der Aufgaben zur linearen Algebra. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
+  <p class="lede">Gruppen und Körper, Restklassen, Galoiskörper und die Inversentabellen &#x2014; darüber rechnet ein großer Teil der Aufgaben zur linearen Algebra. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
   <article class="eintrag" id="abelsche-gruppe" data-suche="gruppe gruppenaxiome verknuepfung assoziativ kommutativ neutrales inverses element">
     <h3>Abelsche Gruppe <span class="quelle">Skript S. 55</span></h3>
@@ -35,6 +35,98 @@
       </mrow>
     </math>
     <p class="fall">Oben Assoziativität und Kommutativität, unten das neutrale Element e und zu jedem a ein inverses Element x. Ohne das Kommutativgesetz heißt G nur Gruppe, nicht abelsch.</p>
+  </article>
+
+  <article class="eintrag" id="untergruppe" data-suche="untergruppe untergruppenkriterium teilmenge abgeschlossenheit nachweis matrizenmenge nachrechnen gegenbeispiel">
+    <h3>Untergruppenkriterium <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">U &#x2286; G, G eine Gruppe bez&#xFC;glich &#x2217;, f&#xFC;r alle a, b &#x2208; U; in den Aufgaben LA 1 und LA 4 verlangt, im Skript nicht gef&#xFC;hrt</p>
+    <math display="block">
+      <mrow>
+        <mi>U</mi><mo>&#x2260;</mo><mi>&#x2205;</mi>
+        <mspace width="1.6em"></mspace>
+        <mi>a</mi><mo>&#x2217;</mo><mi>b</mi><mo>&#x2208;</mo><mi>U</mi>
+        <mspace width="1.6em"></mspace>
+        <msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>&#x2208;</mo><mi>U</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mo>&#x27F9;</mo><mspace width="0.6em"></mspace>
+        <mo>(</mo><mi>U</mi><mo>,</mo><mspace width="0.2em"></mspace><mo>&#x2217;</mo><mo>)</mo>
+        <mspace width="0.5em"></mspace><mtext>ist Gruppe</mtext>
+      </mrow>
+    </math>
+    <p class="fall">Assoziativit&#xE4;t und neutrales Element sind dann <strong>nicht</strong> mehr zu pr&#xFC;fen: die Assoziativit&#xE4;t erbt U von G, und aus a &#x2208; U zusammen mit <math><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup></math> &#x2208; U folgt <math><mrow><mi>e</mi><mo>=</mo><mi>a</mi><mo>&#x2217;</mo><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>&#x2208;</mo><mi>U</mi></mrow></math>.</p>
+    <p class="fall">Steckt U in keiner bekannten Gruppe, bleiben alle drei Axiome der Definition oben zu zeigen, dazu die Abgeschlossenheit der Verkn&#xFC;pfung.</p>
+    <p class="fall">Die Kommutativit&#xE4;t ist immer ein eigener, letzter Punkt &#x2014; sie vererbt sich zwar von G auf U, folgt aber aus dem Kriterium nicht. Ein einziges Gegenbeispiel <math><mrow><mi>a</mi><mo>&#x2217;</mo><mi>b</mi><mo>&#x2260;</mo><mi>b</mi><mo>&#x2217;</mo><mi>a</mi></mrow></math> widerlegt sie.</p>
+  </article>
+
+  <article class="eintrag" id="verknuepfungstafel" data-suche="verknuepfungstafel gruppentafel tabelle ablesen lateinisches quadrat symmetrisch diagonale neutrales inverses zeile spalte">
+    <h3>Die Axiome an der Verkn&#xFC;pfungstafel ablesen <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">endliche Menge G mit einer Verkn&#xFC;pfung &#x2217;; links steht der erste, oben der zweite Operand; in den Aufgaben LA 3, LA 5 und LA 6 verlangt, im Skript nicht gef&#xFC;hrt</p>
+    <math display="block">
+      <mtable>
+        <mtr><mtd><mo>&#x2217;</mo></mtd><mtd><mo>&#x2026;</mo></mtd><mtd><mi>b</mi></mtd><mtd><mo>&#x2026;</mo></mtd></mtr>
+        <mtr><mtd><mo>&#x22EE;</mo></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr>
+        <mtr><mtd><mi>a</mi></mtd><mtd></mtd><mtd><mi>a</mi><mo>&#x2217;</mo><mi>b</mi></mtd><mtd></mtd></mtr>
+        <mtr><mtd><mo>&#x22EE;</mo></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr>
+      </mtable>
+    </math>
+    <p class="fall"><strong>Abgeschlossen:</strong> im Inneren der Tafel steht kein Zeichen, das nicht schon im Kopf vorkommt.</p>
+    <p class="fall"><strong>Neutrales Element e:</strong> die Zeile zu e wiederholt die Kopfzeile, die Spalte zu e die Kopfspalte.</p>
+    <p class="fall"><strong>Inverse:</strong> in jeder Zeile steht e genau einmal; der Kopf der Spalte, in der es steht, ist das inverse Element.</p>
+    <p class="fall"><strong>Kommutativ:</strong> die Tafel ist symmetrisch zur Hauptdiagonalen.</p>
+    <p class="fall"><strong>Assoziativit&#xE4;t ist nicht ablesbar</strong> &#x2014; sie verlangte alle <math><msup><mi>n</mi><mn>3</mn></msup></math> Tripel. Man beruft sich stattdessen auf die umgebende Struktur, aus der die Verkn&#xFC;pfung stammt.</p>
+    <p class="fall">In der Tafel einer Gruppe steht in jeder Zeile und jeder Spalte jedes Element <em>genau einmal</em> (ein lateinisches Quadrat). Eine Zeile mit einer Wiederholung widerlegt die Gruppeneigenschaft sofort &#x2014; das trifft die Multiplikationstafel jedes <math><msub><mi>&#x2124;</mi><mi>n</mi></msub></math> mit zusammengesetztem n.</p>
+  </article>
+
+  <article class="eintrag" id="einheitskreis-und-einheitswurzeln" data-suche="komplexer betrag multiplikativ konjugiert einheitskreis einheitswurzel zyklisch potenzen von i mu4">
+    <h3>Einheitskreis und Einheitswurzeln <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">z, w &#x2208; &#x2102;; in den Aufgaben LA 3 und LA 4 verlangt, im Skript nicht gef&#xFC;hrt</p>
+    <math display="block">
+      <mrow>
+        <mo stretchy="false">|</mo><mi>z</mi><mo>&#x22C5;</mo><mi>w</mi><mo stretchy="false">|</mo>
+        <mo>=</mo>
+        <mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo><mo>&#x22C5;</mo>
+        <mo stretchy="false">|</mo><mi>w</mi><mo stretchy="false">|</mo>
+        <mspace width="1.6em"></mspace>
+        <msup><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup>
+        <mo>=</mo>
+        <mi>z</mi><mo>&#x22C5;</mo><mover><mi>z</mi><mo>&#xAF;</mo></mover>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>W</mi><mo>=</mo>
+        <mo>{</mo><mi>z</mi><mo>&#x2208;</mo><mi>&#x2102;</mi>
+        <mo stretchy="false">|</mo>
+        <mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo><mo>=</mo><mn>1</mn>
+        <mo>}</mo>
+        <mspace width="1.4em"></mspace>
+        <mi>z</mi><mo>&#x2208;</mo><mi>W</mi>
+        <mspace width="0.5em"></mspace><mo>&#x27F9;</mo><mspace width="0.5em"></mspace>
+        <msup><mi>z</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup>
+        <mo>=</mo><mover><mi>z</mi><mo>&#xAF;</mo></mover>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msub><mi>&#x3BC;</mi><mi>n</mi></msub><mo>=</mo>
+        <mo>{</mo><mi>z</mi><mo>&#x2208;</mo><mi>&#x2102;</mi>
+        <mo stretchy="false">|</mo>
+        <msup><mi>z</mi><mi>n</mi></msup><mo>=</mo><mn>1</mn>
+        <mo>}</mo>
+        <mo>=</mo>
+        <mo>{</mo>
+        <msup><mi>e</mi><mrow><mn>2</mn><mi>&#x3C0;</mi><mi>i</mi><mi>k</mi><mo>/</mo><mi>n</mi></mrow></msup>
+        <mspace width="0.3em"></mspace><mo stretchy="false">|</mo><mspace width="0.3em"></mspace>
+        <mi>k</mi><mo>=</mo><mn>0</mn><mo>,</mo><mo>&#x2026;</mo><mo>,</mo><mi>n</mi><mo>&#x2212;</mo><mn>1</mn>
+        <mo>}</mo>
+      </mrow>
+    </math>
+    <p class="fall">Die erste Zeile tr&#xE4;gt beide Nachweise: der Betrag ist <strong>multiplikativ</strong>, also ist W abgeschlossen; und aus <math><mrow><msup><mrow><mo stretchy="false">|</mo><mi>z</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mo>=</mo><mi>z</mi><mo>&#x22C5;</mo><mover><mi>z</mi><mo>&#xAF;</mo></mover><mo>=</mo><mn>1</mn></mrow></math> folgt, dass das Inverse auf dem Einheitskreis einfach die konjugierte Zahl ist.</p>
+    <p class="fall">Beide sind Untergruppen von <math><mrow><mo>(</mo><mi>&#x2102;</mi><mo>&#x2216;</mo><mo>{</mo><mn>0</mn><mo>}</mo><mo>,</mo><mspace width="0.2em"></mspace><mo>&#x22C5;</mo><mo>)</mo></mrow></math> und damit abelsch. <math><msub><mi>&#x3BC;</mi><mi>n</mi></msub></math> liegt in W, hat n Elemente und ist <em>zyklisch</em>: jedes Element ist eine Potenz von <math><msup><mi>e</mi><mrow><mn>2</mn><mi>&#x3C0;</mi><mi>i</mi><mo>/</mo><mi>n</mi></mrow></msup></math>.</p>
+    <p class="fall">F&#xFC;r n = 4 ist das <math><mrow><msub><mi>&#x3BC;</mi><mn>4</mn></msub><mo>=</mo><mo>{</mo><mn>1</mn><mo>,</mo><mi>i</mi><mo>,</mo><mo>&#x2212;</mo><mn>1</mn><mo>,</mo><mo>&#x2212;</mo><mi>i</mi><mo>}</mo></mrow></math>, die Potenzen von i.</p>
   </article>
 
   <article class="eintrag" id="koerper-und-ring" data-suche="koerper ring axiome distributivgesetz nullelement einselement">
@@ -66,7 +158,7 @@
     <p class="fall">Fehlt allein die Invertierbarkeit <math><mrow><mi>a</mi><mo>&#x22C5;</mo><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>=</mo><mn>1</mn></mrow></math>, ist K ein <strong>Ring</strong> und kein Körper. So sind die ganzen Zahlen ein Ring &#x2014; und die Restklassen modulo einer zusammengesetzten Zahl ebenfalls.</p>
   </article>
 
-  <article class="eintrag" id="restklassen" data-suche="kongruent modulo restklasse standardrepraesentant repraesentant teilbarkeit">
+  <article class="eintrag" id="restklassen" data-suche="kongruent modulo restklasse standardrepraesentant repraesentant repraesentantensystem vollstaendig aufeinanderfolgende teilbarkeit">
     <h3>Restklassen modulo n <span class="quelle">Skript S. 56</span></h3>
     <p class="bedingung">n &#x2208; &#x2115;, x, y &#x2208; &#x2124;; kongruent heißt: n teilt die Differenz</p>
     <math display="block">
@@ -102,10 +194,11 @@
       </mrow>
     </math>
     <p class="fall">0, 1, 2, …, n &#x2212; 1 sind die <strong>Standardrepräsentanten</strong>: jede Restklasse enthält genau einen davon. Gerechnet wird mit einem beliebigen Vertreter; man darf jederzeit auf den kleinsten zurückgehen, bevor man weiterrechnet.</p>
+    <p class="fall">Ein <strong>vollständiges Repräsentantensystem</strong> ist jede Menge, die aus jeder Restklasse genau einen Vertreter enthält. Je n aufeinanderfolgende ganze Zahlen leisten das — nicht nur 0 bis n &#x2212; 1, sondern etwa auch &#x2212;10 bis 10 für n = 21.</p>
     <p class="fall">Mit der Addition ist <math><msub><mi>&#x2124;</mi><mi>n</mi></msub></math> für jedes n eine abelsche Gruppe mit n Elementen.</p>
   </article>
 
-  <article class="eintrag" id="galoiskoerper" data-suche="galoiskoerper galois field primzahl gf(p) zp endlicher koerper ring">
+  <article class="eintrag" id="galoiskoerper" data-suche="galoiskoerper galois field primzahl gf(p) zp endlicher koerper ring nullteiler zusammengesetzt warum kein koerper">
     <h3>Galoiskörper GF(p) <span class="quelle">Skript S. 59</span></h3>
     <p class="bedingung">Die Restklassen modulo n bilden genau dann einen Körper, wenn n eine Primzahl ist</p>
     <math display="block">
@@ -124,6 +217,7 @@
       </mrow>
     </math>
     <p class="fall">Für eine Primzahl p sind 1, 2, …, p &#x2212; 1 sämtlich teilerfremd zu p; jedes Element außer der Null ist deshalb invertierbar. Für zusammengesetztes n bleibt <math><msub><mi>&#x2124;</mi><mi>n</mi></msub></math> ein Ring &#x2014; modulo 6 etwa hat die 2 kein Inverses.</p>
+    <p class="fall">Der Grund sind die <strong>Nullteiler</strong>: aus n = a &#x22C5; b mit 1 &lt; a, b &lt; n folgt <math><mrow><mi>a</mi><mo>&#x22C5;</mo><mi>b</mi><mo>&#x2261;</mo><mn>0</mn></mrow></math>, obwohl weder a noch b die Null ist. Ein Nullteiler kann kein Inverses haben: aus <math><mrow><mi>a</mi><mo>&#x22C5;</mo><mi>x</mi><mo>&#x2261;</mo><mn>1</mn></mrow></math> folgte <math><mrow><mi>b</mi><mo>=</mo><mo>(</mo><mi>a</mi><mo>&#x22C5;</mo><mi>x</mi><mo>)</mo><mo>&#x22C5;</mo><mi>b</mi><mo>=</mo><mi>x</mi><mo>&#x22C5;</mo><mo>(</mo><mi>a</mi><mo>&#x22C5;</mo><mi>b</mi><mo>)</mo><mo>&#x2261;</mo><mn>0</mn></mrow></math>. Damit ist <math><mrow><msub><mi>&#x2124;</mi><mi>n</mi></msub><mo>&#x2216;</mo><mo>{</mo><mn>0</mn><mo>}</mo></mrow></math> nicht einmal abgeschlossen.</p>
   </article>
 
   <article class="eintrag" id="rechnen-in-gf2" data-suche="gf(2) bit bits xor and verknuepfungstafel additionstafel multiplikationstafel byte">
