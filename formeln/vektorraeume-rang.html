@@ -169,7 +169,7 @@
     <p class="fall"><strong>Auf den K&#xF6;rper achten:</strong> <math><mrow><mo>&lt;</mo><mi>u</mi><mo>,</mo><mn>2</mn><mi>w</mi><mo>&gt;</mo><mo>=</mo><mo>&lt;</mo><mi>u</mi><mo>,</mo><mi>w</mi><mo>&gt;</mo></mrow></math> gilt nur, solange 2 invertierbar ist. &#xDC;ber GF(2) ist <math><mrow><mn>2</mn><mi>w</mi><mo>=</mo><mi>O</mi></mrow></math>, und der Erzeuger f&#xE4;llt ersatzlos weg.</p>
   </article>
 
-  <article class="eintrag" id="lineare-abbildung" data-suche="linearitaet homomorphismus affin erkennen xor">
+  <article class="eintrag" id="lineare-abbildung" data-suche="linearitaet homomorphismus affin erkennen xor gegenbeispiel widerlegen nachweis nicht linear">
     <h3>Lineare Abbildung <span class="quelle">Skript S. 64</span></h3>
     <p class="bedingung">f : V &#x2192; W zwischen K-Vektorräumen; beides muss gelten</p>
     <math display="block">
@@ -190,6 +190,7 @@
     </math>
     <p class="fall">Woran man sie erkennt: jede Komponente des Ergebnisvektors ist eine reine Linearkombination der Eingangsvariablen &#x2014; keine Produkte, keine Quadrate, kein Sinus und vor allem <strong>keine Konstante</strong>. f(x₁, x₂) = (1 + x₁, x₁ &#x2212; 3x₂) ist nicht linear, sondern affin.</p>
     <p class="fall">Über GF(2) heißt dasselbe: eine boolesche Funktion ist genau dann linear, wenn sie eine reine XOR-Summe der Variablen ist.</p>
+    <p class="fall"><strong>Widerlegt</strong> ist die Linearität mit einem <em>einzigen</em> Gegenbeispiel. Am schnellsten geht das mit den Einheitsvektoren: stimmt <math><mrow><mi>f</mi><mo>(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>)</mo><mo>+</mo><mi>f</mi><mo>(</mo><msub><mi>e</mi><mn>2</mn></msub><mo>)</mo><mo>=</mo><mi>f</mi><mo>(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>+</mo><msub><mi>e</mi><mn>2</mn></msub><mo>)</mo></mrow></math> nicht, ist man fertig.</p>
   </article>
 
   <article class="eintrag" id="abbildungsmatrix" data-suche="einheitsvektoren spalten darstellungsmatrix aufstellen">
@@ -458,6 +459,35 @@
     </math>
     <p class="fall">Die zweite Zeile ist dieselbe Abbildung in Zeilenschreibweise: schreibt man x als Zeile statt als Spalte, wandert die Matrix nach rechts und wird transponiert.</p>
     <p class="fall">Die inneren Maße müssen übereinstimmen, sonst ist das Produkt nicht erklärt. A · B und B · A sind im Allgemeinen verschieden.</p>
+  </article>
+
+  <article class="eintrag" id="transponieren-rechenregeln" data-suche="transponieren rechenregeln reihenfolge dreht sich um produkt summe spalte zeile vergleich">
+    <h3>Rechenregeln zum Transponieren <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">A und B passend f&#xFC;r das Produkt, x eine Spalte; in Aufgabe LA 14 verlangt, im Skript steht nur die Zeilenschreibweise (S. 66)</p>
+    <math display="block">
+      <mrow>
+        <msup><mrow><mo>(</mo><mi>A</mi><mo>&#x22C5;</mo><mi>B</mi><mo>)</mo></mrow><mi>T</mi></msup>
+        <mo>=</mo>
+        <msup><mi>B</mi><mi>T</mi></msup><mo>&#x22C5;</mo><msup><mi>A</mi><mi>T</mi></msup>
+        <mspace width="1.4em"></mspace>
+        <msup><mrow><mo>(</mo><msup><mi>A</mi><mi>T</mi></msup><mo>)</mo></mrow><mi>T</mi></msup>
+        <mo>=</mo><mi>A</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msup><mrow><mo>(</mo><mi>A</mi><mo>+</mo><mi>B</mi><mo>)</mo></mrow><mi>T</mi></msup>
+        <mo>=</mo>
+        <msup><mi>A</mi><mi>T</mi></msup><mo>+</mo><msup><mi>B</mi><mi>T</mi></msup>
+        <mspace width="1.4em"></mspace>
+        <msup><mrow><mo>(</mo><mi>A</mi><mo>&#x22C5;</mo><mi>x</mi><mo>)</mo></mrow><mi>T</mi></msup>
+        <mo>=</mo>
+        <msup><mi>x</mi><mi>T</mi></msup><mo>&#x22C5;</mo><msup><mi>A</mi><mi>T</mi></msup>
+      </mrow>
+    </math>
+    <p class="fall">Beim Produkt <strong>dreht sich die Reihenfolge um</strong> &#x2014; genau wie bei der Inversen. Die letzte Formel ist der Sonderfall B = x und zugleich die Antwort auf den Vergleich, den LA 14 verlangt: <math><mrow><mi>A</mi><mo>&#x22C5;</mo><mi>x</mi></mrow></math> und <math><mrow><msup><mi>x</mi><mi>T</mi></msup><mo>&#x22C5;</mo><msup><mi>A</mi><mi>T</mi></msup></mrow></math> tragen dieselben Eintr&#xE4;ge, einmal als Spalte und einmal als Zeile.</p>
+    <p class="fall">Bei Summe und Vielfachem passiert dagegen nichts: <math><mrow><msup><mrow><mo>(</mo><mi>c</mi><mo>&#x22C5;</mo><mi>A</mi><mo>)</mo></mrow><mi>T</mi></msup><mo>=</mo><mi>c</mi><mo>&#x22C5;</mo><msup><mi>A</mi><mi>T</mi></msup></mrow></math>.</p>
+    <p class="fall">Verwandt und andernorts in der Sammlung: <math><mrow><mi>det</mi><mo>(</mo><msup><mi>A</mi><mi>T</mi></msup><mo>)</mo><mo>=</mo><mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo></mrow></math> bei den Rechenregeln der Determinante, <math><mrow><msup><mrow><mo>(</mo><msup><mi>A</mi><mi>T</mi></msup><mo>)</mo></mrow><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>=</mo><msup><mrow><mo>(</mo><msup><mi>A</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>)</mo></mrow><mi>T</mi></msup></mrow></math> bei der Inversen, und <math><mrow><msup><mi>A</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>=</mo><msup><mi>A</mi><mi>T</mi></msup></mrow></math> als Kennzeichen der orthogonalen Matrizen.</p>
   </article>
 
   <article class="eintrag" id="dimensionsformel" data-suche="rangsatz kern bild dimension freie variablen defekt">
