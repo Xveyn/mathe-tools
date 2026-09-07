@@ -114,6 +114,61 @@
     <p class="fall">U ist stets ein UVR von V. Man sagt: die Vektoren <strong>erzeugen</strong> U oder <strong>spannen</strong> U auf; die spitzen Klammern sind die Schreibweise des Skripts.</p>
   </article>
 
+  <article class="eintrag" id="untervektorraeume-des-rn" data-suche="welche teilmengen sind uvr ursprungsgerade ursprungsebene nullraum klassifikation gekruemmt verschoben parabel kreis skizze">
+    <h3>Untervektorr&#xE4;ume des &#x211D;<sup>n</sup> <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">U &#x2286; &#x211D;<sup>n</sup>; in Aufgabe LA 9 als allgemeine Frage gestellt, im Skript nur an Beispielen (S. 62)</p>
+    <math display="block">
+      <mrow>
+        <mi>U</mi><mspace width="0.4em"></mspace><mtext>UVR</mtext>
+        <mspace width="0.9em"></mspace><mo>&#x27FA;</mo><mspace width="0.9em"></mspace>
+        <mi>U</mi><mo>=</mo>
+        <mo>&lt;</mo>
+        <msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mo>&#x2026;</mo><mo>,</mo>
+        <msub><mi>v</mi><mi>k</mi></msub>
+        <mo>&gt;</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mn>0</mn><mo>&#x2264;</mo><mi>k</mi><mo>&#x2264;</mo><mi>n</mi>
+        <mspace width="1.2em"></mspace>
+        <mi>dim</mi><mspace width="0.2em"></mspace><mi>U</mi><mo>=</mo><mi>k</mi>
+      </mrow>
+    </math>
+    <p class="fall">Jeder Untervektorraum ist also die lineare H&#xFC;lle von h&#xF6;chstens n unabh&#xE4;ngigen Vektoren; k = 0 liefert <math><mrow><mo>{</mo><mi>O</mi><mo>}</mo></mrow></math>, k = n den ganzen Raum.</p>
+    <p class="fall">Im <math><msup><mi>&#x211D;</mi><mn>2</mn></msup></math> gibt es deshalb <strong>genau drei Sorten</strong>: der Nullraum <math><mrow><mo>{</mo><mi>O</mi><mo>}</mo></mrow></math>, jede <strong>Ursprungsgerade</strong> <math><mrow><mo>&lt;</mo><mi>v</mi><mo>&gt;</mo></mrow></math> mit <math><mrow><mi>v</mi><mo>&#x2260;</mo><mi>O</mi></mrow></math>, und der ganze <math><msup><mi>&#x211D;</mi><mn>2</mn></msup></math>. Im <math><msup><mi>&#x211D;</mi><mn>3</mn></msup></math> kommen die <strong>Ursprungsebenen</strong> <math><mrow><mo>&lt;</mo><mi>v</mi><mo>,</mo><mi>w</mi><mo>&gt;</mo></mrow></math> dazu.</p>
+    <p class="fall">Drei Schnellproben schlagen fast jedes Gegenbeispiel: <strong>der Ursprung fehlt</strong> &#x2014; jede verschobene Gerade oder Ebene; <strong>die Menge ist gekr&#xFC;mmt</strong> &#x2014; Parabel oder Kreis, ein Vielfaches eines Punktes liegt nicht mehr darauf; <strong>die Menge ist endlich und gr&#xF6;&#xDF;er als</strong> <math><mrow><mo>{</mo><mi>O</mi><mo>}</mo></mrow></math>, was &#xFC;ber &#x211D; nie geht, weil mit u auch <math><mrow><mi>&#x3BB;</mi><mo>&#x22C5;</mo><mi>u</mi></mrow></math> f&#xFC;r <em>alle</em> &#x3BB; dazugeh&#xF6;rt.</p>
+  </article>
+
+  <article class="eintrag" id="huellen-vergleichen" data-suche="teilmengenbeziehung enthalten vergleich erzeugendensystem umformen gleichheit liegt vektor in der huelle probe lgs spalten anhaengen">
+    <h3>Zwei lineare H&#xFC;llen vergleichen <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">U = &lt;v<sub>1</sub>, &#x2026;, v<sub>k</sub>&gt; und W = &lt;w<sub>1</sub>, &#x2026;, w<sub>m</sub>&gt; in einem K-Vektorraum; in den Aufgaben LA 10 und LA 12 verlangt, im Skript nicht gef&#xFC;hrt</p>
+    <math display="block">
+      <mrow>
+        <mi>U</mi><mo>&#x2286;</mo><mi>W</mi>
+        <mspace width="1em"></mspace><mo>&#x27FA;</mo><mspace width="1em"></mspace>
+        <msub><mi>v</mi><mi>i</mi></msub><mo>&#x2208;</mo><mi>W</mi>
+        <mspace width="0.8em"></mspace>
+        <mo>(</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mo>&#x2026;</mo><mo>,</mo><mi>k</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>w</mi><mo>&#x2208;</mo><mi>U</mi>
+        <mspace width="1em"></mspace><mo>&#x27FA;</mo><mspace width="1em"></mspace>
+        <mo>[</mo><msub><mi>v</mi><mn>1</mn></msub><mspace width="0.4em"></mspace><mo>&#x2026;</mo><mspace width="0.4em"></mspace><msub><mi>v</mi><mi>k</mi></msub>
+        <mspace width="0.3em"></mspace><mo stretchy="false">|</mo><mspace width="0.3em"></mspace>
+        <mi>w</mi><mo>]</mo>
+        <mspace width="0.5em"></mspace><mtext>l&#xF6;sbar</mtext>
+      </mrow>
+    </math>
+    <p class="fall">Die erste Zeile ist der ganze Nachweis: es gen&#xFC;gt, <em>jeden Erzeuger</em> von U als Linearkombination der Erzeuger von W zu schreiben &#x2014; nicht jedes Element von U. <strong>Gleichheit</strong> zeigt man in beide Richtungen.</p>
+    <p class="fall">Die zweite Zeile ist zugleich die Rechenvorschrift: die Erzeuger als <strong>Spalten</strong>, der Kandidat als rechte Seite, dann Gau&#xDF;. Eine Zeile der Form <math><mrow><mo>(</mo><mn>0</mn><mspace width="0.3em"></mspace><mo>&#x2026;</mo><mspace width="0.3em"></mspace><mn>0</mn><mspace width="0.3em"></mspace><mo stretchy="false">|</mo><mspace width="0.3em"></mspace><mi>c</mi><mo>)</mo></mrow></math> mit <math><mrow><mi>c</mi><mo>&#x2260;</mo><mn>0</mn></mrow></math> hei&#xDF;t: unl&#xF6;sbar, w liegt nicht in U.</p>
+    <p class="fall">Mehrere Kandidaten pr&#xFC;ft man in <em>einem</em> Durchgang, indem man sie als weitere Spalten rechts anh&#xE4;ngt &#x2014; die Umformungen sind f&#xFC;r alle dieselben.</p>
+    <p class="fall">Ein Erzeugendensystem darf man wie die Zeilen beim Gau&#xDF;-Verfahren umformen, ohne die H&#xFC;lle zu &#xE4;ndern: einen Erzeuger mit <math><mrow><mi>&#x3BB;</mi><mo>&#x2260;</mo><mn>0</mn></mrow></math> multiplizieren, ein Vielfaches eines Erzeugers zu einem anderen addieren, zwei vertauschen, einen Erzeuger streichen, der Linearkombination der &#xFC;brigen ist.</p>
+    <p class="fall"><strong>Auf den K&#xF6;rper achten:</strong> <math><mrow><mo>&lt;</mo><mi>u</mi><mo>,</mo><mn>2</mn><mi>w</mi><mo>&gt;</mo><mo>=</mo><mo>&lt;</mo><mi>u</mi><mo>,</mo><mi>w</mi><mo>&gt;</mo></mrow></math> gilt nur, solange 2 invertierbar ist. &#xDC;ber GF(2) ist <math><mrow><mn>2</mn><mi>w</mi><mo>=</mo><mi>O</mi></mrow></math>, und der Erzeuger f&#xE4;llt ersatzlos weg.</p>
+  </article>
+
   <article class="eintrag" id="lineare-abbildung" data-suche="linearitaet homomorphismus affin erkennen xor">
     <h3>Lineare Abbildung <span class="quelle">Skript S. 64</span></h3>
     <p class="bedingung">f : V &#x2192; W zwischen K-Vektorräumen; beides muss gelten</p>
