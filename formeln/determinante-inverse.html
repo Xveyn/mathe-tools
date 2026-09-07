@@ -130,7 +130,7 @@
     <p class="fall">Vorsicht bei sehr kleinen reellen Werten: eine gerechnete Determinante von <math><msup><mn>10</mn><mrow><mo>&#x2212;</mo><mn>12</mn></mrow></msup></math> kann ein Rundungsfehler sein und die Matrix in Wahrheit singulär.</p>
   </article>
 
-  <article class="eintrag" id="rechenregeln-determinante" data-suche="produktsatz transponiert inverse faktor dreiecksmatrix zeilenumformung multilinearform">
+  <article class="eintrag" id="rechenregeln-determinante" data-suche="produktsatz transponiert inverse faktor dreiecksmatrix zeilenumformung multilinearform nullzeile nullspalte gleiche zeilen proportional sofort singulaer">
     <h3>Rechenregeln <span class="quelle">Skript S. 80, 81</span></h3>
     <p class="bedingung">A und B sind n × n Matrizen über K, c ∈ K</p>
     <math display="block">
@@ -173,6 +173,31 @@
       </mrow>
     </math>
     <p class="fall">Bei einer oberen oder unteren <strong>Dreiecksmatrix</strong> ist die Determinante das Produkt der Diagonaleinträge. Zusammen mit der ersten Umformungsregel ist das der schnellste Weg: mit Gauß auf Dreiecksform bringen &#x2014; das ändert den Wert nicht &#x2014; und dann die Diagonale multiplizieren.</p>
+    <p class="fall">Ohne jede Rechnung null ist die Determinante, sobald eine <strong>Nullzeile oder Nullspalte</strong> auftritt &#x2014; ebenso bei zwei gleichen oder zueinander proportionalen Zeilen (oder Spalten). Solche Matrizen sind sofort singul&#xE4;r.</p>
+  </article>
+
+  <article class="eintrag" id="blockdreiecksmatrix" data-suche="block kaestchen zerfaellt vier bloecke nullblock unten links grosse determinante zerlegen 4x4">
+    <h3>Determinante einer Blockdreiecksmatrix <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">A ist k &#xD7; k, D ist l &#xD7; l, unten links steht der Nullblock, B ist beliebig; in Aufgabe LA 30c verlangt, im Skript nicht gef&#xFC;hrt</p>
+    <math display="block">
+      <mrow>
+        <mi>det</mi>
+        <mrow class="matrix-rahmen">
+          <mo class="matrix-klammer-flach">(</mo>
+          <mtable>
+            <mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr>
+            <mtr><mtd><mi>O</mi></mtd><mtd><mi>D</mi></mtd></mtr>
+          </mtable>
+          <mo class="matrix-klammer-flach">)</mo>
+        </mrow>
+        <mo>=</mo>
+        <mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo><mo>&#x22C5;</mo>
+        <mi>det</mi><mo>(</mo><mi>D</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Beide Bl&#xF6;cke auf der Diagonalen m&#xFC;ssen <strong>quadratisch</strong> sein, und einer der beiden Au&#xDF;enbl&#xF6;cke muss ganz aus Nullen bestehen. B geht dann gar nicht ein &#x2014; dieselbe Formel gilt spiegelbildlich, wenn stattdessen oben rechts der Nullblock steht.</p>
+    <p class="fall">Das spart bei einer 4 &#xD7; 4 mit zwei 2 &#xD7; 2 Bl&#xF6;cken die ganze Laplace-Entwicklung: zwei kleine Determinanten statt vier 3 &#xD7; 3.</p>
+    <p class="fall">Die Dreiecksmatrix ist der Sonderfall lauter 1 &#xD7; 1 Bl&#xF6;cke &#x2014; daher dort das Produkt der Diagonaleintr&#xE4;ge. Mit B = O hei&#xDF;t die Matrix <strong>blockdiagonal</strong>, und die Formel gilt unver&#xE4;ndert.</p>
   </article>
 
   <article class="eintrag" id="determinante-geometrisch" data-suche="flaeche parallelogramm volumen spat parallelepiped betrag abhaengig">
