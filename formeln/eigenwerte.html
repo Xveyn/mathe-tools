@@ -177,6 +177,33 @@
     <p class="fall">Umformen darf man erst im <em>zweiten</em> Schritt, beim Lösen von (A &#x2212; λE)x = O. Dort ist λ bereits bekannt und es geht nur noch um eine Lösungsmenge.</p>
   </article>
 
+  <article class="eintrag" id="eigenwerte-der-drehmatrix" data-suche="drehmatrix drehung eigenwerte komplex keine reellen laesst keine gerade fest spiegelung achse fest">
+    <h3>Eigenwerte einer Drehmatrix <span class="quelle">Skript S. 88, 89</span></h3>
+    <p class="bedingung">D<sub>&#x3B1;</sub> ist die Drehmatrix der Ebene zum Winkel &#x3B1;; in Aufgabe LA 47 verlangt</p>
+    <math display="block">
+      <mrow>
+        <mi>p</mi><mo>(</mo><mi>&#x3BB;</mi><mo>)</mo><mo>=</mo>
+        <msup><mi>&#x3BB;</mi><mn>2</mn></msup>
+        <mo>&#x2212;</mo>
+        <mn>2</mn><mi>cos</mi><mo>&#x2061;</mo><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo><mo>&#x22C5;</mo><mi>&#x3BB;</mi>
+        <mo>+</mo><mn>1</mn>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msub><mi>&#x3BB;</mi><mrow><mn>1</mn><mo>,</mo><mn>2</mn></mrow></msub>
+        <mo>=</mo>
+        <mi>cos</mi><mo>&#x2061;</mo><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo>
+        <mo>&#xB1;</mo>
+        <mi>sin</mi><mo>&#x2061;</mo><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo><mo>&#x22C5;</mo><mi>i</mi>
+      </mrow>
+    </math>
+    <p class="fall">Das Skript schreibt die Nullstellen erst als <math><mrow><mi>cos</mi><mo>&#x2061;</mo><mi>&#x3B1;</mi><mo>&#xB1;</mo><msqrt><mrow><msup><mi>cos</mi><mn>2</mn></msup><mi>&#x3B1;</mi><mo>&#x2212;</mo><mn>1</mn></mrow></msqrt></mrow></math> (S. 88) und dann in der Form oben (S. 89) &#x2014; dasselbe, denn unter der Wurzel steht <math><mrow><mo>&#x2212;</mo><msup><mi>sin</mi><mn>2</mn></msup><mi>&#x3B1;</mi></mrow></math>.</p>
+    <p class="fall"><strong>Reell</strong> sind sie nur f&#xFC;r cos &#x3B1; = &#xB1;1, also f&#xFC;r &#x3B1; = 0 (&#x3BB; = 1, die Identit&#xE4;t) und &#x3B1; = &#x3C0; (&#x3BB; = &#x2212;1, die Punktspiegelung). Jede andere Drehung l&#xE4;sst <em>keine</em> Gerade fest &#x2014; deshalb gibt es keinen reellen Eigenvektor.</p>
+    <p class="fall">Probe: <math><mrow><mi>tr</mi><mo>(</mo><msub><mi>D</mi><mi>&#x3B1;</mi></msub><mo>)</mo><mo>=</mo><mn>2</mn><mi>cos</mi><mo>&#x2061;</mo><mi>&#x3B1;</mi></mrow></math> ist die Summe, <math><mrow><mi>det</mi><mo>(</mo><msub><mi>D</mi><mi>&#x3B1;</mi></msub><mo>)</mo><mo>=</mo><mn>1</mn></mrow></math> das Produkt der beiden. Und <math><mrow><mo stretchy="false">|</mo><mi>&#x3BB;</mi><mo stretchy="false">|</mo><mo>=</mo><mn>1</mn></mrow></math>, wie bei jeder orthogonalen Matrix.</p>
+    <p class="fall">Zum Vergleich die <strong>Spiegelung</strong> (im Skript nicht gerechnet): <math><msub><mi>S</mi><mi>&#x3B1;</mi></msub></math> hat die Eigenwerte +1 und &#x2212;1 &#x2014; die Spiegelachse bleibt fest, die Senkrechte dazu kippt um. Passend dazu ist <math><mrow><mi>tr</mi><mo>(</mo><msub><mi>S</mi><mi>&#x3B1;</mi></msub><mo>)</mo><mo>=</mo><mn>0</mn></mrow></math> und <math><mrow><mi>det</mi><mo>(</mo><msub><mi>S</mi><mi>&#x3B1;</mi></msub><mo>)</mo><mo>=</mo><mo>&#x2212;</mo><mn>1</mn></mrow></math>.</p>
+  </article>
+
   <article class="eintrag" id="dreiecksmatrix" data-suche="diagonaleintraege ablesen dreieck diagonalmatrix ohne rechnung">
     <h3>Dreiecksmatrix: Eigenwerte ablesen <span class="quelle">Skript S. 89</span></h3>
     <p class="bedingung">A ist eine obere oder untere Dreiecksmatrix mit den Diagonaleinträgen b<sub>1</sub>, …, b<sub>n</sub></p>

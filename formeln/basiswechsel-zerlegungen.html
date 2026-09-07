@@ -32,7 +32,7 @@
     <p class="fall">Derselbe Vektor hat je nach Basis verschiedene Koordinaten. <strong>Welche Basis gemeint ist, muss deshalb immer dabeistehen.</strong></p>
   </article>
 
-  <article class="eintrag" id="transformationsmatrix" data-suche="T basiswechsel richtung spalten neue alte koordinaten umrechnen">
+  <article class="eintrag" id="transformationsmatrix" data-suche="T basiswechsel richtung spalten neue alte koordinaten umrechnen orthonormalbasis transponierte abkuerzung gedrehte basis">
     <h3>Transformationsmatrix <span class="quelle">Skript S. 93</span></h3>
     <p class="bedingung">T ist die Transformationsmatrix von B<sub>1</sub> nach B<sub>2</sub>: in ihren Spalten stehen die Basisvektoren von B<sub>2</sub>, in Koordinaten bezüglich B<sub>1</sub></p>
     <math display="block">
@@ -53,6 +53,7 @@
     </math>
     <p class="fall"><strong>Welche Richtung welche ist, ist hier die eigentliche Schwierigkeit.</strong> In den Spalten von T stehen die Vektoren der <em>neuen</em> Basis B<sub>2</sub> &#x2014; deshalb rechnet T von B<sub>2</sub>-Koordinaten <em>nach</em> B<sub>1</sub>-Koordinaten, also scheinbar rückwärts.</p>
     <p class="fall">Merkregel: <strong>T macht aus den neuen Koordinaten die alten, T<sup>&#x2212;1</sup> aus den alten die neuen.</strong></p>
+    <p class="fall">Ist <math><msub><mi>B</mi><mn>2</mn></msub></math> eine <strong>Orthonormalbasis</strong>, so ist T orthogonal und das Rückrechnen kostet nichts: <math><mrow><msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>=</mo><msup><mi>T</mi><mi>T</mi></msup></mrow></math>. Bei einer gedrehten oder gespiegelten Standardbasis ist T sogar die Dreh- bzw. Spiegelmatrix selbst — dann spart man die ganze Inversenrechnung (Aufgaben LA 49 und LA 50).</p>
   </article>
 
   <article class="eintrag" id="abbildungsmatrix-nach-basiswechsel" data-suche="konjugation aehnlich T hoch minus eins A T neue basis">
