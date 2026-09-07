@@ -105,6 +105,31 @@
     <p class="fall">A heißt dann <strong>diagonalisierbar</strong>, also ähnlich zu einer Diagonalmatrix. Fehlt eine Basis aus Eigenvektoren &#x2014; ist also bei einem Eigenwert die geometrische Vielfachheit kleiner als die algebraische &#x2014;, so ist A nicht diagonalisierbar.</p>
   </article>
 
+  <article class="eintrag" id="wann-diagonalisierbar" data-suche="hinreichende bedingung kriterium n verschiedene eigenwerte unabhaengig hermitesch symmetrisch garantie komplexe matrix">
+    <h3>Wann ist eine Matrix diagonalisierbar? <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">A ist n &#xD7; n &#xFC;ber K; m(&#x3BB;) ist die algebraische, dim E<sub>&#x3BB;</sub> die geometrische Vielfachheit. In Aufgabe LA 56 nach hinreichenden Bedingungen gefragt; das Skript nennt in Satz 3.11.6 nur die Voraussetzung selbst</p>
+    <math display="block">
+      <mrow>
+        <mtext>diagonalisierbar</mtext>
+        <mspace width="0.8em"></mspace><mo>&#x27FA;</mo><mspace width="0.8em"></mspace>
+        <mi>dim</mi><mspace width="0.2em"></mspace><msub><mi>E</mi><mi>&#x3BB;</mi></msub>
+        <mo>=</mo><mi>m</mi><mo>(</mo><mi>&#x3BB;</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msub><mi>&#x3BB;</mi><mi>i</mi></msub><mo>&#x2260;</mo><msub><mi>&#x3BB;</mi><mi>j</mi></msub>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <mi>dim</mi><mspace width="0.2em"></mspace><msub><mi>E</mi><mi>&#x3BB;</mi></msub>
+        <mo>=</mo><mi>m</mi><mo>(</mo><mi>&#x3BB;</mi><mo>)</mo><mo>=</mo><mn>1</mn>
+      </mrow>
+    </math>
+    <p class="fall">Die erste Zeile ist das <strong>Kriterium</strong> (notwendig und hinreichend), die zweite eine bequeme <strong>hinreichende</strong> Bedingung. Sie gilt, weil Eigenvektoren zu paarweise verschiedenen Eigenwerten stets linear unabh&#xE4;ngig sind &#x2014; bei n verschiedenen Eigenwerten hat man damit sofort eine Basis aus Eigenvektoren.</p>
+    <p class="fall">Hinreichend, aber nicht notwendig: die Einheitsmatrix hat nur einen einzigen Eigenwert und ist trotzdem schon diagonal.</p>
+    <p class="fall">Weitere hinreichende Bedingungen: <strong>reell symmetrisch</strong> (sogar orthogonal diagonalisierbar, siehe n&#xE4;chster Eintrag) und &#xFC;ber &#x2102; <strong>hermitesch</strong> (unit&#xE4;r diagonalisierbar, mit reellen Eigenwerten).</p>
+    <p class="fall">&#xDC;ber &#x2102; zerf&#xE4;llt das charakteristische Polynom stets in Linearfaktoren &#x2014; an der <em>Existenz</em> der Eigenwerte scheitert es dort also nie, nur an den Vielfachheiten. &#xDC;ber &#x211D; kann schon die Existenz fehlen, etwa bei einer Drehmatrix.</p>
+  </article>
+
   <article class="eintrag" id="orthogonal-diagonalisierbar" data-suche="symmetrisch orthogonale transformationsmatrix transponiert statt invertieren onb">
     <h3>Symmetrisch heißt orthogonal diagonalisierbar <span class="quelle">Skript S. 97</span></h3>
     <p class="bedingung">A ist reell und symmetrisch; als Spalten von T nimmt man eine <em>Orthonormalbasis</em> aus Eigenvektoren</p>
