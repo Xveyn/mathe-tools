@@ -335,6 +335,38 @@
     <p class="fall">Praktische Folge f&#xFC;r die Ebene: kommt bei einer Verkettung eine <em>symmetrische</em> Matrix mit det = &#x2212;1 heraus, ist es eine Spiegelung &#x2014; und damit selbstinvers.</p>
   </article>
 
+  <article class="eintrag" id="was-bleibt-orthogonal" data-suche="vielfaches skalieren 2A minus A iA bleibt erhalten diagonalmatrix wann orthogonal wahr falsch">
+    <h3>Was bleibt orthogonal, was nicht <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">A ist orthogonal bzw. unit&#xE4;r, c ein Skalar, D = diag(d<sub>1</sub>, &#x2026;, d<sub>n</sub>); in Aufgabe LA 40 abgefragt, im Skript nicht gef&#xFC;hrt</p>
+    <math display="block">
+      <mrow>
+        <msup><mrow><mo>(</mo><mi>c</mi><mi>A</mi><mo>)</mo></mrow><mi>T</mi></msup>
+        <mo>&#x22C5;</mo><mo>(</mo><mi>c</mi><mi>A</mi><mo>)</mo>
+        <mo>=</mo>
+        <msup><mi>c</mi><mn>2</mn></msup><mo>&#x22C5;</mo><mi>E</mi>
+        <mspace width="1.2em"></mspace><mo>&#x27F9;</mo><mspace width="0.6em"></mspace>
+        <mi>c</mi><mo>=</mo><mo>&#xB1;</mo><mn>1</mn>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>c</mi><mi>A</mi><mspace width="0.4em"></mspace><mtext>unit&#xE4;r</mtext>
+        <mspace width="0.9em"></mspace><mo>&#x27FA;</mo><mspace width="0.9em"></mspace>
+        <mo stretchy="false">|</mo><mi>c</mi><mo stretchy="false">|</mo><mo>=</mo><mn>1</mn>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>D</mi><mspace width="0.4em"></mspace><mtext>orthogonal</mtext>
+        <mspace width="0.9em"></mspace><mo>&#x27FA;</mo><mspace width="0.9em"></mspace>
+        <msub><mi>d</mi><mi>i</mi></msub><mo>=</mo><mo>&#xB1;</mo><mn>1</mn>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Erhalten</strong> bleibt die Orthogonalit&#xE4;t beim Vorzeichenwechsel (&#x2212;A), beim Transponieren (<math><mrow><msup><mi>A</mi><mi>T</mi></msup><mo>=</mo><msup><mi>A</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup></mrow></math> ist wieder orthogonal, denn auch die Zeilen bilden eine ONB) und beim Produkt zweier orthogonaler Matrizen.</p>
+    <p class="fall"><strong>Verloren</strong> geht sie bei jedem anderen Vielfachen: 2A hat Spalten der Norm 2. &#xDC;ber &#x2102; ist dagegen <math><mrow><mi>i</mi><mi>A</mi></mrow></math> unit&#xE4;r, weil <math><mrow><mo stretchy="false">|</mo><mi>i</mi><mo stretchy="false">|</mo><mo>=</mo><mn>1</mn></mrow></math> &#x2014; auf dem Einheitskreis darf man frei drehen, auf der reellen Achse bleiben nur +1 und &#x2212;1.</p>
+    <p class="fall">Eine <strong>Diagonalmatrix</strong> ist deshalb nur im Ausnahmefall orthogonal: diag(2, 3) ist es nicht, diag(1, &#x2212;1) schon. &#xDC;ber &#x2102; gen&#xFC;gt <math><mrow><mo stretchy="false">|</mo><msub><mi>d</mi><mi>i</mi></msub><mo stretchy="false">|</mo><mo>=</mo><mn>1</mn></mrow></math> f&#xFC;r unit&#xE4;r.</p>
+  </article>
+
   <article class="eintrag" id="determinante-plus-minus-eins" data-suche="determinante orthogonal umkehrung">
     <h3>Determinante einer orthogonalen Matrix <span class="quelle">nicht im Skript</span></h3>
     <p class="bedingung">Folgerung aus A·Aᵀ = E; in Aufgabe LA 40j verlangt</p>

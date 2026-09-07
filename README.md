@@ -43,15 +43,15 @@ zeigt.
 | [Skalarprodukt und Orthogonalität](formeln/skalarprodukt.html) | Skalarprodukt, komplexes Skalarprodukt, Orthonormalbasis, Projektion, Vektorprodukt. |
 | [Determinante und Inverse](formeln/determinante-inverse.html) | Determinante von 2×2- und 3×3-Matrizen, Laplace-Entwicklung, Rechenregeln, Inverse — auch von Diagonal- und Dreiecksmatrizen —, Blockdreiecksmatrizen, die Gruppe der regulären Matrizen. |
 | [Drehungen und Spiegelungen](formeln/drehungen-spiegelungen.html) | Orthogonale und unitäre Matrizen, Drehmatrizen in Ebene und Raum, Spiegelungen samt ihren Inversen, Verkettungen, unitäre Beispiele. |
-| [Eigenwerte und Eigenvektoren](formeln/eigenwerte.html) | Eigenwerte und Eigenvektoren, charakteristisches Polynom, symmetrische und hermitesche Matrizen. |
+| [Eigenwerte und Eigenvektoren](formeln/eigenwerte.html) | Eigenwerte und Eigenvektoren, charakteristisches Polynom, Spur- und Determinantenprobe, endliche Körper, symmetrische und hermitesche Matrizen. |
 | [Basiswechsel und Zerlegungen](formeln/basiswechsel-zerlegungen.html) | Transformationsmatrix, Diagonalisierung, Spektralzerlegung, SVD und Pseudoinverse. |
 | [Homogene Koordinaten](formeln/homogene-koordinaten.html) | Einbettung in homogene Koordinaten, Verschiebungsmatrix, Drehung um einen Punkt, Skalierung mit Fixpunkt. |
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-**Vierzehn Themen, 157 Einträge — vollständig.** Alle vier Kapitel des
+**Vierzehn Themen, 160 Einträge — vollständig.** Alle vier Kapitel des
 Stoffes sind abgedeckt: Integralrechnung (23 Einträge),
-Differentialgleichungen (14), lineare Algebra (88) und Funktionen mehrerer
+Differentialgleichungen (14), lineare Algebra (91) und Funktionen mehrerer
 Variablen (32). Zwölf Einträge stehen neben dem Skript und sagen das in ihrer
 Quellenangabe — sie stammen aus den Übungsblättern.
 Erreichbar ist die
