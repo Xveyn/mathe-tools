@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../favicon.svg">
+<title>Eigenwerte und Eigenvektoren</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/karten.css">
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Eigenwerte und Eigenvektoren</h1>
+  <p class="lede">Ein Eigenvektor ist eine Richtung, die eine Matrix nicht verdreht &#x2014; sie wird nur gestreckt, gestaucht oder umgeklappt. Der Faktor dazu ist der Eigenwert. Alle drei Karten rechnen dieselbe Matrix durch, damit die Schritte aufeinander aufbauen.</p>
+
+  <div class="abfrage-leiste">
+    <button type="button" id="abfrage-schalter" aria-pressed="false">Abfragen</button>
+  </div>
+
+  <article class="karte" id="eigenwerte-bestimmen">
+    <h3>Schritt 1: Eigenwerte bestimmen</h3>
+
+    <div class="voraussetzung"><math><mi>A</mi></math> ist eine quadratische <math><mi>n</mi><mo>&#xD7;</mo><mi>n</mi></math> Matrix über einem Körper <math><mi>K</mi></math>.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <mi>A</mi><mo>&#x22C5;</mo><mi>v</mi><mo>=</mo><mi>&#x3BB;</mi><mo>&#x22C5;</mo><mi>v</mi>
+          <mspace width="1.2em"></mspace>
+          <mi>v</mi><mo>&#x2260;</mo><mi>O</mi>
+        </mrow>
+      </math>
+      <math display="block">
+        <mrow>
+          <mi>det</mi><mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo>
+          <mo>=</mo><mn>0</mn>
+        </mrow>
+      </math>
+      <p>Die zweite Zeile ist die erste, umgestellt: aus <math><mrow><mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo><mi>v</mi><mo>=</mo><mi>O</mi></mrow></math> mit <math><mrow><mi>v</mi><mo>&#x2260;</mo><mi>O</mi></mrow></math> folgt, dass <math><mrow><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi></mrow></math> singulär sein muss. Die linke Seite heißt <strong>charakteristisches Polynom</strong>, seine Nullstellen sind die Eigenwerte.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Für die ganze Kartenreihe:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>A</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>2</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mn>2</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>Auf der Diagonalen <math><mi>&#x3BB;</mi></math> abziehen und die Determinante bilden:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>det</mi>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>2</mn><mo>&#x2212;</mo><mi>&#x3BB;</mi></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mn>2</mn><mo>&#x2212;</mo><mi>&#x3BB;</mi></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+          <mo>=</mo>
+          <msup><mrow><mo>(</mo><mn>2</mn><mo>&#x2212;</mo><mi>&#x3BB;</mi><mo>)</mo></mrow><mn>2</mn></msup>
+          <mo>&#x2212;</mo><mn>1</mn>
+        </mrow>
+      </math>
+
+      <math display="block">
+        <mrow>
+          <mo>=</mo>
+          <msup><mi>&#x3BB;</mi><mn>2</mn></msup>
+          <mo>&#x2212;</mo><mn>4</mn><mi>&#x3BB;</mi><mo>+</mo><mn>3</mn>
+          <mo>=</mo>
+          <mo>(</mo><mi>&#x3BB;</mi><mo>&#x2212;</mo><mn>3</mn><mo>)</mo>
+          <mo>(</mo><mi>&#x3BB;</mi><mo>&#x2212;</mo><mn>1</mn><mo>)</mo>
+        </mrow>
+      </math>
+
+      <p>Die Nullstellen sind <math><mrow><msub><mi>&#x3BB;</mi><mn>1</mn></msub><mo>=</mo><mn>3</mn></mrow></math> und <math><mrow><msub><mi>&#x3BB;</mi><mn>2</mn></msub><mo>=</mo><mn>1</mn></mrow></math>.</p>
+
+      <p><strong>Probe, ohne neu zu rechnen.</strong> Die Summe der Eigenwerte ist die Spur, das Produkt die Determinante:</p>
+
+      <math display="block">
+        <mrow>
+          <mn>3</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>4</mn><mo>=</mo>
+          <mn>2</mn><mo>+</mo><mn>2</mn>
+          <mspace width="1.6em"></mspace>
+          <mn>3</mn><mo>&#x22C5;</mo><mn>1</mn><mo>=</mo><mn>3</mn><mo>=</mo>
+          <mn>4</mn><mo>&#x2212;</mo><mn>1</mn>
+        </mrow>
+      </math>
+
+      <p>Beides stimmt. Für eine <math><mn>2</mn><mo>&#xD7;</mo><mn>2</mn></math> Matrix ist das sogar der schnellste Weg zum Polynom &#x2014; es lautet immer <math><mrow><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>&#x2212;</mo><mi>tr</mi><mo>(</mo><mi>A</mi><mo>)</mo><mi>&#x3BB;</mi><mo>+</mo><mi>det</mi><mo>(</mo><mi>A</mi><mo>)</mo></mrow></math>, hier also <math><mrow><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>4</mn><mi>&#x3BB;</mi><mo>+</mo><mn>3</mn></mrow></math> direkt aus den vier Einträgen.</p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 180" role="img" aria-label="Das charakteristische Polynom als nach oben geöffnete Parabel. Sie schneidet die waagerechte Lambda-Achse an den beiden Stellen 1 und 3; dazwischen liegt ihr Tiefpunkt unterhalb der Achse. Die beiden Schnittstellen sind die Eigenwerte.">
+          <line x1="25" y1="120" x2="240" y2="120" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="40" y1="160" x2="40" y2="25" stroke="var(--axis)" stroke-width="1"/>
+          <text x="245" y="124" text-anchor="end" font-size="10" fill="var(--dim)">&#x3BB;</text>
+          <text x="46" y="30" text-anchor="start" font-size="10" fill="var(--dim)">&#x3C7;(&#x3BB;)</text>
+
+          <polyline points="40,45 62.5,88.75 85,120 107.5,138.75 130,145 152.5,138.75 175,120 197.5,88.75 220,45"
+                    fill="none" stroke="var(--dim)" stroke-width="1.6"/>
+
+          <circle cx="85" cy="120" r="3.5" fill="var(--gold)"/>
+          <circle cx="175" cy="120" r="3.5" fill="var(--gold)"/>
+          <text x="85" y="136" text-anchor="middle" font-size="10" fill="var(--gold)">1</text>
+          <text x="175" y="136" text-anchor="middle" font-size="10" fill="var(--gold)">3</text>
+          <text x="130" y="163" text-anchor="middle" font-size="9" fill="var(--dim)">die zwei Eigenwerte</text>
+        </svg>
+        <figcaption>Das charakteristische Polynom <math><mrow><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>4</mn><mi>&#x3BB;</mi><mo>+</mo><mn>3</mn></mrow></math>. Eigenwerte sind genau seine Nullstellen &#x2014; hier zwei, weil die Parabel die Achse zweimal schneidet.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Spur und Determinante sind Summe und Produkt der Eigenwerte. Beide stehen ohne Rechnung in der Matrix &#x2014; und verraten jeden Vorzeichenfehler sofort.</p>
+
+    <p class="fehler">Die Bedingung <math><mrow><mi>v</mi><mo>&#x2260;</mo><mi>O</mi></mrow></math> weglassen. Der Nullvektor löst <math><mrow><mi>A</mi><mi>v</mi><mo>=</mo><mi>&#x3BB;</mi><mi>v</mi></mrow></math> für <em>jedes</em> <math><mi>&#x3BB;</mi></math>; ohne die Bedingung wäre jede Zahl ein Eigenwert und der Begriff wertlos. Der Eigen<em>wert</em> <math><mn>0</mn></math> ist dagegen erlaubt &#x2014; er heißt genau, dass <math><mi>A</mi></math> singulär ist.</p>
+  </article>
+
+  <article class="karte" id="eigenraum">
+    <h3>Schritt 2: Eigenvektoren und Eigenraum</h3>
+
+    <div class="voraussetzung"><math><mi>&#x3BB;</mi></math> ist ein bereits bestimmter Eigenwert von <math><mi>A</mi></math>.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <msub><mi>E</mi><mi>&#x3BB;</mi></msub><mo>=</mo>
+          <mi>ker</mi><mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo>
+          <mo>=</mo>
+          <mo>{</mo><mi>v</mi>
+          <mo stretchy="false">|</mo>
+          <mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo><mi>v</mi><mo>=</mo><mi>O</mi>
+          <mo>}</mo>
+        </mrow>
+      </math>
+      <p>Je Eigenwert ein eigenes homogenes Gleichungssystem. Der Eigenraum ist sein Lösungsraum &#x2014; ein Untervektorraum, den man als lineare Hülle angibt. Der Nullvektor liegt darin, ist aber kein Eigenvektor.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Dieselbe Matrix, jetzt für <math><mrow><mi>&#x3BB;</mi><mo>=</mo><mn>3</mn></mrow></math>:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>A</mi><mo>&#x2212;</mo><mn>3</mn><mi>E</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>Zeile 2 plus Zeile 1 gibt eine Nullzeile; es bleibt <math><mrow><mo>&#x2212;</mo><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mn>0</mn></mrow></math>, also <math><mrow><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><msub><mi>x</mi><mn>1</mn></msub></mrow></math>. Mit <math><msub><mi>x</mi><mn>1</mn></msub></math> als freier Variablen:</p>
+
+      <math display="block">
+        <mrow>
+          <msub><mi>E</mi><mn>3</mn></msub><mo>=</mo>
+          <mo>&lt;</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable><mtr><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd></mtr></mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mo>&gt;</mo>
+        </mrow>
+      </math>
+
+      <p>Und für <math><mrow><mi>&#x3BB;</mi><mo>=</mo><mn>1</mn></mrow></math> steht dort <math><mrow><mi>A</mi><mo>&#x2212;</mo><mi>E</mi></mrow></math> mit lauter Einsen, also <math><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mn>0</mn></mrow></math>:</p>
+
+      <math display="block">
+        <mrow>
+          <msub><mi>E</mi><mn>1</mn></msub><mo>=</mo>
+          <mo>&lt;</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable><mtr><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr></mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mo>&gt;</mo>
+        </mrow>
+      </math>
+
+      <p><strong>Probe durch Einsetzen</strong> &#x2014; die einzige, die wirklich zählt:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>A</mi>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable><mtr><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd></mtr></mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+          <mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable><mtr><mtd><mn>3</mn></mtd></mtr><mtr><mtd><mn>3</mn></mtd></mtr></mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+          <mo>=</mo><mn>3</mn>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable><mtr><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd></mtr></mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <math display="block">
+        <mrow>
+          <mi>A</mi>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable><mtr><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr></mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable><mtr><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr></mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mo>=</mo><mn>1</mn><mo>&#x22C5;</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable><mtr><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr></mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 260" role="img" aria-label="Koordinatensystem mit zwei Geraden durch den Ursprung: die eine steigt unter fünfundvierzig Grad und trägt den Eigenvektor (1, 1), die andere fällt unter fünfundvierzig Grad und trägt den Eigenvektor (1, minus 1). Auf der steigenden Geraden ist der kurze Pfeil zum Vektor (1, 1) und der dreimal so lange Pfeil zu seinem Bild (3, 3) eingezeichnet, beide zeigen in dieselbe Richtung. Auf der fallenden Geraden fällt der Vektor (1, minus 1) mit seinem Bild zusammen. Ein dritter Pfeil zum Vektor (1, 0) liegt auf keiner der beiden Geraden; sein Bild (2, 1) zeigt sichtbar in eine andere Richtung.">
+          <line x1="15" y1="130" x2="245" y2="130" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="130" y1="245" x2="130" y2="15" stroke="var(--axis)" stroke-width="1"/>
+          <text x="250" y="134" text-anchor="end" font-size="10" fill="var(--dim)">x</text>
+          <text x="130" y="11" text-anchor="middle" font-size="10" fill="var(--dim)">y</text>
+
+          <!-- die beiden Eigenrichtungen als Geraden durch den Ursprung -->
+          <line x1="40" y1="220" x2="220" y2="40" stroke="var(--gold)" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="40" y1="40" x2="220" y2="220" stroke="var(--mint)" stroke-width="1" stroke-dasharray="3 3"/>
+
+          <!-- Bildvektor A v1 = (3,3), gestreckt auf derselben Geraden -->
+          <line x1="130" y1="130" x2="220" y2="40" stroke="var(--gold)" stroke-width="1.6"/>
+          <polygon points="220,40 216.11,48.83 211.17,43.89" fill="var(--gold)"/>
+          <text x="224" y="36" text-anchor="end" font-size="9" fill="var(--gold)">Av&#x2081; = 3v&#x2081;</text>
+
+          <!-- v1 = (1,1) -->
+          <line x1="130" y1="130" x2="160" y2="100" stroke="var(--gold)" stroke-width="2.6"/>
+          <polygon points="160,100 156.11,108.83 151.17,103.89" fill="var(--gold)"/>
+          <text x="154" y="94" text-anchor="end" font-size="9" fill="var(--gold)">v&#x2081;</text>
+
+          <!-- v2 = (1,-1), Bild identisch -->
+          <line x1="130" y1="130" x2="160" y2="160" stroke="var(--mint)" stroke-width="2.6"/>
+          <polygon points="160,160 151.17,156.11 156.11,151.17" fill="var(--mint)"/>
+          <text x="166" y="170" text-anchor="start" font-size="9" fill="var(--mint)">v&#x2082; = Av&#x2082;</text>
+
+          <!-- w = (1,0), kein Eigenvektor, und sein Bild (2,1) -->
+          <line x1="130" y1="130" x2="160" y2="130" stroke="var(--rose)" stroke-width="2.6"/>
+          <polygon points="160,130 154,133.5 154,126.5" fill="var(--rose)"/>
+          <text x="158" y="143" text-anchor="middle" font-size="9" fill="var(--rose)">w</text>
+
+          <line x1="130" y1="130" x2="190" y2="100" stroke="var(--rose)" stroke-width="1.6" stroke-dasharray="4 2"/>
+          <polygon points="190,100 183.52,107.15 180.38,100.89" fill="var(--rose)"/>
+          <text x="196" y="97" text-anchor="start" font-size="9" fill="var(--rose)">Aw</text>
+        </svg>
+        <figcaption>Auf den beiden gestrichelten Geraden bleibt jeder Vektor liegen &#x2014; <math><msub><mi>v</mi><mn>1</mn></msub></math> wird verdreifacht, <math><msub><mi>v</mi><mn>2</mn></msub></math> bleibt, wie er ist. Der Vektor <math><mi>w</mi></math> liegt auf keiner der beiden; sein Bild <math><mrow><mi>A</mi><mi>w</mi></mrow></math> zeigt woanders hin. Genau diese zwei Geraden sind <math><msub><mi>E</mi><mn>3</mn></msub></math> und <math><msub><mi>E</mi><mn>1</mn></msub></math>.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Eigenvektoren sind Richtungen, keine einzelnen Pfeile: mit <math><mi>v</mi></math> ist jedes Vielfache <math><mrow><mi>t</mi><mi>v</mi></mrow></math> mit <math><mrow><mi>t</mi><mo>&#x2260;</mo><mn>0</mn></mrow></math> ebenfalls Eigenvektor zu demselben <math><mi>&#x3BB;</mi></math>. Deshalb ist die Antwort ein <em>Raum</em>, keine Liste.</p>
+
+    <p class="fehler">Nur den Nullvektor herausbekommen. Wenn <math><mrow><mo>(</mo><mi>A</mi><mo>&#x2212;</mo><mi>&#x3BB;</mi><mi>E</mi><mo>)</mo><mi>v</mi><mo>=</mo><mi>O</mi></mrow></math> eindeutig lösbar ist, muss mindestens <em>eine</em> Zeile beim Gauß wegfallen &#x2014; sonst steckt der Fehler schon in Schritt 1 und <math><mi>&#x3BB;</mi></math> ist gar kein Eigenwert. Ein Eigenraum hat immer mindestens die Dimension 1.</p>
+  </article>
+
+  <article class="karte" id="diagonalisieren">
+    <h3>Schritt 3: Diagonalisieren</h3>
+
+    <div class="voraussetzung"><math><mi>A</mi></math> besitzt eine Basis aus Eigenvektoren <math><msub><mi>v</mi><mn>1</mn></msub></math>, …, <math><msub><mi>v</mi><mi>n</mi></msub></math>.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <mi>D</mi><mo>=</mo>
+          <msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup>
+          <mi>A</mi><mi>T</mi>
+          <mo>=</mo>
+          <mi>diag</mi><mo>(</mo>
+          <msub><mi>&#x3BB;</mi><mn>1</mn></msub><mo>,</mo>
+          <mo>&#x2026;</mo><mo>,</mo>
+          <msub><mi>&#x3BB;</mi><mi>n</mi></msub>
+          <mo>)</mo>
+        </mrow>
+      </math>
+      <p>In den <strong>Spalten</strong> von <math><mi>T</mi></math> stehen die Eigenvektoren, auf der Diagonalen von <math><mi>D</mi></math> die zugehörigen Eigenwerte &#x2014; in derselben Reihenfolge.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Die beiden Eigenvektoren aus Schritt 2 als Spalten:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>T</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mspace width="1.2em"></mspace>
+          <msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>=</mo>
+          <mfrac><mn>1</mn><mn>2</mn></mfrac>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>Erst <math><mrow><mi>A</mi><mi>T</mi></mrow></math> &#x2014; und das ist wenig Arbeit, denn die Spalten von <math><mi>T</mi></math> sind Eigenvektoren, werden also nur mit ihrem Eigenwert multipliziert:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>A</mi><mi>T</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>3</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>3</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>Dann von links mit <math><msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup></math>:</p>
+
+      <math display="block">
+        <mrow>
+          <msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mi>A</mi><mi>T</mi>
+          <mo>=</mo>
+          <mfrac><mn>1</mn><mn>2</mn></mfrac>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>6</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>2</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+          <mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>3</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+          <mo>=</mo><mi>D</mi>
+        </mrow>
+      </math>
+
+      <p>Die Eigenwerte stehen auf der Diagonalen, in der Reihenfolge der Spalten von <math><mi>T</mi></math> &#x2014; erst <math><mn>3</mn></math>, dann <math><mn>1</mn></math>. Vertauscht man die Spalten von <math><mi>T</mi></math>, vertauschen sich auch die Diagonaleinträge.</p>
+
+      <p><strong>Und wann es nicht geht.</strong> Für</p>
+
+      <math display="block">
+        <mrow>
+          <mi>B</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>6</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>4</mn></mtd><mtd><mn>2</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>ist <math><mrow><mi>tr</mi><mo>=</mo><mn>8</mn></mrow></math> und <math><mrow><mi>det</mi><mo>=</mo><mn>16</mn></mrow></math>, also <math><mrow><msup><mi>&#x3BB;</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>8</mn><mi>&#x3BB;</mi><mo>+</mo><mn>16</mn><mo>=</mo><msup><mrow><mo>(</mo><mi>&#x3BB;</mi><mo>&#x2212;</mo><mn>4</mn><mo>)</mo></mrow><mn>2</mn></msup></mrow></math> &#x2014; ein <em>doppelter</em> Eigenwert <math><mrow><mi>&#x3BB;</mi><mo>=</mo><mn>4</mn></mrow></math>. Schritt 2 liefert dazu aber nur eine Richtung:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>B</mi><mo>&#x2212;</mo><mn>4</mn><mi>E</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>2</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>4</mn></mtd><mtd><mo>&#x2212;</mo><mn>2</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <math display="block">
+        <mrow>
+          <msub><mi>E</mi><mn>4</mn></msub><mo>=</mo>
+          <mo>&lt;</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable><mtr><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mn>2</mn></mtd></mtr></mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mo>&gt;</mo>
+        </mrow>
+      </math>
+
+      <p>Der Eigenwert ist algebraisch <strong>doppelt</strong>, der Eigenraum aber nur <strong>eindimensional</strong>. Damit gibt es keine Basis des <math><msup><mi>&#x211D;</mi><mn>2</mn></msup></math> aus Eigenvektoren von <math><mi>B</mi></math>, und <math><mi>B</mi></math> ist <strong>nicht diagonalisierbar</strong>. Ein <math><mi>T</mi></math> mit zwei Spalten ließe sich gar nicht bilden &#x2014; die zweite Spalte wäre ein Vielfaches der ersten und <math><mi>T</mi></math> singulär.</p>
+
+      <p>Ein eigenes Bild braucht diese Karte nicht: die Skizze bei <a href="#eigenraum">Schritt 2</a> zeigt bereits die beiden Eigenrichtungen von <math><mi>A</mi></math>. Genau sie sind die Spalten von <math><mi>T</mi></math> &#x2014; das Diagonalisieren heißt nichts anderes, als diese beiden Geraden zu den neuen Koordinatenachsen zu machen. Bei <math><mi>B</mi></math> gäbe es dafür nur eine Achse, und das reicht nicht.</p>
+    </div>
+
+    <p class="merksatz">Diagonalisieren heißt: die Eigenrichtungen zu Koordinatenachsen machen. In diesen Koordinaten tut die Abbildung nichts weiter, als jede Achse mit ihrem Eigenwert zu strecken.</p>
+
+    <p class="fehler"><math><mi>T</mi></math> und <math><msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup></math> vertauschen. Es gilt <math><mrow><mi>D</mi><mo>=</mo><msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mi>A</mi><mi>T</mi></mrow></math>, nicht <math><mrow><mi>T</mi><mi>A</mi><msup><mi>T</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup></mrow></math>. In den Spalten von <math><mi>T</mi></math> stehen die <em>neuen</em> Basisvektoren, also rechnet <math><mi>T</mi></math> von der Eigenbasis in die Standardbasis &#x2014; und muss deshalb rechts stehen. Ist <math><mi>A</mi></math> symmetrisch wie hier, kann man die Eigenvektoren normieren; dann ist <math><mi>T</mi></math> orthogonal und man transponiert statt zu invertieren.</p>
+  </article>
+
+  <p class="querlink"><a href="../formeln/eigenwerte.html">Nur die Formel, ohne Erklärung &#x2192; Eigenwerte in der Formelsammlung</a></p>
+
+  <p class="seitenfuss"><a href="index.html">&#x2190; Alle Karten im Überblick</a></p>
+
+</div>
+
+<script src="../shared/abfrage.js"></script>
+<script>MT.abfrage.start();</script>
+</body>
+</html>

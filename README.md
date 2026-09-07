@@ -25,8 +25,9 @@ etwas nach.
 | [Extrema mit Nebenbedingung](karten/extrema-mit-nebenbedingung.html) | Extrema, die nur auf einer Nebenbedingung gesucht sind — der Multiplikator von Lagrange liefert die Kandidaten. |
 | [Extremwerte](karten/extremwerte.html) | Erst liefert der Gradient die stationären Stellen, dann entscheidet die Hesse-Matrix, ob jede davon ein Minimum, ein Maximum oder ein Sattelpunkt ist. |
 | [Lineare Differentialgleichungen zweiter Ordnung](karten/differentialgleichungen.html) | Charakteristisches Polynom und die drei Fälle seiner Nullstellen, der Ansatz vom Typ der rechten Seite und die Resonanz, die ihn um den Faktor x erweitert. |
+| [Eigenwerte und Eigenvektoren](karten/eigenwerte.html) | Ein Eigenvektor ist eine Richtung, die die Matrix nicht verdreht, sondern nur streckt; das charakteristische Polynom liefert die Streckfaktoren, ein Gleichungssystem die Richtungen. |
 
-Alle fünf sind auch von der Startseite aus erreichbar, dazu über
+Alle sechs sind auch von der Startseite aus erreichbar, dazu über
 [karten/index.html](karten/index.html), das alle Kartenthemen im Überblick
 zeigt.
 
