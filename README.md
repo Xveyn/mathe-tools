@@ -50,10 +50,10 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien und was sie über die Fläche verraten, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-**Vierzehn Themen, 172 Einträge — vollständig.** Alle vier Kapitel des
+**Vierzehn Themen, 173 Einträge — vollständig.** Alle vier Kapitel des
 Stoffes sind abgedeckt: Integralrechnung (26 Einträge),
 Differentialgleichungen (20), lineare Algebra (93) und Funktionen mehrerer
-Variablen (33). Vierundvierzig Einträge stehen neben dem Skript und sagen das in ihrer
+Variablen (34). Fünfundvierzig Einträge stehen neben dem Skript und sagen das in ihrer
 Quellenangabe — sie stammen aus den Übungsblättern.
 Erreichbar ist die
 Sammlung von der Startseite aus, dazu über

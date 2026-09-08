@@ -126,7 +126,7 @@
     <p class="fall">Damit vier Begriffe: <strong>innerer Punkt</strong> von D &#x2014; es gibt eine ε-Umgebung, die ganz in D liegt. <strong>Offen</strong> &#x2014; jeder Punkt von D ist innerer Punkt. <strong>Randpunkt</strong> &#x2014; jede ε-Umgebung enthält einen Punkt aus D <em>und</em> einen, der nicht dazugehört. <strong>Abgeschlossen</strong> &#x2014; D enthält alle seine Randpunkte.</p>
   </article>
 
-  <article class="eintrag" id="grenzwert-und-stetigkeit" data-suche="limes folge komponentenweise konvergenz stetig">
+  <article class="eintrag" id="grenzwert-und-stetigkeit" data-suche="limes folge komponentenweise konvergenz stetig beschraenkt nullfolge produkt oszilliert einschnueren">
     <h3>Grenzwert und Stetigkeit <span class="quelle">Skript S. 110, 111, 112</span></h3>
     <p class="bedingung">Der Grenzwert muss für <em>jede</em> Folge, die gegen a läuft, derselbe sein</p>
     <math display="block">
@@ -146,6 +146,7 @@
     </math>
     <p class="fall">Die zweite Zeile ist die <strong>Stetigkeit</strong> bei a: der Grenzwert existiert und stimmt mit dem Funktionswert überein.</p>
     <p class="fall">Bei einer vektorwertigen Folge wird der Grenzwert <strong>komponentenweise</strong> bestimmt &#x2014; jede Komponente für sich.</p>
+    <p class="fall"><strong>Beschränkt mal Nullfolge ist Nullfolge</strong> &#x2014; der beschränkte Faktor braucht selbst nicht zu konvergieren. In Aufgabe ANA 10 springen die Winkel n&#xB2; und e<sup>n</sup> wild hin und her, aber beide Komponenten sind vom Betrag her höchstens 1/n; die Folge konvergiert gegen den Nullvektor.</p>
   </article>
 
   <article class="eintrag" id="unstetigkeit-nachweisen" data-suche="zwei folgen gegenbeispiel verschiedene grenzwerte nachweis unstetig">
@@ -162,6 +163,43 @@
     </math>
     <p class="fall">Das ist der Standardweg, und er ist unsymmetrisch: <strong>eine</strong> Folge genügt nie, um Stetigkeit zu zeigen &#x2014; aber <strong>zwei</strong> mit verschiedenen Grenzwerten genügen immer, um Unstetigkeit zu zeigen.</p>
     <p class="fall">Das Standardbeispiel des Skripts ist <math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo><mo>=</mo><mfrac><mrow><mi>x</mi><mi>y</mi></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></mfrac></mrow></math> im Punkt (0 | 0): längs der Geraden y = x kommt <math><mfrac><mn>1</mn><mn>2</mn></mfrac></math> heraus, längs y = &#x2212;x dagegen <math><mrow><mo>&#x2212;</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></math>. Die Funktion ist dort für <strong>jede</strong> Wahl von f(0 | 0) unstetig.</p>
+  </article>
+
+  <article class="eintrag" id="polarkoordinaten-im-ursprung" data-suche="polarkoordinaten radius winkel phi r gegen null grenzwert im ursprung abschaetzen richtungsabhaengig einklemmen">
+    <h3>Polarkoordinaten: Grenzwerte im Ursprung <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Die Annäherung an den Ursprung wird damit zu <em>einem</em> Grenzübergang r &#x2192; 0, statt zu unendlich vielen Folgen &#x2014; verlangt in den Aufgaben ANA 8, 9 und 11</p>
+    <math display="block">
+      <mrow>
+        <mi>x</mi><mo>=</mo><mi>r</mi><mspace width="0.2em"></mspace><mi>cos</mi><mi>&#x3C6;</mi>
+        <mo>,</mo><mspace width="0.8em"></mspace>
+        <mi>y</mi><mo>=</mo><mi>r</mi><mspace width="0.2em"></mspace><mi>sin</mi><mi>&#x3C6;</mi>
+        <mo>,</mo><mspace width="0.8em"></mspace>
+        <msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup>
+        <mo>=</mo><msup><mi>r</mi><mn>2</mn></msup>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Bleibt nach dem Kürzen nur &#x3C6; stehen und kein r</strong>, hängt der Wert allein von der <em>Richtung</em> ab, aus der man kommt. Dann existiert der Grenzwert nicht, und die Funktion ist im Ursprung für keine Wahl von f(0 | 0) stetig:</p>
+    <math display="block">
+      <mrow>
+        <mfrac><mrow><mi>x</mi><mi>y</mi></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></mfrac>
+        <mo>=</mo>
+        <mfrac><mn>1</mn><mn>2</mn></mfrac>
+        <mi>sin</mi><mo>(</mo><mn>2</mn><mi>&#x3C6;</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Das ist dasselbe Beispiel, das das Skript auf S. 112 und 113 mit zwei Folgen erledigt &#x2014; in Polarkoordinaten steht das Ergebnis in einer Zeile und man sieht zugleich <em>alle</em> Richtungen auf einmal (ANA 8).</p>
+    <p class="fall"><strong>Lässt sich |f| durch eine Schranke abschätzen, die nur von r abhängt</strong> und mit r gegen null geht, so existiert der Grenzwert und ist null:</p>
+    <math display="block">
+      <mrow>
+        <mo stretchy="false">|</mo><mi>f</mi><mo stretchy="false">|</mo>
+        <mo>&#x2264;</mo><mi>g</mi><mo>(</mo><mi>r</mi><mo>)</mo>
+        <mo>,</mo><mspace width="0.6em"></mspace>
+        <munder><mo movablelimits="false">lim</mo><mrow><mi>r</mi><mo>&#x2192;</mo><mn>0</mn></mrow></munder>
+        <mi>g</mi><mo>(</mo><mi>r</mi><mo>)</mo><mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <p class="fall">Bei <math><mrow><mi>x</mi><mi>y</mi><mo>&#x22C5;</mo><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>&#x2212;</mo><msup><mi>y</mi><mn>2</mn></msup></mrow><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></mfrac></mrow></math> etwa steht in Polarkoordinaten <math><mrow><mfrac><mrow><msup><mi>r</mi><mn>2</mn></msup></mrow><mn>4</mn></mfrac><mi>sin</mi><mo>(</mo><mn>4</mn><mi>&#x3C6;</mi><mo>)</mo></mrow></math>, also |f| &#x2264; r&#xB2;/4 &#x2192; 0. Die Funktion ist im Ursprung stetig (ANA 9). Und <math><mrow><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mn>1</mn><mo>/</mo><mo>(</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup><mo>)</mo></mrow></msup><mo>=</mo><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mn>1</mn><mo>/</mo><msup><mi>r</mi><mn>2</mn></msup></mrow></msup></mrow></math> hängt von &#x3C6; gar nicht ab und geht gegen 0 (ANA 11).</p>
+    <p class="fall"><strong>Die Schranke muss von &#x3C6; frei sein.</strong> Dass jede <em>Gerade</em> durch den Ursprung denselben Grenzwert liefert, genügt nicht: <math><mrow><mfrac><mrow><msup><mi>x</mi><mn>2</mn></msup><mi>y</mi></mrow><mrow><msup><mi>x</mi><mn>4</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></mfrac></mrow></math> geht längs jeder Geraden gegen 0, längs der Parabel y = x&#xB2; aber gegen 1/2.</p>
   </article>
 
   <article class="eintrag" id="partielle-ableitung" data-suche="richtungsableitung konstant halten differenzenquotient einheitsvektor abschnittsweise nahtstelle definition statt regeln fallunterscheidung ursprung">
