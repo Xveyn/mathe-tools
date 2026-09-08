@@ -48,12 +48,12 @@ zeigt.
 | [Basiswechsel und Zerlegungen](formeln/basiswechsel-zerlegungen.html) | Transformationsmatrix, Diagonalisierung samt hinreichender Bedingungen, Spektralzerlegung, SVD und Pseudoinverse. |
 | [Homogene Koordinaten](formeln/homogene-koordinaten.html) | Einbettung in homogene Koordinaten, Verschiebungsmatrix, Drehung um einen Punkt, Skalierung mit Fixpunkt. |
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien und was sie über die Fläche verraten, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz samt ihren beiden Nullregeln. |
-| [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
+| [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix — auch wenn sie nichts sagt —, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-**Vierzehn Themen, 174 Einträge — vollständig.** Alle vier Kapitel des
+**Vierzehn Themen, 175 Einträge — vollständig.** Alle vier Kapitel des
 Stoffes sind abgedeckt: Integralrechnung (26 Einträge),
 Differentialgleichungen (20), lineare Algebra (93) und Funktionen mehrerer
-Variablen (35). Sechsundvierzig Einträge stehen neben dem Skript und sagen das in ihrer
+Variablen (36). Siebenundvierzig Einträge stehen neben dem Skript und sagen das in ihrer
 Quellenangabe — sie stammen aus den Übungsblättern.
 Erreichbar ist die
 Sammlung von der Startseite aus, dazu über
