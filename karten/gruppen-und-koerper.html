@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../favicon.svg">
+<title>Gruppen und endliche K&#xF6;rper</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/karten.css">
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Gruppen und endliche K&#xF6;rper</h1>
+  <p class="lede">Vier Karten zu der Frage, was eine Menge mit einer Verkn&#xFC;pfung zur Gruppe macht &#x2014; wie man es nachrechnet, wie man es an einer Tafel abliest, wie man modulo einer Zahl rechnet und wie viele Elemente ein Vektorraum &#xFC;ber einem endlichen K&#xF6;rper hat.</p>
+
+  <div class="abfrage-leiste">
+    <button type="button" id="abfrage-schalter" aria-pressed="false">Abfragen</button>
+  </div>
+
+  <article class="karte" id="gruppe-nachweisen">
+    <h3>Nachweisen, dass etwas eine Gruppe ist</h3>
+
+    <div class="voraussetzung">Eine Menge <math><mi>G</mi></math> mit einer Verkn&#xFC;pfung <math><mo>&#x2217;</mo></math>. Gefragt sind vier Dinge &#x2014; und eines davon vergisst man immer.</div>
+
+    <div class="formel" data-verdeckbar>
+      <p><strong>1. Abgeschlossen:</strong> f&#xFC;r alle <math><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>&#x2208;</mo><mi>G</mi></mrow></math> liegt <math><mrow><mi>a</mi><mo>&#x2217;</mo><mi>b</mi></mrow></math> wieder in <math><mi>G</mi></math>. Das ist der Punkt, der vergessen wird, und der bei einer <em>endlichen</em> Zahlenmenge meistens schiefgeht.</p>
+      <p><strong>2. Assoziativ:</strong> <math><mrow><mi>a</mi><mo>&#x2217;</mo><mo>(</mo><mi>b</mi><mo>&#x2217;</mo><mi>c</mi><mo>)</mo><mo>=</mo><mo>(</mo><mi>a</mi><mo>&#x2217;</mo><mi>b</mi><mo>)</mo><mo>&#x2217;</mo><mi>c</mi></mrow></math>.</p>
+      <p><strong>3. Neutrales Element</strong> <math><mi>e</mi></math> mit <math><mrow><mi>e</mi><mo>&#x2217;</mo><mi>g</mi><mo>=</mo><mi>g</mi><mo>&#x2217;</mo><mi>e</mi><mo>=</mo><mi>g</mi></mrow></math>.</p>
+      <p><strong>4. Zu jedem <math><mi>a</mi></math> ein Inverses</strong> <math><mi>x</mi></math> mit <math><mrow><mi>a</mi><mo>&#x2217;</mo><mi>x</mi><mo>=</mo><mi>e</mi></mrow></math>.</p>
+      <p>Kommt <strong>5. Kommutativ</strong> dazu, hei&#xDF;t die Gruppe <em>abelsch</em>. Das ist eine eigene Frage und muss eigens beantwortet werden &#x2014; oft mit einem Gegenbeispiel.</p>
+      <p><strong>Die Abk&#xFC;rzung:</strong> steckt <math><mi>G</mi></math> schon in einer bekannten Gruppe, gen&#xFC;gen Abgeschlossenheit und Inverse. Assoziativit&#xE4;t erbt sich, und das neutrale Element folgt aus <math><mrow><mi>a</mi><mo>&#x2217;</mo><msup><mi>a</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>=</mo><mi>e</mi></mrow></math>.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Die reellen <math><mrow><mn>2</mn><mo>&#xD7;</mo><mn>2</mn></mrow></math> Matrizen dieser Form, mit <math><mrow><mi>a</mi><mo>&#x2260;</mo><mn>0</mn></mrow></math> und <math><mrow><mi>d</mi><mo>&#x2260;</mo><mn>0</mn></mrow></math>, unter der Matrizenmultiplikation:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>A</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mi>a</mi></mtd><mtd><mi>b</mi></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mi>d</mi></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p><strong>Abgeschlossen.</strong> Das Produkt zweier solcher Matrizen:</p>
+
+      <math display="block">
+        <mrow>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mi>a</mi></mtd><mtd><mi>b</mi></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mi>d</mi></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mi>e</mi></mtd><mtd><mi>f</mi></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mi>g</mi></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+      <math display="block">
+        <mrow>
+          <mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-hoch">(</mo>
+            <mtable>
+              <mtr><mtd><mi>a</mi><mi>e</mi></mtd><mtd><mi>a</mi><mi>f</mi><mo>+</mo><mi>b</mi><mi>g</mi></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mi>d</mi><mi>g</mi></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-hoch">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>Die Null unten links bleibt stehen, weil sie mit einer Null multipliziert und zu einer Null addiert wird. Und <math><mrow><mi>a</mi><mi>e</mi><mo>&#x2260;</mo><mn>0</mn></mrow></math> sowie <math><mrow><mi>d</mi><mi>g</mi><mo>&#x2260;</mo><mn>0</mn></mrow></math>, weil in <math><mi>&#x211D;</mi></math> ein Produkt nur null wird, wenn ein Faktor null ist. Also liegt das Produkt wieder in der Menge.</p>
+
+      <p><strong>Assoziativ:</strong> gilt f&#xFC;r jede Matrizenmultiplikation, nichts zu tun.</p>
+
+      <p><strong>Neutral:</strong> die Einheitsmatrix, und sie hat selbst die verlangte Form mit <math><mrow><mi>a</mi><mo>=</mo><mi>d</mi><mo>=</mo><mn>1</mn></mrow></math> und <math><mrow><mi>b</mi><mo>=</mo><mn>0</mn></mrow></math>.</p>
+
+      <p><strong>Inverses:</strong> die Determinante ist <math><mrow><mi>a</mi><mi>d</mi><mo>&#x2260;</mo><mn>0</mn></mrow></math>, also existiert es:</p>
+
+      <math display="block">
+        <mrow>
+          <msup><mi>A</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup>
+          <mo>=</mo>
+          <mfrac><mn>1</mn><mrow><mi>a</mi><mi>d</mi></mrow></mfrac>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mi>d</mi></mtd><mtd><mo>&#x2212;</mo><mi>b</mi></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mi>a</mi></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>Auch sie hat die verlangte Form: unten links eine Null, und oben links <math><mrow><mi>d</mi><mo>/</mo><mo>(</mo><mi>a</mi><mi>d</mi><mo>)</mo><mo>&#x2260;</mo><mn>0</mn></mrow></math>. Alle vier Punkte sind erf&#xFC;llt &#x2014; es ist eine Gruppe.</p>
+
+      <p><strong>Abelsch? Nein.</strong> Ein Gegenbeispiel gen&#xFC;gt:</p>
+
+      <math display="block">
+        <mrow>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>2</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>2</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+      <math display="block">
+        <mrow>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>2</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>2</mn></mtd><mtd><mn>2</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 130" role="img" aria-label="Schema der Matrizenmultiplikation zweier oberer Dreiecksmatrizen. Die Stelle unten links im Ergebnis ist hervorgehoben; darunter steht die Rechnung null mal e plus d mal null gleich null. Sie zeigt, warum die Null unten links erhalten bleibt.">
+          <text x="130" y="20" text-anchor="middle" font-size="10" fill="var(--dim)">warum die Null unten links bleibt</text>
+
+          <rect x="34" y="34" width="52" height="46" fill="none" stroke="var(--edge)" stroke-width="1"/>
+          <text x="47" y="52" text-anchor="middle" font-size="11" fill="var(--dim)">a</text>
+          <text x="73" y="52" text-anchor="middle" font-size="11" fill="var(--dim)">b</text>
+          <text x="47" y="72" text-anchor="middle" font-size="11" fill="var(--gold)">0</text>
+          <text x="73" y="72" text-anchor="middle" font-size="11" fill="var(--gold)">d</text>
+
+          <text x="97" y="62" text-anchor="middle" font-size="12" fill="var(--dim)">&#x22C5;</text>
+
+          <rect x="108" y="34" width="52" height="46" fill="none" stroke="var(--edge)" stroke-width="1"/>
+          <text x="121" y="52" text-anchor="middle" font-size="11" fill="var(--mint)">e</text>
+          <text x="147" y="52" text-anchor="middle" font-size="11" fill="var(--dim)">f</text>
+          <text x="121" y="72" text-anchor="middle" font-size="11" fill="var(--mint)">0</text>
+          <text x="147" y="72" text-anchor="middle" font-size="11" fill="var(--dim)">g</text>
+
+          <text x="171" y="62" text-anchor="middle" font-size="12" fill="var(--dim)">=</text>
+
+          <rect x="178" y="34" width="62" height="46" fill="none" stroke="var(--edge)" stroke-width="1"/>
+          <text x="193" y="52" text-anchor="middle" font-size="11" fill="var(--dim)">ae</text>
+          <text x="222" y="52" text-anchor="middle" font-size="9" fill="var(--dim)">af + bg</text>
+          <text x="193" y="72" text-anchor="middle" font-size="11" fill="var(--rose)">0</text>
+          <text x="222" y="72" text-anchor="middle" font-size="11" fill="var(--dim)">dg</text>
+          <rect x="181" y="62" width="24" height="15" fill="var(--rose)" fill-opacity="0.18" stroke="none"/>
+
+          <text x="130" y="103" text-anchor="middle" font-size="10" fill="var(--rose)">0 &#x22C5; e + d &#x22C5; 0 = 0</text>
+          <text x="130" y="119" text-anchor="middle" font-size="9" fill="var(--dim)">die zweite Zeile links trifft die erste Spalte rechts</text>
+        </svg>
+        <figcaption>Die hervorgehobene Stelle entsteht aus der unteren Zeile der linken und der linken Spalte der rechten Matrix. Beide tragen dort eine Null &#x2014; deshalb bleibt die Form erhalten.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Abgeschlossenheit zuerst pr&#xFC;fen. Sie ist der einzige Punkt, an dem eine Menge scheitert, die sonst alles mitbringt &#x2014; etwa <math><mrow><mo>{</mo><mo>&#x2212;</mo><mn>10</mn><mo>,</mo><mo>&#x2026;</mo><mo>,</mo><mn>10</mn><mo>}</mo></mrow></math> unter der gew&#xF6;hnlichen Addition, wo <math><mrow><mn>7</mn><mo>+</mo><mn>8</mn></mrow></math> aus der Menge herausf&#xFC;hrt.</p>
+
+    <p class="fehler">Beim neutralen und beim inversen Element vergessen zu pr&#xFC;fen, ob sie <em>selbst in der Menge liegen</em>. Bei einer Teilmenge n&#xFC;tzt es nichts, dass es in der gro&#xDF;en Gruppe ein Inverses gibt &#x2014; es muss in der kleinen liegen.</p>
+
+    <p class="querlink"><a href="../formeln/endliche-koerper.html#untergruppe">Das Untergruppenkriterium in der Formelsammlung &#x2192;</a></p>
+  </article>
+
+  <article class="karte" id="verknuepfungstafel">
+    <h3>Die Axiome an der Tafel ablesen</h3>
+
+    <div class="voraussetzung">Eine <em>endliche</em> Menge mit einer Verkn&#xFC;pfung. Links steht der erste Operand, oben der zweite.</div>
+
+    <div class="formel" data-verdeckbar>
+      <p><strong>Abgeschlossen:</strong> im Inneren der Tafel steht kein Zeichen, das nicht schon im Kopf vorkommt.</p>
+      <p><strong>Neutrales Element:</strong> seine Zeile wiederholt die Kopfzeile, seine Spalte die Kopfspalte.</p>
+      <p><strong>Inverse:</strong> in jeder Zeile steht das neutrale Element genau einmal. Der Kopf der Spalte, in der es steht, ist das Inverse.</p>
+      <p><strong>Kommutativ:</strong> die Tafel ist symmetrisch zur Hauptdiagonalen.</p>
+      <p><strong>Assoziativit&#xE4;t sieht man nicht.</strong> Sie ist der einzige Punkt, den die Tafel nicht verr&#xE4;t &#x2014; man erbt sie von einer bekannten Verkn&#xFC;pfung oder rechnet sie nach.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Die vierten Einheitswurzeln <math><mrow><msub><mi>&#x3BC;</mi><mn>4</mn></msub><mo>=</mo><mo>{</mo><mn>1</mn><mo>,</mo><mi>i</mi><mo>,</mo><mo>&#x2212;</mo><mn>1</mn><mo>,</mo><mo>&#x2212;</mo><mi>i</mi><mo>}</mo></mrow></math> unter der Multiplikation:</p>
+
+      <math display="block">
+        <mtable>
+          <mtr><mtd><mo>&#x22C5;</mo></mtd><mtd><mn>1</mn></mtd><mtd><mi>i</mi></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mi>i</mi></mtd></mtr>
+          <mtr><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd><mtd><mi>i</mi></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mi>i</mi></mtd></mtr>
+          <mtr><mtd><mi>i</mi></mtd><mtd><mi>i</mi></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mi>i</mi></mtd><mtd><mn>1</mn></mtd></mtr>
+          <mtr><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mi>i</mi></mtd><mtd><mn>1</mn></mtd><mtd><mi>i</mi></mtd></mtr>
+          <mtr><mtd><mo>&#x2212;</mo><mi>i</mi></mtd><mtd><mo>&#x2212;</mo><mi>i</mi></mtd><mtd><mn>1</mn></mtd><mtd><mi>i</mi></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
+        </mtable>
+      </math>
+
+      <p>Alles vier abgelesen: im Inneren stehen nur die vier Zeichen aus dem Kopf. Die Zeile zur <math><mn>1</mn></math> wiederholt den Kopf, also ist <math><mn>1</mn></math> neutral. In jeder Zeile steht genau eine <math><mn>1</mn></math> &#x2014; die Inversen sind <math><mrow><msup><mi>i</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>=</mo><mo>&#x2212;</mo><mi>i</mi></mrow></math> und umgekehrt, <math><mn>1</mn></math> und <math><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></math> sind zu sich selbst invers. Und die Tafel ist symmetrisch. Assoziativ ist sie, weil die Multiplikation in <math><mi>&#x2102;</mi></math> es ist. Also eine <strong>abelsche Gruppe</strong>.</p>
+
+      <p><strong>Ein Gegenbeispiel:</strong> <math><msub><mi>&#x2124;</mi><mn>4</mn></msub></math> unter der Multiplikation.</p>
+
+      <math display="block">
+        <mtable>
+          <mtr><mtd><mo>&#x22C5;</mo></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>3</mn></mtd></mtr>
+          <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+          <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>3</mn></mtd></mtr>
+          <mtr><mtd><mn>2</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>2</mn></mtd></mtr>
+          <mtr><mtd><mn>3</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>3</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+        </mtable>
+      </math>
+
+      <p><strong>In der Zeile der <math><mn>2</mn></math> steht keine <math><mn>1</mn></math></strong> &#x2014; die <math><mn>2</mn></math> hat kein Inverses. Deshalb ist <math><msub><mi>&#x2124;</mi><mn>4</mn></msub></math> <em>kein K&#xF6;rper</em>. In derselben Zeile steht <math><mrow><mn>2</mn><mo>&#x22C5;</mo><mn>2</mn><mo>=</mo><mn>0</mn></mrow></math>: zwei Zahlen ungleich null mit dem Produkt null, ein <strong>Nullteiler</strong>. Beides h&#xE4;ngt zusammen, und beides kommt davon, dass <math><mn>4</mn></math> keine Primzahl ist.</p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 175" role="img" aria-label="Ein Kreis um den Ursprung eines Koordinatensystems mit Radius eins. Auf ihm liegen vier markierte Punkte: rechts die Eins, oben i, links minus eins und unten minus i. Ein gebogener Pfeil vom Punkt rechts zum Punkt oben ist mit mal i beschriftet und zeigt, dass die Multiplikation mit i einer Vierteldrehung entspricht.">
+          <line x1="46" y1="85" x2="214" y2="85" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="130" y1="169" x2="130" y2="9" stroke="var(--axis)" stroke-width="1"/>
+          <circle cx="130" cy="85" r="60" fill="none" stroke="var(--edge)" stroke-width="1"/>
+
+          <path d="M 169.39 78.05 A 40 40 0 0 0 136.95 45.61" fill="none" stroke="var(--mint)" stroke-width="1.3" stroke-dasharray="4 3"/>
+          <polygon points="136.95,45.61 145.54,43.48 144.03,50.93" fill="var(--mint)"/>
+          <text x="148" y="70" text-anchor="middle" font-size="10" fill="var(--mint)">&#x22C5; i</text>
+
+          <circle cx="190" cy="85" r="4" fill="var(--gold)"/>
+          <text x="190" y="103" text-anchor="middle" font-size="10" fill="var(--gold)">1</text>
+          <circle cx="130" cy="25" r="4" fill="var(--gold)"/>
+          <text x="144" y="22" text-anchor="middle" font-size="10" fill="var(--gold)">i</text>
+          <circle cx="70" cy="85" r="4" fill="var(--gold)"/>
+          <text x="70" y="103" text-anchor="middle" font-size="10" fill="var(--gold)">&#x2212;1</text>
+          <circle cx="130" cy="145" r="4" fill="var(--gold)"/>
+          <text x="148" y="149" text-anchor="middle" font-size="10" fill="var(--gold)">&#x2212;i</text>
+        </svg>
+        <figcaption>Die vier Elemente liegen auf dem Einheitskreis. Multiplizieren mit <math><mi>i</mi></math> dreht um eine Vierteldrehung weiter &#x2014; nach vier Schritten ist man wieder bei <math><mn>1</mn></math>. Deshalb ist die Menge abgeschlossen.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Vier der f&#xFC;nf Eigenschaften stehen in der Tafel: Abgeschlossenheit im Inneren, das neutrale Element als wiederholter Kopf, die Inversen als je eine Fundstelle pro Zeile, die Kommutativit&#xE4;t als Symmetrie. Nur die Assoziativit&#xE4;t nicht.</p>
+
+    <p class="fehler">Aus einer vollen Tafel ohne L&#xFC;cken auf eine Gruppe schlie&#xDF;en. Voll hei&#xDF;t nur abgeschlossen. <math><msub><mi>&#x2124;</mi><mn>4</mn></msub></math> hat eine vollst&#xE4;ndige Multiplikationstafel und ist trotzdem keine Gruppe.</p>
+  </article>
+
+  <article class="karte" id="modulo-rechnen">
+    <h3>Modulo rechnen</h3>
+
+    <div class="voraussetzung">Gerechnet wird mit Restklassen; als Ergebnis ist der <strong>Standardrepr&#xE4;sentant</strong> <math><mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mo>&#x2026;</mo><mo>,</mo><mi>n</mi><mo>&#x2212;</mo><mn>1</mn></mrow></math> gefragt.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <mi>x</mi><mo>&#x2261;</mo><mi>y</mi>
+          <mspace width="0.5em"></mspace><mi>mod</mi><mspace width="0.3em"></mspace><mi>n</mi>
+          <mspace width="0.8em"></mspace><mo>&#x27FA;</mo><mspace width="0.8em"></mspace>
+          <mi>n</mi><mo>&#x2223;</mo><mo>(</mo><mi>x</mi><mo>&#x2212;</mo><mi>y</mi><mo>)</mo>
+        </mrow>
+      </math>
+      <p><strong>Die Regel, die alles einfach macht:</strong> man darf jeden Zwischenwert sofort durch seinen Standardrepr&#xE4;sentanten ersetzen. Addition, Subtraktion, Multiplikation und Potenzieren vertragen sich damit &#x2014; erst reduzieren, dann weiterrechnen, nie umgekehrt.</p>
+      <p><strong>Negative Zahlen:</strong> so oft <math><mi>n</mi></math> addieren, bis das Ergebnis im Bereich <math><mrow><mn>0</mn></mrow></math> bis <math><mrow><mi>n</mi><mo>&#x2212;</mo><mn>1</mn></mrow></math> liegt. Ein negativer Standardrepr&#xE4;sentant ist keiner.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Drei Rechnungen modulo <math><mn>7</mn></math>. Zuerst die Bausteine einzeln reduzieren:</p>
+
+      <math display="block">
+        <mrow>
+          <mn>300</mn><mo>=</mo><mn>7</mn><mo>&#x22C5;</mo><mn>42</mn><mo>+</mo><mn>6</mn>
+          <mspace width="1em"></mspace>
+          <mn>901</mn><mo>=</mo><mn>7</mn><mo>&#x22C5;</mo><mn>128</mn><mo>+</mo><mn>5</mn>
+        </mrow>
+      </math>
+      <math display="block">
+        <mrow>
+          <mn>300</mn><mo>&#x2212;</mo><mn>901</mn><mo>&#x2261;</mo>
+          <mn>6</mn><mo>&#x2212;</mo><mn>5</mn><mo>=</mo><mn>1</mn>
+        </mrow>
+      </math>
+
+      <p>Statt <math><mrow><mo>&#x2212;</mo><mn>601</mn></mrow></math> auszurechnen und dann zu reduzieren, reduziert man vorher &#x2014; und rechnet mit zwei einstelligen Zahlen.</p>
+
+      <math display="block">
+        <mrow>
+          <mn>39</mn><mo>&#x2261;</mo><mn>4</mn>
+          <mspace width="1em"></mspace>
+          <mn>79</mn><mo>&#x2261;</mo><mn>2</mn>
+          <mspace width="1em"></mspace>
+          <mo>&#x2212;</mo><mn>79</mn><mo>&#x2261;</mo><mo>&#x2212;</mo><mn>2</mn><mo>&#x2261;</mo><mn>5</mn>
+        </mrow>
+      </math>
+      <math display="block">
+        <mrow>
+          <mn>39</mn><mo>&#x22C5;</mo><mo>(</mo><mo>&#x2212;</mo><mn>79</mn><mo>)</mo><mo>&#x2261;</mo>
+          <mn>4</mn><mo>&#x22C5;</mo><mn>5</mn><mo>=</mo><mn>20</mn><mo>&#x2261;</mo><mn>6</mn>
+        </mrow>
+      </math>
+
+      <p>Hier ist <math><mrow><mo>&#x2212;</mo><mn>2</mn></mrow></math> das Zwischenergebnis; erst <math><mrow><mo>&#x2212;</mo><mn>2</mn><mo>+</mo><mn>7</mn><mo>=</mo><mn>5</mn></mrow></math> ist ein Standardrepr&#xE4;sentant.</p>
+
+      <math display="block">
+        <mrow>
+          <mo>&#x2212;</mo><mn>20</mn><mo>&#x2261;</mo><mo>&#x2212;</mo><mn>6</mn><mo>&#x2261;</mo><mn>1</mn>
+          <mspace width="1.2em"></mspace>
+          <msup><mrow><mo>(</mo><mo>&#x2212;</mo><mn>20</mn><mo>)</mo></mrow><mn>3</mn></msup>
+          <mo>&#x2261;</mo><msup><mn>1</mn><mn>3</mn></msup><mo>=</mo><mn>1</mn>
+        </mrow>
+      </math>
+
+      <p>Die dritte Rechnung f&#xE4;llt in sich zusammen, sobald man <math><mrow><mo>&#x2212;</mo><mn>20</mn></mrow></math> reduziert hat. Ohne die Reduktion m&#xFC;sste man <math><mrow><mo>&#x2212;</mo><mn>8000</mn></mrow></math> durch <math><mn>7</mn></math> teilen.</p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 175" role="img" aria-label="Ein Ziffernblatt mit sieben Positionen, von null oben im Uhrzeigersinn bis sechs. Es zeigt, dass beim Rechnen modulo sieben nach der sechs wieder die null kommt.">
+          <circle cx="130" cy="82" r="50" fill="none" stroke="var(--edge)" stroke-width="1"/>
+          <circle cx="130" cy="32" r="4" fill="var(--mint)"/>
+          <text x="130" y="20" text-anchor="middle" font-size="10" fill="var(--mint)">0</text>
+          <circle cx="169.1" cy="50.8" r="3" fill="var(--dim)"/>
+          <text x="182" y="45" text-anchor="middle" font-size="10" fill="var(--dim)">1</text>
+          <circle cx="178.7" cy="93.1" r="3" fill="var(--dim)"/>
+          <text x="192" y="97" text-anchor="middle" font-size="10" fill="var(--dim)">2</text>
+          <circle cx="151.7" cy="127" r="3" fill="var(--dim)"/>
+          <text x="159" y="145" text-anchor="middle" font-size="10" fill="var(--dim)">3</text>
+          <circle cx="108.3" cy="127" r="3" fill="var(--dim)"/>
+          <text x="101" y="145" text-anchor="middle" font-size="10" fill="var(--dim)">4</text>
+          <circle cx="81.3" cy="93.1" r="3" fill="var(--dim)"/>
+          <text x="68" y="97" text-anchor="middle" font-size="10" fill="var(--dim)">5</text>
+          <circle cx="90.9" cy="50.8" r="3" fill="var(--gold)"/>
+          <text x="78" y="45" text-anchor="middle" font-size="10" fill="var(--gold)">6</text>
+
+          <path d="M 101.32 41.04 A 50 50 0 0 1 126.51 32.12" fill="none" stroke="var(--gold)" stroke-width="1.6"/>
+          <polygon points="126.51,32.12 118.91,36.67 118.18,29.11" fill="var(--gold)"/>
+
+          <text x="130" y="163" text-anchor="middle" font-size="9" fill="var(--dim)">nach der 6 kommt wieder die 0</text>
+        </svg>
+        <figcaption>Modulo <math><mn>7</mn></math> hat die Zahlengerade sieben Positionen und schlie&#xDF;t sich zum Kreis. Deshalb ist <math><mrow><mo>&#x2212;</mo><mn>20</mn></mrow></math> dasselbe wie <math><mn>1</mn></math>: von der Null aus zwanzig Schritte r&#xFC;ckw&#xE4;rts landet man eine Position vor ihr.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Erst reduzieren, dann rechnen. Jeder Zwischenwert darf sofort auf seinen Standardrepr&#xE4;sentanten zur&#xFC;ck &#x2014; das h&#xE4;lt die Zahlen einstellig, egal wie gro&#xDF; die Aufgabe aussieht.</p>
+
+    <p class="fehler">Ein negatives Ergebnis stehen lassen. <math><mrow><mo>&#x2212;</mo><mn>2</mn></mrow></math> ist zwar kongruent zu <math><mn>5</mn></math> modulo <math><mn>7</mn></math>, aber gefragt war der Standardrepr&#xE4;sentant, und der liegt zwischen <math><mn>0</mn></math> und <math><mn>6</mn></math>.</p>
+
+    <p class="querlink"><a href="../formeln/endliche-koerper.html#inverse-modulo">Die Inversentabellen zu GF(3), GF(5), GF(7) und GF(11) &#x2192;</a></p>
+  </article>
+
+  <article class="karte" id="vektorraum-ueber-gf">
+    <h3>Wie viele Elemente ein Vektorraum &#xFC;ber GF(p) hat</h3>
+
+    <div class="voraussetzung"><math><mrow><mi>GF</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></math> hat <math><mi>p</mi></math> Elemente, <math><mi>p</mi></math> prim. Anders als &#xFC;ber <math><mi>&#x211D;</mi></math> l&#xE4;sst sich hier alles <em>aufz&#xE4;hlen</em>.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <mo stretchy="false">|</mo>
+          <mi>GF</mi><msup><mrow><mo>(</mo><mi>p</mi><mo>)</mo></mrow><mi>n</mi></msup>
+          <mo stretchy="false">|</mo>
+          <mo>=</mo>
+          <msup><mi>p</mi><mi>n</mi></msup>
+        </mrow>
+      </math>
+      <p>Jede der <math><mi>n</mi></math> Komponenten hat <math><mi>p</mi></math> M&#xF6;glichkeiten, unabh&#xE4;ngig voneinander.</p>
+      <p><strong>Und f&#xFC;r jeden Untervektorraum:</strong> hat er die Dimension <math><mi>k</mi></math>, so hat er genau <math><msup><mi>p</mi><mi>k</mi></msup></math> Elemente &#x2014; er besteht aus allen Linearkombinationen von <math><mi>k</mi></math> Basisvektoren, und jeder der <math><mi>k</mi></math> Koeffizienten hat <math><mi>p</mi></math> M&#xF6;glichkeiten.</p>
+      <p><strong>Daraus folgt eine harte Schranke:</strong> die Elementzahl eines Untervektorraums ist immer eine <em>Potenz von p</em>. Andere Zahlen kommen nicht vor.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p><math><mrow><mi>GF</mi><msup><mrow><mo>(</mo><mn>2</mn><mo>)</mo></mrow><mn>3</mn></msup></mrow></math> hat <math><mrow><msup><mn>2</mn><mn>3</mn></msup><mo>=</mo><mn>8</mn></mrow></math> Elemente &#x2014; alle Tripel aus Nullen und Einsen:</p>
+
+      <math display="block">
+        <mrow>
+          <mo>(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>)</mo>
+        </mrow>
+      </math>
+      <math display="block">
+        <mrow>
+          <mo>(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>)</mo>
+        </mrow>
+      </math>
+
+      <p><strong>Gesucht ein Untervektorraum mit mindestens zwei und h&#xF6;chstens drei Elementen.</strong> &#xDC;ber <math><mrow><mi>GF</mi><mo>(</mo><mn>2</mn><mo>)</mo></mrow></math> sind nur die Zahlen <math><mrow><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>8</mn></mrow></math> m&#xF6;glich &#x2014; drei Elemente gibt es gar nicht. Es bleibt die Zwei, also die H&#xFC;lle eines einzigen Vektors:</p>
+
+      <math display="block">
+        <mrow>
+          <mo>&#x27E8;</mo><mo>(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>&#x27E9;</mo>
+          <mo>=</mo>
+          <mo>{</mo>
+          <mo>(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>)</mo>
+          <mo>}</mo>
+        </mrow>
+      </math>
+
+      <p>Mehr wird es nicht: der einzige Koeffizient kann nur <math><mn>0</mn></math> oder <math><mn>1</mn></math> sein.</p>
+
+      <p><math><mrow><mi>GF</mi><msup><mrow><mo>(</mo><mn>3</mn><mo>)</mo></mrow><mn>2</mn></msup></mrow></math> hat <math><mrow><msup><mn>3</mn><mn>2</mn></msup><mo>=</mo><mn>9</mn></mrow></math> Elemente. Dort sind nur <math><mrow><mn>1</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>9</mn></mrow></math> m&#xF6;glich &#x2014; jetzt geht die Drei und die Zwei nicht:</p>
+
+      <math display="block">
+        <mrow>
+          <mo>&#x27E8;</mo><mo>(</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>&#x27E9;</mo>
+          <mo>=</mo>
+          <mo>{</mo>
+          <mo>(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mn>2</mn><mo>,</mo><mn>0</mn><mo>)</mo>
+          <mo>}</mo>
+        </mrow>
+      </math>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 175" role="img" aria-label="Ein schräg gezeichneter Würfel. Seine acht Ecken stehen für die acht Elemente von GF zwei hoch drei. Zwei Ecken sind hervorgehoben und durch eine dicke Kante verbunden: der Nullvektor und der Vektor eins, eins, null. Sie bilden zusammen den gesuchten Untervektorraum mit zwei Elementen.">
+          <line x1="70" y1="122" x2="132" y2="122" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="96" y1="100" x2="158" y2="100" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="70" y1="70" x2="132" y2="70" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="96" y1="48" x2="158" y2="48" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="70" y1="122" x2="96" y2="100" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="132" y1="122" x2="158" y2="100" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="70" y1="70" x2="96" y2="48" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="132" y1="70" x2="158" y2="48" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="70" y1="122" x2="70" y2="70" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="132" y1="122" x2="132" y2="70" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="96" y1="100" x2="96" y2="48" stroke="var(--edge)" stroke-width="1"/>
+          <line x1="158" y1="100" x2="158" y2="48" stroke="var(--edge)" stroke-width="1"/>
+
+          <line x1="70" y1="122" x2="158" y2="100" stroke="var(--mint)" stroke-width="2.4"/>
+
+          <circle cx="70" cy="122" r="4" fill="var(--mint)"/>
+          <circle cx="158" cy="100" r="4" fill="var(--mint)"/>
+          <circle cx="132" cy="122" r="2.6" fill="var(--dim)"/>
+          <circle cx="96" cy="100" r="2.6" fill="var(--dim)"/>
+          <circle cx="70" cy="70" r="2.6" fill="var(--dim)"/>
+          <circle cx="132" cy="70" r="2.6" fill="var(--dim)"/>
+          <circle cx="96" cy="48" r="2.6" fill="var(--dim)"/>
+          <circle cx="158" cy="48" r="2.6" fill="var(--dim)"/>
+
+          <text x="62" y="138" text-anchor="middle" font-size="9" fill="var(--mint)">(0, 0, 0)</text>
+          <text x="186" y="97" text-anchor="middle" font-size="9" fill="var(--mint)">(1, 1, 0)</text>
+          <text x="130" y="163" text-anchor="middle" font-size="9" fill="var(--dim)">acht Ecken, acht Elemente</text>
+        </svg>
+        <figcaption>Die acht Elemente von <math><mrow><mi>GF</mi><msup><mrow><mo>(</mo><mn>2</mn><mo>)</mo></mrow><mn>3</mn></msup></mrow></math> sind die acht Ecken eines W&#xFC;rfels. Der gesuchte Untervektorraum besteht aus zwei davon &#x2014; dem Nullpunkt und einer weiteren Ecke.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Die Elementzahl eines Untervektorraums ist immer eine Potenz von <math><mi>p</mi></math>. Wer nach einem mit sechs Elementen sucht, sucht &#xFC;ber keinem <math><mrow><mi>GF</mi><mo>(</mo><mi>p</mi><mo>)</mo></mrow></math> etwas, das es gibt.</p>
+
+    <p class="fehler">Den Nullvektor beim Aufz&#xE4;hlen vergessen. Er liegt in <em>jedem</em> Untervektorraum, auch im kleinsten &#x2014; und der kleinste besteht nur aus ihm.</p>
+
+    <p class="querlink"><a href="../formeln/vektorraeume-rang.html#elementzahl-ueber-gf">Die Elementzahl in der Formelsammlung &#x2192;</a></p>
+  </article>
+
+  <p class="seitenfuss"><a href="index.html">&#x2190; Alle Karten im &#xDC;berblick</a></p>
+
+</div>
+
+<script src="../shared/abfrage.js"></script>
+<script>MT.abfrage.start();</script>
+</body>
+</html>

@@ -28,6 +28,7 @@ etwas nach.
 | [Eigenwerte und Eigenvektoren](karten/eigenwerte.html) | Ein Eigenvektor ist eine Richtung, die die Matrix nicht verdreht, sondern nur streckt; das charakteristische Polynom liefert die Streckfaktoren, ein Gleichungssystem die Richtungen. |
 | [Drehungen und Spiegelungen](karten/drehungen-spiegelungen.html) | Zwei Abbildungen, die Längen und Winkel unangetastet lassen; ihre Spalten sind die Bilder der Einheitsvektoren, und zwei Spiegelungen ergeben zusammen eine Drehung. |
 | [Lineare Abbildungen](karten/lineare-abbildungen.html) | Von der Abbildungsvorschrift zur Matrix, von der Matrix zu Kern und Bild, und von deren Dimensionen zu injektiv, surjektiv und bijektiv. |
+| [Gruppen und endliche Körper](karten/gruppen-und-koerper.html) | Was eine Menge mit einer Verknüpfung zur Gruppe macht, wie man es an einer Verknüpfungstafel abliest, wie man modulo rechnet und wie viele Elemente ein Vektorraum über GF(p) hat. |
 
 Alle sechs sind auch von der Startseite aus erreichbar, dazu über
 [karten/index.html](karten/index.html), das alle Kartenthemen im Überblick
