@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../favicon.svg">
+<title>Drehungen und Spiegelungen</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/karten.css">
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Drehungen und Spiegelungen</h1>
+  <p class="lede">Zwei Abbildungen, die L&#xE4;ngen und Winkel unangetastet lassen &#x2014; und zwei Matrizen, die man sich nicht merken muss, wenn man wei&#xDF;, woher ihre Spalten kommen. Die dritte Karte setzt beide zusammen: zwei Spiegelungen ergeben eine Drehung.</p>
+
+  <div class="abfrage-leiste">
+    <button type="button" id="abfrage-schalter" aria-pressed="false">Abfragen</button>
+  </div>
+
+  <article class="karte" id="drehung">
+    <h3>Drehung in der Ebene</h3>
+
+    <div class="voraussetzung">Gedreht wird um den <strong>Ursprung</strong>, gegen den Uhrzeigersinn, um den Winkel <math><mi>&#x3B1;</mi></math>.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <msub><mi>D</mi><mi>&#x3B1;</mi></msub><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer">(</mo>
+            <mtable>
+              <mtr>
+                <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+                <mtd><mo>&#x2212;</mo><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              </mtr>
+              <mtr>
+                <mtd><mi>sin</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+                <mtd><mi>cos</mi><mo>(</mo><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              </mtr>
+            </mtable>
+            <mo class="matrix-klammer">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+      <p><strong>Woher die Spalten kommen:</strong> die Spalten einer Abbildungsmatrix sind immer die Bilder der Einheitsvektoren. Dreht man <math><msub><mi>e</mi><mn>1</mn></msub></math> um <math><mi>&#x3B1;</mi></math>, landet er nach der Kreisdefinition bei <math><mrow><mo>(</mo><mi>cos</mi><mi>&#x3B1;</mi><mo>,</mo><mi>sin</mi><mi>&#x3B1;</mi><mo>)</mo></mrow></math>; <math><msub><mi>e</mi><mn>2</mn></msub></math> steht senkrecht darauf und landet bei <math><mrow><mo>(</mo><mo>&#x2212;</mo><mi>sin</mi><mi>&#x3B1;</mi><mo>,</mo><mi>cos</mi><mi>&#x3B1;</mi><mo>)</mo></mrow></math>. Mehr steckt in der Matrix nicht.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Der Vektor <math><mrow><mi>v</mi><mo>=</mo><mo>(</mo><mn>2</mn><mo>,</mo><mn>2</mn><mo>)</mo></mrow></math>, gedreht um <math><mrow><mi>&#x3B1;</mi><mo>=</mo><mn>45</mn><mo>&#xB0;</mo></mrow></math>. Dort ist <math><mrow><mi>cos</mi><mo>(</mo><mn>45</mn><mo>&#xB0;</mo><mo>)</mo><mo>=</mo><mi>sin</mi><mo>(</mo><mn>45</mn><mo>&#xB0;</mo><mo>)</mo><mo>=</mo><mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac></mrow></math>:</p>
+
+      <math display="block">
+        <mrow>
+          <msub><mi>D</mi><mrow><mn>45</mn><mo>&#xB0;</mo></mrow></msub>
+          <mo>=</mo>
+          <mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>Angewandt auf <math><mi>v</mi></math>, Zeile mal Spalte:</p>
+
+      <math display="block">
+        <mrow>
+          <msub><mi>D</mi><mrow><mn>45</mn><mo>&#xB0;</mo></mrow></msub><mi>v</mi>
+          <mo>=</mo>
+          <mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>1</mn><mo>&#x22C5;</mo><mn>2</mn><mo>&#x2212;</mo><mn>1</mn><mo>&#x22C5;</mo><mn>2</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn><mo>&#x22C5;</mo><mn>2</mn><mo>+</mo><mn>1</mn><mo>&#x22C5;</mo><mn>2</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <math display="block">
+        <mrow>
+          <mo>=</mo>
+          <mfrac><msqrt><mn>2</mn></msqrt><mn>2</mn></mfrac>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>0</mn></mtd></mtr>
+              <mtr><mtd><mn>4</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+          <mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>0</mn></mtd></mtr>
+              <mtr><mtd><mn>2</mn><msqrt><mn>2</mn></msqrt></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p><strong>Die Probe kostet nichts:</strong> eine Drehung &#xE4;ndert die L&#xE4;nge nicht. Vorher <math><mrow><mo>&#x2016;</mo><mi>v</mi><mo>&#x2016;</mo><mo>=</mo><msqrt><mrow><mn>4</mn><mo>+</mo><mn>4</mn></mrow></msqrt><mo>=</mo><mn>2</mn><msqrt><mn>2</mn></msqrt></mrow></math>, nachher <math><mrow><msqrt><mrow><mn>0</mn><mo>+</mo><mn>8</mn></mrow></msqrt><mo>=</mo><mn>2</mn><msqrt><mn>2</mn></msqrt></mrow></math>. Passt.</p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 175" role="img" aria-label="Koordinatensystem. Ein Pfeil vom Ursprung zum Punkt (2, 2) zeigt unter fünfundvierzig Grad nach rechts oben. Ein zweiter, gleich langer Pfeil zeigt vom Ursprung senkrecht nach oben auf die y-Achse zum Punkt (0, zwei Wurzel zwei). Ein Kreisbogen zwischen den beiden Pfeilspitzen ist mit fünfundvierzig Grad beschriftet.">
+          <line x1="15" y1="130" x2="245" y2="130" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="130" y1="165" x2="130" y2="15" stroke="var(--axis)" stroke-width="1"/>
+          <text x="248" y="142" text-anchor="end" font-size="10" fill="var(--dim)">x</text>
+          <text x="124" y="20" text-anchor="end" font-size="10" fill="var(--dim)">y</text>
+
+          <path d="M 163.00 97.00 A 46.67 46.67 0 0 0 130.00 83.33" fill="none" stroke="var(--dim)" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="152" y="84" text-anchor="middle" font-size="9" fill="var(--dim)">45&#xB0;</text>
+
+          <line x1="130" y1="130" x2="190" y2="70" stroke="var(--mint)" stroke-width="2.6"/>
+          <polygon points="190.0,70.0 186.61,79.33 180.67,73.39" fill="var(--mint)"/>
+          <text x="196" y="66" text-anchor="start" font-size="9" fill="var(--mint)">v = (2, 2)</text>
+
+          <line x1="130" y1="130" x2="130" y2="45.15" stroke="var(--gold)" stroke-width="2.6"/>
+          <polygon points="130.0,45.15 134.2,54.15 125.8,54.15" fill="var(--gold)"/>
+          <text x="124" y="42" text-anchor="end" font-size="9" fill="var(--gold)">D&#x2084;&#x2085;v</text>
+        </svg>
+        <figcaption>Beide Pfeile sind gleich lang &#x2014; das ist die ganze Aussage. Gedreht wird nur die Richtung.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Die Spalten sind die Bilder von <math><msub><mi>e</mi><mn>1</mn></msub></math> und <math><msub><mi>e</mi><mn>2</mn></msub></math>. Wer das wei&#xDF;, schreibt jede Drehmatrix aus dem Einheitskreis hin, statt sie auswendig zu lernen.</p>
+
+    <p class="fehler">Das Minuszeichen in die falsche Ecke setzen. Es steht <strong>oben rechts</strong>. Bei <math><mrow><msub><mi>D</mi><mrow><mn>90</mn><mo>&#xB0;</mo></mrow></msub></mrow></math> muss <math><msub><mi>e</mi><mn>1</mn></msub></math> auf <math><mrow><mo>(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>)</mo></mrow></math> gehen &#x2014; damit ist die erste Spalte festgelegt und die Frage entschieden.</p>
+  </article>
+
+  <article class="karte" id="spiegelung">
+    <h3>Spiegelung in der Ebene</h3>
+
+    <div class="voraussetzung">Gespiegelt wird an einer Geraden <em>durch den Ursprung</em>, die gegen&#xFC;ber der x-Achse um den Winkel <math><mi>&#x3B1;</mi></math> geneigt ist.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <msub><mi>S</mi><mi>&#x3B1;</mi></msub><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer">(</mo>
+            <mtable>
+              <mtr>
+                <mtd><mi>cos</mi><mo>(</mo><mn>2</mn><mi>&#x3B1;</mi><mo>)</mo></mtd>
+                <mtd><mi>sin</mi><mo>(</mo><mn>2</mn><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              </mtr>
+              <mtr>
+                <mtd><mi>sin</mi><mo>(</mo><mn>2</mn><mi>&#x3B1;</mi><mo>)</mo></mtd>
+                <mtd><mo>&#x2212;</mo><mi>cos</mi><mo>(</mo><mn>2</mn><mi>&#x3B1;</mi><mo>)</mo></mtd>
+              </mtr>
+            </mtable>
+            <mo class="matrix-klammer">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+      <p>Im Argument steht <strong>der doppelte Winkel</strong>, und die Matrix ist symmetrisch. Der Grund f&#xFC;r beides steckt im Bild: ein Vektor, der selbst um <math><mi>&#x3C6;</mi></math> geneigt ist, hat zur Spiegelachse den Abstandswinkel <math><mrow><mi>&#x3B1;</mi><mo>&#x2212;</mo><mi>&#x3C6;</mi></mrow></math> und landet bei <math><mrow><mi>&#x3B1;</mi><mo>+</mo><mo>(</mo><mi>&#x3B1;</mi><mo>&#x2212;</mo><mi>&#x3C6;</mi><mo>)</mo><mo>=</mo><mn>2</mn><mi>&#x3B1;</mi><mo>&#x2212;</mo><mi>&#x3C6;</mi></mrow></math>. Der Winkel wird also an <math><mi>&#x3B1;</mi></math> gespiegelt, und <math><mn>2</mn><mi>&#x3B1;</mi></math> bleibt stehen.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Spiegelung an der <strong>Winkelhalbierenden</strong>, also <math><mrow><mi>&#x3B1;</mi><mo>=</mo><mn>45</mn><mo>&#xB0;</mo></mrow></math>. Dann ist <math><mrow><mn>2</mn><mi>&#x3B1;</mi><mo>=</mo><mn>90</mn><mo>&#xB0;</mo></mrow></math>, also <math><mrow><mi>cos</mi><mo>(</mo><mn>2</mn><mi>&#x3B1;</mi><mo>)</mo><mo>=</mo><mn>0</mn></mrow></math> und <math><mrow><mi>sin</mi><mo>(</mo><mn>2</mn><mi>&#x3B1;</mi><mo>)</mo><mo>=</mo><mn>1</mn></mrow></math>:</p>
+
+      <math display="block">
+        <mrow>
+          <msub><mi>S</mi><mrow><mn>45</mn><mo>&#xB0;</mo></mrow></msub><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>Das ist die Matrix, die die beiden Koordinaten <em>vertauscht</em> &#x2014; genau das tut die Spiegelung an <math><mrow><mi>y</mi><mo>=</mo><mi>x</mi></mrow></math>. Mit <math><mrow><mi>w</mi><mo>=</mo><mo>(</mo><mn>3</mn><mo>,</mo><mn>1</mn><mo>)</mo></mrow></math>:</p>
+
+      <math display="block">
+        <mrow>
+          <msub><mi>S</mi><mrow><mn>45</mn><mo>&#xB0;</mo></mrow></msub><mi>w</mi>
+          <mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>0</mn><mo>&#x22C5;</mo><mn>3</mn><mo>+</mo><mn>1</mn><mo>&#x22C5;</mo><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn><mo>&#x22C5;</mo><mn>3</mn><mo>+</mo><mn>0</mn><mo>&#x22C5;</mo><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+          <mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>3</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p><strong>Zwei Proben, beide ohne Rechnung:</strong> zweimal spiegeln f&#xFC;hrt zur&#xFC;ck, also <math><mrow><msubsup><mi>S</mi><mi>&#x3B1;</mi><mn>2</mn></msubsup><mo>=</mo><mi>E</mi></mrow></math>. Und die Determinante ist <math><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></math> statt <math><mrow><mo>+</mo><mn>1</mn></mrow></math> wie bei der Drehung &#x2014; eine Spiegelung kehrt den Umlaufsinn um.</p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 200" role="img" aria-label="Koordinatensystem mit der gestrichelten Winkelhalbierenden von links unten nach rechts oben. Ein Pfeil zeigt zum Punkt (3, 1) unterhalb der Geraden, ein zweiter zum Punkt (1, 3) oberhalb. Eine kurze gestrichelte Strecke verbindet die beiden Punkte; sie steht senkrecht auf der Winkelhalbierenden, und ihr Mittelpunkt liegt auf ihr.">
+          <line x1="15" y1="130" x2="245" y2="130" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="130" y1="190" x2="130" y2="15" stroke="var(--axis)" stroke-width="1"/>
+          <text x="248" y="142" text-anchor="end" font-size="10" fill="var(--dim)">x</text>
+          <text x="124" y="20" text-anchor="end" font-size="10" fill="var(--dim)">y</text>
+
+          <line x1="70" y1="190" x2="222" y2="38" stroke="var(--rose)" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="214" y="28" text-anchor="end" font-size="9" fill="var(--rose)">y = x</text>
+
+          <line x1="220" y1="100" x2="160" y2="40" stroke="var(--dim)" stroke-width="1" stroke-dasharray="2 3"/>
+          <circle cx="190" cy="70" r="2.5" fill="var(--dim)"/>
+
+          <line x1="130" y1="130" x2="220" y2="100" stroke="var(--mint)" stroke-width="2.6"/>
+          <polygon points="220.0,100.0 212.79,106.83 210.13,98.86" fill="var(--mint)"/>
+          <text x="220" y="122" text-anchor="middle" font-size="9" fill="var(--mint)">w = (3, 1)</text>
+
+          <line x1="130" y1="130" x2="160" y2="40" stroke="var(--gold)" stroke-width="2.6"/>
+          <polygon points="160.0,40.0 161.14,49.87 153.17,47.21" fill="var(--gold)"/>
+          <text x="166" y="34" text-anchor="start" font-size="9" fill="var(--gold)">S&#x2084;&#x2085;w = (1, 3)</text>
+        </svg>
+        <figcaption>Die Verbindungsstrecke steht senkrecht auf der Achse, und ihr Mittelpunkt <math><mrow><mo>(</mo><mn>2</mn><mo stretchy="false">|</mo><mn>2</mn><mo>)</mo></mrow></math> liegt auf ihr. Das ist die Definition der Spiegelung, und zugleich die Probe.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Drehung: <math><mrow><mi>det</mi><mo>=</mo><mo>+</mo><mn>1</mn></mrow></math>, Minuszeichen oben rechts, Winkel einfach. Spiegelung: <math><mrow><mi>det</mi><mo>=</mo><mo>&#x2212;</mo><mn>1</mn></mrow></math>, Matrix symmetrisch, Winkel doppelt.</p>
+
+    <p class="fehler"><math><mi>&#x3B1;</mi></math> statt <math><mrow><mn>2</mn><mi>&#x3B1;</mi></mrow></math> in die Matrix schreiben. Die Probe dagegen: f&#xFC;r <math><mrow><mi>&#x3B1;</mi><mo>=</mo><mn>0</mn></mrow></math> muss die Spiegelung an der x-Achse herauskommen, also <math><mrow><mi>diag</mi><mo>(</mo><mn>1</mn><mo>,</mo><mo>&#x2212;</mo><mn>1</mn><mo>)</mo></mrow></math>. Mit dem doppelten Winkel stimmt das; mit dem einfachen auch &#x2014; deshalb pr&#xFC;ft man zus&#xE4;tzlich bei <math><mrow><mi>&#x3B1;</mi><mo>=</mo><mn>45</mn><mo>&#xB0;</mo></mrow></math>, wo nur der doppelte Winkel die Vertauschungsmatrix liefert.</p>
+  </article>
+
+  <article class="karte" id="verketten">
+    <h3>Verketten: was zwei Spiegelungen ergeben</h3>
+
+    <div class="voraussetzung">Alle Matrizen sind orthogonal, also ist auch jedes Produkt orthogonal. Die Determinante multipliziert sich mit: <math><mrow><mo>(</mo><mo>&#x2212;</mo><mn>1</mn><mo>)</mo><mo>&#x22C5;</mo><mo>(</mo><mo>&#x2212;</mo><mn>1</mn><mo>)</mo><mo>=</mo><mo>+</mo><mn>1</mn></mrow></math>.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <msub><mi>D</mi><mi>&#x3B1;</mi></msub><mo>&#x22C5;</mo><msub><mi>D</mi><mi>&#x3B2;</mi></msub>
+          <mo>=</mo>
+          <msub><mi>D</mi><mrow><mi>&#x3B1;</mi><mo>+</mo><mi>&#x3B2;</mi></mrow></msub>
+        </mrow>
+      </math>
+      <math display="block">
+        <mrow>
+          <msub><mi>S</mi><mi>&#x3B1;</mi></msub><mo>&#x22C5;</mo><msub><mi>S</mi><mi>&#x3B2;</mi></msub>
+          <mo>=</mo>
+          <msub><mi>D</mi><mrow><mn>2</mn><mo>(</mo><mi>&#x3B1;</mi><mo>&#x2212;</mo><mi>&#x3B2;</mi><mo>)</mo></mrow></msub>
+        </mrow>
+      </math>
+      <p>Die erste Zeile ist genau das Additionstheorem f&#xFC;r Sinus und Kosinus, in Matrixform. Die zweite ist die interessantere: <strong>zwei Spiegelungen ergeben eine Drehung</strong> &#x2014; und zwar um den <em>doppelten</em> Winkel zwischen den beiden Achsen. Die Determinante sagt es schon voraus: minus mal minus ist plus, also kann nur eine Drehung herauskommen.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Zwei Achsen unter <math><mrow><mi>&#x3B2;</mi><mo>=</mo><mn>15</mn><mo>&#xB0;</mo></mrow></math> und <math><mrow><mi>&#x3B1;</mi><mo>=</mo><mn>45</mn><mo>&#xB0;</mo></mrow></math>. Der Zwischenwinkel ist <math><mrow><mn>30</mn><mo>&#xB0;</mo></mrow></math>, die Drehung also um <math><mrow><mn>60</mn><mo>&#xB0;</mo></mrow></math>. Nachgerechnet an einem Vektor, der unter <math><mrow><mn>20</mn><mo>&#xB0;</mo></mrow></math> liegt:</p>
+
+      <math display="block">
+        <mrow>
+          <mn>20</mn><mo>&#xB0;</mo>
+          <mspace width="0.7em"></mspace><mo>&#x27F6;</mo><mspace width="0.7em"></mspace>
+          <mn>10</mn><mo>&#xB0;</mo>
+          <mspace width="0.7em"></mspace><mo>&#x27F6;</mo><mspace width="0.7em"></mspace>
+          <mn>80</mn><mo>&#xB0;</mo>
+        </mrow>
+      </math>
+
+      <p>Der erste Pfeil ist die Spiegelung an der <math><mrow><mn>15</mn><mo>&#xB0;</mo></mrow></math>-Achse, der zweite die an der <math><mrow><mn>45</mn><mo>&#xB0;</mo></mrow></math>-Achse. Beide Male wird der Winkel an der Achse gespiegelt: <math><mrow><mn>2</mn><mo>&#x22C5;</mo><mn>15</mn><mo>&#x2212;</mo><mn>20</mn><mo>=</mo><mn>10</mn></mrow></math>, dann <math><mrow><mn>2</mn><mo>&#x22C5;</mo><mn>45</mn><mo>&#x2212;</mo><mn>10</mn><mo>=</mo><mn>80</mn></mrow></math>. Von <math><mrow><mn>20</mn><mo>&#xB0;</mo></mrow></math> nach <math><mrow><mn>80</mn><mo>&#xB0;</mo></mrow></math> sind <math><mrow><mn>60</mn><mo>&#xB0;</mo></mrow></math> &#x2014; unabh&#xE4;ngig davon, wo der Vektor angefangen hat.</p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 215" role="img" aria-label="Koordinatensystem mit zwei gestrichelten Spiegelachsen durch den Ursprung, eine flach unter fünfzehn Grad, die andere steiler unter fünfundvierzig Grad. Drei Pfeile gleicher Länge: der Ausgangsvektor unter zwanzig Grad, sein Spiegelbild an der flachen Achse knapp darunter unter zehn Grad, und dessen Spiegelbild an der steilen Achse hoch oben unter achtzig Grad. Ein Kreisbogen vom ersten zum letzten Pfeil ist mit sechzig Grad beschriftet.">
+          <line x1="15" y1="130" x2="245" y2="130" stroke="var(--axis)" stroke-width="1"/>
+          <line x1="130" y1="205" x2="130" y2="15" stroke="var(--axis)" stroke-width="1"/>
+          <text x="248" y="142" text-anchor="end" font-size="10" fill="var(--dim)">x</text>
+          <text x="124" y="20" text-anchor="end" font-size="10" fill="var(--dim)">y</text>
+
+          <line x1="225.63" y1="104.38" x2="34.37" y2="155.62" stroke="var(--rose)" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="231" y="100" text-anchor="end" font-size="9" fill="var(--rose)">15&#xB0;</text>
+          <line x1="200" y1="60" x2="60" y2="200" stroke="var(--rose)" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="206" y="56" text-anchor="end" font-size="9" fill="var(--rose)">45&#xB0;</text>
+
+          <path d="M 175.44 113.46 A 48.36 48.36 0 0 0 138.40 82.37" fill="none" stroke="var(--dim)" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="161" y="90" text-anchor="middle" font-size="9" fill="var(--dim)">60&#xB0;</text>
+
+          <line x1="130" y1="130" x2="203.3" y2="103.32" stroke="var(--mint)" stroke-width="2.6"/>
+          <polygon points="203.3,103.32 196.28,110.35 193.4,102.45" fill="var(--mint)"/>
+          <text x="200" y="92" text-anchor="end" font-size="9" fill="var(--mint)">p</text>
+
+          <line x1="130" y1="130" x2="206.82" y2="116.46" stroke="var(--dim)" stroke-width="1.8"/>
+          <polygon points="206.82,116.46 198.68,122.15 197.22,113.88" fill="var(--dim)"/>
+          <text x="212" y="126" text-anchor="start" font-size="9" fill="var(--dim)">S&#x2081;&#x2085;p</text>
+
+          <line x1="130" y1="130" x2="143.54" y2="53.18" stroke="var(--gold)" stroke-width="2.6"/>
+          <polygon points="143.54,53.18 146.12,62.78 137.85,61.32" fill="var(--gold)"/>
+          <text x="150" y="49" text-anchor="start" font-size="9" fill="var(--gold)">S&#x2084;&#x2085;S&#x2081;&#x2085;p</text>
+        </svg>
+        <figcaption>Zweimal gespiegelt, einmal gedreht. Der Drehwinkel <math><mrow><mn>60</mn><mo>&#xB0;</mo></mrow></math> ist doppelt so gro&#xDF; wie der Winkel <math><mrow><mn>30</mn><mo>&#xB0;</mo></mrow></math> zwischen den beiden Achsen.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">An der Determinante liest man ab, was herauskommen kann: <math><mrow><mo>+</mo><mn>1</mn></mrow></math> hei&#xDF;t Drehung, <math><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></math> hei&#xDF;t Spiegelung. Eine gerade Anzahl von Spiegelungen ergibt immer eine Drehung, eine ungerade immer eine Spiegelung.</p>
+
+    <p class="fehler">Die Reihenfolge f&#xFC;r gleichg&#xFC;ltig halten. Es ist <math><mrow><msub><mi>D</mi><mi>&#x3B1;</mi></msub><msub><mi>S</mi><mi>&#x3B2;</mi></msub><mo>=</mo><msub><mi>S</mi><mrow><mi>&#x3B2;</mi><mo>+</mo><mi>&#x3B1;</mi><mo>/</mo><mn>2</mn></mrow></msub></mrow></math>, aber <math><mrow><msub><mi>S</mi><mi>&#x3B2;</mi></msub><msub><mi>D</mi><mi>&#x3B1;</mi></msub><mo>=</mo><msub><mi>S</mi><mrow><mi>&#x3B2;</mi><mo>&#x2212;</mo><mi>&#x3B1;</mi><mo>/</mo><mn>2</mn></mrow></msub></mrow></math>. Beides sind Spiegelungen, aber an Achsen, die um <math><mi>&#x3B1;</mi></math> auseinanderliegen. Nur die Drehungen untereinander vertauschen.</p>
+
+    <p class="querlink"><a href="../formeln/drehungen-spiegelungen.html">Nur die Formeln, ohne Erkl&#xE4;rung &#x2192; Drehungen und Spiegelungen in der Formelsammlung</a></p>
+  </article>
+
+  <p class="seitenfuss"><a href="index.html">&#x2190; Alle Karten im &#xDC;berblick</a></p>
+
+</div>
+
+<script src="../shared/abfrage.js"></script>
+<script>MT.abfrage.start();</script>
+</body>
+</html>
