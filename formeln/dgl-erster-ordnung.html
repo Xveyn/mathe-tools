@@ -13,7 +13,7 @@
 <div class="wrap">
 
   <h1>Differentialgleichungen erster Ordnung</h1>
-  <p class="lede">Anfangswertproblem, trennbare Variablen und die lineare Gleichung mit konstantem Koeffizienten &#x2014; dazu die Ansatztabelle für die spezielle Lösung. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
+  <p class="lede">Anfangswertproblem, Normalform, trennbare Variablen und die lineare Gleichung mit konstantem oder variablem Koeffizienten &#x2014; dazu die Ansatztabelle für die spezielle Lösung. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
   <article class="eintrag" id="explizite-dgl-und-awp" data-suche="awp anfangswertproblem richtungsfeld loesung explizit gewoehnlich">
     <h3>Explizite DGL erster Ordnung und AWP <span class="quelle">Skript S. 41</span></h3>
@@ -33,6 +33,40 @@
     </math>
     <p class="fall">Eine Lösung ist eine Funktion y(x), die die Gleichung für alle zulässigen x erfüllt. Kommt die zweite Zeile dazu, heißt die Aufgabe <strong>Anfangswertproblem (AWP)</strong> &#x2014; und die Lösung ist dann eindeutig.</p>
     <p class="fall">Geometrisch gibt f(x, y) in jedem Punkt die Steigung vor: das <strong>Richtungsfeld</strong>. Die Anfangsbedingung legt fest, welche der Kurven gemeint ist.</p>
+  </article>
+
+  <article class="eintrag" id="normalform-herstellen" data-suche="umstellen sortieren fuehrender koeffizient teilen vorzeichen alpha beta gamma">
+    <h3>Normalform herstellen <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Erster Schritt vor jeder Fallunterscheidung; die Aufgaben DGL 1d, 1f und 2f sind nicht in Normalform gestellt</p>
+    <p class="fall">Erster Ordnung, mit a &#x2260; 0:</p>
+    <math display="block">
+      <mrow>
+        <mi>a</mi><msup><mi>y</mi><mo>&#x2032;</mo></msup>
+        <mo>+</mo><mi>b</mi><mi>y</mi><mo>=</mo><mi>s</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <msup><mi>y</mi><mo>&#x2032;</mo></msup><mo>=</mo>
+        <mo>&#x2212;</mo><mfrac><mi>b</mi><mi>a</mi></mfrac><mi>y</mi>
+        <mo>+</mo><mfrac><mrow><mi>s</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mi>a</mi></mfrac>
+      </mrow>
+    </math>
+    <p class="fall">Zweiter Ordnung, mit a &#x2260; 0:</p>
+    <math display="block">
+      <mrow>
+        <mi>a</mi><msup><mi>y</mi><mo>&#x2033;</mo></msup>
+        <mo>+</mo><mi>b</mi><msup><mi>y</mi><mo>&#x2032;</mo></msup>
+        <mo>+</mo><mi>c</mi><mi>y</mi><mo>=</mo><mi>s</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msup><mi>y</mi><mo>&#x2033;</mo></msup>
+        <mo>+</mo><mfrac><mi>b</mi><mi>a</mi></mfrac><msup><mi>y</mi><mo>&#x2032;</mo></msup>
+        <mo>+</mo><mfrac><mi>c</mi><mi>a</mi></mfrac><mi>y</mi>
+        <mo>=</mo><mfrac><mrow><mi>s</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mi>a</mi></mfrac>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Die St&#xF6;rfunktion wird mitgeteilt.</strong> Wer nur die linke Seite durch a teilt, rechnet ab da eine andere Gleichung.</p>
+    <p class="fall"><strong>Die Vorzeichenfalle:</strong> das Skript schreibt die Gleichung erster Ordnung mit &#x3B1; <em>rechts</em> (y&#x2032; = &#x3B1;y + &#x3B2;), die zweiter Ordnung mit &#x3B1; <em>links</em> (y&#x2033; + &#x3B1;y&#x2032; + &#x3B2;y = &#x3B3;). Aus y&#x2032; + 3y = &#x2026; wird deshalb &#x3B1; = &#x2212;3, aus y&#x2033; + 3y&#x2032; + &#x2026; dagegen &#x3B1; = +3.</p>
   </article>
 
   <article class="eintrag" id="trennbare-variablen" data-suche="separation trennen integrieren dy dx aufloesen konstante">
@@ -64,6 +98,34 @@
     <p class="fall">Nach der Trennung darf links nur noch y stehen und rechts nur noch x. Geht das nicht, ist die Gleichung nicht von diesem Typ.</p>
   </article>
 
+  <article class="eintrag" id="implizite-loesung" data-suche="implizit nicht aufloesbar zweig wurzel vorzeichen konstante loesung singulaer verloren">
+    <h3>Implizite L&#xF6;sung und verlorene konstante L&#xF6;sungen <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Nach dem Integrieren beider Seiten bei trennbaren Variablen; in Aufgabe DGL 1b bleibt die L&#xF6;sung implizit</p>
+    <math display="block">
+      <mrow>
+        <mi>G</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>=</mo>
+        <mi>F</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>+</mo><mi>C</mi>
+        <mspace width="0.8em"></mspace><mtext>mit</mtext><mspace width="0.8em"></mspace>
+        <msup><mi>G</mi><mo>&#x2032;</mo></msup><mo>=</mo>
+        <mfrac><mn>1</mn><mi>g</mi></mfrac>
+        <mo>,</mo><mspace width="0.4em"></mspace>
+        <msup><mi>F</mi><mo>&#x2032;</mo></msup><mo>=</mo><mi>f</mi>
+      </mrow>
+    </math>
+    <p class="fall">Diese Gleichung <em>ist</em> schon die L&#xF6;sung, nur in impliziter Form. Nach y aufl&#xF6;sen darf man, man muss aber nicht &#x2014; oft geht es gar nicht.</p>
+    <p class="fall">Wird zum Aufl&#xF6;sen eine Wurzel gezogen, entstehen <strong>zwei Zweige</strong>. Welcher gilt, entscheidet allein der Anfangswert:</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>y</mi><mn>2</mn></msup><mo>&#x2212;</mo><msup><mi>x</mi><mn>2</mn></msup>
+        <mo>=</mo><mi>C</mi>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <mi>y</mi><mo>=</mo><mo>&#xB1;</mo>
+        <msqrt><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>C</mi></mrow></msqrt>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Beim Teilen durch g(y) gehen L&#xF6;sungen verloren:</strong> ist g(y*) = 0, so ist die konstante Funktion y &#x2261; y* selbst eine L&#xF6;sung der DGL. Sie steht in keiner Formel, weil sie vor dem Integrieren wegdividiert wurde &#x2014; sie ist von Hand nachzutragen.</p>
+  </article>
+
   <article class="eintrag" id="lineare-dgl-erster-ordnung" data-suche="homogen inhomogen konstante koeffizienten stoerfunktion exponentialansatz">
     <h3>Lineare DGL erster Ordnung mit konstantem Koeffizienten <span class="quelle">Skript S. 44, 45</span></h3>
     <p class="bedingung">α &#x2208; ℝ konstant, β(x) die Störfunktion; β = 0 heißt <em>homogen</em></p>
@@ -91,6 +153,23 @@
       </mrow>
     </math>
     <p class="fall">Die Lösung der <strong>inhomogenen</strong> Gleichung ist die Summe aus der homogenen Lösung <math><mrow><mi>C</mi><msup><mi>e</mi><mrow><mi>&#x3B1;</mi><mi>x</mi></mrow></msup></mrow></math> und <em>einer</em> speziellen Lösung. Die spezielle Lösung findet man über einen Ansatz vom Typ der Störfunktion &#x2014; siehe den nächsten Eintrag.</p>
+  </article>
+
+  <article class="eintrag" id="homogene-dgl-variabler-koeffizient" data-suche="ortsabhaengig nicht konstant stammfunktion exponent integrierender faktor cos(x)y">
+    <h3>Homogene lineare DGL mit variablem Koeffizienten <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">y&#x2032; + a(x)&#x22C5;y = 0 mit stetigem a; das Skript behandelt nur a konstant, Aufgabe DGL 1c nicht</p>
+    <math display="block">
+      <mrow>
+        <mi>y</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <mi>C</mi><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mi>A</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></msup>
+        <mspace width="0.8em"></mspace><mtext>mit</mtext><mspace width="0.8em"></mspace>
+        <msup><mi>A</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>=</mo><mi>a</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">A ist <em>irgendeine</em> Stammfunktion von a; ihre eigene Integrationskonstante steckt schon in C.</p>
+    <p class="fall">Herkunft: das ist nichts als die Trennung der Variablen, <math><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mi>y</mi></mfrac><mo>=</mo><mo>&#x2212;</mo><mi>a</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mrow></math>.</p>
+    <p class="fall">F&#xFC;r konstantes a = &#x2212;&#x3B1; steht daraus wieder <math><mrow><mi>y</mi><mo>=</mo><mi>C</mi><msup><mi>e</mi><mrow><mi>&#x3B1;</mi><mi>x</mi></mrow></msup></mrow></math> &#x2014; die Formel des vorigen Eintrags ist der Sonderfall.</p>
   </article>
 
   <article class="eintrag" id="ansatztabelle-erster-ordnung" data-suche="ansatz stoerfunktion polynom exponential resonanz koeffizienten einsetzen">
