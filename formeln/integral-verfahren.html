@@ -15,7 +15,7 @@
   <h1>Integral: Verfahren und Partialbrüche</h1>
   <p class="lede">Die drei Wege zu einer Stammfunktion, die das Skript führt: partielle Integration, Substitution und die Zerlegung gebrochen rationaler Funktionen. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <article class="eintrag" id="partielle-integration" data-suche="produktregel umkehrung faktoren waehlen ln x">
+  <article class="eintrag" id="partielle-integration" data-suche="produktregel umkehrung faktoren waehlen ln x mehrmals zweimal wiederholen grad polynom abbauen">
     <h3>Partielle Integration <span class="quelle">Skript S. 28</span></h3>
     <p class="bedingung">f und g stetig differenzierbar auf [a, b]</p>
     <math display="block">
@@ -54,6 +54,8 @@
     </math>
     <p class="fall">Das Gegenstück zur Produktregel. Sie liefert <strong>kein Ergebnis, sondern ein anderes Integral</strong> &#x2014; die Wahl von f und g&#x2032; entscheidet, ob es leichter wird.</p>
     <p class="fall">Faustregel für die Wahl: f ist der Faktor, der beim Ableiten einfacher wird (ein Polynom, ein Logarithmus), g&#x2032; der, den man leicht integrieren kann (Exponentialfunktion, Sinus, Kosinus).</p>
+    <p class="fall"><strong>Bei einem Polynom vom Grad m ist m-mal partiell zu integrieren.</strong> Jeder Durchgang senkt den Grad um eins, bis vorn eine Konstante steht und das Restintegral ein Grundintegral ist. Bei <math><mrow><msup><mi>x</mi><mn>2</mn></msup><msup><mi>e</mi><mi>x</mi></msup></mrow></math> sind das zwei Durchgänge (Aufgabe INT 14c).</p>
+    <p class="fall">Das ist etwas anderes als der Ringschluss im nächsten Eintrag: dort kommt das Ausgangsintegral zurück, hier wird es mit jedem Schritt einfacher.</p>
     <p class="fall">Für <math><mrow><mo class="operator-gross">&#x222B;</mo><mi>ln</mi><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi></mrow></math> setzt man f = ln(x) und g&#x2032; = 1 &#x2014; der zweite Faktor wird künstlich ergänzt.</p>
   </article>
 
@@ -87,7 +89,7 @@
     <p class="fall">Das Verfahren trägt bei <math><msup><mi>sin</mi><mn>2</mn></msup></math> und <math><msup><mi>cos</mi><mn>2</mn></msup></math> und ebenso bei Produkten wie <math><mrow><msup><mi>e</mi><mi>x</mi></msup><mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow></math>, wo man zweimal partiell integrieren muss, bevor sich der Ring schließt.</p>
   </article>
 
-  <article class="eintrag" id="sin2-und-cos2" data-suche="quadrat sinus kosinus fertiges ergebnis halbwinkel">
+  <article class="eintrag" id="sin2-und-cos2" data-suche="quadrat sinus kosinus fertiges ergebnis halbwinkel ungerade potenz dritte hoch drei pythagoras faktor abspalten">
     <h3>Die Integrale von sin² und cos² <span class="quelle">Skript S. 30</span></h3>
     <p class="bedingung">Fertige Ergebnisse, jeweils bis auf eine Konstante C</p>
     <math display="block">
@@ -109,11 +111,25 @@
       </mrow>
     </math>
     <p class="fall">Die Summe der beiden ist x + C &#x2014; genau das, was <math><mrow><msup><mi>sin</mi><mn>2</mn></msup><mo>+</mo><msup><mi>cos</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn></mrow></math> verlangt. Das ist zugleich die Probe.</p>
+    <p class="fall"><strong>Ungerade Potenzen gehen ganz anders &#x2014; und leichter.</strong> Man spaltet einen Faktor ab, schreibt den geraden Rest mit dem Pythagoras um und substituiert; partielle Integration braucht es nicht:</p>
+    <math display="block">
+      <mrow>
+        <mo class="operator-gross">&#x222B;</mo>
+        <msup><mi>sin</mi><mn>3</mn></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mo class="operator-gross">&#x222B;</mo>
+        <mo>(</mo><mn>1</mn><mo>&#x2212;</mo><msup><mi>cos</mi><mn>2</mn></msup><mo>(</mo><mi>x</mi><mo>)</mo><mo>)</mo>
+        <mi>sin</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+      </mrow>
+    </math>
+    <p class="fall">Mit z = cos(x) steht dort <math><mrow><mo>&#x2212;</mo><mo class="operator-gross">&#x222B;</mo><mo>(</mo><mn>1</mn><mo>&#x2212;</mo><msup><mi>z</mi><mn>2</mn></msup><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>z</mi></mrow></math>, ein Grundintegral. So gestellt in Aufgabe INT 19a.</p>
     <p class="fall">Daraus folgt unmittelbar <math><mrow><msubsup><mo class="operator-gross">&#x222B;</mo><mn>0</mn><mi>&#x3C0;</mi></msubsup><msup><mi>sin</mi><mn>2</mn></msup><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi><mo>=</mo><mfrac><mi>&#x3C0;</mi><mn>2</mn></mfrac></mrow></math>.</p>
   </article>
 
-  <article class="eintrag" id="substitutionsregel" data-suche="kettenregel neue variable grenzen mitsubstituieren ruecksubstitution">
-    <h3>Substitutionsregel <span class="quelle">Skript S. 30, 31, 32</span></h3>
+  <article class="eintrag" id="substitutionsregel" data-suche="kettenregel neue variable grenzen mitsubstituieren ruecksubstitution umkehrung nach x aufloesen wurzel dx ersetzen ableitung fehlt">
+    <h3>Substitutionsregel <span class="quelle">Skript S. 30, 31, 32, 34</span></h3>
     <p class="bedingung">f stetig, g stetig differenzierbar und bijektiv; x = g(t), also dx = g&#x2032;(t) dt</p>
     <math display="block">
       <mrow>
@@ -159,6 +175,19 @@
         <mspace width="0.2em"></mspace><mi>d</mi><mi>z</mi>
       </mrow>
     </math>
+    <p class="fall"><strong>Steht h&#x2032;(x) <em>nicht</em> im Integranden</strong>, ist das kein Hinderungsgrund &#x2014; man löst die Substitutionsgleichung nach x auf und ersetzt auch das:</p>
+    <math display="block">
+      <mrow>
+        <mi>z</mi><mo>=</mo><mi>h</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <mi>d</mi><mi>x</mi><mo>=</mo>
+        <mfrac><mrow><mi>d</mi><mi>z</mi></mrow><mrow><msup><mi>h</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mfrac>
+        <mo>,</mo><mspace width="0.8em"></mspace>
+        <mi>x</mi><mo>=</mo>
+        <msup><mi>h</mi><mrow><mo>&#x2212;</mo><mn>1</mn></mrow></msup><mo>(</mo><mi>z</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <p class="fall">Bei z = 1 &#x2212; 3x etwa ist dx = &#x2212;dz/3 <em>und</em> x = (1 &#x2212; z)/3; beides wird eingesetzt, danach steht wirklich nur noch z da. So gestellt in den Aufgaben INT 16f und INT 22c &#x2014; der Regelfall, wenn unter einer Wurzel oder im Nenner ein Term steht, dessen Ableitung nirgends auftaucht.</p>
   </article>
 
   <article class="eintrag" id="vier-standardformen" data-suche="lineare substitution muster erkennen ohne rechnung cotangens">
