@@ -35,7 +35,7 @@ zeigt.
 
 | Thema | Worum es geht |
 |---|---|
-| [Integralrechnung — Grundlagen und Hauptsatz](formeln/integral-grundlagen.html) | Ober- und Untersumme, Integralfunktion, beide Teile des Hauptsatzes, Grundintegrale-Tabelle, uneigentliche Integrale. |
+| [Integralrechnung — Grundlagen und Hauptsatz](formeln/integral-grundlagen.html) | Ober- und Untersumme, Integralfunktion, beide Teile des Hauptsatzes, Grundintegrale-Tabelle, uneigentliche Integrale samt Konvergenzkriterium. |
 | [Integralrechnung — Verfahren und Partialbrüche](formeln/integral-verfahren.html) | Partielle Integration, Substitutionsregel, Partialbruchzerlegung, Polynomdivision. |
 | [Differentialgleichungen erster Ordnung](formeln/dgl-erster-ordnung.html) | Anfangswertproblem, Normalform, trennbare Variablen samt impliziter Lösung, lineare DGL erster Ordnung — auch mit variablem Koeffizienten —, Ansatztabelle. |
 | [Differentialgleichungen zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) | Charakteristische Gleichung, die drei Fälle der Diskriminante samt ihren Konstanten, Ansatztabelle mit Resonanz, drei Schreibweisen nebeneinander, gedämpfte und erzwungene Schwingung. |
@@ -50,10 +50,10 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-**Vierzehn Themen, 170 Einträge — vollständig.** Alle vier Kapitel des
-Stoffes sind abgedeckt: Integralrechnung (25 Einträge),
+**Vierzehn Themen, 171 Einträge — vollständig.** Alle vier Kapitel des
+Stoffes sind abgedeckt: Integralrechnung (26 Einträge),
 Differentialgleichungen (20), lineare Algebra (93) und Funktionen mehrerer
-Variablen (32). Zweiundvierzig Einträge stehen neben dem Skript und sagen das in ihrer
+Variablen (32). Dreiundvierzig Einträge stehen neben dem Skript und sagen das in ihrer
 Quellenangabe — sie stammen aus den Übungsblättern.
 Erreichbar ist die
 Sammlung von der Startseite aus, dazu über

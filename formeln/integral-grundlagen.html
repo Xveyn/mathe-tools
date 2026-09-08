@@ -417,6 +417,35 @@
     <p class="fall">Im dritten Fall müssen <strong>beide</strong> Grenzwerte existieren. Fehlt einer, ist das ganze Integral divergent.</p>
   </article>
 
+  <article class="eintrag" id="konvergenz-von-potenzen" data-suche="konvergiert divergiert exponent kriterium massstab vergleich potenz wurzel entscheiden ob existiert">
+    <h3>Wann eine Potenz uneigentlich integrierbar ist <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">s &gt; 0; die beiden Maßstäbe, an denen sich fast jedes uneigentliche Integral entscheidet &#x2014; das Skript zeigt nur vier Beispiele, die Aufgaben INT 12 und INT 21 verlangen die Regel</p>
+    <p class="fall"><strong>Draußen</strong>, auf [1, &#x221E;[ &#x2014; konvergiert genau dann, wenn <strong>s &gt; 1</strong>:</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mn>1</mn><mi>&#x221E;</mi></msubsup>
+        <msup><mi>x</mi><mrow><mo>&#x2212;</mo><mi>s</mi></mrow></msup>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mfrac><mn>1</mn><mrow><mi>s</mi><mo>&#x2212;</mo><mn>1</mn></mrow></mfrac>
+      </mrow>
+    </math>
+    <p class="fall"><strong>An der Null</strong>, auf ]0, 1] &#x2014; konvergiert genau dann, wenn <strong>s &lt; 1</strong>:</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mn>0</mn><mn>1</mn></msubsup>
+        <msup><mi>x</mi><mrow><mo>&#x2212;</mo><mi>s</mi></mrow></msup>
+        <mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mfrac><mn>1</mn><mrow><mn>1</mn><mo>&#x2212;</mo><mi>s</mi></mrow></mfrac>
+      </mrow>
+    </math>
+    <p class="fall"><strong>s = 1 divergiert in beiden Fällen</strong> &#x2014; dort steht der Logarithmus, und der wächst an beiden Enden über alle Grenzen. Er ist die Grenze, an der es kippt.</p>
+    <p class="fall">Merkbild: draußen muss der Exponent <em>groß</em> genug sein, damit die Funktion schnell genug fällt; an der Null <em>klein</em> genug, damit sie nicht zu schnell wächst. Deshalb konvergiert 1/x&#xB2; auf [1, &#x221E;[ und 1/&#x221A;x auf ]0, 1] &#x2014; und keines von beiden umgekehrt.</p>
+    <p class="fall"><strong>An einer Polstelle x<sub>0</sub></strong> gilt dieselbe Schranke für (x &#x2212; x<sub>0</sub>)<sup>&#x2212;s</sup>: über ein endliches Intervall, das an x<sub>0</sub> stößt, konvergiert es genau für s &lt; 1. Eine <em>einfache</em> Nullstelle im Nenner gibt s = 1 und damit Divergenz &#x2014; so in INT 12h und in INT 21a und 21c.</p>
+    <p class="fall">Steht statt einer Potenz ein Produkt aus Polynom und <math><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mi>x</mi></mrow></msup></math>, entscheidet die Exponentialfunktion: sie schlägt jedes Polynom, der Grenzwert ist 0 und das Integral konvergiert (INT 12e).</p>
+  </article>
+
   <article class="eintrag" id="nicht-ueber-polstellen" data-suche="warnung fehler stammfunktion blind einsetzen gebrochen rational">
     <h3>Nicht über Polstellen hinweg integrieren <span class="quelle">Skript S. 27, 39</span></h3>
     <p class="bedingung">Warnung; gilt für jede Definitionslücke im Integrationsintervall</p>
