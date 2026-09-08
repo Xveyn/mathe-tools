@@ -378,6 +378,33 @@
     <p class="fall">Zwei Fälle zum Merken: das Wirbelfeld f(x, y, z) = (&#x2212;y, x, 0) hat rot(f) = (0, 0, 2) und div(f) = 0, ist also quellenfrei. Das Zentralfeld g(x, y, z) = (x, y, z) hat rot(g) = (0, 0, 0) und div(g) = 3, ist also wirbelfrei mit konstanter Quellstärke.</p>
   </article>
 
+  <article class="eintrag" id="wirbelfrei-und-quellenfrei" data-suche="rot grad null div rot null potential potentialfeld elektrisches feld nullregel schwarz folgerung">
+    <h3>Gradientenfelder sind wirbelfrei, Wirbelfelder quellenfrei <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">f beziehungsweise F zweimal stetig partiell differenzierbar auf dem ℝ³; beide Regeln folgen allein aus dem Satz von Schwarz &#x2014; Aufgabe ANA 19 verlangt den Nachweis der ersten</p>
+    <math display="block">
+      <mrow>
+        <mi>rot</mi><mo>(</mo><mi>grad</mi><mspace width="0.2em"></mspace><mi>f</mi><mo>)</mo>
+        <mo>=</mo>
+        <mo>(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>div</mi><mo>(</mo><mi>rot</mi><mspace width="0.2em"></mspace><mi>F</mi><mo>)</mo>
+        <mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <p class="fall">Der Nachweis ist beide Male derselbe: ausschreiben, und jeder Summand hebt sich gegen den mit <em>vertauschter</em> Ableitungsreihenfolge weg. Ohne die Voraussetzung von Schwarz &#x2014; also ohne die Stetigkeit der zweiten Ableitungen &#x2014; gilt das nicht.</p>
+    <p class="fall">In der Physik heißt f ein <strong>Potential</strong> und das zugehörige Feld ist sein negativer Gradient. Aus der ersten Regel folgt damit: <strong>jedes Potentialfeld ist wirbelfrei.</strong> So gebaut ist das elektrostatische Feld in Aufgabe ANA 20:</p>
+    <math display="block">
+      <mrow>
+        <mi>E</mi><mo>=</mo><mo>&#x2212;</mo><mi>grad</mi><mspace width="0.2em"></mspace><mi>&#x3C6;</mi>
+      </mrow>
+    </math>
+    <p class="fall">Komponentenweise ist das <math><mrow><msub><mi>E</mi><mi>x</mi></msub><mo>=</mo><mo>&#x2212;</mo><mfrac><mrow><mo>&#x2202;</mo><mi>&#x3C6;</mi></mrow><mrow><mo>&#x2202;</mo><mi>x</mi></mrow></mfrac></mrow></math> und ebenso für y und z &#x2014; drei partielle Ableitungen, sonst nichts.</p>
+    <p class="fall">Die Umkehrung &#x2014; ob umgekehrt jedes wirbelfreie Feld ein Potential besitzt &#x2014; gehört nicht mehr zum Stoff. Sie gilt nicht auf jedem Gebiet.</p>
+  </article>
+
   <article class="eintrag" id="hoehere-ableitungen" data-suche="zweite ableitung schwarz vertauschen reihenfolge gemischt schreibweise">
     <h3>Höhere partielle Ableitungen <span class="quelle">Skript S. 120, 121</span></h3>
     <p class="bedingung">Sind die partiellen Ableitungen wieder partiell differenzierbar, entstehen die höheren Ableitungen</p>
