@@ -13,7 +13,7 @@
 <div class="wrap">
 
   <h1>Differentialgleichungen zweiter Ordnung</h1>
-  <p class="lede">Charakteristische Gleichung, die drei Fälle der Diskriminante samt ihren Konstanten, die Ansatztabelle samt Resonanz, das Vier-Schritt-Verfahren und die gedämpfte Schwingung. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
+  <p class="lede">Charakteristische Gleichung, die drei Fälle der Diskriminante samt ihren Konstanten, die Ansatztabelle samt Resonanz, das Vier-Schritt-Verfahren, die gedämpfte Schwingung und den Amplitudengang der erzwungenen. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
   <article class="eintrag" id="lineare-dgl-zweiter-ordnung" data-suche="awp anfangsbedingungen homogen inhomogen stoerfunktion konstante koeffizienten">
     <h3>Lineare DGL zweiter Ordnung mit konstanten Koeffizienten <span class="quelle">Skript S. 47</span></h3>
@@ -176,7 +176,7 @@
     <a class="querlink" href="../tools/schwingung/index.html">Selbst durchfahren &#x2192; Schwingungsrechner</a>
   </article>
 
-  <article class="eintrag" id="ansatztabelle-zweiter-ordnung" data-suche="ansatz stoerfunktion resonanz polynom exponential cosinus sinus tabelle">
+  <article class="eintrag" id="ansatztabelle-zweiter-ordnung" data-suche="ansatz stoerfunktion resonanz polynom exponential cosinus sinus tabelle realteil vergleich lambda">
     <h3>Ansatztabelle zweiter Ordnung <span class="quelle">Skript S. 50</span></h3>
     <p class="bedingung">Ansatz für eine spezielle Lösung von y&#x2033; + αy&#x2032; + βy = γ(x); λ<sub>1</sub>, λ<sub>2</sub> sind die Nullstellen der charakteristischen Gleichung</p>
 
@@ -249,6 +249,7 @@
     </math>
 
     <p class="fall">Das Muster ist in allen drei Blöcken dasselbe: <strong>liegt die rechte Seite selbst schon im Lösungsraum der homogenen Gleichung, wird der Ansatz mit x multipliziert</strong> &#x2014; bei doppelter Übereinstimmung mit x². Das ist die <strong>Resonanz</strong>.</p>
+    <p class="fall"><strong>Verglichen wird mit dem ganzen &#x3BB;, nicht mit seinem Realteil.</strong> Bei &#x3BB; = &#x2212;1 &#xB1; 5i und einer St&#xF6;rfunktion mal e<sup>&#x2212;x</sup> liegt <em>keine</em> Resonanz vor, obwohl u = &#x2212;1 der Realteil ist &#x2014; so gestellt in Aufgabe DGL 8.</p>
     <a class="querlink" href="../karten/differentialgleichungen.html#resonanz">Wann mit x zu multiplizieren ist &#x2192; Karte</a>
   </article>
 
@@ -386,6 +387,82 @@
     </math>
     <p class="fall">Derselbe Vergleich in der Diskriminante: <math><mrow><mi>D</mi><mo>=</mo><msup><mi>&#x3B1;</mi><mn>2</mn></msup><mo>&#x2212;</mo><mn>4</mn><mi>&#x3B2;</mi><mo>=</mo><mfrac><mn>1</mn><msup><mi>&#x3C4;</mi><mn>2</mn></msup></mfrac><mo>&#x2212;</mo><mn>4</mn><msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup></mrow></math>. Die drei F&#xE4;lle sind also dieselben wie oben, nur physikalisch benannt.</p>
     <p class="fall">&#x3B4; = 1/(2&#x3C4;) hei&#xDF;t <strong>Abklingkonstante</strong>. Die Einh&#xFC;llende <math><mrow><msup><mi>e</mi><mrow><mo>&#x2212;</mo><mi>&#x3B4;</mi><mi>t</mi></mrow></msup></mrow></math> ist nach der Zeit 2&#x3C4; auf 1/e gefallen &#x2014; nicht nach &#x3C4;.</p>
+    <a class="querlink" href="../tools/schwingung/index.html">Selbst durchfahren &#x2192; Schwingungsrechner</a>
+  </article>
+
+  <article class="eintrag" id="erzwungene-schwingung" data-suche="resonanzkurve resonanzfrequenz amplitudengang phasengang frequenzgang anregung erreger ueberhoehung resonanzkatastrophe viertelperiode">
+    <h3>Erzwungene Schwingung: Amplitude und Phase <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">Ged&#xE4;mpfter Schwinger mit harmonischer Anregung der Frequenz &#x3C9;; der Ansatz A&#x22C5;cos &#x3C9;t + B&#x22C5;sin &#x3C9;t, eingesetzt und nach A und B aufgel&#xF6;st &#x2014; Aufgabe DGL 7</p>
+    <math display="block">
+      <mrow>
+        <mover><mi>y</mi><mo>&#xA8;</mo></mover>
+        <mo>+</mo><mfrac><mn>1</mn><mi>&#x3C4;</mi></mfrac><mover><mi>y</mi><mo>&#x2D9;</mo></mover>
+        <mo>+</mo><msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup><mi>y</mi>
+        <mo>=</mo>
+        <msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup><mi>c</mi>
+        <mspace width="0.2em"></mspace><mi>cos</mi><mi>&#x3C9;</mi><mi>t</mi>
+      </mrow>
+    </math>
+    <p class="fall">Mit der Abk&#xFC;rzung <math><mrow><mi>N</mi><mo>=</mo><msup><mrow><mo>(</mo><msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup><mo>&#x2212;</mo><msup><mi>&#x3C9;</mi><mn>2</mn></msup><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mfrac><msup><mi>&#x3C9;</mi><mn>2</mn></msup><msup><mi>&#x3C4;</mi><mn>2</mn></msup></mfrac></mrow></math>:</p>
+    <math display="block">
+      <mrow>
+        <mi>A</mi><mo>=</mo>
+        <mfrac>
+          <mrow><msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup><mi>c</mi><mo>(</mo><msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup><mo>&#x2212;</mo><msup><mi>&#x3C9;</mi><mn>2</mn></msup><mo>)</mo></mrow>
+          <mi>N</mi>
+        </mfrac>
+        <mo>,</mo><mspace width="0.8em"></mspace>
+        <mi>B</mi><mo>=</mo>
+        <mfrac>
+          <mrow><msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup><mi>c</mi><mi>&#x3C9;</mi></mrow>
+          <mrow><mi>&#x3C4;</mi><mi>N</mi></mrow>
+        </mfrac>
+      </mrow>
+    </math>
+    <p class="fall">Zusammengefasst zu <em>einer</em> Kosinuswelle, <math><mrow><mi>y</mi><mo>=</mo><mover><mi>y</mi><mo>&#x302;</mo></mover><mi>cos</mi><mo>(</mo><mi>&#x3C9;</mi><mi>t</mi><mo>&#x2212;</mo><mi>&#x3C6;</mi><mo>)</mo></mrow></math>:</p>
+    <math display="block">
+      <mrow>
+        <mover><mi>y</mi><mo>&#x302;</mo></mover><mo>=</mo>
+        <msqrt><mrow><msup><mi>A</mi><mn>2</mn></msup><mo>+</mo><msup><mi>B</mi><mn>2</mn></msup></mrow></msqrt>
+        <mo>=</mo>
+        <mfrac>
+          <mrow><msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup><mi>c</mi></mrow>
+          <msqrt><mi>N</mi></msqrt>
+        </mfrac>
+        <mo>,</mo><mspace width="0.8em"></mspace>
+        <mi>tan</mi><mi>&#x3C6;</mi><mo>=</mo>
+        <mfrac><mi>B</mi><mi>A</mi></mfrac>
+      </mrow>
+    </math>
+    <p class="fall">Beim Winkel entscheidet das Vorzeichen von A, in welchem Quadranten &#x3C6; liegt: oberhalb der Resonanz ist A &lt; 0, dort geh&#xF6;rt &#x3C0; dazu. Der Taschenrechner-Arkustangens allein gibt das nicht her.</p>
+    <p class="fall">Die Amplitude ist am gr&#xF6;&#xDF;ten bei der <strong>Resonanzfrequenz</strong> &#x2014; sie liegt etwas <em>unter</em> &#x3C9;<sub>0</sub>:</p>
+    <math display="block">
+      <mrow>
+        <msub><mi>&#x3C9;</mi><mi>r</mi></msub><mo>=</mo>
+        <msqrt><mrow>
+          <msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup>
+          <mo>&#x2212;</mo>
+          <mfrac><mn>1</mn><mrow><mn>2</mn><msup><mi>&#x3C4;</mi><mn>2</mn></msup></mrow></mfrac>
+        </mrow></msqrt>
+      </mrow>
+    </math>
+    <p class="fall">Genau bei &#x3C9; = &#x3C9;<sub>0</sub> ist A = 0: die erzwungene Schwingung l&#xE4;uft der Anregung dann um eine Viertelperiode hinterher, &#x3C6; = &#x3C0;/2.</p>
+    <p class="fall">Steht rechts nicht &#x3C9;<sub>0</sub><sup>2</sup>c, sondern ein beliebiges K&#x22C5;cos &#x3C9;t, so tritt in A, B und in der Amplitude &#xFC;berall K an die Stelle von &#x3C9;<sub>0</sub><sup>2</sup>c.</p>
+    <p class="fall"><strong>Ohne D&#xE4;mpfung</strong> und bei &#x3C9; = &#x3C9;<sub>0</sub> versagt das alles &#x2014; N wird null. Dort steht Resonanz im Sinne der Ansatztabelle, der Ansatz bekommt den Faktor t, und die Amplitude w&#xE4;chst unbegrenzt (Aufgabe DGL 9):</p>
+    <math display="block">
+      <mrow>
+        <mover><mi>y</mi><mo>&#xA8;</mo></mover>
+        <mo>+</mo><msubsup><mi>&#x3C9;</mi><mn>0</mn><mn>2</mn></msubsup><mi>y</mi>
+        <mo>=</mo><mi>c</mi><mspace width="0.2em"></mspace><mi>sin</mi><mo>(</mo><msub><mi>&#x3C9;</mi><mn>0</mn></msub><mi>t</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msub><mi>y</mi><mi>s</mi></msub><mo>=</mo>
+        <mo>&#x2212;</mo><mfrac><mi>c</mi><mrow><mn>2</mn><msub><mi>&#x3C9;</mi><mn>0</mn></msub></mrow></mfrac>
+        <mi>t</mi><mspace width="0.2em"></mspace><mi>cos</mi><mo>(</mo><msub><mi>&#x3C9;</mi><mn>0</mn></msub><mi>t</mi><mo>)</mo>
+      </mrow>
+    </math>
     <a class="querlink" href="../tools/schwingung/index.html">Selbst durchfahren &#x2192; Schwingungsrechner</a>
   </article>
 

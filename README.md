@@ -38,7 +38,7 @@ zeigt.
 | [Integralrechnung — Grundlagen und Hauptsatz](formeln/integral-grundlagen.html) | Ober- und Untersumme, Hauptsatz, Grundintegrale-Tabelle, uneigentliche Integrale. |
 | [Integralrechnung — Verfahren und Partialbrüche](formeln/integral-verfahren.html) | Partielle Integration, Substitutionsregel, Partialbruchzerlegung, Polynomdivision. |
 | [Differentialgleichungen erster Ordnung](formeln/dgl-erster-ordnung.html) | Anfangswertproblem, Normalform, trennbare Variablen samt impliziter Lösung, lineare DGL erster Ordnung — auch mit variablem Koeffizienten —, Ansatztabelle. |
-| [Differentialgleichungen zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) | Charakteristische Gleichung, die drei Fälle der Diskriminante samt ihren Konstanten, Ansatztabelle mit Resonanz, drei Schreibweisen nebeneinander, gedämpfte Schwingung. |
+| [Differentialgleichungen zweiter Ordnung](formeln/dgl-zweiter-ordnung.html) | Charakteristische Gleichung, die drei Fälle der Diskriminante samt ihren Konstanten, Ansatztabelle mit Resonanz, drei Schreibweisen nebeneinander, gedämpfte und erzwungene Schwingung. |
 | [Endliche Körper und Restklassen](formeln/endliche-koerper.html) | Gruppen- und Körperaxiome, Untergruppenkriterium, Verknüpfungstafeln, Einheitswurzeln, Restklassen, GF(p), Inversentabellen. |
 | [Vektorräume, lineare Abbildungen, Rang](formeln/vektorraeume-rang.html) | UVR-Kriterium, Elementzahl über GF(p), lineare Hüllen vergleichen, Abbildungsmatrix, Kern und Bild, Rang — auch seine Abhängigkeit vom Körper —, Transponier-Regeln, die Äquivalenzkette der Regularität. |
 | [Skalarprodukt und Orthogonalität](formeln/skalarprodukt.html) | Skalarprodukt, komplexes Skalarprodukt, Orthonormalbasis, Projektion, Vektorprodukt. |
@@ -50,10 +50,10 @@ zeigt.
 | [Partielle Ableitungen und Gradient](formeln/ableitungen-gradient.html) | Höhenlinien, partielle Ableitung, Gradient, Jacobi-Matrix, Rotation und Divergenz. |
 | [Extrema, Fehlerfortpflanzung, kleinste Quadrate](formeln/extrema-fehler.html) | Stationäre Stellen, Hesse-Matrix, Taylorpolynom, Fehlerfortpflanzung, kleinste Quadrate. |
 
-**Vierzehn Themen, 167 Einträge — vollständig.** Alle vier Kapitel des
+**Vierzehn Themen, 168 Einträge — vollständig.** Alle vier Kapitel des
 Stoffes sind abgedeckt: Integralrechnung (23 Einträge),
-Differentialgleichungen (19), lineare Algebra (93) und Funktionen mehrerer
-Variablen (32). Vierzig Einträge stehen neben dem Skript und sagen das in ihrer
+Differentialgleichungen (20), lineare Algebra (93) und Funktionen mehrerer
+Variablen (32). Einundvierzig Einträge stehen neben dem Skript und sagen das in ihrer
 Quellenangabe — sie stammen aus den Übungsblättern.
 Erreichbar ist die
 Sammlung von der Startseite aus, dazu über
