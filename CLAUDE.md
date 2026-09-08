@@ -64,7 +64,7 @@ docs/superpowers/     Design- und Planungsdokumente
 | Datei | Was drin ist |
 |---|---|
 | `shared/theme.css` | Farbtokens, Grundtypografie, dazu die Druckpalette (heller Blattfarben-Satz im `@media print`-Block, gilt für jede Seite) |
-| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-rahmen`, `.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`, `.matrix-klammer-2z-ober`, `.matrix-klammer-4z-tief`, `.matrix-strich-2z-index`), dazu `.klammer-hoch` für eine Klammer um eine hohe Zeile und `.operator-gross` für Integral-, Summen- und Produktzeichen (beide siehe „Formeln"). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
+| `shared/ui.css` | Panels, die Schieberegler-Bedienelemente der Werkzeuge selbst (nicht zu verwechseln mit der Textklasse `.regler`, die in `shared/karten.css` steht — siehe „Eine Karte schreiben"), Chips, Raster — dazu die Katalog-Kacheln (`.katalog`, `.kachel`), die Verweiszeilen (`.querlink`, `.seitenfuss`), die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Matrixklammern (`.matrix-rahmen`, `.matrix-klammer`, `.matrix-klammer-3z`, `.matrix-klammer-4z`, `.matrix-klammer-flach`, `.matrix-klammer-2z-ober`, `.matrix-klammer-2z-hoch`, `.matrix-klammer-4z-tief`, `.matrix-strich-2z-index`), dazu `.klammer-hoch` für eine Klammer um eine hohe Zeile und `.operator-gross` für Integral-, Summen- und Produktzeichen (beide siehe „Formeln"). Das brauchen auch Startseite, Kartenübersicht und Formelübersicht, also Seiten, die keine Werkzeuge sind |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
 | `shared/formeln.css` | Bausteine der Formelsammlung: der Eintrag `.eintrag`, Verzeichnis und Filterzeile, samt Druck-Stylesheet — lädt nie zusammen mit `karten.css` |
 | `shared/expr.js` | `MT.expr.compile(term, vars)` — Terme in Funktionen |
@@ -569,7 +569,7 @@ hat sie hier schon gefunden.
   wirkungslos, eine Klammer wächst also nicht von selbst mit ihrer Matrix
   mit. Die Klassen stehen seit der Formelsammlung in `shared/ui.css`
   (vorher, für die Hesse-Matrix allein, in `shared/karten.css`), und es
-  sind sieben Größen, nicht mehr eine:
+  sind acht Größen, nicht mehr eine:
 
   - `.matrix-klammer` (3,8em) — zweizeilig mit Indexzellen, an der
     Hesse-Matrix von `karten/extremwerte.html` gemessen (`f_xx`, `f_xy`):
@@ -592,6 +592,12 @@ hat sie hier schon gefunden.
     `(a, −b; b, a)`: Verhältnis 1,08, Überstand 1,7 px; an der Inversen
     der 2×2-Matrix: 1,09. **Der Klassenname nennt den ersten Fall,
     gemeint ist die Höhe.**
+  - `.matrix-klammer-2z-hoch` (3,2em) — zweizeilig mit einer **Hochzahl**
+    in einer Zelle. Die Hochstellung hebt die Zeile auf 42,5 bis 45,5 px;
+    `-2z-ober` steht dort 2,5 px zu kurz (0,94), `.matrix-klammer` ist mit
+    58 px zu lang (1,28 bis 1,36). Am 2026-09-08 an den beiden
+    Verkettungsmatrizen von `karten/lineare-abbildungen.html` gemessen:
+    Verhältnis 1,03 und 1,11.
   - `.matrix-klammer-4z-tief` (6,4em) — vierzeilig mit tiefergestellten
     Indizes (`b₁`, `b₂`, `b₃`), die jede Zeile höher machen als bei der
     DFT-Matrix: 90,1 px statt 73,4 px. Am 2026-09-04 an der
@@ -604,8 +610,8 @@ hat sie hier schon gefunden.
     Verhältnis 1,03 bis 1,14.
 
   **Nicht die Zeilenzahl allein bestimmt die passende Klammer, sondern die
-  Höhe der Zelle — und die sieben Größen decken die häufigen Fälle, nicht
-  jede Zellenhöhe.** Die beiden Größen vom 2026-09-04 sind genau daran
+  Höhe der Zelle — und die acht Größen decken die häufigen Fälle, nicht
+  jede Zellenhöhe.** Die beiden Größen vom 2026-09-04 und die vom 2026-09-08 sind genau daran
   entstanden: dieselbe Zeilenzahl, andere Zellen, und die vorhandene
   Klasse stand **zu kurz** — die Matrix ragte oben und unten aus ihrer
   Klammer heraus (0,87 bzw. 0,88). Eine neue Matrix wird deshalb
@@ -621,7 +627,7 @@ hat sie hier schon gefunden.
   Drehmatrizen des Raums gemessen: an der reinen Zahlenmatrix
   `diag(1,−1,1)`, deren Zellen noch flacher sind, liegt das Verhältnis
   bei 1,346. Beide Fälle sind bekannt und so gelassen, nicht übersehen.
-  Eine geänderte Schriftgröße der Umgebung verstimmt jede der vier
+  Eine geänderte Schriftgröße der Umgebung verstimmt jede dieser
   Klammern lautlos gegen ihre Matrix — dann muss neu vermessen werden.
 - **Ein Überstrich streckt sich nicht — er passt nur über ein einzelnes
   Zeichen.** Dieselbe Ursache wie bei den Matrixklammern, an anderer

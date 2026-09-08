@@ -27,6 +27,7 @@ etwas nach.
 | [Lineare Differentialgleichungen zweiter Ordnung](karten/differentialgleichungen.html) | Charakteristisches Polynom und die drei Fälle seiner Nullstellen, der Ansatz vom Typ der rechten Seite und die Resonanz, die ihn um den Faktor x erweitert. |
 | [Eigenwerte und Eigenvektoren](karten/eigenwerte.html) | Ein Eigenvektor ist eine Richtung, die die Matrix nicht verdreht, sondern nur streckt; das charakteristische Polynom liefert die Streckfaktoren, ein Gleichungssystem die Richtungen. |
 | [Drehungen und Spiegelungen](karten/drehungen-spiegelungen.html) | Zwei Abbildungen, die Längen und Winkel unangetastet lassen; ihre Spalten sind die Bilder der Einheitsvektoren, und zwei Spiegelungen ergeben zusammen eine Drehung. |
+| [Lineare Abbildungen](karten/lineare-abbildungen.html) | Von der Abbildungsvorschrift zur Matrix, von der Matrix zu Kern und Bild, und von deren Dimensionen zu injektiv, surjektiv und bijektiv. |
 
 Alle sechs sind auch von der Startseite aus erreichbar, dazu über
 [karten/index.html](karten/index.html), das alle Kartenthemen im Überblick
@@ -89,7 +90,7 @@ Die gemeinsamen Bausteine:
 | `shared/extrema.js` | `MT.extrema` — stationäre Stellen suchen und einordnen |
 | `shared/dgl.js` | `MT.dgl.loese(a, b, glieder, anfang)` — lineare Differentialgleichungen zweiter Ordnung mit konstanten Koeffizienten, geschlossen gelöst |
 | `shared/theme.css` | Farbtokens und Grundtypografie, dazu die Druckpalette (heller Blattfarben-Satz im `@media print`-Block, gilt für jede Seite) |
-| `shared/ui.css` | Panels, Regler, Chips, Raster, dazu die Katalog-Kacheln, die Ansichtsregler-Gruppe `.blick` an einer Zeichentafel, die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Klammern und Zeichen des Formelsatzes (`.matrix-klammer` und ihre sechs Geschwister, `.klammer-hoch`, `.operator-gross`) — die Startseite, die Kartenübersicht und die Formelübersicht teilen sich diese Bausteine |
+| `shared/ui.css` | Panels, Regler, Chips, Raster, dazu die Katalog-Kacheln, die Ansichtsregler-Gruppe `.blick` an einer Zeichentafel, die Abschnittsüberschrift `h2.abschnitt` und die handbemessenen Klammern und Zeichen des Formelsatzes (`.matrix-klammer` und ihre sieben Geschwister, `.klammer-hoch`, `.operator-gross`) — die Startseite, die Kartenübersicht und die Formelübersicht teilen sich diese Bausteine |
 | `shared/karten.css` | Bausteine der Karten, samt Druck-Stylesheet |
 | `shared/formeln.css` | Bausteine der Formelsammlung: der Eintrag `.eintrag`, Verzeichnis und Filterzeile, samt Druck-Stylesheet — lädt nie zusammen mit `karten.css` |
 | `shared/formeln.js` | `MT.formeln.start()` — Verzeichnis und Filter einer Formelseite, aus dem Markup selbst gelesen |

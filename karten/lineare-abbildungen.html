@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../favicon.svg">
+<title>Lineare Abbildungen</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/karten.css">
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Lineare Abbildungen</h1>
+  <p class="lede">Von der Abbildungsvorschrift zur Matrix, von der Matrix zu Kern und Bild, und von deren Dimensionen zu den drei Fragen nach injektiv, surjektiv und bijektiv. Die ersten drei Karten rechnen dieselbe Abbildung durch &#x2014; eine, die je zwei benachbarte Werte mittelt.</p>
+
+  <div class="abfrage-leiste">
+    <button type="button" id="abfrage-schalter" aria-pressed="false">Abfragen</button>
+  </div>
+
+  <article class="karte" id="abbildungsmatrix">
+    <h3>Schritt 1: Von der Vorschrift zur Matrix</h3>
+
+    <div class="voraussetzung"><math><mrow><mi>f</mi><mo>:</mo><msup><mi>K</mi><mi>n</mi></msup><mo>&#x27F6;</mo><msup><mi>K</mi><mi>m</mi></msup></mrow></math> ist linear. Dann gibt es genau eine <math><mrow><mi>m</mi><mo>&#xD7;</mo><mi>n</mi></mrow></math> Matrix <math><mi>A</mi></math> mit <math><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>A</mi><mo>&#x22C5;</mo><mi>x</mi></mrow></math>.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <mi>A</mi><mo>&#x22C5;</mo><msub><mi>e</mi><mi>i</mi></msub>
+          <mo>=</mo>
+          <mi>f</mi><mo>(</mo><msub><mi>e</mi><mi>i</mi></msub><mo>)</mo>
+        </mrow>
+      </math>
+      <p><strong>Das ist die ganze Bauanleitung:</strong> <math><mrow><mi>A</mi><mo>&#x22C5;</mo><msub><mi>e</mi><mi>i</mi></msub></mrow></math> greift die i-te Spalte von <math><mi>A</mi></math> heraus. Man rechnet also <math><mrow><mi>f</mi><mo>(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>)</mo></mrow></math>, <math><mrow><mi>f</mi><mo>(</mo><msub><mi>e</mi><mn>2</mn></msub><mo>)</mo></mrow></math>, &#x2026; aus und schreibt die Ergebnisse als Spalten nebeneinander. Nichts zu raten, nichts zu l&#xF6;sen.</p>
+      <p>Die Zahl der <strong>Spalten</strong> ist die Dimension des Definitionsbereichs, die Zahl der <strong>Zeilen</strong> die des Zielbereichs.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Eine Abbildung <math><mrow><msup><mi>&#x211D;</mi><mn>3</mn></msup><mo>&#x27F6;</mo><msup><mi>&#x211D;</mi><mn>2</mn></msup></mrow></math>, die je zwei benachbarte Werte mittelt:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>f</mi><mo>(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><msub><mi>x</mi><mn>3</mn></msub><mo>)</mo>
+          <mo>=</mo>
+          <mo>(</mo>
+          <mfrac><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub></mrow><mn>2</mn></mfrac>
+          <mo>,</mo>
+          <mfrac><mrow><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><msub><mi>x</mi><mn>3</mn></msub></mrow><mn>2</mn></mfrac>
+          <mo>)</mo>
+        </mrow>
+      </math>
+
+      <p><strong>Warum sie linear ist:</strong> jede Komponente ist eine reine Linearkombination der Eingangsvariablen &#x2014; kein Produkt, kein Quadrat, keine Konstante. St&#xFC;nde irgendwo ein <math><mo>+</mo></math>&#x2009;1, w&#xE4;re die Abbildung affin und nicht linear.</p>
+
+      <p>Die drei Spalten sind die Bilder der Einheitsvektoren:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>f</mi><mo>(</mo><msub><mi>e</mi><mn>1</mn></msub><mo>)</mo><mo>=</mo>
+          <mo>(</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>,</mo><mn>0</mn><mo>)</mo>
+          <mo>,</mo><mspace width="0.7em"></mspace>
+          <mi>f</mi><mo>(</mo><msub><mi>e</mi><mn>2</mn></msub><mo>)</mo><mo>=</mo>
+          <mo>(</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>,</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>)</mo>
+        </mrow>
+      </math>
+      <math display="block">
+        <mrow>
+          <mi>f</mi><mo>(</mo><msub><mi>e</mi><mn>3</mn></msub><mo>)</mo><mo>=</mo>
+          <mo>(</mo><mn>0</mn><mo>,</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>)</mo>
+        </mrow>
+      </math>
+
+      <p>Nebeneinandergeschrieben, den gemeinsamen Faktor ausgeklammert:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>A</mi><mo>=</mo>
+          <mfrac><mn>1</mn><mn>2</mn></mfrac>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+              <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p><strong>Die Probe:</strong> zwei Zeilen und drei Spalten &#x2014; das passt zu <math><mrow><msup><mi>&#x211D;</mi><mn>3</mn></msup><mo>&#x27F6;</mo><msup><mi>&#x211D;</mi><mn>2</mn></msup></mrow></math>. Und <math><mrow><mi>A</mi><mo>&#x22C5;</mo><mo>(</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>6</mn><mo>)</mo></mrow></math> gibt <math><mrow><mo>(</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo>,</mo><mn>4</mn><mo>)</mo></mrow></math>, wie die Vorschrift direkt.</p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 150" role="img" aria-label="Eine Matrix mit zwei Zeilen und drei Spalten in runden Klammern. Über jeder Spalte steht, welches Bild eines Einheitsvektors sie trägt: über der ersten f von e eins, über der zweiten f von e zwei, über der dritten f von e drei. Drei Pfeile zeigen von diesen Beschriftungen nach unten in die jeweilige Spalte. Die drei Spalten sind verschieden eingefärbt.">
+          <text x="83" y="22" text-anchor="middle" font-size="10" fill="var(--gold)">f(e&#x2081;)</text>
+          <text x="129" y="22" text-anchor="middle" font-size="10" fill="var(--mint)">f(e&#x2082;)</text>
+          <text x="175" y="22" text-anchor="middle" font-size="10" fill="var(--rose)">f(e&#x2083;)</text>
+
+          <line x1="83" y1="30" x2="83" y2="44" stroke="var(--gold)" stroke-width="1.4"/>
+          <polygon points="83,44 79.2,36.0 86.8,36.0" fill="var(--gold)"/>
+          <line x1="129" y1="30" x2="129" y2="44" stroke="var(--mint)" stroke-width="1.4"/>
+          <polygon points="129,44 125.2,36.0 132.8,36.0" fill="var(--mint)"/>
+          <line x1="175" y1="30" x2="175" y2="44" stroke="var(--rose)" stroke-width="1.4"/>
+          <polygon points="175,44 171.2,36.0 178.8,36.0" fill="var(--rose)"/>
+
+          <path d="M 66 54 Q 56 84 66 114" fill="none" stroke="var(--dim)" stroke-width="1.6"/>
+          <path d="M 192 54 Q 202 84 192 114" fill="none" stroke="var(--dim)" stroke-width="1.6"/>
+
+          <text x="83" y="78" text-anchor="middle" font-size="12" fill="var(--gold)">1</text>
+          <text x="83" y="104" text-anchor="middle" font-size="12" fill="var(--gold)">0</text>
+          <text x="129" y="78" text-anchor="middle" font-size="12" fill="var(--mint)">1</text>
+          <text x="129" y="104" text-anchor="middle" font-size="12" fill="var(--mint)">1</text>
+          <text x="175" y="78" text-anchor="middle" font-size="12" fill="var(--rose)">0</text>
+          <text x="175" y="104" text-anchor="middle" font-size="12" fill="var(--rose)">1</text>
+
+          <text x="46" y="88" text-anchor="end" font-size="12" fill="var(--dim)">&#xBD;</text>
+          <text x="130" y="138" text-anchor="middle" font-size="9" fill="var(--dim)">drei Spalten, weil f drei Eing&#xE4;nge hat</text>
+        </svg>
+        <figcaption>Jede Spalte ist das Bild eines Einheitsvektors. Der Faktor <math><mfrac><mn>1</mn><mn>2</mn></mfrac></math> steht vor der Matrix, weil er in allen Eintr&#xE4;gen vorkommt.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Die Spalten sind die Bilder der Einheitsvektoren. Das gilt f&#xFC;r <em>jede</em> lineare Abbildung &#x2014; auch f&#xFC;r Drehungen und Spiegelungen, deren Matrizen man damit hinschreibt, statt sie zu lernen.</p>
+
+    <p class="fehler">Die Bilder als <strong>Zeilen</strong> statt als Spalten schreiben. Dann steht <math><msup><mi>A</mi><mi>T</mi></msup></math> da, und die Matrix hat die falsche Gestalt: bei <math><mrow><msup><mi>&#x211D;</mi><mn>3</mn></msup><mo>&#x27F6;</mo><msup><mi>&#x211D;</mi><mn>2</mn></msup></mrow></math> w&#xE4;re sie <math><mrow><mn>3</mn><mo>&#xD7;</mo><mn>2</mn></mrow></math> statt <math><mrow><mn>2</mn><mo>&#xD7;</mo><mn>3</mn></mrow></math> und das Produkt <math><mrow><mi>A</mi><mo>&#x22C5;</mo><mi>x</mi></mrow></math> ginge gar nicht auf.</p>
+
+    <p class="querlink"><a href="drehungen-spiegelungen.html#drehung">Dieselbe Bauanleitung an der Drehmatrix &#x2192;</a></p>
+  </article>
+
+  <article class="karte" id="kern-und-bild">
+    <h3>Schritt 2: Kern und Bild</h3>
+
+    <div class="voraussetzung"><math><mi>f</mi></math> linear mit Abbildungsmatrix <math><mi>A</mi></math>. Beide Mengen sind Untervektorr&#xE4;ume &#x2014; der Kern im Definitionsbereich, das Bild im Zielbereich.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <mi>ker</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo>
+          <mo>{</mo><mi>x</mi><mspace width="0.3em"></mspace>
+          <mo stretchy="false">|</mo><mspace width="0.3em"></mspace>
+          <mi>A</mi><mo>&#x22C5;</mo><mi>x</mi><mo>=</mo><mi>O</mi><mo>}</mo>
+        </mrow>
+      </math>
+      <math display="block">
+        <mrow>
+          <mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo>
+          <mo>&#x27E8;</mo>
+          <msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><mo>&#x2026;</mo><mo>,</mo><msub><mi>a</mi><mi>n</mi></msub>
+          <mo>&#x27E9;</mo>
+        </mrow>
+      </math>
+      <p><strong>Zwei verschiedene Rechnungen.</strong> Der Kern ist die L&#xF6;sungsmenge des homogenen Gleichungssystems &#x2014; also Gau&#xDF;. Das Bild ist die lineare H&#xFC;lle der <em>Spaltenvektoren</em> <math><msub><mi>a</mi><mi>i</mi></msub></math> von <math><mi>A</mi></math> &#x2014; also hinschreiben und danach vereinfachen, indem man abh&#xE4;ngige Spalten wegl&#xE4;sst.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p><strong>Der Kern.</strong> Die beiden Zeilen von <math><mrow><mi>A</mi><mo>&#x22C5;</mo><mi>x</mi><mo>=</mo><mi>O</mi></mrow></math>, mit 2 durchmultipliziert:</p>
+
+      <math display="block">
+        <mrow>
+          <msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mn>0</mn>
+          <mspace width="1.2em"></mspace>
+          <msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><msub><mi>x</mi><mn>3</mn></msub><mo>=</mo><mn>0</mn>
+        </mrow>
+      </math>
+
+      <p>Zwei Gleichungen, drei Unbekannte &#x2014; eine Variable bleibt frei. Mit <math><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>=</mo><mi>t</mi></mrow></math> folgt <math><mrow><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><mo>&#x2212;</mo><mi>t</mi></mrow></math> aus der ersten und <math><mrow><msub><mi>x</mi><mn>3</mn></msub><mo>=</mo><mi>t</mi></mrow></math> aus der zweiten:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>ker</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo>
+          <mo>&#x27E8;</mo><mo>(</mo><mn>1</mn><mo>,</mo><mo>&#x2212;</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>)</mo><mo>&#x27E9;</mo>
+        </mrow>
+      </math>
+
+      <p><strong>Probe:</strong> <math><mrow><mi>f</mi><mo>(</mo><mn>1</mn><mo>,</mo><mo>&#x2212;</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>)</mo><mo>=</mo><mo>(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>)</mo></mrow></math> &#x2014; beide Nachbarmittel sind null. Anschaulich: der Kern besteht genau aus den Vektoren, die immer abwechselnd auf und ab gehen.</p>
+
+      <p><strong>Das Bild.</strong> Die H&#xFC;lle der drei Spalten:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo>
+          <mo>&#x27E8;</mo>
+          <mo>(</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>,</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>)</mo><mo>,</mo>
+          <mo>(</mo><mn>0</mn><mo>,</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>)</mo>
+          <mo>&#x27E9;</mo>
+        </mrow>
+      </math>
+
+      <p>Die erste und die dritte Spalte sind schon unabh&#xE4;ngig und spannen den ganzen <math><msup><mi>&#x211D;</mi><mn>2</mn></msup></math> auf; die mittlere ist ihre Summe und damit &#xFC;berfl&#xFC;ssig. Vereinfacht:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo>
+          <msup><mi>&#x211D;</mi><mn>2</mn></msup>
+        </mrow>
+      </math>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 170" role="img" aria-label="Links eine hochstehende Ellipse für den Definitionsbereich R hoch drei, darin eine schräge gestrichelte Gerade durch die Mitte, die den Kern darstellt. Rechts eine kleinere, ganz ausgefüllte Ellipse für den Zielbereich R hoch zwei mit einem Punkt in der Mitte. Ein Pfeil führt von der Geraden links auf den Punkt rechts, ein zweiter von einer Stelle abseits der Geraden auf eine andere Stelle rechts.">
+          <ellipse cx="65" cy="85" rx="42" ry="62" fill="none" stroke="var(--edge)" stroke-width="1.2"/>
+          <text x="65" y="162" text-anchor="middle" font-size="10" fill="var(--dim)">&#x211D;&#xB3;</text>
+
+          <ellipse cx="200" cy="92" rx="34" ry="42" fill="var(--rose)" fill-opacity="0.22" stroke="var(--rose)" stroke-width="1.2"/>
+          <text x="200" y="150" text-anchor="middle" font-size="10" fill="var(--rose)">im f = &#x211D;&#xB2;</text>
+
+          <line x1="44" y1="122" x2="86" y2="48" stroke="var(--mint)" stroke-width="1.6" stroke-dasharray="4 3"/>
+          <text x="90" y="42" text-anchor="middle" font-size="9" fill="var(--mint)">ker f</text>
+
+          <circle cx="65" cy="85" r="3" fill="var(--mint)"/>
+          <circle cx="200" cy="92" r="3" fill="var(--gold)"/>
+          <text x="200" y="108" text-anchor="middle" font-size="9" fill="var(--gold)">O</text>
+
+          <line x1="72" y1="72.7" x2="195.5" y2="91.3" stroke="var(--mint)" stroke-width="1.4"/>
+          <polygon points="195.5,91.3 187.02,93.87 188.16,86.35" fill="var(--mint)"/>
+
+          <line x1="70" y1="118" x2="179.5" y2="110.3" stroke="var(--dim)" stroke-width="1.2"/>
+          <polygon points="179.5,110.3 171.79,114.65 171.25,107.07" fill="var(--dim)"/>
+          <circle cx="70" cy="118" r="2.5" fill="var(--dim)"/>
+          <circle cx="184" cy="110" r="2.5" fill="var(--dim)"/>
+        </svg>
+        <figcaption>Die ganze Kerngerade wird auf den einen Punkt <math><mi>O</mi></math> abgebildet. Das Bild f&#xFC;llt hier den Zielbereich vollst&#xE4;ndig aus.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Kern: homogenes Gleichungssystem l&#xF6;sen. Bild: Spalten hinschreiben und ausd&#xFC;nnen. Zwei ganz verschiedene Rechnungen an <em>derselben</em> Matrix.</p>
+
+    <p class="fehler">Das Bild aus den <strong>Zeilen</strong> statt aus den Spalten bilden. Die Zeilen liegen im falschen Raum: bei <math><mrow><mn>2</mn><mo>&#xD7;</mo><mn>3</mn></mrow></math> haben sie drei Komponenten, das Bild liegt aber im <math><msup><mi>&#x211D;</mi><mn>2</mn></msup></math>. Die Zahl der unabh&#xE4;ngigen Zeilen stimmt trotzdem &#x2014; sie ist der Rang.</p>
+  </article>
+
+  <article class="karte" id="injektiv-surjektiv-bijektiv">
+    <h3>Schritt 3: Injektiv, surjektiv, bijektiv</h3>
+
+    <div class="voraussetzung"><math><mrow><mi>f</mi><mo>:</mo><msup><mi>K</mi><mi>n</mi></msup><mo>&#x27F6;</mo><msup><mi>K</mi><mi>m</mi></msup></mrow></math> linear. Alle drei Fragen entscheiden sich an <em>Dimensionen</em>, nicht an einzelnen Vektoren.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <mi>dim</mi><mspace width="0.2em"></mspace><mi>ker</mi><mo>(</mo><mi>f</mi><mo>)</mo>
+          <mo>+</mo>
+          <mi>dim</mi><mspace width="0.2em"></mspace><mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo>
+          <mo>=</mo><mi>n</mi>
+        </mrow>
+      </math>
+      <p>Die <strong>Dimensionsformel</strong>. Rechts steht <math><mi>n</mi></math>, die Dimension des <em>Definitions</em>bereichs &#x2014; nicht die des Zielbereichs. Damit lassen sich die drei Fragen beantworten:</p>
+      <p><strong>Injektiv</strong> genau dann, wenn <math><mrow><mi>ker</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mo>{</mo><mi>O</mi><mo>}</mo></mrow></math>, also <math><mrow><mi>dim</mi><mspace width="0.2em"></mspace><mi>ker</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mn>0</mn></mrow></math>.</p>
+      <p><strong>Surjektiv</strong> genau dann, wenn <math><mrow><mi>dim</mi><mspace width="0.2em"></mspace><mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mi>m</mi></mrow></math>, also wenn der Rang so gro&#xDF; ist wie die Zielraumdimension.</p>
+      <p><strong>Bijektiv</strong> genau dann, wenn beides gilt. Aus der Formel folgt dann <math><mrow><mi>n</mi><mo>=</mo><mi>m</mi></mrow></math>: eine bijektive lineare Abbildung geht nie zwischen R&#xE4;umen verschiedener Dimension.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>F&#xFC;r die gemittelte Abbildung von oben steht alles schon da:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>dim</mi><mspace width="0.2em"></mspace><mi>ker</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mn>1</mn>
+          <mo>,</mo><mspace width="0.9em"></mspace>
+          <mi>dim</mi><mspace width="0.2em"></mspace><mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mn>2</mn>
+        </mrow>
+      </math>
+
+      <p>Die Formel geht auf: <math><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>=</mo><mn>3</mn><mo>=</mo><mi>n</mi></mrow></math>. Damit:</p>
+
+      <p><strong>Injektiv?</strong> Nein &#x2014; der Kern ist eine Gerade, nicht nur der Nullpunkt. Konkret gehen <math><mrow><mo>(</mo><mn>1</mn><mo>,</mo><mo>&#x2212;</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo>)</mo></mrow></math> und der Nullvektor beide auf <math><mrow><mo>(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>)</mo></mrow></math>.</p>
+
+      <p><strong>Surjektiv?</strong> Ja &#x2014; <math><mrow><mi>dim</mi><mspace width="0.2em"></mspace><mi>im</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mn>2</mn><mo>=</mo><mi>m</mi></mrow></math>, jeder Vektor des <math><msup><mi>&#x211D;</mi><mn>2</mn></msup></math> wird getroffen.</p>
+
+      <p><strong>Bijektiv?</strong> Nein, weil nicht injektiv. Das war auch ohne jede Rechnung klar: <math><mrow><mi>n</mi><mo>=</mo><mn>3</mn></mrow></math> und <math><mrow><mi>m</mi><mo>=</mo><mn>2</mn></mrow></math> sind verschieden.</p>
+
+      <figure class="bild">
+        <svg viewBox="0 0 260 110" role="img" aria-label="Ein waagerechter Balken, der für die Dimension drei des Definitionsbereichs steht. Er ist in zwei Teile geteilt: das linke Drittel trägt die Beschriftung Dimension des Kerns gleich eins, die rechten zwei Drittel die Beschriftung Dimension des Bildes gleich zwei.">
+          <text x="130" y="18" text-anchor="middle" font-size="10" fill="var(--dim)">n = 3</text>
+          <line x1="30" y1="26" x2="230" y2="26" stroke="var(--dim)" stroke-width="1"/>
+          <line x1="30" y1="22" x2="30" y2="30" stroke="var(--dim)" stroke-width="1"/>
+          <line x1="230" y1="22" x2="230" y2="30" stroke="var(--dim)" stroke-width="1"/>
+
+          <rect x="30" y="40" width="66.67" height="26" fill="var(--mint)" fill-opacity="0.35" stroke="var(--mint)" stroke-width="1.2"/>
+          <rect x="96.67" y="40" width="133.33" height="26" fill="var(--gold)" fill-opacity="0.35" stroke="var(--gold)" stroke-width="1.2"/>
+
+          <text x="63" y="58" text-anchor="middle" font-size="11" fill="var(--mint)">1</text>
+          <text x="163" y="58" text-anchor="middle" font-size="11" fill="var(--gold)">2</text>
+
+          <text x="63" y="84" text-anchor="middle" font-size="9" fill="var(--mint)">dim ker f</text>
+          <text x="163" y="84" text-anchor="middle" font-size="9" fill="var(--gold)">dim im f</text>
+          <text x="130" y="102" text-anchor="middle" font-size="9" fill="var(--dim)">was der Kern schluckt, fehlt dem Bild</text>
+        </svg>
+        <figcaption>Die Dimension des Definitionsbereichs verteilt sich auf Kern und Bild. Je gr&#xF6;&#xDF;er der Kern, desto kleiner das Bild &#x2014; und umgekehrt.</figcaption>
+      </figure>
+    </div>
+
+    <p class="merksatz">Injektiv fragt nach dem Kern, surjektiv nach dem Rang. Beides zusammen geht nur bei <math><mrow><mi>n</mi><mo>=</mo><mi>m</mi></mrow></math>, und dort ist es gleichbedeutend damit, dass <math><mi>A</mi></math> regul&#xE4;r ist.</p>
+
+    <p class="fehler">In der Dimensionsformel <math><mi>m</mi></math> statt <math><mi>n</mi></math> einsetzen. Rechts steht die Dimension des Raums, aus dem man kommt. Bei <math><mrow><msup><mi>&#x211D;</mi><mn>3</mn></msup><mo>&#x27F6;</mo><msup><mi>&#x211D;</mi><mn>2</mn></msup></mrow></math> ist das die 3, nicht die 2 &#x2014; sonst k&#xE4;me hier <math><mrow><mi>dim</mi><mspace width="0.2em"></mspace><mi>ker</mi><mo>=</mo><mn>0</mn></mrow></math> heraus und die Abbildung schiene injektiv.</p>
+  </article>
+
+  <article class="karte" id="verketten">
+    <h3>Verketten: hintereinander abbilden</h3>
+
+    <div class="voraussetzung"><math><mi>f</mi></math> hat die Matrix <math><mi>A</mi></math>, <math><mi>g</mi></math> die Matrix <math><mi>B</mi></math>; die Formate m&#xFC;ssen zusammenpassen.</div>
+
+    <div class="formel" data-verdeckbar>
+      <math display="block">
+        <mrow>
+          <mo>(</mo><mi>g</mi><mo>&#x2218;</mo><mi>f</mi><mo>)</mo><mo>(</mo><mi>x</mi><mo>)</mo>
+          <mo>=</mo>
+          <mi>B</mi><mo>&#x22C5;</mo><mi>A</mi><mo>&#x22C5;</mo><mi>x</mi>
+        </mrow>
+      </math>
+      <p><strong>Verketten hei&#xDF;t multiplizieren</strong> &#x2014; und die Reihenfolge dreht sich um: bei <math><mrow><mi>g</mi><mo>&#x2218;</mo><mi>f</mi></mrow></math> wird zuerst <math><mi>f</mi></math> angewandt, aber <math><mi>B</mi></math> steht <em>links</em>. Der Grund steht schon in der Zeile: <math><mi>x</mi></math> steht rechts, also trifft es zuerst auf <math><mi>A</mi></math>.</p>
+    </div>
+
+    <div class="beispiel" data-verdeckbar>
+      <p>Mit einem Parameter <math><mrow><mi>a</mi><mo>&#x2208;</mo><mi>&#x211D;</mi></mrow></math>:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>A</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-flach">(</mo>
+            <mtable>
+              <mtr><mtd><mi>a</mi></mtd><mtd><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>1</mn></mtd><mtd><mo>&#x2212;</mo><mi>a</mi></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-flach">)</mo>
+          </mrow>
+          <mo>,</mo><mspace width="0.7em"></mspace>
+          <mi>B</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-ober">(</mo>
+            <mtable>
+              <mtr><mtd><mn>2</mn></mtd><mtd><mn>4</mn></mtd></mtr>
+              <mtr><mtd><mo>&#x2212;</mo><mi>a</mi></mtd><mtd><mn>1</mn></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-ober">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>Erst <math><mrow><mi>g</mi><mo>&#x2218;</mo><mi>f</mi></mrow></math>, also <math><mrow><mi>B</mi><mo>&#x22C5;</mo><mi>A</mi></mrow></math>:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>B</mi><mo>&#x22C5;</mo><mi>A</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-hoch">(</mo>
+            <mtable>
+              <mtr><mtd><mn>2</mn><mi>a</mi><mo>+</mo><mn>4</mn></mtd><mtd><mn>2</mn><mo>&#x2212;</mo><mn>4</mn><mi>a</mi></mtd></mtr>
+              <mtr><mtd><mn>1</mn><mo>&#x2212;</mo><msup><mi>a</mi><mn>2</mn></msup></mtd><mtd><mo>&#x2212;</mo><mn>2</mn><mi>a</mi></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-hoch">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p>Dann <math><mrow><mi>f</mi><mo>&#x2218;</mo><mi>g</mi></mrow></math>, also <math><mrow><mi>A</mi><mo>&#x22C5;</mo><mi>B</mi></mrow></math>:</p>
+
+      <math display="block">
+        <mrow>
+          <mi>A</mi><mo>&#x22C5;</mo><mi>B</mi><mo>=</mo>
+          <mrow class="matrix-rahmen">
+            <mo class="matrix-klammer-2z-hoch">(</mo>
+            <mtable>
+              <mtr><mtd><mi>a</mi></mtd><mtd><mn>4</mn><mi>a</mi><mo>+</mo><mn>1</mn></mtd></mtr>
+              <mtr><mtd><mn>2</mn><mo>+</mo><msup><mi>a</mi><mn>2</mn></msup></mtd><mtd><mn>4</mn><mo>&#x2212;</mo><mi>a</mi></mtd></mtr>
+            </mtable>
+            <mo class="matrix-klammer-2z-hoch">)</mo>
+          </mrow>
+        </mrow>
+      </math>
+
+      <p><strong>Die beiden sind verschieden</strong>, und zwar f&#xFC;r jedes <math><mi>a</mi></math>. Schon die Ecke links oben zeigt es: <math><mrow><mn>2</mn><mi>a</mi><mo>+</mo><mn>4</mn><mo>=</mo><mi>a</mi></mrow></math> h&#xE4;tte nur <math><mrow><mi>a</mi><mo>=</mo><mo>&#x2212;</mo><mn>4</mn></mrow></math> zur Folge, und dort stimmt die Ecke rechts oben nicht.</p>
+    </div>
+
+    <p class="merksatz">Zuerst angewandt hei&#xDF;t rechts geschrieben. <math><mrow><mi>g</mi><mo>&#x2218;</mo><mi>f</mi></mrow></math> ist <math><mrow><mi>B</mi><mo>&#x22C5;</mo><mi>A</mi></mrow></math>, nicht <math><mrow><mi>A</mi><mo>&#x22C5;</mo><mi>B</mi></mrow></math>.</p>
+
+    <p class="fehler">Annehmen, dass die Reihenfolge nichts ausmacht. Bei Matrizen gilt <math><mrow><mi>A</mi><mi>B</mi><mo>&#x2260;</mo><mi>B</mi><mi>A</mi></mrow></math> im Regelfall &#x2014; die Ausnahmen sind selten genug, dass man sie einzeln nachpr&#xFC;ft.</p>
+
+    <p class="querlink"><a href="../formeln/vektorraeume-rang.html">Nur die Formeln, ohne Erkl&#xE4;rung &#x2192; Vektorr&#xE4;ume und Rang in der Formelsammlung</a></p>
+  </article>
+
+  <p class="seitenfuss"><a href="index.html">&#x2190; Alle Karten im &#xDC;berblick</a></p>
+
+</div>
+
+<script src="../shared/abfrage.js"></script>
+<script>MT.abfrage.start();</script>
+</body>
+</html>
