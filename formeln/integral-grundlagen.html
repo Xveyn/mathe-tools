@@ -13,10 +13,10 @@
 <div class="wrap">
 
   <h1>Integral: Grundlagen und Hauptsatz</h1>
-  <p class="lede">Was das Integral ist, wie man es abschätzt, und der Satz, der es rechenbar macht &#x2014; dazu die Grundintegrale und die beiden Arten uneigentlicher Integrale. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
+  <p class="lede">Was das Integral ist, wie man es abschätzt, und die beiden Teile des Hauptsatzes, die es rechenbar machen &#x2014; dazu die Grundintegrale und die beiden Arten uneigentlicher Integrale. Gesucht wird nur auf dieser Seite &#x2014; was in einem anderen Thema steht, findet das Feld nicht.</p>
 
-  <article class="eintrag" id="ober-und-untersumme" data-suche="riemann zerlegung infimum supremum abschaetzung integrierbar">
-    <h3>Ober- und Untersumme <span class="quelle">Skript S. 8, 13</span></h3>
+  <article class="eintrag" id="ober-und-untersumme" data-suche="riemann zerlegung infimum supremum abschaetzung integrierbar aequidistant gleich breit monoton fallend wachsend linker rechter rand teilintervall">
+    <h3>Ober- und Untersumme <span class="quelle">Skript S. 8, 10, 12, 13</span></h3>
     <p class="bedingung">f beschränkt auf [a, b], Z eine Zerlegung a = x<sub>0</sub> &lt; x<sub>1</sub> &lt; … &lt; x<sub>n</sub> = b; m<sub>i</sub> und M<sub>i</sub> sind Infimum und Supremum auf dem i-ten Teilintervall</p>
     <math display="block">
       <mrow>
@@ -43,6 +43,30 @@
       </mrow>
     </math>
     <p class="fall">Je feiner die Zerlegung, desto enger die beiden Schranken. Streben Unter- und Obersumme gegen denselben Wert, ist f Riemann-integrierbar und dieser Wert ist das Integral.</p>
+    <p class="fall">In den Aufgaben wird fast immer <strong>äquidistant</strong> zerlegt &#x2014; n Teilintervalle gleicher Breite h. Dann lässt sich h ausklammern:</p>
+    <math display="block">
+      <mrow>
+        <mi>h</mi><mo>=</mo>
+        <mfrac><mrow><mi>b</mi><mo>&#x2212;</mo><mi>a</mi></mrow><mi>n</mi></mfrac>
+        <mo>,</mo><mspace width="0.8em"></mspace>
+        <msub><mi>x</mi><mi>i</mi></msub><mo>=</mo>
+        <mi>a</mi><mo>+</mo><mi>i</mi><mi>h</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <mi>U</mi><mo>(</mo><msub><mi>Z</mi><mi>n</mi></msub><mo>)</mo><mo>=</mo>
+        <mi>h</mi>
+        <munderover><mo class="operator-gross">&#x2211;</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover>
+        <msub><mi>m</mi><mi>i</mi></msub>
+        <mo>,</mo><mspace width="0.8em"></mspace>
+        <mi>O</mi><mo>(</mo><msub><mi>Z</mi><mi>n</mi></msub><mo>)</mo><mo>=</mo>
+        <mi>h</mi>
+        <munderover><mo class="operator-gross">&#x2211;</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover>
+        <msub><mi>M</mi><mi>i</mi></msub>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Ist f auf [a, b] monoton, liegen m<sub>i</sub> und M<sub>i</sub> an den Rändern</strong> der Teilintervalle &#x2014; man muss kein Infimum suchen, sondern nur einsetzen. Bei <em>wachsendem</em> f steht das Infimum am linken und das Supremum am rechten Rand, bei <em>fallendem</em> f umgekehrt. Das Skript zeigt das auf S. 12 an f(x) = x, spricht es aber nicht aus; Aufgabe INT 3 verlangt es für ein fallendes f.</p>
   </article>
 
   <article class="eintrag" id="sehnentrapezformel" data-suche="trapezregel numerisch naeherung stuetzstellen">
@@ -111,7 +135,7 @@
     <p class="fall">Summen und konstante Faktoren dürfen innerhalb oder außerhalb des Integrals gebildet werden. Ein <strong>Produkt</strong> zweier Funktionen lässt sich so <strong>nicht</strong> zerlegen &#x2014; dafür gibt es die partielle Integration.</p>
   </article>
 
-  <article class="eintrag" id="monotonie" data-suche="abschaetzung groesser kleiner ungleichung">
+  <article class="eintrag" id="monotonie" data-suche="abschaetzung groesser kleiner ungleichung beidseitig schranke sandwich obere untere">
     <h3>Monotonie des Integrals <span class="quelle">Skript S. 17</span></h3>
     <p class="bedingung">f(x) &#x2264; g(x) für alle x &#x2208; [a, b], beide integrierbar</p>
     <math display="block">
@@ -121,7 +145,18 @@
         <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>g</mi>
       </mrow>
     </math>
-    <p class="fall">Damit lässt sich ein Integral nach oben und unten abschätzen, ohne es auszurechnen.</p>
+    <p class="fall">Damit lässt sich ein Integral nach oben und unten abschätzen, ohne es auszurechnen. Zweimal angewandt gibt das die beidseitige Schranke &#x2014; so gestellt in Aufgabe INT 4:</p>
+    <math display="block">
+      <mrow>
+        <mi>g</mi><mo>&#x2264;</mo><mi>f</mi><mo>&#x2264;</mo><mi>h</mi>
+        <mspace width="0.8em"></mspace><mo>&#x27F9;</mo><mspace width="0.8em"></mspace>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>g</mi>
+        <mo>&#x2264;</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi>
+        <mo>&#x2264;</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup><mi>h</mi>
+      </mrow>
+    </math>
   </article>
 
   <article class="eintrag" id="mittelwertsatz" data-suche="mittelwert rechteck xi zwischenwertsatz">
@@ -161,6 +196,66 @@
     </math>
     <p class="fall">Das Rezept in drei Schritten: die <strong>Nullstellen</strong> von f beziehungsweise f &#x2212; g im Intervall bestimmen, dann <strong>abschnittsweise</strong> zwischen a, den Nullstellen und b integrieren, und den <strong>Betrag zuletzt</strong> auf die einzelnen Ergebnisse anwenden.</p>
     <p class="fall">Wer den Betrag vergisst, bekommt den Integralwert: bei einem Vorzeichenwechsel heben sich Anteile gegenseitig auf und die Fläche kommt zu klein heraus. Bleibt das Vorzeichen im ganzen Intervall gleich, darf der Betrag entfallen.</p>
+  </article>
+
+  <article class="eintrag" id="integralfunktion" data-suche="variable obere grenze bezugspunkt erster teil hauptsatz ableiten des integrals umkehrung integrationsvariable">
+    <h3>Integralfunktion und F&#x2032;&#xA0;=&#xA0;f <span class="quelle">Skript S. 20, 21, 22</span></h3>
+    <p class="bedingung">f stetig auf [a, b], x<sub>0</sub> &#x2208; [a, b] ein fest gewählter Bezugspunkt; das ist der <em>erste</em> Teil des Hauptsatzes</p>
+    <math display="block">
+      <mrow>
+        <mi>F</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><msub><mi>x</mi><mn>0</mn></msub><mi>x</mi></msubsup>
+        <mi>f</mi><mo>(</mo><mi>t</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>t</mi>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msup><mi>F</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>=</mo><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo>
+        <mo>,</mo><mspace width="0.8em"></mspace>
+        <mi>F</mi><mo>(</mo><msub><mi>x</mi><mn>0</mn></msub><mo>)</mo><mo>=</mo><mn>0</mn>
+      </mrow>
+    </math>
+    <p class="fall">Jede Integralfunktion ist also eine <strong>Stammfunktion</strong>. Das ist der Satz, der das Integrieren zur Umkehrung des Ableitens macht; der bekanntere zweite Teil, F(b) &#x2212; F(a), folgt daraus.</p>
+    <p class="fall">Die Integrationsvariable heißt <strong>t</strong>, weil x schon die obere Grenze ist. Dieselbe Bezeichnung für beides ist ein Fehler, kein Schreibstil.</p>
+    <p class="fall">Zwei Integralfunktionen zu demselben f, mit verschiedenen Bezugspunkten, unterscheiden sich nur um eine Konstante. Deshalb gibt es <em>zwei Wege</em> zu einer Integralfunktion mit vorgegebenem F(x<sub>0</sub>) = 0: das Integral mit variabler oberer Grenze direkt ausrechnen, oder irgendeine Stammfunktion nehmen und die Konstante aus F(x<sub>0</sub>) = 0 bestimmen. Beide Wege sind in Aufgabe INT 7 verlangt.</p>
+    <p class="fall">Rückwärts gelesen gibt derselbe Satz die Integrale der Ableitungen &#x2014; man braucht keine Stammfunktion zu suchen, man hat sie schon (Aufgabe INT 8):</p>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <msup><mi>f</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <mi>f</mi><mo>(</mo><mi>b</mi><mo>)</mo><mo>&#x2212;</mo><mi>f</mi><mo>(</mo><mi>a</mi><mo>)</mo>
+      </mrow>
+    </math>
+    <math display="block">
+      <mrow>
+        <msubsup><mo class="operator-gross">&#x222B;</mo><mi>a</mi><mi>b</mi></msubsup>
+        <msup><mi>f</mi><mo>&#x2033;</mo></msup><mo>(</mo><mi>x</mi><mo>)</mo><mspace width="0.2em"></mspace><mi>d</mi><mi>x</mi>
+        <mo>=</mo>
+        <msup><mi>f</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>b</mi><mo>)</mo>
+        <mo>&#x2212;</mo>
+        <msup><mi>f</mi><mo>&#x2032;</mo></msup><mo>(</mo><mi>a</mi><mo>)</mo>
+      </mrow>
+    </math>
+  </article>
+
+  <article class="eintrag" id="was-f-ueber-die-stammfunktion-sagt" data-suche="monotonieverhalten stationaere stelle lokales extremum wendepunkt kurvendiskussion vorzeichenwechsel graph von F ablesen">
+    <h3>Was der Integrand über die Stammfunktion sagt <span class="quelle">nicht im Skript</span></h3>
+    <p class="bedingung">F eine Stammfunktion von f; Monotonie, stationäre Stellen, Extrema und Wendepunkte von F allein aus dem Graphen von f &#x2014; alles folgt aus F&#x2032; = f. Verlangt in den Aufgaben INT 6 und INT 17</p>
+    <math display="block">
+      <mrow>
+        <msup><mi>F</mi><mo>&#x2032;</mo></msup><mo>=</mo><mi>f</mi>
+        <mo>,</mo><mspace width="0.8em"></mspace>
+        <msup><mi>F</mi><mo>&#x2033;</mo></msup><mo>=</mo><msup><mi>f</mi><mo>&#x2032;</mo></msup>
+      </mrow>
+    </math>
+    <p class="fall"><strong>Monotonie:</strong> wo f(x) &gt; 0 ist, wächst F streng; wo f(x) &lt; 0 ist, fällt F streng.</p>
+    <p class="fall"><strong>Stationäre Stellen von F</strong> sind die <em>Nullstellen von f</em>.</p>
+    <p class="fall"><strong>Lokale Extrema von F:</strong> dort, wo f das Vorzeichen wechselt. Von + nach &#x2212; ist es ein Maximum von F, von &#x2212; nach + ein Minimum. Wechselt f das Vorzeichen nicht, ist die stationäre Stelle ein Sattelpunkt.</p>
+    <p class="fall"><strong>Wendepunkte von F</strong> liegen dort, wo f ein lokales Extremum hat.</p>
+    <p class="fall"><strong>Die Falle:</strong> gefragt sind die Extrema von <em>F</em>, gerechnet wird aber mit f. Wer die Extremstellen von f bestimmt, hat die Wendepunkte von F gefunden und die Frage verfehlt. Aufgabe INT 6 sagt das eigens dazu.</p>
+    <p class="fall">Eine Stammfunktion muss dazu nicht bekannt sein. Das ist der Sinn der Übung: das ganze Monotonie- und Extremverhalten von F liest man am Graphen von f ab.</p>
   </article>
 
   <article class="eintrag" id="hauptsatz" data-suche="stammfunktion eckige klammer einsetzen grenzen hdi">
